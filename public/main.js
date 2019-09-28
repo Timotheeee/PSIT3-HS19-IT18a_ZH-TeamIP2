@@ -1,9 +1,12 @@
+var db;
+
 $(function () {
     console.log("jquery works");
 
     //sample code to make an api request
     $.ajax({url: "/api/", method: "get"}).done(function (data) {
-        var question = data.db.questions[0];
+        db = data.db;
+        var question = db.questions[0];
         console.log(question);
         $("#question").text(question.title);
         

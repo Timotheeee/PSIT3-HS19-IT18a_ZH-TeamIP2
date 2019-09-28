@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 
 const express = require('express'),
         bodyParser = require('body-parser'),
