@@ -13,12 +13,23 @@ $(function () {
         //$("stuff").html(question.title + "<br>" + question.answers[0].title)
     });
 
+    const app = new Vue({
+        el: '#app',
+        data: {
+            mainTitle: 'StudentScore'
+        }
+    });
+    
+
 
 
 });
+
 function send() {
     var checked = $("input[name='answer']:checked").val();
     $.ajax({url: "/api/", method: "post", data: {answer: checked}}).done(function (data) {
         $("#response").text(data.data);
     });
 }
+
+

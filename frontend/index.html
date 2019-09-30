@@ -3,7 +3,12 @@
     <head>
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
         <meta charset="UTF-8">
-        <title>psit3</title>
+        <title>StudentScore</title>
+
+        <!-- include vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- include jquery -->
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="main.js"></script>
 
@@ -13,12 +18,13 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>psit3</h1>
-        <div id="question"></div>
-        <input type="radio" name="answer" value="0"><span id="input0">8 hours</span><br>
-        <input type="radio" name="answer" value="1"><span id="input1">5 hours</span><br>
-        <button onclick="send()">send to server</button><br>
-        server response: <span id="response"></span>
+        <div id="app">
+            <h1>{{ title }}</h1>
+            <input type="radio" name="answer" value="0"><span id="input0">8 hours</span><br>
+            <input type="radio" name="answer" value="1"><span id="input1">5 hours</span><br>
+            <button onclick="send()">send to server</button><br>
+            server response: <span id="response"></span>
+        </div>
         
     </body>
 </html>
