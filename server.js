@@ -2,7 +2,7 @@
 "use strict";
 const express = require('express'), bodyParser = require('body-parser'), morgan = require('morgan'), app = express();
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '\\..\\public'));
+app.use(express.static(__dirname + '/public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 var server = app.listen(process.env.PORT || 3000, listen);
