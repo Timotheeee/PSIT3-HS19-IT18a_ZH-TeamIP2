@@ -1,17 +1,27 @@
 import Vue from "vue";
-import QuestionBoxComponent from "./components/QuestionBox";
+import QuestionBox from "./components/QuestionBox.vue";
 
-let v = new Vue({
-    el: "#app",
-    template: `
-    <div>
-        <h1>{{mainTitle}}!</h1>
-        <QuestionBox :question="How long did you sleep?" />
-    </div>`,
-    data: {
-        mainTitle: "StudentScore"
-    },
-    components: {
-      QuestionBoxComponent
-    }
+$(function () {
+
+  let v = new Vue({
+      el: "#app",
+      template: `
+      <div>
+          <h1>{{mainTitle}}</h1>
+          <question-box />
+      </div>
+      `,
+      data() {
+        return {
+          mainTitle: 'StudentScore'
+        }
+      },
+      components: {
+          QuestionBox
+      },
+      methods: {
+
+      }
+  });
 });
+
