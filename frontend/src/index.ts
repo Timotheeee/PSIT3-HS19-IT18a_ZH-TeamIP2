@@ -1,9 +1,7 @@
 import Vue from "vue";
 import QuestionBox from "./components/QuestionBox.vue";
 
-$(function () {
-
-  let v = new Vue({
+let v = new Vue({
       el: "#app",
       template: `
       <div>
@@ -23,5 +21,4 @@ $(function () {
 
       }
   });
-});
 
