@@ -39,7 +39,7 @@ export default Vue.extend({
     },
     methods: {
       onButtonClick() {
-        console.log("send to JSON, value: " + this.pickedAnswer);
+        this.$emit("answerGiven", this.pickedAnswer);
       },
     },
     created() {
