@@ -5,8 +5,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
   entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, './public'),
+    publicPath: '/public/',
     filename: 'build.js'
   },
   module: {

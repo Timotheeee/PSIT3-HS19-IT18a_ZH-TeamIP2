@@ -6,6 +6,13 @@
       <label :for="answer.getId()">{{answer.answer}} </label>
     </div>
     <button @click="onButtonClick">Submit</button>
+
+    <b-row>
+      <b-col>TEST1</b-col>
+      <b-col>TEST2</b-col>
+      <b-col>TEST3</b-col>
+      <b-col>TEST4</b-col>
+    </b-row>
   </div>
 </template>
 
@@ -50,4 +57,3 @@ class Answer {
 }
 
 </script>
-
