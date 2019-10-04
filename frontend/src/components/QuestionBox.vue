@@ -26,7 +26,7 @@ export default Vue.extend({
         console.log("send to JSON, value: " + this.pickedAnswer);
       },
     },
-    mounted() {
+    created() {
       // fetch data json file
       this.question = "How long did you sleep last night?";
       this.possibleAnswers.push(new Answer(1, "below 6 hours"));
