@@ -6,7 +6,7 @@ const express = require('express'),
         app = express();
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '\\..\\public'));
+app.use(express.static(__dirname + '\\..\\..\\frontend\\public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -30,7 +30,7 @@ function save() {
             console.log(err);
         }
     });
-} 
+}
 function load() {
     fs.readFile("./db.json", function (err: any, data: string) {
         if (err) {
@@ -47,7 +47,7 @@ function load() {
 app.post('/api/', function (req: { body: { answer: any; }; }, res: { status: (arg0: number) => { json: (arg0: { data: string; }) => void; }; }) {
     var answer = req.body.answer;
     var data = answer == 0 ? "good" : "bad";
-    
+
     res.status(200).json({data:data});
 });
 
