@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2>{{question}}</h2>
+    <h2 id="question">{{question}}</h2>
     <div v-for="answer in possibleAnswers" :key=answer.id>
       <input type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
       <label :for="answer.getId()">{{answer.answer}} </label>
     </div>
-    <button @click="sendClicked">Submit</button>
+    <button @click="onButtonClick">Submit</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default Vue.extend({
       }
     },
     methods: {
-      sendClicked() {
+      onButtonClick() {
         console.log("send to JSON, value: " + this.pickedAnswer);
       },
     },
