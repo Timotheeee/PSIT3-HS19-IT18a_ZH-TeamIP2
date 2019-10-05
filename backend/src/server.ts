@@ -3,8 +3,9 @@
 const express = require('express'),
         bodyParser = require('body-parser'),
         morgan = require('morgan'),
-        app = express();
-
+        app = express(),
+        mysql = require('mysql'),
+        fs = require('fs');
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '\\..\\..\\frontend\\public'));
 // parse application/x-www-form-urlencoded
@@ -19,29 +20,22 @@ function listen() {
     console.log('app listening at http://' + host + ':' + port);
 }
 
-const fs = require('fs');
+
 
 var db: any;
-load();
 
+//this isn't used for now, it will be once we have users
 function save() {
-    fs.writeFile("./db.json", JSON.stringify(db), function (err: any) {
-        if (err) {
-            console.log(err);
-        }
-    });
+    con.query("update graph set data = '?'", function (err: any, result: any) {
+        if (err) throw err;
+      });
 }
-function load() {
-    fs.readFile("./db.json", function (err: any, data: string) {
-        if (err) {
-            return;
-        }
-        try {
-            db = JSON.parse(data);
-        } catch (e) {
 
-        }
-    });
+function load() {
+    con.query("SELECT data FROM graph where id=1", function (err: any, result: any) {
+        if (err) throw err;
+        db = JSON.parse(result[0].data);
+      });
 }
 
 app.post('/api/', function (req: { body: { answer: any; }; }, res: { status: (arg0: number) => { json: (arg0: { data: string; }) => void; }; }) {
@@ -54,3 +48,28 @@ app.post('/api/', function (req: { body: { answer: any; }; }, res: { status: (ar
 app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
     res.status(200).json({db: db});
 });
+
+
+
+var con = mysql.createConnection({
+    host: "timotheeee1.site",
+    port: 3306,
+    user: "timothel_psit3",
+    password: "psit3",
+    database: "timothel_psit3"
+  });
+  
+  con.connect(function(err: any) {
+    if (err) throw err;
+    console.log("Connected to db!");
+    runQuery("use timothel_psit3");
+    load();
+    //save();
+  });
+
+  function runQuery(sql:string){
+    con.query(sql, function (err: any, result: any) {
+        if (err) throw err;
+      });
+  }
+  
