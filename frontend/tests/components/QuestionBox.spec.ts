@@ -1,11 +1,11 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
+import Vue from "vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
-import Vue from "vue";
 
 describe("is questionbox rendered correctly", () => {
   let wrapper: Wrapper<Vue>;
   beforeEach(() => {
-    wrapper = shallowMount(QuestionBox);
+    wrapper = shallowMount(QuestionBox)
   })
 
   it("has to contain a button", () => {
@@ -14,10 +14,6 @@ describe("is questionbox rendered correctly", () => {
 
   it("has to contain a question", () => {
     expect(wrapper.contains("#question")).toBeTruthy();
-  })
-
-  it("has to contain atleast one answer", () => {
-    expect(wrapper.contains("input[name=answer]")).toBeTruthy();
   })
 })
 
@@ -33,8 +29,22 @@ describe("are functions of questionbox called", () => {
   test("onButtonClick function", () => {
     let onButtonClickStub = jest.fn();
     let button = wrapper.find("button");
-    wrapper.setMethods({ onButtonClick: onButtonClickStub })
+    wrapper.setMethods({ onButtonClick: onButtonClickStub()  })
     button.trigger("click");
-    expect(onButtonClickStub.mock.calls.length).toBe(1)
+    expect(onButtonClickStub.mock.calls.length).toBe(1);
+  })
+})
+
+describe("are events of questionbox emitted", () => {
+  let wrapper: Wrapper<Vue>;
+
+  beforeEach(() => {
+    wrapper = shallowMount(QuestionBox);
+  })
+
+  test("onButtonClick event", () => {
+    let button = wrapper.find("button");
+    button.trigger("click");
+    expect(wrapper.emitted('answerGiven').length).toBe(1);
   })
 })
