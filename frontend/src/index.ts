@@ -1,12 +1,17 @@
 import Vue from "vue";
-import QuestionBox from "./components/QuestionBox.vue";
+import ChatBox from "./components/ChatBox.vue";
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue);
 
 let v = new Vue({
       el: "#app",
       template: `
-      <div>
+      <div class="jumbotron text-center">
           <h1>{{mainTitle}}</h1>
-          <question-box />
+          <chat-box />
       </div>
       `,
       data() {
@@ -15,7 +20,7 @@ let v = new Vue({
         }
       },
       components: {
-          QuestionBox
+          ChatBox
       },
       methods: {
 
