@@ -1,0 +1,78 @@
+graph = {
+  "nodes": [
+    {
+      "id": "q1",
+      "metadata": {
+    	  "title" : "How much do you sleep?"
+      }
+    },
+    {
+      "id": "q2",
+      "metadata": {
+    	  "title" : "Do you write summaries?"
+      }
+    },
+    {
+      "id": "q3",
+      "metadata": {
+    	  "title" : "How regularly do you excercise?"
+      }
+    },
+    {
+      "id": "q4",
+      "metadata": {
+    	  "title" : "Thank you for answering the questions!"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "8 hours",
+        "score": "1"
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "5 hours",
+        "score": "-1"
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "No",
+        "score": "-1"
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "Yes.",
+        "score": "1"
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "Never!",
+        "score": "-1"
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "A lot.",
+        "score": "1"
+      }
+    }
+  ]
+}
