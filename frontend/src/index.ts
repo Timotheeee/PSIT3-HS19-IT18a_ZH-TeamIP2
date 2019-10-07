@@ -1,34 +1,26 @@
 import Vue from "vue";
-import QuestionBox from "./components/QuestionBox.vue";
-import AnswerBox from "./components/AnswerBox.vue";
+import ChatBox from "./components/ChatBox.vue";
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+Vue.use(BootstrapVue);
 
 let v = new Vue({
       el: "#app",
       template: `
-      <div>
+      <div class="jumbotron text-center">
           <h1>{{mainTitle}}</h1>
-          <QuestionBox @inputData="updateAnswer" />
-          <AnswerBox :answr="childData" />
+          <chat-box />
       </div>
       `,
       data() {
         return {
-          mainTitle: 'StudentScore',
-          childData: ""
-        };
+          mainTitle: 'StudentScore'
+        }
       },
       components: {
-          QuestionBox,
-          AnswerBox
-      },
-      methods: {
-        updateAnswer(variable: string){
-          this.childData =variable;
-        }
-
+          ChatBox
       }
   });
-
-
 

@@ -13,12 +13,6 @@ export default Vue.extend({
         answer: {
             type:String
         }
-    },
-    
-    data() {
-      return {
-        answer: ""
-      };
     }
 });
 </script>
