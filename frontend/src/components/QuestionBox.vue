@@ -14,17 +14,20 @@ import Vue from "vue";
 
 
 export default Vue.extend({
+    name: "QuestionBox",
     data() {
       return {
         question: '',
         possibleAnswers: [] as Answer[],
         pickedAnswer: ''
-      }
+      };
     },
     methods: {
       sendClicked() {
         console.log("send to JSON, value: " + this.pickedAnswer);
-      },
+        this.$emit("inputData", this.pickedAnswer);
+        this.pickedAnswer = "";
+      }
     },
     mounted() {
       // fetch data json file
