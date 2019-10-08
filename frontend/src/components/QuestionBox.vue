@@ -40,3 +40,6 @@ export default Vue.extend({
 });
 </script>
 
+<style lang="sass">
+  $primary-color: #0066cc
+</style>
