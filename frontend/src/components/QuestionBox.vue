@@ -2,8 +2,10 @@
   <div>
     <h2 id="question" >{{question}}</h2>
     <div v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
-      <input type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
+      <fieldset :id="question">
+      <input type="radio" :name="question" :value="answer.getId()" v-model="pickedAnswer" >
       <label :for="answer.getId()">{{answer.answer}} </label>
+      </fieldset>
     </div>
     <button @click="onButtonClick">Submit</button>
   </div>
@@ -37,6 +39,9 @@ export default Vue.extend({
         this.$emit("answerPicked", this.pickedAnswer);
         this.pickedAnswer = "";
         this.showAnswer = false;
+      },
+      createFieldSetId(questionId: number): string {
+        return 'question' + questionId;
       }
     }
 });

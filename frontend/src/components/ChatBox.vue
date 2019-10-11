@@ -18,18 +18,18 @@ import AnswerBox from './AnswerBox.vue';
 export default Vue.extend({
     data() {
       return {
-         question: new Question(1, "How much did you sleep?"),
          pickedAnswer: ''
       }
     },
-    created() {
-      this.question.addPossibleAnswer(new Answer(1, 'below 6 hours'));
-      this.question.addPossibleAnswer(new Answer(2, '6 to 8 hours'));
-      this.question.addPossibleAnswer(new Answer(3, 'over 8 hours'));
+    props: {
+      question: {
+        type: Question,
+        required: true
+      }
     },
     methods: {
       updateAnswer(givenAnswer: string) {
-        this.pickedAnswer = givenAnswer;
+        this.$data.pickedAnswer = givenAnswer;
        }
     },
     components: {
