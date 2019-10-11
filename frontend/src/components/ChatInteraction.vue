@@ -1,7 +1,7 @@
 <template>
   <div>
-    <chat-box :question="this.question1" />
-    <chat-box :question="this.question2" />
+    <chat-box id="chatbox" :question="this.question1" />
+    <chat-box id="chatbox" :question="this.question2" />
   </div>
 </template>
 
