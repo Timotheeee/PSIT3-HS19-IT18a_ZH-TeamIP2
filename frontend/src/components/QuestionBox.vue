@@ -40,9 +40,6 @@ export default Vue.extend({
         this.pickedAnswer = "";
         this.showAnswer = false;
       },
-      createFieldSetId(questionId: number): string {
-        return 'question' + questionId;
-      }
     }
 });
 </script>
