@@ -1,11 +1,9 @@
 <template>
   <div>
-    <the-header />
     <question-box :question="this.question.getQuestion()"
                   :possibleAnswers="this.question.getPossibleAnswers()"
                   @answerPicked="updateAnswer" />
     <answer-box :answer="this.pickedAnswer" />
-    <the-footer />
   </div>
 </template>
 

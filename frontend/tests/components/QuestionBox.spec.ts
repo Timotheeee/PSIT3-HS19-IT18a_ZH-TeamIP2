@@ -1,6 +1,7 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from "vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
+import {Answer} from "./../Answer.ts"
 
 describe("is questionbox rendered correctly", () => {
   let wrapper: Wrapper<Vue>;
@@ -14,6 +15,14 @@ describe("is questionbox rendered correctly", () => {
 
   it("has to contain a question", () => {
     expect(wrapper.contains("#question")).toBeTruthy();
+  })
+
+  it("has to contain at least one question", () => {
+    // TODO
+  })
+
+  test("answers have to dissappear if button pressed" , () => {
+    // TODO
   })
 })
 

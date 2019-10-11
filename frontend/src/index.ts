@@ -1,8 +1,9 @@
 import Vue from "vue";
-import ChatBox from "./components/ChatBox.vue";
+import ChatInteraction from "./components/ChatInteraction.vue";
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 Vue.use(BootstrapVue);
 
@@ -10,8 +11,10 @@ let v = new Vue({
       el: "#app",
       template: `
       <div class="jumbotron text-center">
-          <h1>{{mainTitle}}</h1>
-          <chat-box />
+        <the-header />
+        <h1>{{mainTitle}}</h1>
+        <chat-interaction />
+        <the-footer />
       </div>
       `,
       data() {
@@ -20,7 +23,7 @@ let v = new Vue({
         }
       },
       components: {
-          ChatBox
+          ChatInteraction
       }
   });
 

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="question" >{{question}}</h2>
-    <div v-for="answer in possibleAnswers" :key=answer.id>
-      <input v-if="showAnswer" type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
-      <label v-if="showAnswer" :for="answer.getId()">{{answer.answer}} </label>
+    <div v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
+      <input type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
+      <label :for="answer.getId()">{{answer.answer}} </label>
     </div>
-    <button v-if="showAnswer" @click="onButtonClick">Submit</button>
+    <button @click="onButtonClick">Submit</button>
   </div>
 </template>
 
