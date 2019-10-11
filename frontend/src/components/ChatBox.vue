@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <question-box :question="this.question.getQuestion()"
-                  :possibleAnswers="this.question.getPossibleAnswers()"
-                  @answerPicked="updateAnswer" />
-    <answer-box :answer="this.pickedAnswer" />
-  </div>
+    <div class="w-100 min-vh-100 background">
+        <div class="container chat min-vh-100 p-0">
+            <the-header />
+            <div class="p-3">
+                <question-box :question="this.question.getQuestion()"
+                              :possibleAnswers="this.question.getPossibleAnswers()"
+                              @answerPicked="updateAnswer" />
+                <answer-box :answer="this.pickedAnswer" />
+            </div>
+            <the-footer />
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -13,6 +19,7 @@ import {Question} from "./../Question";
 import {Answer} from "./../Answer"
 import QuestionBox from './QuestionBox.vue';
 import AnswerBox from './AnswerBox.vue';
+import TheHeader from './TheHeader.vue';
 
 
 export default Vue.extend({
@@ -34,7 +41,20 @@ export default Vue.extend({
     },
     components: {
       QuestionBox,
-      AnswerBox
+      AnswerBox,
+      TheHeader
     }
 });
 </script>
+
+<style lang="scss">
+    $primary-color: #18aec7;
+
+    .background {
+        background-color: $primary-color;
+    }
+
+    .chat {
+        background-color: white;
+    }
+</style>
