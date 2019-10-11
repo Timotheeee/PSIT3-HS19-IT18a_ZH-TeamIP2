@@ -3,8 +3,8 @@
     <h2 id="question" >{{question}}</h2>
     <div v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
       <fieldset :id="question">
-      <input type="radio" :name="question" :value="answer.getId()" v-model="pickedAnswer" >
-      <label :for="answer.getId()">{{answer.answer}} </label>
+      <input type="radio" :name="question" :value="answer.getAnswer()" v-model="pickedAnswer" >
+      <label :for="answer.getAnswer()">{{answer.answer}} </label>
       </fieldset>
     </div>
     <button @click="onButtonClick">Submit</button>

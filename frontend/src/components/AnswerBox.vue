@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>{{answer}}</h2>
+      <h2 v-if="answer">{{ resultMessage }}</h2>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default Vue.extend({
         answer: {
             type:String
         }
+    },
+    computed: {
+      resultMessage: function(): string {
+        return "Your answer was: " + this.answer;
+      }
     }
 });
 </script>
