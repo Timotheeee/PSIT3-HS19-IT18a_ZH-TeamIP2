@@ -74,7 +74,11 @@ module.exports = {
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin()
-  ]
+  ],
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
