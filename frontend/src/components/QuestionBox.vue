@@ -2,10 +2,10 @@
   <div>
     <h2 id="question" >{{question}}</h2>
     <div v-for="answer in possibleAnswers" :key=answer.id>
-      <input type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
-      <label :for="answer.getId()">{{answer.answer}} </label>
+      <input v-if="showAnswer" type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
+      <label v-if="showAnswer" :for="answer.getId()">{{answer.answer}} </label>
     </div>
-    <button @click="onButtonClick">Submit</button>
+    <button v-if="showAnswer" @click="onButtonClick">Submit</button>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ export default Vue.extend({
     name: "QuestionBox",
     data() {
       return {
-        pickedAnswer: ''
+        pickedAnswer: '',
+        showAnswer: true
       };
     },
     props: {
@@ -35,6 +36,7 @@ export default Vue.extend({
       onButtonClick() {
         this.$emit("answerPicked", this.pickedAnswer);
         this.pickedAnswer = "";
+        this.showAnswer = false;
       }
     }
 });
