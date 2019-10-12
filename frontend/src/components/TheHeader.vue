@@ -1,3 +1,23 @@
+<template>
+  <div>
+    <span>header</span>
+  </div>
+</template>
+
 <script lang="ts">
-// TO DO add header
+import Vue from "vue";
+
+
+export default Vue.extend({
+    data() {
+      return {
+      }
+    },
+    components: {
+      
+    },
+    created() {
+
+    }
+});
 </script>

@@ -1,5 +1,7 @@
 import Vue from "vue";
 import ChatInteraction from "./components/ChatInteraction.vue";
+import TheFooter from "./components/TheFooter.vue";
+import TheHeader from "./components/TheHeader.vue";
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -23,7 +25,9 @@ let v = new Vue({
         }
       },
       components: {
-          ChatInteraction
+          ChatInteraction,
+          TheFooter,
+          TheHeader
       }
   });
 

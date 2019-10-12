@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "watch": {
+    "compile_css": "*.scss"
+  },
   "scripts": {
     "test": "jest",
-    "build": "webpack --watch --mode=development"
+    "build": "webpack --watch --mode=development",
+    "compile_css": "node-sass --include-path sass ./src/style.scss ./public/style.css",
+    "watch": "nodemon --watch src/style.scss --exec npm run compile_css"
   },
   "author": "",
   "license": "ISC",
@@ -31,9 +36,12 @@
   "dependencies": {
     "axios": "^0.19.0",
     "babel-core": "^6.26.3",
+    "file-loader": "^4.2.0",
     "less": "^3.10.3",
     "nodemon": "^1.19.3",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.23.0"
+    "npm-watch": "^0.6.0",
+    "sass": "^1.23.0",
+    "watch": "^1.0.2"
   }
 }
