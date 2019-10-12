@@ -46,6 +46,14 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -66,7 +74,11 @@ module.exports = {
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin()
-  ]
+  ],
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {

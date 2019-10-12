@@ -1,53 +1,49 @@
 <template>
   <div>
-    <h2>{{question}}</h2>
-    <div v-for="answer in possibleAnswers" :key=answer.id>
-      <input type="radio" name="answer" :value="answer.getId()" v-model="pickedAnswer" >
-      <label :for="answer.getId()">{{answer.answer}} </label>
+    <h2 id="question" >{{question}}</h2>
+    <div v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
+      <fieldset :id="question">
+      <input type="radio" :name="question" :value="answer.getAnswer()" v-model="pickedAnswer" >
+      <label :for="answer.getAnswer()">{{answer.answer}} </label>
+      </fieldset>
     </div>
-    <button @click="sendClicked">Submit</button>
+    <button @click="onButtonClick">Submit</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import {Answer} from './../Answer';
 
 
 export default Vue.extend({
+    name: "QuestionBox",
     data() {
       return {
-        question: '',
-        possibleAnswers: [] as Answer[],
-        pickedAnswer: ''
+        pickedAnswer: '',
+        showAnswer: true
+      };
+    },
+    props: {
+      question: {
+        type: String,
+        required: true
+      },
+      possibleAnswers: {
+        type: [],
+        required: true
       }
     },
     methods: {
-      sendClicked() {
-        console.log("send to JSON, value: " + this.pickedAnswer);
+      onButtonClick() {
+        this.$emit("answerPicked", this.pickedAnswer);
+        this.pickedAnswer = "";
+        this.showAnswer = false;
       },
-    },
-    mounted() {
-      // fetch data json file
-      this.question = "How long did you sleep last night?";
-      this.possibleAnswers.push(new Answer(1, "below 6 hours"));
-      this.possibleAnswers.push(new Answer(2, "between 6 and 8 hours"));
-      this.possibleAnswers.push(new Answer(3, "over 8 hours"));
     }
 });
-
-class Answer {
-  id: number;
-  answer: string;
-
-  constructor(id: number, answer: string) {
-    this.id = id;
-    this.answer = answer;
-  }
-
-  getId() : number {
-    return this.id;
-  }
-}
-
 </script>
 
+<style lang="sass">
+  $primary-color: #0066cc
+</style>
