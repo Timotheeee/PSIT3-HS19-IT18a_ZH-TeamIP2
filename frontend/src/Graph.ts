@@ -33,8 +33,7 @@ export class Graph {
   }
 
   findNode(id: string) : any {
-    for (let i: number = 0; i < this.nodes.length; i++) {
-      let node: Node = this.nodes[i];
+    for (let node of this.nodes) {
       if (node.getId().localeCompare(id)) {
         return node;
       }
