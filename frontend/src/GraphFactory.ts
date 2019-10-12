@@ -4,6 +4,9 @@ import {JSONNode} from './JSONNode.ts';
 import {JSONEdge} from './JSONEdge.ts';
 
 export class GraphFactory {
+  /*
+   * Creates and returns a Graph object from the given JSONGraph.
+   */
   static createGraph(JSONGraph: JSONGraph) : Graph {
     let graph: Graph = new Graph();
     this.importNodes(graph, JSONGraph.nodes);
