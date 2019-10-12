@@ -19,7 +19,7 @@ export class Graph {
     return node;
   }
 
-  addEdge(source: string, target: string, answer: string, score: string) {
+  addEdge(source: string, target: string, answer: string, score: number) {
     let sourceNode: Node = this.findNode(source);
     if (sourceNode == null) {
       throw new Error("Source node not found.");

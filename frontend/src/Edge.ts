@@ -4,9 +4,9 @@ export class Edge {
     private source: Node;
     private target: Node;
     private answer: string;
-    private score: string;
+    private score: number;
 
-    constructor(source: Node, target: Node, answer: string, score: string) {
+    constructor(source: Node, target: Node, answer: string, score: number) {
       this.source = source;
       this.target = target;
       this.answer = answer;
@@ -29,11 +29,11 @@ export class Edge {
       return this.target;
     }
 
-    setScore(score: string) {
+    setScore(score: number) {
       this.score = score;
     }
 
-    getScore() : string {
+    getScore() : number {
       return this.score;
     }
 
