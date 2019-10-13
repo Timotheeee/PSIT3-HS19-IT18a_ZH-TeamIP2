@@ -8,15 +8,21 @@
 }
 
 .question {
-  color: $surface;
+  color: white;
   font-size: 18px;
   background: $primary-color;
 }
 
 .answer {
-  color: $surface;
+  color: white;
   font-size: 18px;
   background: $secondary-color;
+}
+
+.possible-answer {
+  color: black;
+  font-size: 18px;
+  background: $secondary-light;
 }
 
 .question:after {
@@ -43,6 +49,21 @@
   height: 0;
   border: 25px solid transparent;
   border-left-color: $secondary-color;
+  border-right: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-right: -25px;
+}
+
+.possible-answer:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-left-color: $secondary-light;
   border-right: 0;
   border-bottom: 0;
   margin-top: -10px;
