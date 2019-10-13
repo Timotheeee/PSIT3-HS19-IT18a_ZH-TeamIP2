@@ -2,12 +2,10 @@
     <div class="w-100 min-vh-100 background">
         <div class="container chat min-vh-100 p-0">
             <the-header />
-            <div class="p-3">
-                <question-box :question="this.question.getQuestion()"
-                              :possibleAnswers="this.question.getPossibleAnswers()"
-                              @answerPicked="updateAnswer" />
-                <answer-box :answer="this.pickedAnswer" />
-            </div>
+            <question-box :question="this.question.getQuestion()"
+                          :possibleAnswers="this.question.getPossibleAnswers()"
+                          @answerPicked="updateAnswer" />
+            <answer-box :answer="this.pickedAnswer" />
             <the-footer />
         </div>
     </div>
