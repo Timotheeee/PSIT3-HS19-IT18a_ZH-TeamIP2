@@ -1,5 +1,5 @@
 <template>
-    <div class="header container-fluid shadow-sm">
+    <div class="header container-fluid">
         <b-img rounded="circle" src="images/projectLogo.jpg" class="p-2 logo"></b-img>
         <span class="h1 align-middle">StudentScore</span>
     </div>
@@ -14,16 +14,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-    $header-color: #e6e6e6;
+  @import "../css/styles";
 
-    .logo {
-        width: 100px;
-        height: 100px;
-    }
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
 
-    .header {
-        background-color: $header-color;
-    }
+  .header {
+    background-color: $surface-dark;
+  }
 </style>
 
 

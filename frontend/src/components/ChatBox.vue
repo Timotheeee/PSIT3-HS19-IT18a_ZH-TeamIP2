@@ -1,14 +1,16 @@
 <template>
-    <div class="w-100 min-vh-100 background">
-        <div class="container chat min-vh-100 p-0">
-            <the-header />
-            <question-box :question="this.question.getQuestion()"
-                          :possibleAnswers="this.question.getPossibleAnswers()"
-                          @answerPicked="updateAnswer" />
-            <answer-box :answer="this.pickedAnswer" />
-            <the-footer />
-        </div>
+  <div class="w-100 min-vh-100 background">
+    <div class="container chat min-vh-100 p-0 shadow-lg">
+      <the-header />
+      <div class="px-5 py-3">
+        <question-box :question="this.question.getQuestion()"
+                      :possibleAnswers="this.question.getPossibleAnswers()"
+                      @answerPicked="updateAnswer" />
+        <answer-box :answer="this.pickedAnswer" />
+      </div>
+      <the-footer />
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -46,13 +48,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-    $primary-color: #18aec7;
+  @import "../css/styles";
 
-    .background {
-        background-color: $primary-color;
-    }
+  .background {
+    background-color: $primary-color;
+  }
 
-    .chat {
-        background-color: white;
-    }
+  .chat {
+    background-color: $surface;
+  }
 </style>
