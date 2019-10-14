@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <chat-box id="chatbox" :question="this.question1" />
-    <chat-box id="chatbox" :question="this.question2" />
+  <div class="w-100 min-vh-100 background">
+    <div class="container chat min-vh-100 p-0 shadow-lg">
+      <the-header />
+        <chat-box class="chatbox" :question="this.question1" />
+        <chat-box class="chatbox" :question="this.question2" />
+      </div>
+    <the-footer />
   </div>
 </template>
 
@@ -10,6 +14,7 @@ import Vue from "vue";
 import ChatBox from "./ChatBox.vue";
 import {Question} from "./../Question";
 import {Answer} from "./../Answer"
+import TheHeader from './TheHeader.vue';
 
 
 export default Vue.extend({
@@ -20,7 +25,8 @@ export default Vue.extend({
       }
     },
     components: {
-      ChatBox
+      ChatBox,
+      TheHeader
     },
     created() {
       this.question1.addPossibleAnswer(new Answer(1, 'below 6 hours'));

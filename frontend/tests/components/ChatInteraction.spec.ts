@@ -14,7 +14,7 @@ describe("chatinteraction", () => {
   describe("is chatinteraction rendered correctly", () => {
 
     it("has to contains atleast one chatbox", () => {
-      expect(wrapper.contains('#chatbox')).toBeTruthy();
+      expect(wrapper.contains('.chatbox')).toBeTruthy();
     })
   })
 })
