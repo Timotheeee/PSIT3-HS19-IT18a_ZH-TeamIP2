@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2 id="question" >{{question}}</h2>
-    <div v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
-      <fieldset :id="question">
+    <p id="question" class="speech-bubble question">{{question}}</p>
+    <div class="speech-bubble possible-answer mr-5 float-left" v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
+    <fieldset :id="question">
       <input type="radio" :name="question" :value="answer.getAnswer()" v-model="pickedAnswer" >
       <label :for="answer.getAnswer()">{{answer.answer}} </label>
-      </fieldset>
+    </fieldset>
     </div>
     <button @click="onButtonClick">Submit</button>
   </div>
@@ -30,7 +30,7 @@ export default Vue.extend({
         required: true
       },
       possibleAnswers: {
-        type: [],
+        type: Array,
         required: true
       }
     },
@@ -44,6 +44,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="sass">
-  $primary-color: #0066cc
+<style lang="scss">
+  @import "../css/styles";
+  @import "../css/speech-bubble";
 </style>

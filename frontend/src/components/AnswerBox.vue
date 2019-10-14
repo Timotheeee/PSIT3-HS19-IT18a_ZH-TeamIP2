@@ -1,12 +1,11 @@
 <template>
   <div>
-      <h2 v-if="answer">{{ resultMessage }}</h2>
+      <p class="speech-bubble answer float-right" v-if="answer">{{ resultMessage }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-
 export default Vue.extend({
     name: "AnswerBox",
     props: {
@@ -21,3 +20,8 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style lang="scss">
+  @import "../css/styles";
+  @import "../css/speech-bubble";
+</style>
