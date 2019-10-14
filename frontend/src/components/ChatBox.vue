@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-5 pt-3 pb-5">
     <question-box :question="this.question.getQuestion()"
                   :possibleAnswers="this.question.getPossibleAnswers()"
                   @answerPicked="updateAnswer" />
@@ -13,8 +13,6 @@ import {Question} from "./../Question";
 import {Answer} from "./../Answer"
 import QuestionBox from './QuestionBox.vue';
 import AnswerBox from './AnswerBox.vue';
-
-
 export default Vue.extend({
     data() {
       return {
@@ -38,3 +36,13 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style lang="scss">
+  @import "../css/styles";
+  .background {
+    background-color: $primary-color;
+  }
+  .chat {
+    background-color: $surface;
+  }
+</style>

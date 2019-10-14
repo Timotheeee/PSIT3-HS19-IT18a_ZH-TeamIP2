@@ -12,12 +12,7 @@ Vue.use(BootstrapVue);
 let v = new Vue({
       el: "#app",
       template: `
-      <div class="jumbotron text-center">
-        <the-header />
-        <h1>{{mainTitle}}</h1>
-        <chat-interaction />
-        <the-footer />
-      </div>
+      <chat-interaction />
       `,
       data() {
         return {

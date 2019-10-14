@@ -14,7 +14,7 @@ export default Vue.extend({
       }
     },
     components: {
-      
+
     },
     created() {
 

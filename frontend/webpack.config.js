@@ -52,13 +52,13 @@ module.exports = {
         ]
       },
       {
-        test: /\.sass$/,
+        test: /\.s[a|c]ss$/,
         use: [
           'vue-style-loader',
           'css-loader',
           'sass-loader'
         ]
-      }
+      },
     ]
   },
   resolve: {
