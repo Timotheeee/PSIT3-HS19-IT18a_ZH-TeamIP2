@@ -1,12 +1,22 @@
 import Vue from "vue";
-import QuestionBox from "./components/QuestionBox.vue";
+import ChatInteraction from "./components/ChatInteraction.vue";
+import TheFooter from "./components/TheFooter.vue";
+import TheHeader from "./components/TheHeader.vue";
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
+Vue.use(BootstrapVue);
 
 let v = new Vue({
       el: "#app",
       template: `
-      <div>
-          <h1>{{mainTitle}}</h1>
-          <question-box />
+      <div class="jumbotron text-center">
+        <the-header />
+        <h1>{{mainTitle}}</h1>
+        <chat-interaction />
+        <the-footer />
       </div>
       `,
       data() {
@@ -15,10 +25,9 @@ let v = new Vue({
         }
       },
       components: {
-          QuestionBox
-      },
-      methods: {
-
+          ChatInteraction,
+          TheFooter,
+          TheHeader
       }
   });
 

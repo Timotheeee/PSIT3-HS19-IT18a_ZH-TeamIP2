@@ -3,11 +3,15 @@ var webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    index: './src/index.ts',
+    results: './src/results.ts',
+    welcome: './src/welcome.ts'
+  },
   output: {
-    path: path.resolve(__dirname, './public'),
-    publicPath: '/public/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, './public/compiledjs/'),
+    publicPath: '/public/compiledjs/',
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -46,6 +50,14 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -66,7 +78,11 @@ module.exports = {
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin()
-  ]
+  ],
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules|public/
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
