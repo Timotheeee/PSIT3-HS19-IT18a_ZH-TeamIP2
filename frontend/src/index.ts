@@ -1,10 +1,9 @@
 import Vue from "vue";
 import ChatInteraction from "./components/ChatInteraction.vue";
-import TheFooter from "./components/TheFooter.vue";
-import TheHeader from "./components/TheHeader.vue";
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import router from './router/router'
 
 
 Vue.use(BootstrapVue);
@@ -12,8 +11,9 @@ Vue.use(BootstrapVue);
 let v = new Vue({
       el: "#app",
       template: `
-      <chat-interaction />
+      <router-view />
       `,
+      router,
       data() {
         return {
           mainTitle: 'StudentScore'
@@ -21,8 +21,6 @@ let v = new Vue({
       },
       components: {
           ChatInteraction,
-          TheFooter,
-          TheHeader
       }
   });
 
