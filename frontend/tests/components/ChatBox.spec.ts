@@ -1,18 +1,18 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from "vue"
-import ChatBox from "./../../src/components/ChatBox.vue"
+import QuestionPack from "./../../src/components/QuestionPack.vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
 import { Question } from "./../../src/Question"
 import { Answer } from '../../src/Answer'
 
-describe("chatbox", () => {
+describe("QuestionPack", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
     let question = new Question(1, "hello");
     question.addPossibleAnswer(new Answer(1, "ok"));
 
-    wrapper = shallowMount(ChatBox, {
+    wrapper = shallowMount(QuestionPack, {
       propsData: {
         question: question
       }

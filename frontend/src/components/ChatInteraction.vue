@@ -3,7 +3,7 @@
     <div class="container chat p-0 shadow-lg">
       <the-header />
       <div class="chat-space">
-        <question-pack class="chatbox"
+        <question-pack class="questionPack"
                   v-for="question in this.questions"
                   :question="question"
                   @displayNextQuestion="getNextQuestion" />
