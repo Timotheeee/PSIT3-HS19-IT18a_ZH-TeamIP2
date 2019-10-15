@@ -26,8 +26,9 @@ export default Vue.extend({
       }
     },
     methods: {
-      updateAnswer(givenAnswer: string) {
-        this.$data.pickedAnswer = givenAnswer;
+      updateAnswer(givenAnswer: Answer) {
+        this.$data.pickedAnswer = givenAnswer.getAnswer();
+        this.$emit("displayNextQuestion", givenAnswer.getId());
        }
     },
     components: {
@@ -39,9 +40,11 @@ export default Vue.extend({
 
 <style lang="scss">
   @import "../css/styles";
+
   .background {
     background-color: $primary-color;
   }
+
   .chat {
     background-color: $surface;
   }

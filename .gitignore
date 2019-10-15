@@ -3,5 +3,10 @@ backend/node_modules/
 backend/dist/
 frontend/node_modules/
 frontend/coverage/
-frontend/public/build.js
+frontend/public/compiledjs/
+frontend/public/compiledjs/welcome.js
+frontend/public/compiledjs/results.js
+frontend/public/compiledjs/index.js
+frontend/public/style.css
 .idea/
+frontend/public/compiledjs/welcome.js
