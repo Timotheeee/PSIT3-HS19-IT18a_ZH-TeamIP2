@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <img :src="logo" class="smallLogo" />
-      <b id="studentscore">StudentScore</b>
-    </div>
+    <the-header />
     <br />
     <br />
     <div id="resultsbox">
@@ -27,6 +24,7 @@
 import Vue from "vue";
 import { Question } from "./../Question";
 import { Answer } from "./../Answer";
+import TheHeader from "./TheHeader.vue"
 
 export default Vue.extend({
   data() {
@@ -37,7 +35,9 @@ export default Vue.extend({
       clueless: "60% Clueless"
     };
   },
-  components: {},
+  components: {
+    TheHeader
+  },
   created() {}
 });
 </script>
