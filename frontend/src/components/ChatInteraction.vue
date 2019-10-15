@@ -3,7 +3,7 @@
     <div class="container chat p-0 shadow-lg">
       <the-header />
       <div class="chat-space">
-        <chat-box class="chatbox"
+        <question-pack class="chatbox"
                   v-for="question in this.questions"
                   :question="question"
                   @displayNextQuestion="getNextQuestion" />
@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ChatBox from "./ChatBox.vue";
+import QuestionPack from "./QuestionPack.vue";
 import {Question} from "./../Question";
 import {Answer} from "./../Answer"
 import TheHeader from './TheHeader.vue';
@@ -49,7 +49,7 @@ export default Vue.extend({
     },
     components: {
         TheHeader,
-        ChatBox
+        QuestionPack
     }
 });
 </script>
