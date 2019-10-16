@@ -65,6 +65,7 @@ export default Vue.extend({
   .chatbox {
     overflow-y: scroll;
     height: calc(100vh - 100px);
+    display: grid;
   }
 
   // scrollbar design

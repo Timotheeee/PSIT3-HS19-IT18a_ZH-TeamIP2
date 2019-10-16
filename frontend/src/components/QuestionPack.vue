@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5 pt-3 pb-5">
+  <div class="px-5 py-3">
     <question-box :question="this.question.getQuestion()"
                   :possibleAnswers="this.question.getPossibleAnswers()"
                   @answerPicked="updateAnswer" />
