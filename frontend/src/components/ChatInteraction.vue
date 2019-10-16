@@ -2,7 +2,7 @@
   <div class="w-100 min-vh-100 background">
     <div class="container chat p-0 shadow-lg">
       <the-header />
-      <div class="chat-space">
+      <div class="chatbox">
         <question-pack class="questionPack"
                   v-for="question in this.questions"
                   :question="question"
@@ -45,6 +45,11 @@ export default Vue.extend({
                 'dirt, or 700 pounds.'));
 
             this.questions.push(question2);
+            var element = document.getElementById("chat-space");
+            if(element != null) {
+
+                element.scrollTop = element.scrollHeight + 100;
+            }
         }
     },
     components: {
@@ -55,8 +60,33 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  .chat-space {
+  @import "../css/styles";
+
+  .chatbox {
     overflow-y: scroll;
     height: calc(100vh - 100px);
+  }
+
+  // scrollbar design
+  // not supported by FF, IE or Edge
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $surface;
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    background: $surface-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: $primary-dark;
   }
 </style>
