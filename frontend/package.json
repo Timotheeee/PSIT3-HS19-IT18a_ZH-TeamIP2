@@ -9,8 +9,8 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --watch --mode=development",
-    "compile_css": "node-sass --include-path sass ./src/style.scss ./public/css/style.css",
-    "watch": "nodemon --watch src/style.scss --exec npm run compile_css"
+    "compile_css": "node-sass --include-path sass ./src/css/style.scss ./public/css/style.css",
+    "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css"
   },
   "author": "",
   "license": "ISC",
