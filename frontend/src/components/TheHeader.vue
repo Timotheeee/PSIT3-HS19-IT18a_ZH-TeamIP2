@@ -13,7 +13,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/styles";
+  @import "../css/colors";
   .logo {
     width: 100px;
     height: 100px;

@@ -22,6 +22,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/styles";
+  @import "../css/colors";
   @import "../css/speech-bubble";
 </style>
