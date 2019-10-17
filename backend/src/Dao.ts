@@ -41,6 +41,13 @@ export class Dao {
     return JSON.parse(this.graph);
   }
 
+  public saveGraph(graph:any){
+    fs.writeFile("./db.json", JSON.stringify(graph), function (err: any) {
+      if (err) {
+          console.log(err);
+      }
+  });
+  }
 
   //used for tests
   public getGraphAsync(){
