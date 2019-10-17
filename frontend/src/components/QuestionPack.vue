@@ -37,15 +37,3 @@ export default Vue.extend({
     }
 });
 </script>
-
-<style lang="scss">
-  @import "../css/colors";
-
-  .background {
-    background-color: $primary-color;
-  }
-
-  .chat {
-    background-color: $surface;
-  }
-</style>

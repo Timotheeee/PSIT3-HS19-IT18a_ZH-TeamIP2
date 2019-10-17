@@ -2,7 +2,7 @@
   <div class="w-100 min-vh-100 background">
     <div class="container chat p-0 shadow-lg">
       <the-header />
-      <div class="chatbox">
+      <div id="chat-box">
         <question-pack class="questionPack"
                   v-for="question in this.questions"
                   :question="question"
@@ -45,10 +45,11 @@ export default Vue.extend({
                 'dirt, or 700 pounds.'));
 
             this.questions.push(question2);
-            var element = document.getElementById("chat-space");
-            if(element != null) {
 
-                element.scrollTop = element.scrollHeight + 100;
+            var chatBox = document.getElementById("chat-box");
+            if(chatBox != null) {
+
+                chatBox.scrollTop = chatBox.scrollHeight + chatBox.clientHeight;
             }
         }
     },
@@ -62,10 +63,15 @@ export default Vue.extend({
 <style lang="scss">
   @import "../css/colors";
 
-  .chatbox {
+  .background {
+    background-color: $primary-color;
+  }
+
+  #chat-box {
     overflow-y: scroll;
     height: calc(100vh - 100px);
     display: grid;
+    background-color: $surface;
   }
 
   // scrollbar design
