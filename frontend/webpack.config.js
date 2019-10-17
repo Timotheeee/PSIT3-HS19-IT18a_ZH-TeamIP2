@@ -4,9 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: {
-    index: './src/index.ts',
-    results: './src/results.ts',
-    welcome: './src/welcome.ts'
+    index: './src/index.ts'
   },
   output: {
     path: path.resolve(__dirname, './public/compiledjs/'),

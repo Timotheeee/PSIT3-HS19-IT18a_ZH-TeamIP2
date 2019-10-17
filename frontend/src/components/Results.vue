@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <the-header />
-    <br />
-    <br />
-    <div id="resultsbox">
-      <div id="youare">You are...</div>
-      <br>
-      <img :src="circle" id="circle" />
-      <span id="hardworker">{{hardworker}}</span>
-      <span id="clueless">{{clueless}}</span>
+  <div class="container" style="background-color: white; border:1px solid black">
+    <div class="jumbotron text-center" style="background-color: white;">
+      <div>
+        <the-header />
+        <br />
+        <br />
+        <div id="resultsbox">
+          <div id="youare">You are...</div>
+          <br />
+          <img :src="circle" id="circle" />
+          <span id="hardworker">{{hardworker}}</span>
+          <span id="clueless">{{clueless}}</span>
+        </div>
+        <div id="tiltedredbox"></div>
+        <div id="suggestions">
+          <h3>Suggestions:</h3>
+          <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</b>
+        </div>
+      </div>
     </div>
-    <div id="tiltedredbox"></div>
-    <div id="suggestions">
-      <h3>Suggestions:</h3>
-      <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</b>
-
-    </div>
-
   </div>
 </template>
 
@@ -24,7 +26,7 @@
 import Vue from "vue";
 import { Question } from "./../Question";
 import { Answer } from "./../Answer";
-import TheHeader from "./TheHeader.vue"
+import TheHeader from "./TheHeader.vue";
 
 export default Vue.extend({
   data() {
