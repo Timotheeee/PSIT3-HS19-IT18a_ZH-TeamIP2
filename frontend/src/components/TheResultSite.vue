@@ -41,3 +41,7 @@ export default Vue.extend({
   created() {}
 });
 </script>
+
+<style lang="scss">
+  @import "../css/styles";
+</style>
