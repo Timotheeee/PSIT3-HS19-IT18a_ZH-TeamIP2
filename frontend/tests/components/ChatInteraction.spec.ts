@@ -13,8 +13,8 @@ describe("chatinteraction", () => {
 
   describe("is chatinteraction rendered correctly", () => {
 
-    it("has to contains atleast one chatbox", () => {
-      expect(wrapper.contains('.chatbox')).toBeTruthy();
+    it("has to contains atleast one questionPack", () => {
+      expect(wrapper.contains('.questionPack')).toBeTruthy();
     })
   })
 })

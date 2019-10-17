@@ -15,7 +15,7 @@ export default Vue.extend({
     },
     computed: {
       resultMessage: function(): string {
-        return "Your answer was: " + this.answer;
+        return this.answer;
       }
     }
 });
