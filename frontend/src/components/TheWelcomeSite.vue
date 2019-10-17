@@ -20,8 +20,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Question } from "./../Question";
-import { Answer } from "./../Answer";
 import TheHeader from "./TheHeader.vue";
 
 export default Vue.extend({
@@ -41,3 +39,7 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="scss">
+  @import "../css/styles";
+</style>

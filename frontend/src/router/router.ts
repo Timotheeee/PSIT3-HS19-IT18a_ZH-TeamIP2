@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Welcome from './../components/Welcome.vue'
-import Results from './../components/Results.vue'
+import TheWelcomeSite from './../components/TheWelcomeSite.vue'
+import TheResultSite from './../components/TheResultSite.vue'
 import ChatInteraction from './../components/ChatInteraction.vue'
 import AdminPage from './../components/AdminPage.vue'
 
@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '*',
       name: 'Frontpage',
-      component: Welcome,
+      component: TheWelcomeSite,
     },
     {
       path: '/questionnaire',
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/results',
       name: 'Results',
-      component: Results
+      component: TheResultSite
     },
     {
       path: '/adminpage',

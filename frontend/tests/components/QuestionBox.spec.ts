@@ -1,7 +1,7 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from "vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
-import {Answer} from "./../../src/Answer"
+import {Answer} from "./../../src/model/Answer"
 
 describe("questionbox", () => {
   let wrapper: Wrapper<Vue>;
