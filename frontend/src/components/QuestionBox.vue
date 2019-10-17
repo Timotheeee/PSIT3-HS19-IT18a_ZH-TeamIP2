@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Answer} from './../Answer';
+import {Answer} from './../model/Answer';
 
 export default Vue.extend({
     name: "QuestionBox",
