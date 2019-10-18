@@ -4,6 +4,54 @@
       <div>
         <the-header />
         <input type="file" id="graphfile" @change="getFile" />
+        <h2>Example file:</h2>
+        <pre style="text-align:left">{
+    "questions": [{
+            "id":0,
+            "title": "how much do you sleep ?",
+            "answers": [
+                {
+                    "title": "8 hours",
+                    "score": "1"
+                }, {
+                    "title": "5 hours",
+                    "score": "-1"
+                }
+            ]
+        },{
+            "id":1,
+            "title": "Do you write summaries ?",
+            "answers": [
+                {
+                    "title": "yes",
+                    "score": "1"
+                }, {
+                    "title": "no",
+                    "score": "-1"
+                }
+            ]
+        },{
+            "id":2,
+            "title": "How many hobbies do you have ?",
+            "answers": [
+                {
+                    "title": "0",
+                    "score": "1"
+                }, {
+                    "title": "1",
+                    "score": "1",
+                    "next": "3"
+                }
+            ]
+        },{
+            "id":3,
+            "title": "How much time do you invest in other hobbies ?",
+            "min": 0,
+            "max": 20,
+            "step": 0.5
+        }]
+      }
+        </pre>
       </div>
     </div>
   </div>
@@ -42,11 +90,12 @@ export default Vue.extend({
       }
     },
     post(graph: any) {
+      console.log("graph: " + graph);
       axios({
         method: "post",
         url: "/api",
         data: {
-          graph: "lol",
+          graph: "lol"
         }
       })
         .then(r => {
