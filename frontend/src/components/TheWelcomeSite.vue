@@ -5,6 +5,10 @@
       <div class="jumbotron text-center jumbotron-fluid">
           <h1 class="display-3">Welcome to StudentScore!</h1>
           <p class="lead">{{this.textStudentScore}}</p>
+
+          <button @click="goTo('/questionnaire')" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
+          <button @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Adminpanel</button>
+
           <h5>StudentScore Members</h5>
               <ul class="list-inline">
                 <li class="list-inline-item">Semanur Cerkez</li>
@@ -14,7 +18,6 @@
                 <li class="list-inline-item">Patric (Ryan) Steiger</li>
                 <li class="list-inline-item">Erwin Tran</li>
               </ul>
-          <button @click="goToQuestionnaire" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
       </div>
     </div>
   </div>
@@ -35,8 +38,8 @@ export default Vue.extend({
   },
   created() {},
   methods: {
-    goToQuestionnaire(): void {
-      this.$router.push("/questionnaire");
+    goTo(route: string): void {
+      this.$router.push(route);
     }
   }
 });
@@ -47,7 +50,7 @@ export default Vue.extend({
   margin-bottom: 60px;
 }
 
-.list-inline {
+.btn {
   margin-bottom: 60px;
 }
 
