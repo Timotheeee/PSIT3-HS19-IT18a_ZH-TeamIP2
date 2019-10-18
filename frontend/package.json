@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --watch --mode=development",
-    "compile_css": "node-sass --include-path sass ./src/css/style.scss ./public/css/style.css",
+    "compile_css": "node-sass --include-path sass ./src/css/styles.scss",
     "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css"
   },
   "author": "",
