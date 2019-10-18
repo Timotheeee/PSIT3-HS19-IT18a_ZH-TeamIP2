@@ -30,9 +30,8 @@ app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (a
   res.status(200).json(graph);
 });
 
-app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
-  var graph = req.body.graph;
-  dao.saveGraph(graph);
-  res.status(200).json(graph);
+app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+  dao.saveGraph(req.body.graph);
+  res.status(200).json({response:"ok"});
 });
 
