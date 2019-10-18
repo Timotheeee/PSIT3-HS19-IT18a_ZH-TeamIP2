@@ -9,12 +9,15 @@ const express = require('express'),
   mysql = require('mysql'),
   fs = require('fs');
 
+
 var dao = new Dao();
+
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '\\..\\..\\frontend\\public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var server = app.listen(process.env.PORT || 3000, listen);
 
@@ -33,5 +36,6 @@ app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (a
 app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
   dao.saveGraph(req.body.graph);
   res.status(200).json({response:"ok"});
+  console.log(req.body);
 });
 
