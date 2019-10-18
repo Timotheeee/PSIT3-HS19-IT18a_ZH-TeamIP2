@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import TheWelcomeSite from './../components/TheWelcomeSite.vue'
 import TheResultSite from './../components/TheResultSite.vue'
 import ChatInteraction from './../components/ChatInteraction.vue'
-import AdminPage from './../components/AdminPage.vue'
+import TheAdminPage from './../components/TheAdminPage.vue'
 
 Vue.use(Router)
 
@@ -27,7 +27,7 @@ export default new Router({
     {
       path: '/adminpage',
       name: 'AdminPage',
-      component: AdminPage
+      component: TheAdminPage
     },
     {
       path: '/api',
