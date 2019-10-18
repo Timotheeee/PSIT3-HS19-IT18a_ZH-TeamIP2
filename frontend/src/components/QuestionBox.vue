@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Answer} from './../Answer';
+import {Answer} from './../model/Answer';
 
 export default Vue.extend({
     name: "QuestionBox",
@@ -44,6 +44,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/styles";
+  @import "../css/colors";
   @import "../css/speech-bubble";
 </style>

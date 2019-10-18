@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Question} from "./../Question";
-import {Answer} from "./../Answer"
+import {Question} from "./../model/Question";
+import {Answer} from "./../model/Answer"
 import QuestionBox from './QuestionBox.vue';
 import AnswerBox from './AnswerBox.vue';
 export default Vue.extend({
@@ -39,7 +39,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/styles";
+  @import "../css/colors";
 
   .background {
     background-color: $primary-color;
