@@ -95,7 +95,7 @@ export default Vue.extend({
         method: "post",
         url: "/api",
         data: {
-          graph: "lol"
+          graph: graph
         }
       })
         .then(r => {
