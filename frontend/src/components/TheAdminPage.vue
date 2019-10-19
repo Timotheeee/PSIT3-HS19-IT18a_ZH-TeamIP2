@@ -5,6 +5,7 @@
       <div class="jumbotron text-center jumbotron-fluid">
         <div class="container">
           <div class="large-12 medium-12 small-12 cell">
+            <button @click="goTo('/welcome')" type="button" class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
             <label>
               <input type="file" id="file" ref="file" class="btn btn-secondary btn-lg" v-on:change="handleFileUpload()"/>
             </label>
@@ -28,6 +29,9 @@ export default Vue.extend({
     };
   },
   methods: {
+    goTo(route: string): void {
+      this.$router.push(route);
+    },
     handleFileUpload() {
       // get file from input field
       this.file = this.$refs.file.files[0];
