@@ -9,7 +9,8 @@
             <label>
               <input type="file" id="file" ref="file" class="btn btn-secondary btn-lg" v-on:change="handleFileUpload()"/>
             </label>
-            <button type="button" class="btn btn-secondary btn-lg" v-on:click="submitFile()">Submit</button>
+            <button type="button" class="btn btn-secondary btn-lg" v-on:click="submitFile()">Submit</button><br>
+            <a href="example.json"><button type="button" class="btn btn-secondary btn-lg">Example file format</button></a><br>
           </div>
         </div>
       </div>
