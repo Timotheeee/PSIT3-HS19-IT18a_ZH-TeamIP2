@@ -3,6 +3,7 @@
     <div class="jumbotron text-center" style="background-color: white;">
       <div>
         <the-header />
+        <a href="/#/welcome/">back to the welcome page</a><br>
         <input type="file" id="graphfile" @change="getFile" />
         <h2>Example file:</h2>
         <pre style="text-align:left">{
@@ -74,15 +75,15 @@ export default Vue.extend({
   methods: {
     getFile() {
       var input = <HTMLInputElement>document.getElementById("graphfile");
-      var files = input.files;
-      var file: File = files[0];
+      var temp = input.files || [""];
+      var file: any = temp[0] || {};
       var this2 = this;
       if (file) {
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function(evt) {
-          console.log(evt.target.result);
-          this2.post(JSON.stringify(evt.target.result));
+          var a = evt.target || {result:{}};
+          this2.post(JSON.stringify(a.result || {}));
         };
         reader.onerror = function(evt) {
           console.log("error");

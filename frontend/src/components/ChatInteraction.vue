@@ -4,7 +4,7 @@
       <the-header />
       <div id="chat-box">
         <question-pack class="questionPack"
-                  v-for="question in this.questions"
+                  v-for="question in this.questions" v-bind:key="question"
                   :question="question"
                   @displayNextQuestion="getNextQuestion" />
       </div>
