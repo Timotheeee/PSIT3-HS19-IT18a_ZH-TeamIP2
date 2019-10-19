@@ -1,18 +1,23 @@
 <template>
-  <div class="container" style="background-color: white; border:1px solid black">
-    <div class="jumbotron text-center" style="background-color: white;">
-      <div>
-        <the-header />
-        <br />
-        <br />
-        <h2>Welcome to StudentScore!</h2>
-        <br />
-        <br />
-        <span>our goal is to... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
-        <br />
-        <br />
-        <br />
-        <button @click="goToQuestionnaire" id="start">Start!</button>
+  <div class="w-100 min-vh-100 background">
+    <div class="container p-0 shadow-lg">
+      <the-header />
+      <div class="jumbotron text-center jumbotron-fluid">
+          <h1 class="display-3">Welcome to StudentScore!</h1>
+          <p class="lead">{{this.textStudentScore}}</p>
+
+          <button @click="goTo('/questionnaire')" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
+          <button @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Adminpanel</button>
+
+          <h5>StudentScore Members</h5>
+              <ul class="list-inline">
+                <li class="list-inline-item">Semanur Cerkez</li>
+                <li class="list-inline-item">Lars Höhener</li>
+                <li class="list-inline-item">Timothé Laborie</li>
+                <li class="list-inline-item">Michael Schlaubitz</li>
+                <li class="list-inline-item">Patric (Ryan) Steiger</li>
+                <li class="list-inline-item">Erwin Tran</li>
+              </ul>
       </div>
     </div>
   </div>
@@ -25,7 +30,7 @@ import TheHeader from "./TheHeader.vue";
 export default Vue.extend({
   data() {
     return {
-      logo: "./images/logo.png"
+      textStudentScore: "Our goal is to rethink surveys with a chat-like interface."
     };
   },
   components: {
@@ -33,13 +38,21 @@ export default Vue.extend({
   },
   created() {},
   methods: {
-    goToQuestionnaire(): void {
-      this.$router.push("/questionnaire");
+    goTo(route: string): void {
+      this.$router.push(route);
     }
   }
 });
 </script>
 
 <style lang="scss">
-  @import "../css/styles";
+.lead {
+  margin-bottom: 60px;
+}
+
+.btn {
+  margin-bottom: 60px;
+}
+
+
 </style>
