@@ -18,7 +18,6 @@
 <script lang="ts">
 import Vue from "vue";
 import TheHeader from "./TheHeader.vue";
-import ICountUp from 'vue-countup-v2'
 
 export default Vue.extend({
   data() {

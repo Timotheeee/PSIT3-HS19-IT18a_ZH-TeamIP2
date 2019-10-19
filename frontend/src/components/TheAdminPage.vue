@@ -1,57 +1,16 @@
 <template>
-  <div class="container" style="background-color: white; border:1px solid black">
-    <div class="jumbotron text-center" style="background-color: white;">
-      <div>
-        <the-header />
-        <input type="file" id="graphfile" @change="getFile" />
-        <h2>Example file:</h2>
-        <pre style="text-align:left">{
-    "questions": [{
-            "id":0,
-            "title": "how much do you sleep ?",
-            "answers": [
-                {
-                    "title": "8 hours",
-                    "score": "1"
-                }, {
-                    "title": "5 hours",
-                    "score": "-1"
-                }
-            ]
-        },{
-            "id":1,
-            "title": "Do you write summaries ?",
-            "answers": [
-                {
-                    "title": "yes",
-                    "score": "1"
-                }, {
-                    "title": "no",
-                    "score": "-1"
-                }
-            ]
-        },{
-            "id":2,
-            "title": "How many hobbies do you have ?",
-            "answers": [
-                {
-                    "title": "0",
-                    "score": "1"
-                }, {
-                    "title": "1",
-                    "score": "1",
-                    "next": "3"
-                }
-            ]
-        },{
-            "id":3,
-            "title": "How much time do you invest in other hobbies ?",
-            "min": 0,
-            "max": 20,
-            "step": 0.5
-        }]
-      }
-        </pre>
+  <div class="w-100 min-vh-100 background">
+    <div class="container p-0 shadow-lg">
+      <the-header />
+      <div class="jumbotron text-center jumbotron-fluid">
+        <div class="container">
+          <div class="large-12 medium-12 small-12 cell">
+            <label>
+              <input type="file" id="file" ref="file" class="btn btn-secondary btn-lg" v-on:change="handleFileUpload()"/>
+            </label>
+            <button type="button" class="btn btn-secondary btn-lg" v-on:click="submitFile()">Submit</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -65,50 +24,45 @@ import axios from "axios";
 export default Vue.extend({
   data() {
     return {
-      logo: "./images/logo.png",
-      circle: "./images/circle.png",
-      hardworker: "40% Hard Worker",
-      clueless: "60% Clueless"
+      file: ''
     };
   },
   methods: {
-    getFile() {
-      var input = <HTMLInputElement>document.getElementById("graphfile");
-      var files = input.files;
-      var file: File = files[0];
-      var this2 = this;
-      if (file) {
-        var reader = new FileReader();
-        reader.readAsText(file, "UTF-8");
-        reader.onload = function(evt) {
-          console.log(evt.target.result);
-          this2.post(JSON.stringify(evt.target.result));
-        };
-        reader.onerror = function(evt) {
-          console.log("error");
-        };
+    handleFileUpload() {
+      // get file from input field
+      this.file = this.$refs.file.files[0];
+    },
+    submitFile() {
+      // transform file to json format
+      var reader = new FileReader();
+      reader.readAsText(this.file, "UTF-8");
+      reader.onload = evt => {
+        this.post(evt.target!.result);
+      }
+      reader.onerror = evt => {
+        alert('error while loading the file');
       }
     },
     post(graph: any) {
-      console.log("graph: " + graph);
       axios({
         method: "post",
         url: "/api",
         data: {
-          graph: "lol"
+          graph: graph
         }
-      })
-        .then(r => {
-          console.log(r);
+      }).then(resolve => {
+          console.log(resolve);
         })
-        .catch(e => {
-          console.log(e);
+        .catch(error => {
+          alert('error while uploading the file')
         });
+    },
+    downloadExampleFile() {
+
     }
   },
   components: {
     TheHeader
-  },
-  created() {}
+  }
 });
 </script>
