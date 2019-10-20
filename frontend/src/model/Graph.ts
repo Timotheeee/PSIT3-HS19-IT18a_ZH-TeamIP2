@@ -1,5 +1,5 @@
-import {Node} from './Node.ts';
-import {Edge} from './Edge.ts';
+import {Node} from './Node';
+import {Edge} from './Edge';
 
 export class Graph {
   private nodes: Node[];
@@ -8,6 +8,9 @@ export class Graph {
     this.nodes = [];
   }
 
+  /*
+   * Adds a new node to the graph. The newly added or existing node is returned.
+   */
   addNode(id: string, title: string ) {
     let node: Node = this.findNode(id);
     if (node == null) {
@@ -19,6 +22,9 @@ export class Graph {
     return node;
   }
 
+  /*
+   * Adds an edge between two existing nodes.
+   */
   addEdge(source: string, target: string, answer: string, score: number) {
     let sourceNode: Node = this.findNode(source);
     if (sourceNode == null) {
@@ -32,13 +38,20 @@ export class Graph {
     sourceNode.addEdge(newEdge);
   }
 
+  /*
+   * Finds a existing node by Id. Returns null if node doesn't exist.
+   */
   findNode(id: string) : any {
     for (let node of this.nodes) {
-      if (node.getId().localeCompare(id)) {
+      // check if node id already exists
+      if (node.getId().localeCompare(id) === 0) {
         return node;
       }
     }
     return null;
   }
 
+  getNodes() : Node[] {
+    return this.nodes;
+  }
 }
