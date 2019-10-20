@@ -14,7 +14,7 @@ var dao = new Dao();
 
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '\\..\\..\\frontend\\public'));
+app.use(express.static(__dirname + '//..//..//frontend//public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
