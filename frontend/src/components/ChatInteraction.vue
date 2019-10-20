@@ -6,7 +6,11 @@
         <question-pack class="questionPack"
                   v-for="question in this.questions" v-bind:key="question"
                   :question="question"
+                  :last-question="false"
                   @displayNextQuestion="getNextQuestion" />
+        <question-pack class="last-question hidden"
+                       :question="this.ending"
+                       :last-question="true" />
       </div>
     </div>
   </div>
@@ -18,17 +22,23 @@ import QuestionPack from "./QuestionPack.vue";
 import {Question} from "./../model/Question";
 import {Answer} from "./../model/Answer"
 import TheHeader from './TheHeader.vue';
+
 export default Vue.extend({
     data() {
         var question1 = new Question(1, "How much did you sleep?");
+
         question1.addPossibleAnswer(new Answer(1, 'below 6 hours'));
         question1.addPossibleAnswer(new Answer(2, '6 to 8 hours'));
         question1.addPossibleAnswer(new Answer(3, 'over 8 hours'));
 
+        var counter = 0;
+
         return {
             questions: [
                 question1
-            ]
+            ],
+            ending: Question,
+            counter
         }
     },
     methods: {
@@ -46,10 +56,28 @@ export default Vue.extend({
 
             this.questions.push(question2);
 
-            var chatBox = document.getElementById("chat-box");
+            // only temp so the program will stop
+            this.counter += 1;
+            if(this.counter >= 3) {
+
+                var lastResponse = new Question(100, "Great! We are finished! It was nice talking to you ;)");
+                lastResponse.addPossibleAnswer(new Answer(1, "Nice! Let me see the result"));
+                this.$data.ending = lastResponse;
+
+                var endQuestion = this.$el.querySelector(".last-question");
+                if(endQuestion != null) {
+
+                    endQuestion.classList.remove("hidden");
+                }
+            }
+
+            this.scrollToBottom();
+        },
+        scrollToBottom: function() {
+            var chatBox = this.$el.querySelector("#chat-box");
             if(chatBox != null) {
 
-                chatBox.scrollTop = chatBox.scrollHeight + chatBox.clientHeight;
+                chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
     },

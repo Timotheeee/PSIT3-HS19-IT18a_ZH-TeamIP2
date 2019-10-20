@@ -2,6 +2,7 @@
   <div class="px-5 py-3">
     <question-box :question="this.question.getQuestion()"
                   :possibleAnswers="this.question.getPossibleAnswers()"
+                  :lastQuestion="this.lastQuestion"
                   @answerPicked="updateAnswer" />
     <answer-box :answer="this.pickedAnswer" />
   </div>
@@ -23,6 +24,10 @@ export default Vue.extend({
       question: {
         type: Question,
         required: true
+      },
+      lastQuestion: {
+        type: Boolean,
+        required: false
       }
     },
     methods: {

@@ -2,10 +2,11 @@
   <div>
     <p id="question" class="speech-bubble question">{{question}}</p>
     <div class="speech-bubble possible-answer mr-5 mb-3 float-left" v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
-    <fieldset :id="question">
-      <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
-      <label :for="answer.getAnswer()">{{answer.answer}} </label>
-    </fieldset>
+      <fieldset :id="question" v-if="!lastQuestion">
+        <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
+        <label :for="answer.getAnswer()">{{answer.answer}} </label>
+      </fieldset>
+      <button class="btn linkToResult" v-if="lastQuestion" @click="goToResultSite">{{answer.answer}}</button>
     </div>
     <button @click="onButtonClick">Submit</button>
   </div>
@@ -31,6 +32,10 @@ export default Vue.extend({
       possibleAnswers: {
         type: Array,
         required: true
+      },
+      lastQuestion: {
+          type: Boolean,
+          required: false
       }
     },
     methods: {
@@ -39,6 +44,9 @@ export default Vue.extend({
         this.pickedAnswer = "";
         this.showAnswer = false;
       },
+      goToResultSite(): void {
+          this.$router.push("/results");
+      }
     }
 });
 </script>
@@ -46,4 +54,9 @@ export default Vue.extend({
 <style lang="scss">
   @import "../css/colors";
   @import "../css/speech-bubble";
+
+  .linkToResult {
+    background-color: $secondary-color !important;
+    color: $surface !important;
+  }
 </style>
