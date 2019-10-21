@@ -26,7 +26,7 @@ import axios from "axios";
 export default Vue.extend({
   data() {
     return {
-      file: ''
+      file: new Blob([""])
     };
   },
   methods: {
@@ -35,7 +35,12 @@ export default Vue.extend({
     },
     handleFileUpload() {
       // get file from input field
-      this.file = this.$refs.file.files[0];
+      let inputElement: HTMLInputElement = (<HTMLInputElement>this.$refs.file);
+
+
+      if(inputElement.files) {
+        this.file = inputElement.files[0];
+      }
     },
     submitFile() {
       // transform file to json format
