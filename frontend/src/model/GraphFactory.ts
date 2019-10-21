@@ -14,6 +14,12 @@ export class GraphFactory {
     return graph;
   }
 
+  static createTestGraph() : Graph {
+    // TODO: ryan finish code here. Use static json string to actually test it.
+    let graph: Graph = new Graph();
+    graph.addNode(new Node())
+  }
+
   private static importNodes(graph: Graph, nodes: JSONNode[]) {
     for (let node of nodes) {
       graph.addNode(node.id, node.metadata.title);

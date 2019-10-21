@@ -5,12 +5,12 @@ describe("graph", () => {
   let graph: Graph = new Graph();
   beforeEach(() => {
     graph = new Graph();
-  })
+  });
 
   describe("is graph working correctly", () => {
     it("adds a node correctly", () => {
       expect(graph.addNode("1", "dummy").getId()).toBe("1");
-    })
+    });
 
     it("adds multiple nodes correctly", () => {
       graph.addNode("1", "dummy");
