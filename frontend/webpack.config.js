@@ -48,7 +48,6 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
-<<<<<<< HEAD
       },
       {
         test: /\.s[a|c]ss$/,
@@ -58,9 +57,6 @@ module.exports = {
           'sass-loader'
         ]
       },
-=======
-      }
->>>>>>> f564e80ada4c6a06f6b89024576ed079e794ed43
     ]
   },
   resolve: {
@@ -80,15 +76,11 @@ module.exports = {
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin()
-<<<<<<< HEAD
   ],
   watch: true,
   watchOptions: {
     ignored: /node_modules|public/
   }
-=======
-  ]
->>>>>>> f564e80ada4c6a06f6b89024576ed079e794ed43
 }
 
 if (process.env.NODE_ENV === 'production') {
