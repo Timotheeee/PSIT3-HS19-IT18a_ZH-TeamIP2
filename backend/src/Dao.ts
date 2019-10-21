@@ -24,7 +24,6 @@ export class Dao {
       database: "timothel_psit3"
     });
 
-
     this.con.connect(function (err: any) {
       if (err) throw err;
       console.log("Connected to db!");
