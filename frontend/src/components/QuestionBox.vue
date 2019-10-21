@@ -6,7 +6,7 @@
         <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
         <label :for="answer.getAnswer()">{{answer.answer}} </label>
       </fieldset>
-      <button class="btn linkToResult" v-if="lastQuestion" @click="goToResultSite">{{answer.answer}}</button>
+      <button class="linkToResult" v-if="lastQuestion" @click="goToResultSite">{{answer.answer}}</button>
     </div>
     <button @click="onButtonClick">Submit</button>
   </div>
@@ -35,7 +35,7 @@ export default Vue.extend({
       },
       lastQuestion: {
           type: Boolean,
-          required: false
+          required: true
       }
     },
     methods: {
@@ -56,6 +56,7 @@ export default Vue.extend({
   @import "../css/speech-bubble";
 
   .linkToResult {
+    border: none;
     background-color: $secondary-color !important;
     color: $surface !important;
   }
