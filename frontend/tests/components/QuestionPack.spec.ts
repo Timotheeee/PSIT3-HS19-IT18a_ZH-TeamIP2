@@ -9,10 +9,10 @@ describe("QuestionPack", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
-    let question = new Question(1, "hello");
+    let question = new Question(1, "hello", false);
     question.addPossibleAnswer(new Answer(1, "ok"));
 
-    wrapper = shallowMount(QuestionPack, {
+    wrapper = mount(QuestionPack, {
       propsData: {
         question: question
       }
@@ -20,12 +20,22 @@ describe("QuestionPack", () => {
   })
 
   describe("are events of questionbox received", () => {
-
-    test("updateAnswer function", () => {
+    test("is updateAnswer method called", () => {
       let updateAnswerStub = jest.fn();
       wrapper.setMethods({ updateAnswer: updateAnswerStub})
       wrapper.find(QuestionBox).vm.$emit('answerPicked');
       expect(updateAnswerStub.mock.calls.length).toBe(1);
+    })
+  })
+
+  describe("are events of questionPack emitted", () => {
+    test("if updateAnswer called, is processNextQuestion emitted", () =>  {
+      // create answerstub
+      let answer = new Answer(1, 'this is my answer');
+
+      // after answerPicked event updateAnswer is called
+      wrapper.find(QuestionBox).vm.$emit('answerPicked', answer);
+      expect(wrapper.emitted('processNextQuestion').length).toBe(1);
     })
   })
 })
