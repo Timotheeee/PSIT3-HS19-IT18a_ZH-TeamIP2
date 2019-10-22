@@ -9,7 +9,8 @@ describe("questionbox", () => {
     wrapper = shallowMount(QuestionBox, {
       propsData: {
         question: "Hello?",
-        possibleAnswers: [new Answer(1, "possibleAnswer")]
+        possibleAnswers: [new Answer(1, "possibleAnswer")],
+        lastQuestion: false
       }
     })
   })
@@ -30,6 +31,7 @@ describe("questionbox", () => {
     })
 
     test("answers have to dissappear if button pressed" , () => {
+      expect(wrapper.contains('input[name="Hello?"]')).toBeTruthy();
       let button = wrapper.find("button");
       button.trigger("click");
       expect(wrapper.contains('input[name="Hello?"]')).toBeFalsy();
