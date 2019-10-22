@@ -12,11 +12,21 @@ describe("QuestionPack", () => {
     let question = new Question(1, "hello", false);
     question.addPossibleAnswer(new Answer(1, "ok"));
 
-    wrapper = mount(QuestionPack, {
+    wrapper = shallowMount(QuestionPack, {
       propsData: {
         question: question
       }
     });
+  })
+
+  describe("is questionpack rendered correctly", () => {
+    it("should contain a question-box", () => {
+      expect(wrapper.html().includes('question-box')).toBeTruthy();
+    })
+
+    it("should contain an answer-box", () => {
+      expect(wrapper.html().includes('answer-box')).toBeTruthy();
+    })
   })
 
   describe("are events of questionbox received", () => {

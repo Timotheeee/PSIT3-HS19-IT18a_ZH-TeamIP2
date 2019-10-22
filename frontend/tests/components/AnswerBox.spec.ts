@@ -17,7 +17,7 @@ describe("answerbox", () => {
 
     it("should display one answer", () => {
       expect(wrapper.find('p.answer')).toBeTruthy();
-      expect(wrapper.html().includes('this is my answer'));
+      expect(wrapper.html().includes('this is my answer')).toBeTruthy();
     })
   })
 })
