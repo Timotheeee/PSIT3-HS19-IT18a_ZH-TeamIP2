@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p class="speech-bubble answer float-right" v-if="answer">{{ resultMessage }}</p>
+      <p class="speech-bubble answer float-right" v-if="answer">{{ this.answer }}</p>
   </div>
 </template>
 
@@ -9,13 +9,8 @@ import Vue from "vue";
 export default Vue.extend({
     name: "AnswerBox",
     props: {
-        answer: {
-            type:String
-        }
-    },
-    computed: {
-      resultMessage: function(): string {
-        return this.answer;
+      answer: {
+          type:String
       }
     }
 });
