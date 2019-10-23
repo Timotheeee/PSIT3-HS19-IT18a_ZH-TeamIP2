@@ -3,14 +3,14 @@
     <div class="container p-0 shadow-lg">
       <the-header />
       <div class="jumbotron text-center jumbotron-fluid">
-          <h1 class="display-3">Welcome to StudentScore!</h1>
+          <h1 id="title" class="display-3">Welcome to StudentScore!</h1>
           <p class="lead">{{this.textStudentScore}}</p>
 
-          <button @click="goTo('/questionnaire')" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
-          <button @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Adminpanel</button>
+          <button id="goToQuestionnaire" @click="goTo('/questionnaire')" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
+          <button id="goToAdminPage" @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Adminpanel</button>
 
           <h5>StudentScore Members</h5>
-              <ul class="list-inline">
+              <ul id="teammembers" class="list-inline">
                 <li class="list-inline-item">Semanur Cerkez</li>
                 <li class="list-inline-item">Lars Höhener</li>
                 <li class="list-inline-item">Timothé Laborie</li>
@@ -28,6 +28,7 @@ import Vue from "vue";
 import TheHeader from "./TheHeader.vue";
 
 export default Vue.extend({
+  name: 'WelcomeSite',
   data() {
     return {
       textStudentScore: "Our goal is to rethink surveys with a chat-like interface."

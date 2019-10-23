@@ -7,7 +7,7 @@
     "compile_css": "*.scss"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent",
     "build": "webpack --watch --mode=development",
     "compile_css": "node-sass --include-path sass ./src/css/styles.scss",
     "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css"
