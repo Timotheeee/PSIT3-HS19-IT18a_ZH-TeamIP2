@@ -8,7 +8,7 @@
       </fieldset>
       <button class="linkToResult" v-if="lastQuestion" @click="goToResultSite">{{answer.answer}}</button>
     </div>
-    <button @click="onButtonClick">Submit</button>
+    <button id="emitEvent" @click="onButtonClick">Submit</button>
   </div>
 </template>
 

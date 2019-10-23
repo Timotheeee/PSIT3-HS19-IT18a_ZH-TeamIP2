@@ -5,6 +5,7 @@ import {Answer} from "./../../src/model/Answer"
 
 describe("questionbox", () => {
   let wrapper: Wrapper<Vue>;
+
   beforeEach(() => {
     wrapper = shallowMount(QuestionBox, {
       propsData: {
@@ -18,7 +19,7 @@ describe("questionbox", () => {
   describe("is questionbox rendered correctly", () => {
 
     it("has to contain a button", () => {
-      expect(wrapper.contains("button")).toBeTruthy();
+      expect(wrapper.contains("button#emitEvent")).toBeTruthy();
     })
 
     it("has to contain a question", () => {
@@ -32,18 +33,25 @@ describe("questionbox", () => {
 
     test("answers have to dissappear if button pressed" , () => {
       expect(wrapper.contains('input[name="Hello?"]')).toBeTruthy();
-      let button = wrapper.find("button");
+      let button = wrapper.find("button#emitEvent");
       button.trigger("click");
       expect(wrapper.contains('input[name="Hello?"]')).toBeFalsy();
+    })
+
+    test("if last question, button for resultpage should appear", () => {
+      wrapper.vm.$props.lastQuestion = true;
+      expect(wrapper.contains("button.linkToResult")).toBeTruthy();
     })
   })
 
   describe("are functions of questionbox called", () => {
 
     test("onButtonClick function", () => {
+      // declare stub method
       let onButtonClickStub = jest.fn();
-      let button = wrapper.find("button");
-      wrapper.setMethods({ onButtonClick: onButtonClickStub()  })
+      wrapper.setMethods({ onButtonClick: onButtonClickStub()  });
+
+      let button = wrapper.find("button#emitEvent");
       button.trigger("click");
       expect(onButtonClickStub.mock.calls.length).toBe(1);
     })
@@ -52,9 +60,15 @@ describe("questionbox", () => {
   describe("are events of questionbox emitted", () => {
 
     test("onButtonClick event", () => {
-      let button = wrapper.find("button");
+      // set data of questionbox
+      wrapper.vm.$data.pickedAnswer = 'text';
+
+      let button = wrapper.find("button#emitEvent");
       button.trigger("click");
       expect(wrapper.emitted('answerPicked').length).toBe(1);
+
+      // [0][0] because emitted return an object in an object
+      expect(wrapper.emitted('answerPicked')[0][0]).toBe('text');
     })
   })
 })

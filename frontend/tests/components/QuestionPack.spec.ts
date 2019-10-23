@@ -5,7 +5,7 @@ import QuestionBox from "./../../src/components/QuestionBox.vue"
 import { Question } from "../../src/model/Question"
 import { Answer } from '../../src/model/Answer'
 
-describe("QuestionPack", () => {
+describe("questionpack", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
