@@ -1,7 +1,7 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from "vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
-import {Answer} from "./../../src/model/Answer"
+import answerArrayStub from "./AnswerArrayStub";
 
 describe("questionbox", () => {
   let wrapper: Wrapper<Vue>;
@@ -10,7 +10,7 @@ describe("questionbox", () => {
     wrapper = shallowMount(QuestionBox, {
       propsData: {
         question: "Hello?",
-        possibleAnswers: [new Answer(1, "possibleAnswer")],
+        possibleAnswers: answerArrayStub,
         lastQuestion: false
       }
     })

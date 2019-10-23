@@ -2,19 +2,16 @@ import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from "vue"
 import QuestionPack from "./../../src/components/QuestionPack.vue"
 import QuestionBox from "./../../src/components/QuestionBox.vue"
-import { Question } from "../../src/model/Question"
-import { Answer } from '../../src/model/Answer'
+import questionStub from "./QuestionStub"
+import answerStub from "./AnswerStub"
 
 describe("questionpack", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
-    let question = new Question(1, "hello", false);
-    question.addPossibleAnswer(new Answer(1, "ok"));
-
     wrapper = shallowMount(QuestionPack, {
       propsData: {
-        question: question
+        question: questionStub
       }
     });
   })
@@ -40,11 +37,8 @@ describe("questionpack", () => {
 
   describe("are events of questionPack emitted", () => {
     test("if updateAnswer called, is processNextQuestion emitted", () =>  {
-      // create answerstub
-      let answer = new Answer(1, 'this is my answer');
-
       // after answerPicked event updateAnswer is called
-      wrapper.find(QuestionBox).vm.$emit('answerPicked', answer);
+      wrapper.find(QuestionBox).vm.$emit('answerPicked', answerStub);
       expect(wrapper.emitted('processNextQuestion').length).toBe(1);
     })
   })
