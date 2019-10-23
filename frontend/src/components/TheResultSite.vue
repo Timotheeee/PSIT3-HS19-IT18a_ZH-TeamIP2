@@ -8,7 +8,7 @@
 
           <h3>StudentScore's advices for you are:</h3>
           <div v-for="advice in advices">
-            <p class="lead">{{advice}}</p>
+            <p class="lead advice">{{advice}}</p>
           </div>
       </div>
     </div>
