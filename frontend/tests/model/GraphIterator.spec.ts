@@ -14,23 +14,19 @@ describe("MyGraphIterator", () => {
         return graph;
     };
 
-    beforeEach(function() {
-        //graphIterator = null;
-    });
-
     describe("test gaming graph: left path", () =>{
         it("should folllow the path and eventually arrive at the final node.", () => {
             let graphIterator = new MyGraphIterator(createMinimumViableGraph());
-            graphIterator.getCurrentNode().getTitle().toBe(q1Text);
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q1Text);
             graphIterator.choose("q2");
             
-            graphIterator.getCurrentNode().question.toBe(q2Text);
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q2Text);
             graphIterator.choose("q4");
 
-            graphIterator.getCurrentNode().question.toBe(q4Text);
+            expect(graphIterator.getCurrentNode()).getTitle().toBe(q4Text);
             graphIterator.choose("fn");
 
-            graphIterator.getCurrentNode.isFinalNode().toBe(true);                        
+            expect(graphIterator.getCurrentNode.isFinalNode()).toBe(true);                        
         });
     });
 

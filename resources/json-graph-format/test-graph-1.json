@@ -1,4 +1,4 @@
-graph = {
+{
   "nodes": [
     {
       "id": "h",
@@ -40,12 +40,10 @@ graph = {
     }
   ],
   "edges": [
-    // Edge from H to Q1
     {
       "source": "h",
-      "target": "q1",
+      "target": "q1"
     },
-    // Edges for Questions do you play video games
     {
       "source": "q1",
       "target": "q2",
@@ -62,7 +60,6 @@ graph = {
         "score": 10
       }
     },
-    // Edges from Lol and Wow question
     {
       "source": "q2",
       "target": "q4",
@@ -79,7 +76,6 @@ graph = {
         "score": 1000
       }
     },
-    // Edges from the exercise question
     {
       "source": "q3",
       "target": "q4",
@@ -96,10 +92,9 @@ graph = {
         "score": 0
       }
     },
-    // From q4 to final node
     {
       "source": "q4",
-      "target": "fn",
+      "target": "fn"
     }
   ]
 }

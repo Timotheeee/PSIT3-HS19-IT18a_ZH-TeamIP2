@@ -1,5 +1,5 @@
-import {Node} from './Node';
-import {Edge} from './Edge';
+import {Node, NodeJSON} from './Node';
+import {Edge, EdgeJSON} from './Edge';
 
 export class Graph {
   private nodes: Node[];
@@ -58,4 +58,14 @@ export class Graph {
   getHead() : Node {
     return this.nodes[0];
   }
+
+  static fromJSON(json: GraphJSON): Graph {
+    let graph = Object(Graph.prototype);
+    return Object.assign(graph, json, {});
+  }
+}
+
+export interface GraphJSON {
+  nodes: NodeJSON[];
+  edges: EdgeJSON[];
 }
