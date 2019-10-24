@@ -54,4 +54,8 @@ export class Graph {
   getNodes() : Node[] {
     return this.nodes;
   }
+
+  getHead() : Node {
+    return this.nodes[0];
+  }
 }

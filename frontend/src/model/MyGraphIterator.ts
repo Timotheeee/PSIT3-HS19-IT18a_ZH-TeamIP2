@@ -1,5 +1,5 @@
 import { Graph } from "./Graph";
-import { Node } from "./Graph";
+import { Node } from "./Node";
 
 export interface GraphIterator {
     currentNode: Node;
@@ -16,7 +16,7 @@ export class MyGraphIterator implements GraphIterator {
     catalogue: Graph;
 
     // TODO: michael implement this class
-    
+
     constructor(catalogue: Graph) {
         this.currentNode = catalogue.getHead();
         this.catalogue = catalogue;
