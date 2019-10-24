@@ -20,6 +20,11 @@ export class GraphFactory {
     graph.addNode(new Node())
   }
 
+  static createGraphFromJSON(json: string): Graph {
+    // TODO michael implement this method
+    return new Graph();
+  }
+
   private static importNodes(graph: Graph, nodes: JSONNode[]) {
     for (let node of nodes) {
       graph.addNode(node.id, node.metadata.title);
