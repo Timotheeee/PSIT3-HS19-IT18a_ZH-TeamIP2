@@ -1,4 +1,5 @@
-import { Graph } from "./model/Graph";
+import { Graph } from "./Graph";
+import { Node } from "./Graph";
 
 export interface GraphIterator {
     currentNode: Node;

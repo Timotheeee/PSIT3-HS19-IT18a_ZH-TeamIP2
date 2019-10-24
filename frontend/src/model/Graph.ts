@@ -17,10 +17,10 @@ export class Graph {
     return node;
   }
 
-  addEdge(source: string, target: string, answer: string) {
-    let src: Node = this.findNode(source);
-    let edge: Edge = new Edge(src, target, answer);
-    src.addEdge(edge);
+  addEdge(source: string, target: string, answer: string, score: number = 0) {
+    const sourceNode: Node = this.findNode(source);
+    const targetNode: Node = this.findNode(target);
+    sourceNode.addEdge(new Edge(targetNode, answer, score));
   }
 
   findNode(id: string) : any {
@@ -76,9 +76,9 @@ export class Node {
 export class Edge {
   private target: Node;
   private answer: string;
-  private score: string;
+  private score: number;
 
-  constructor(target: Node, answer: string, score: string) {
+  constructor(target: Node, answer: string, score: number = 0) {
     this.target = target;
     this.answer = answer;
     this.score = score;
@@ -92,11 +92,11 @@ export class Edge {
     return this.target;
   }
 
-  setScore(score: string) {
+  setScore(score: number) {
     this.score = score;
   }
 
-  getScore() : string {
+  getScore() : number {
     return this.score;
   }
 
