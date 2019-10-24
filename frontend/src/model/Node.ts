@@ -32,11 +32,6 @@ export class Node {
   addEdge(edge: Edge) {
     this.edges.push(edge);
   }
-
-  static fromJSON(json: NodeJSON): Node {
-    let node = Object.create(Node.prototype);
-    return Object.assign(node, json, {});
-  }
 }
 
 export interface NodeJSON {

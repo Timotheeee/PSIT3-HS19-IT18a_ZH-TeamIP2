@@ -44,11 +44,6 @@ export class Edge {
   getAnswer() : string {
     return this.answer;
   }
-
-  static fromJSON(json: EdgeJSON): Edge {
-    let edge = Object.create(Edge.prototype);
-    return Object.assign(edge, json, {});
-  }
 }
 
 export interface EdgeJSON {

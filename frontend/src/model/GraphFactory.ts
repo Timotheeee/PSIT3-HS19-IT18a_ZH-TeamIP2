@@ -1,31 +1,37 @@
-import {Graph} from './Graph';
+import {Graph, GraphJSON} from './Graph';
+import {NodeJSON} from './Node';
+import {EdgeJSON} from './Edge';
 
 export class GraphFactory {
   /*
    * Creates and returns a Graph object from the given JSONGraph.
    */
-  /*static createGraph(JSONGraph: JSONGraph) : Graph {
+  private static createGraph(JSONGraph: GraphJSON) : Graph {
     let graph: Graph = new Graph();
     this.importNodes(graph, JSONGraph.nodes);
     this.importEdges(graph, JSONGraph.edges);
     return graph;
-  }*/
-
-  static createGraphFromJSON(data: string): Graph {
-    // TODO michael implement this method
-    let graph: Graph = JSON.parse(data);    
-    return new Graph();
   }
 
-  /*private static importNodes(graph: Graph, nodes: JSONNode[]) {
+  static createGraphFromJSON(data: string): Graph {
+    //let graph: Graph = JSON.parse(data, Graph.reviver);    
+    let graph: GraphJSON = JSON.parse(data);
+    return (this.createGraph(graph));
+  }
+
+  private static importNodes(graph: Graph, nodes: NodeJSON[]) {
     for (let node of nodes) {
       graph.addNode(node.id, node.metadata.title);
     }
   }
 
-  private static importEdges(graph: Graph, edges: JSONEdge[]) {
+  private static importEdges(graph: Graph, edges: EdgeJSON[]) {
+    console.log('inside of importEdges; edges:');
+    console.log(edges);    
+
+    let currentEdge: Object;
     for (let edge of edges) {
       graph.addEdge(edge.source, edge.source, edge.metadata.answer, parseInt(edge.metadata.score));
     }
-  }*/
+  }
 }

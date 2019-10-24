@@ -1,5 +1,6 @@
 import {Node, NodeJSON} from './Node';
 import {Edge, EdgeJSON} from './Edge';
+import { GraphFactory } from './GraphFactory';
 
 export class Graph {
   private nodes: Node[];
@@ -25,7 +26,7 @@ export class Graph {
   /*
    * Adds an edge between two existing nodes.
    */
-  addEdge(source: string, target: string, answer: string, score: number) {
+  addEdge(source: string, target: string, answer: string = "", score: number = 0) {
     let sourceNode: Node = this.findNode(source);
     if (sourceNode == null) {
       throw new Error("Source node not found.");
@@ -59,10 +60,9 @@ export class Graph {
     return this.nodes[0];
   }
 
-  static fromJSON(json: GraphJSON): Graph {
-    let graph = Object(Graph.prototype);
-    return Object.assign(graph, json, {});
-  }
+  /*static reviver(key: string, value: any): any {
+    return key === "" ? Graph.fromJSON(value) : value;
+  }*/
 }
 
 export interface GraphJSON {
