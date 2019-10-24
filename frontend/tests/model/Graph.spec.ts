@@ -47,5 +47,9 @@ describe("graph", () => {
       expect(graph.getNodes()[0].getEdges()[0].getAnswer()).toBe("dummyAnswer1");
       expect(graph.getNodes()[0].getEdges()[1].getAnswer()).toBe("dummyAnswer2");
     })
+
+    it("returns head noded correctly", () => {
+      // TODO: michaeal write test
+    })
   })
 })

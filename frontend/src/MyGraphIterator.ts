@@ -13,9 +13,16 @@ export interface GraphIterator {
 export class MyGraphIterator implements GraphIterator {
     currentNode: Node;
     catalogue: Graph;
+
+    // TODO: michael implement this class
     
     constructor(catalogue: Graph) {
-        return null;
+        this.currentNode = catalogue.getHead();
+        this.catalogue = catalogue;
+    }
+
+    getCurrentNode(): Node {
+        throw new Error("Method not implemented.");
     }
 
     answersForCurrentNode(): [String] {
