@@ -1,13 +1,17 @@
 <template>
   <div>
     <p id="question" class="speech-bubble question">{{question}}</p>
-    <div class="speech-bubble possible-answer mr-5 mb-3 float-left" v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
-    <fieldset :id="question">
-      <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
-      <label :for="answer.getAnswer()">{{answer.answer}} </label>
-    </fieldset>
-    </div>
-    <button @click="onButtonClick">Submit</button>
+
+      <b-button-group vertical class="speech-bubble possible-answer float-right">
+      <b-button id="btn" v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id v-on:click="onButtonClick" :name="question" :value="answer" v-model="pickedAnswer"  >
+
+        <fieldset :id="question">
+          <label :for="answer.getAnswer()">{{answer.answer}} </label>
+        </fieldset>
+      </b-button>
+      </b-button-group>
+
+
   </div>
 </template>
 
