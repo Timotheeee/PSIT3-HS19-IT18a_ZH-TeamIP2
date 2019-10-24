@@ -35,6 +35,4 @@ export class MyGraphIterator implements GraphIterator {
     isFinalNode(): boolean {
         throw new Error("Method not implemented.");
     }
-
-
 }
