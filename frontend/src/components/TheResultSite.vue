@@ -30,9 +30,10 @@ export default Vue.extend({
     // v-if={}
     return {
       score: 0,
-      finalscore: 30,
+      finalscore: 31,
       showadvice: false,
-      advices: [
+      advices: [],
+      advices2: [
         "your such a bad student",
         "holy are you a bad student",
         "flextape can't fix your student habits"
@@ -55,7 +56,16 @@ export default Vue.extend({
         if (this2.score < this2.finalscore) {
           this2.score++;
         } else {
-          this2.showadvice = true;
+          if (!this2.showadvice) {
+            this2.showadvice = true;
+            var i = -1;
+            setInterval(function() {
+              if (i < this2.advices2.length && i >= 0) {
+                this2.advices.push(this2.advices2[i]);
+              }
+              i++;
+            }, 600);
+          }
         }
       }, 50);
     }
@@ -82,12 +92,13 @@ export default Vue.extend({
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.9s;
+  transition: all 0.9s;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+  opacity: 1;
+  transform: scale(3);
 }
 </style>
 
