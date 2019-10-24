@@ -1,7 +1,7 @@
-import {Graph} from './Graph.ts';
-import {JSONGraph} from './JSONGraph.ts';
-import {JSONNode} from './JSONNode.ts';
-import {JSONEdge} from './JSONEdge.ts';
+import {Graph} from './Graph';
+import {JSONGraph} from './JSONGraph';
+import {JSONNode} from './JSONNode';
+import {JSONEdge} from './JSONEdge';
 
 export class GraphFactory {
   /*
