@@ -33,11 +33,6 @@ export class Graph {
     return null;
   }
 
-  static createGraphFromJSON(json: string): Graph {
-    // TODO michael implement this method
-    return new Graph();
-  }
-
   getHead(): Node {
     // TODO: michael implement this method
     return this.nodes[0];
