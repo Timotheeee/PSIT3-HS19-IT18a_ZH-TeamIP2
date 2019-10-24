@@ -8,10 +8,14 @@
           <b>{{ this.score }}</b>
         </h1>
 
-        <h3>StudentScore's advices for you are:</h3>
-        <div v-for="advice in advices">
-          <p class="lead" v-if="showadvice">{{advice}}</p>
-        </div>
+        <transition-group name="fade" mode="out-in">
+          <h3 key="1" v-if="showadvice">StudentScore's advices for you are:</h3>
+          <div key="2" v-if="showadvice">
+            <div v-for="advice in advices" :key="advice">
+              <p class="lead">{{advice}}</p>
+            </div>
+          </div>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -22,11 +26,12 @@ import Vue from "vue";
 import TheHeader from "./TheHeader.vue";
 
 export default Vue.extend({
-  data() {// v-if={}
+  data() {
+    // v-if={}
     return {
       score: 0,
       finalscore: 30,
-      showadvice:false,
+      showadvice: false,
       advices: [
         "your such a bad student",
         "holy are you a bad student",
@@ -49,8 +54,8 @@ export default Vue.extend({
         }
         if (this2.score < this2.finalscore) {
           this2.score++;
-        } else{
-          this2.showadvice=true;
+        } else {
+          this2.showadvice = true;
         }
       }, 50);
     }
@@ -74,4 +79,15 @@ export default Vue.extend({
 #score {
   margin-bottom: 60px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.9s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
+
