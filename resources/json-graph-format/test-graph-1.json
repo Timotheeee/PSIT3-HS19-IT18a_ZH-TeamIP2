@@ -3,7 +3,7 @@ graph = {
     {
       "id": "h",
       "metadata": {
-          "isHead": true,
+        "isHead": true,
     	  "title" : ""
       }
     },
@@ -34,7 +34,7 @@ graph = {
     {
       "id": "fn",
       "metadata": {
-          "isFinalNode" : true,
+        "isFinalNode" : true,
     	  "title" : ""
       }
     }
@@ -62,7 +62,7 @@ graph = {
         "score": 10
       }
     },
-    // Edges from Lol and Wow question    
+    // Edges from Lol and Wow question
     {
       "source": "q2",
       "target": "q4",
@@ -100,6 +100,6 @@ graph = {
     {
       "source": "q4",
       "target": "fn",
-    }    
+    }
   ]
 }
