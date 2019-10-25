@@ -26,16 +26,14 @@ export class GraphFactory {
   }
 
   private static importEdges(graph: Graph, edges: EdgeJSON[]) {
-    console.log('inside of importEdges; edges:');
-    console.log(edges);        
-
     let currentEdge: Object;
-    for (let edge of edges) {
-      console.log('current edge:= ');
-      console.log(edge);
-      console.log(typeof edge);
+    for (let edge of edges) {      
 
-      graph.addEdge(edge.source, edge.source, edge.metadata.answer, parseInt(edge.metadata.score));
+      if(edge.metadata !== undefined){
+        graph.addEdge(edge.source, edge.source, edge.metadata.answer, parseInt(edge.metadata.score));
+      } else {
+        graph.addEdge(edge.source, edge.source);
+      }      
     }
   }
 }
