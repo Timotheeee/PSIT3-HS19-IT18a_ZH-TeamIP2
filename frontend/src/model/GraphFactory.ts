@@ -14,7 +14,7 @@ export class GraphFactory {
   }
 
   static createGraphFromJSON(data: string): Graph {
-    //let graph: Graph = JSON.parse(data, Graph.reviver);    
+    //let graph: Graph = JSON.parse(data, Graph.reviver);
     let graph: GraphJSON = JSON.parse(data);
     return (this.createGraph(graph));
   }
@@ -26,16 +26,14 @@ export class GraphFactory {
   }
 
   private static importEdges(graph: Graph, edges: EdgeJSON[]) {
-    console.log('inside of importEdges; edges:');
-    console.log(edges);        
-
     let currentEdge: Object;
     for (let edge of edges) {
-      console.log('current edge:= ');
-      console.log(edge);
-      console.log(typeof edge);
-
-      graph.addEdge(edge.source, edge.source, edge.metadata.answer, parseInt(edge.metadata.score));
+      //if ("metadata" in edge) {
+        if (edge.metadata !== undefined) {
+          graph.addEdge(edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score));
+        } else {
+          graph.addEdge(edge.source, edge.target);
+        }
     }
   }
 }

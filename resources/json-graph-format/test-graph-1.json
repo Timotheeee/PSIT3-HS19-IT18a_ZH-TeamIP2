@@ -1,4 +1,5 @@
-{
+// short version
+graph = {
   "nodes": [
     {
       "id": "h",
@@ -40,10 +41,12 @@
     }
   ],
   "edges": [
+    // Edge from H to Q1
     {
       "source": "h",
       "target": "q1"
     },
+    // Edges for Questions do you play video games
     {
       "source": "q1",
       "target": "q2",
@@ -60,6 +63,7 @@
         "score": 10
       }
     },
+    // Edges from Lol and Wow question
     {
       "source": "q2",
       "target": "q4",
@@ -76,6 +80,7 @@
         "score": 1000
       }
     },
+    // Edges from the exercise question
     {
       "source": "q3",
       "target": "q4",
@@ -92,9 +97,125 @@
         "score": 0
       }
     },
+    // From q4 to final node
     {
       "source": "q4",
       "target": "fn"
+    }
+  ]
+}
+
+// long version
+graph = {
+  "nodes": [
+    {
+      "id": "h",
+      "metadata": {
+        "isHead": true,
+        "title" : ""
+      }
+    },
+    {
+      "id": "q1",
+      "metadata": {
+    	  "title" : "Do you play video games?"
+      }
+    },
+    {
+      "id": "q2",
+      "metadata": {
+    	  "title" : "Do you play League of Legends or World of Warcraft Classic?"
+      }
+    },
+    {
+      "id": "q3",
+      "metadata": {
+    	  "title" : "Do you exercise at least twice a week?"
+      }
+    },
+    {
+      "id": "q4",
+      "metadata": {
+    	  "title" : "Do you get more than 7 hours of sleep every night?"
+      }
+    },
+    {
+      "id": "fn",
+      "metadata": {
+        "isFinalNode" : true,
+      "title" : ""
+      }
+    }
+  ],
+  "edges": [
+    // Edge from H to Q1
+    {
+      "source": "h",
+      "target": "q1",
+      "metadata": {
+        "answer": "",
+        "score": 0
+      }
+    },
+    // Edges for Questions do you play video games
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "Yes",
+        "score": -10
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q3",
+      "metadata": {
+        "answer": "No",
+        "score": 10
+      }
+    },
+    // Edges from Lol and Wow question
+    {
+      "source": "q2",
+      "target": "q4",
+      "metadata": {
+        "answer": "Yes, Riven is my Bae!",
+        "score": -1000
+      }
+    },
+    {
+      "source": "q2",
+      "target": "q4",
+      "metadata": {
+        "answer": "No, I play CS GO instead xD",
+        "score": 1000
+      }
+    },
+    // Edges from the exercise question
+    {
+      "source": "q3",
+      "target": "q4",
+      "metadata": {
+        "answer": "Yes, I am a true gym rat!",
+        "score": 200
+      }
+    },
+    {
+      "source": "q3",
+      "target": "q4",
+      "metadata": {
+        "answer": "No less than that",
+        "score": 0
+      }
+    },
+    // From q4 to final node
+    {
+      "source": "q4",
+      "target": "fn",
+      "metadata": {
+        "answer": "",
+        "score": 0
+      }
     }
   ]
 }
