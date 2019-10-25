@@ -29,7 +29,7 @@ export default Vue.extend({
     methods: {
       updateAnswer(givenAnswer: Answer) {
         this.$data.pickedAnswer = givenAnswer.getAnswer();
-        this.$emit("processNextQuestion", givenAnswer.getId());
+        this.$emit("processNextQuestion", this.$props.question.getId(), givenAnswer.getId());
        }
     },
     components: {

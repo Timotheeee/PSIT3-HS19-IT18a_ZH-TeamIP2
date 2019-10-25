@@ -12,7 +12,7 @@
           <h3 key="1" v-if="showadvice">StudentScore's advices for you are:</h3>
           <div key="2" v-if="showadvice">
             <div v-for="advice in advices" :key="advice">
-              <p class="lead">{{advice}}</p>
+              <p class="lead advice">{{advice}}</p>
             </div>
           </div>
         </transition-group>

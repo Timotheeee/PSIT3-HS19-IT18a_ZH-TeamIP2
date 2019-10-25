@@ -39,3 +39,9 @@ app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (
   console.log(req.body);
 });
 
+app.post('/score/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { score: number, tips: string[]; }) => void; }; }) {
+  res.status(200).json({
+    score: 75,
+    tips: ["Stop drinking soup", "Learn without sleeping"]
+  });
+});

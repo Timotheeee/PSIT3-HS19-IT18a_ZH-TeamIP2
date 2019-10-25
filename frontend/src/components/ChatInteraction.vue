@@ -3,10 +3,13 @@
     <div class="container chat p-0 shadow-lg">
       <the-header />
       <div id="chat-box">
-        <question-pack class="questionPack"
-                  v-for="question in this.questions" v-bind:key="question.getId()"
-                  :question="question"
-                  @processNextQuestion="processQuestion" />
+        <form @submit="onSubmit"
+          method="post">
+          <question-pack class="questionPack"
+                    v-for="question in this.questions" v-bind:key="question.getId()"
+                    :question="question"
+                    @processNextQuestion="processQuestion" />
+        </form>
       </div>
     </div>
   </div>
@@ -18,6 +21,7 @@ import QuestionPack from './QuestionPack.vue';
 import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
 import TheHeader from './TheHeader.vue';
+import axios from "axios";
 
 export default Vue.extend({
     data() {
@@ -32,14 +36,15 @@ export default Vue.extend({
             questions: [
                 question1
             ],
+            result: [] as number[],
             counter
         }
     },
     methods: {
-        processQuestion(answerId: number) {
+        processQuestion(questionId: number, answerId: number) {
 
+            this.result.push(questionId, answerId);
             this.questions.push(this.getNextQuestion(answerId));
-
             this.scrollToBottom();
         },
         getNextQuestion(answerId: number) {
@@ -51,7 +56,7 @@ export default Vue.extend({
             this.counter += 1;
             if(this.counter <= 3) {
 
-                nextQuestion = new Question(2, "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", false);
+                nextQuestion = new Question(2 + this.counter, "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", false);
                 nextQuestion.addPossibleAnswer(new Answer(1, 'None because they are not vegan'));
                 nextQuestion.addPossibleAnswer(new Answer(2, 'Maybe 4'));
                 nextQuestion.addPossibleAnswer(new Answer(3, 'New York state wildlife expert Richard ' +
@@ -68,12 +73,36 @@ export default Vue.extend({
 
             return nextQuestion;
         },
-        scrollToBottom: function() {
+        scrollToBottom() {
             var chatBox = this.$el.querySelector("#chat-box");
             if(chatBox != null) {
 
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
+        },
+        onSubmit(event: Event) {
+
+            // prevents form from reloading the page
+            event.preventDefault();
+            var result = this.getCalculatedResult();
+            this.$router.replace("/results");
+        },
+        getCalculatedResult() {
+            var resultScore = {score: 0, tips: []};
+
+            axios({
+                method: "post",
+                url: "/score",
+                data: {
+                    result: this.result
+                }
+            }).then(resolve => {
+                resultScore = resolve.data;
+            })
+            .catch(error => {
+                alert('error while sending the answers')
+            });
+            return resultScore;
         }
     },
     components: {
