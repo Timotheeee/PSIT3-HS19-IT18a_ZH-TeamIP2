@@ -19,7 +19,8 @@ describe("resultsite", () => {
       expect(wrapper.contains('h1#score')).toBeTruthy();
     })
 
-    it("should render atleast one advice", () => {
+    it("should render at least one advice", () => {
+      wrapper.vm.$data.showadvice = true;
       expect(wrapper.contains('p.advice')).toBeTruthy();
     })
   })
