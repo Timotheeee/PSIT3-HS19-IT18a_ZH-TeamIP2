@@ -8,8 +8,6 @@ describe("MyGraphIterator", () => {
     describe("test createGraphFromJSON", () =>{
         test("should create a Graph object when called  with viable params.", () => {
             let graphFromJSON: Graph = GraphFactory.createGraphFromJSON(minJSONGraph1Str);
-            console.log(`node count in parsed obj is: ${graphFromJSON.getNodes().length}`);
-            console.log(graphFromJSON);
             expect(graphFromJSON).toBeInstanceOf(Graph);
         });
     });

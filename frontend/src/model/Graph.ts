@@ -4,6 +4,7 @@ import { GraphFactory } from './GraphFactory';
 
 export class Graph {
   private nodes: Node[];
+  private headNode: Node|null = null;
 
   constructor() {
     this.nodes = [];
@@ -57,7 +58,7 @@ export class Graph {
   }
 
   getHead() : Node {
-    return this.nodes[0];
+    return this.headNode;
   }
 
   /*static reviver(key: string, value: any): any {

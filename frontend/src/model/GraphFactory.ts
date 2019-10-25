@@ -1,6 +1,6 @@
 import {Graph, GraphJSON} from './Graph';
-import {NodeJSON} from './Node';
-import {EdgeJSON} from './Edge';
+import {Node, NodeJSON} from './Node';
+import {Edge, EdgeJSON} from './Edge';
 
 export class GraphFactory {
   /*
@@ -10,11 +10,29 @@ export class GraphFactory {
     let graph: Graph = new Graph();
     this.importNodes(graph, JSONGraph.nodes);
     this.importEdges(graph, JSONGraph.edges);
+
+    this.setHeadNode(graph);
+
     return graph;
   }
 
-  static createGraphFromJSON(data: string): Graph {
-    //let graph: Graph = JSON.parse(data, Graph.reviver);    
+  private static setHeadNode(graph: Graph): void {
+    let headNode:Node|null = null;
+
+    const nodes = graph.getNodes();
+    let i = 0;
+    let currentNode:Node|null;
+    while(headNode == null && i < nodes.length){
+      currentNode = nodes[i];
+
+      if(currentNode)
+
+      i++;
+    }
+    
+  }
+
+  static createGraphFromJSON(data: string): Graph {   
     let graph: GraphJSON = JSON.parse(data);
     return (this.createGraph(graph));
   }
