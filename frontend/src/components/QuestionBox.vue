@@ -6,7 +6,7 @@
         <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
         <label :for="answer.getAnswer()">{{answer.answer}} </label>
       </fieldset>
-      <button class="linkToResult" v-if="lastQuestion" @click="goToResultSite">{{answer.answer}}</button>
+      <button class="linkToResult" type="submit" v-if="lastQuestion"onButtonClick >{{answer.answer}}</button>
     </div>
     <button id="emitEvent" @click="onButtonClick">Submit</button>
   </div>
@@ -43,9 +43,6 @@ export default Vue.extend({
         this.$emit("answerPicked", this.pickedAnswer);
         this.pickedAnswer = "";
         this.showAnswer = false;
-      },
-      goToResultSite(): void {
-          this.$router.push("/results");
       }
     }
 });
