@@ -1,5 +1,5 @@
-import {Graph} from "./../../src/model/Graph";
-import {Node} from "./../../src/model/Node";
+import {Graph} from './../../src/model/Graph';
+import {Node} from './../../src/model/Node';
 
 describe("graph", () => {
   let graph: Graph = new Graph();

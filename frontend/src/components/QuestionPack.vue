@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Question} from "./../model/Question";
-import {Answer} from "./../model/Answer"
+import Vue from 'vue';
+import {Question} from './../model/Question';
+import {Answer} from './../model/Answer';
 import QuestionBox from './QuestionBox.vue';
 import AnswerBox from './AnswerBox.vue';
 export default Vue.extend({

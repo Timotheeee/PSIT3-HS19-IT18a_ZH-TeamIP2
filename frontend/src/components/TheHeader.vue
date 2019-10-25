@@ -6,14 +6,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
     name: "TheHeader"
 });
 </script>
 
 <style lang="scss">
-  @import "../css/colors";
+  @import '../css/colors';
   .logo {
     width: 100px;
     height: 100px;

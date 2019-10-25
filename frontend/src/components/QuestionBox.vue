@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 import {Answer} from './../model/Answer';
 
 export default Vue.extend({
@@ -52,8 +52,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/colors";
-  @import "../css/speech-bubble";
+  @import '../css/colors';
+  @import '../css/speech-bubble';
 
   .linkToResult {
     border: none;

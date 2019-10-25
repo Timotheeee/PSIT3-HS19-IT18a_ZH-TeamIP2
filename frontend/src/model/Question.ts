@@ -1,4 +1,4 @@
-import {Answer} from "./Answer"
+import {Answer} from './Answer';
 
 export class Question {
   private id: number;

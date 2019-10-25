@@ -1,4 +1,4 @@
-import answerStub from "./AnswerStub";
+import answerStub from './AnswerStub';
 
 let answerArrayStub = [answerStub];
 export default answerArrayStub;

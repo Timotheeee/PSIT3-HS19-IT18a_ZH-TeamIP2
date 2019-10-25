@@ -1,5 +1,5 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
-import Vue from "vue"
+import Vue from 'vue';
 import AnswerBox from './../../src/components/ChatInteraction.vue';
 
 

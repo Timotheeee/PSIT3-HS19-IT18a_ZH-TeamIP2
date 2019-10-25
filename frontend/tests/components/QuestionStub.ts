@@ -1,5 +1,5 @@
-import {AnswerStub} from "./AnswerStub";
-import answerStub from "./AnswerStub";
+import {AnswerStub} from './AnswerStub';
+import answerStub from './AnswerStub';
 
 
 export class QuestionStub {

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
     name: "AnswerBox",
     props: {
@@ -17,6 +17,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/colors";
-  @import "../css/speech-bubble";
+  @import '../css/colors';
+  @import '../css/speech-bubble';
 </style>

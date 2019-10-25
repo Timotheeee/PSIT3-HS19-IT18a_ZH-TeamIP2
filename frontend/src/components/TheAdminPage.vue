@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import TheHeader from "./TheHeader.vue";
-import axios from "axios";
+import Vue from 'vue';
+import TheHeader from './TheHeader.vue';
+import axios from 'axios';
 
 export default Vue.extend({
   name: 'AdminPage',

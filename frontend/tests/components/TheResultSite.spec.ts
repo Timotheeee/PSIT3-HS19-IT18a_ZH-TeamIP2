@@ -1,6 +1,6 @@
 import { mount, shallowMount, Wrapper} from '@vue/test-utils'
-import Vue from "vue"
-import TheResultSite from "./../../src/components/TheResultSite.vue"
+import Vue from 'vue';
+import TheResultSite from './../../src/components/TheResultSite.vue';
 
 
 describe("resultsite", () => {

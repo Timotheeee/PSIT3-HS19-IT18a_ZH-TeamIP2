@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import QuestionPack from "./QuestionPack.vue";
-import {Question} from "./../model/Question";
-import {Answer} from "./../model/Answer"
+import Vue from 'vue';
+import QuestionPack from './QuestionPack.vue';
+import {Question} from './../model/Question';
+import {Answer} from './../model/Answer';
 import TheHeader from './TheHeader.vue';
 
 export default Vue.extend({
@@ -84,7 +84,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "../css/colors";
+  @import '../css/colors';
 
   .background {
     background-color: $primary-color;

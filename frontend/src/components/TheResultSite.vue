@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import TheHeader from "./TheHeader.vue";
+import Vue from 'vue';
+import TheHeader from './TheHeader.vue';
 
 export default Vue.extend({
   data() {
@@ -77,7 +77,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "../css/colors";
+@import '../css/colors';
 
 #jumbotron {
   overflow-y: scroll;

@@ -1,6 +1,6 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
-import Vue from "vue"
-import ChatInteraction from "./../../src/components/ChatInteraction.vue"
+import Vue from 'vue';
+import ChatInteraction from './../../src/components/ChatInteraction.vue';
 
 
 describe("chatinteraction", () => {

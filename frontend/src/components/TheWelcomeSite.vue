@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import TheHeader from "./TheHeader.vue";
+import Vue from 'vue';
+import TheHeader from './TheHeader.vue';
 
 export default Vue.extend({
   name: 'WelcomeSite',

@@ -1,6 +1,6 @@
 import { mount, shallowMount, Wrapper} from '@vue/test-utils'
-import Vue from "vue"
-import TheAdminPage from "./../../src/components/TheAdminPage.vue"
+import Vue from 'vue';
+import TheAdminPage from './../../src/components/TheAdminPage.vue';
 
 
 describe("adminsite", () => {
