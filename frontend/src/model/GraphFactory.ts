@@ -21,7 +21,7 @@ export class GraphFactory {
 
   private static importNodes(graph: Graph, nodes: NodeJSON[]) {
     for (let node of nodes) {
-      graph.addNode(node.id, node.metadata.title);
+      graph.addNode(node.id, node.metadata.title, node.metadata.isHead, node.metadata.isFinalNode);
     }
   }
 
