@@ -18,29 +18,29 @@ describe("questionbox", () => {
 
   describe("is questionbox rendered correctly", () => {
 
-    it("has to contain a button", () => {
-      expect(wrapper.contains("button#emitEvent")).toBeTruthy();
+    it("has to contain a button group", () => {
+      expect(wrapper.html().includes("b-button-group")).toBeTruthy();
     })
 
     it("has to contain a question", () => {
-      expect(wrapper.contains("#question")).toBeTruthy();
+      expect(wrapper.contains(".question")).toBeTruthy();
     })
 
-    it("has to contain at least one answer", () => {
-      // possible answer has question as attribut name value
-      expect(wrapper.contains('input[name="Hello?"]')).toBeTruthy();
+    it("has to contain a button for atleast one possibleAnswer", () => {
+      expect(wrapper.contains("b-button.btn")).toBeTruthy();
     })
 
     test("answers have to dissappear if button pressed" , () => {
-      expect(wrapper.contains('input[name="Hello?"]')).toBeTruthy();
-      let button = wrapper.find("button#emitEvent");
+      expect(wrapper.contains('b-button[name="Hello?"]')).toBeTruthy();
+      // selector .btn only works because only one answer button is on the site
+      let button = wrapper.find(".btn");
       button.trigger("click");
-      expect(wrapper.contains('input[name="Hello?"]')).toBeFalsy();
+      expect(wrapper.contains('b-button[name="Hello?"]')).toBeFalsy();
     })
 
     test("if last question, button for resultpage should appear", () => {
       wrapper.vm.$props.lastQuestion = true;
-      expect(wrapper.contains("button.linkToResult")).toBeTruthy();
+      expect(wrapper.contains("b-button#goToResultPage")).toBeTruthy();
     })
   })
 
@@ -51,7 +51,7 @@ describe("questionbox", () => {
       let onButtonClickStub = jest.fn();
       wrapper.setMethods({ onButtonClick: onButtonClickStub()  });
 
-      let button = wrapper.find("button#emitEvent");
+      let button = wrapper.find(".btn");
       button.trigger("click");
       expect(onButtonClickStub.mock.calls.length).toBe(1);
     })
@@ -60,15 +60,11 @@ describe("questionbox", () => {
   describe("are events of questionbox emitted", () => {
 
     test("onButtonClick event", () => {
-      // set data of questionbox
-      wrapper.vm.$data.pickedAnswer = 'text';
-
-      let button = wrapper.find("button#emitEvent");
+      let button = wrapper.find(".btn");
       button.trigger("click");
       expect(wrapper.emitted('answerPicked').length).toBe(1);
 
-      // [0][0] because emitted return an object in an object
-      expect(wrapper.emitted('answerPicked')[0][0]).toBe('text');
+      expect(wrapper.emitted('answerPicked')[0]).toStrictEqual([1,'this is my answer']);
     })
   })
 })

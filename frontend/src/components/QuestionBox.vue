@@ -1,22 +1,27 @@
 <template>
   <div>
-    <p id="question" class="speech-bubble question">{{question}}</p>
+    <p class="speech-bubble question">{{question}}</p>
 
-    <b-button-group vertical class="speech-bubble possible-answer float-right">
+    <b-button-group vertical class="speech-bubble possible-answer float-right" v-if="showAnswer">
       <b-button
-        id="btn"
-        v-if="showAnswer"
         v-for="answer in possibleAnswers"
         :key="answer.id"
-        v-on:click="onButtonClick(answer.id,answer.answer)"
+        class="btn"
+        v-on:click="onButtonClick(answer.getId(),answer.getAnswer())"
         :name="question"
         :value="answer"
-        v-model="pickedAnswer"
-      >
-        <fieldset :id="question">
-          <label :for="answer.getAnswer()">{{answer.answer}}</label>
-        </fieldset>
-      </b-button>
+        v-if="!lastQuestion"
+      >{{answer.answer}}</b-button>
+      <b-button
+        class="btn"
+        id="goToResultPage"
+        v-for="answer in possibleAnswers"
+        :key="answer.id"
+        type="submit"
+        :name="question"
+        :value="answer"
+        v-else
+      >{{answer.answer}}</b-button>
     </b-button-group>
   </div>
 </template>
@@ -28,7 +33,6 @@ export default Vue.extend({
   name: "QuestionBox",
   data() {
     return {
-      pickedAnswer: "",
       showAnswer: true
     };
   },
@@ -40,10 +44,14 @@ export default Vue.extend({
     possibleAnswers: {
       type: Array,
       required: true
+    },
+    lastQuestion: {
+      type: Boolean,
+      required: true
     }
   },
   methods: {
-    onButtonClick(id: any, text: any) {
+    onButtonClick(id: number, text: String) {
       this.$emit("answerPicked", id, text);
       this.showAnswer = false;
     }
