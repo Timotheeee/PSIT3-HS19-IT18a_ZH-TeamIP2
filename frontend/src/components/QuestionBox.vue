@@ -1,60 +1,57 @@
 <template>
   <div>
     <p id="question" class="speech-bubble question">{{question}}</p>
-    <div class="speech-bubble possible-answer mr-5 mb-3 float-left" v-if="showAnswer" v-for="answer in possibleAnswers" :key=answer.id>
-      <fieldset :id="question" v-if="!lastQuestion">
-        <input type="radio" :name="question" :value="answer" v-model="pickedAnswer" >
-        <label :for="answer.getAnswer()">{{answer.answer}} </label>
-      </fieldset>
-      <button class="linkToResult" type="submit" v-if="lastQuestion"onButtonClick >{{answer.answer}}</button>
-    </div>
-    <button id="emitEvent" @click="onButtonClick">Submit</button>
+
+    <b-button-group vertical class="speech-bubble possible-answer float-right">
+      <b-button
+        id="btn"
+        v-if="showAnswer"
+        v-for="answer in possibleAnswers"
+        :key="answer.id"
+        v-on:click="onButtonClick(answer.id,answer.answer)"
+        :name="question"
+        :value="answer"
+        v-model="pickedAnswer"
+      >
+        <fieldset :id="question">
+          <label :for="answer.getAnswer()">{{answer.answer}}</label>
+        </fieldset>
+      </b-button>
+    </b-button-group>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Answer} from './../model/Answer';
-
+import Vue from "vue";
+import { Answer } from "./../model/Answer";
 export default Vue.extend({
-    name: "QuestionBox",
-    data() {
-      return {
-        pickedAnswer: '',
-        showAnswer: true
-      };
+  name: "QuestionBox",
+  data() {
+    return {
+      pickedAnswer: "",
+      showAnswer: true
+    };
+  },
+  props: {
+    question: {
+      type: String,
+      required: true
     },
-    props: {
-      question: {
-        type: String,
-        required: true
-      },
-      possibleAnswers: {
-        type: Array,
-        required: true
-      },
-      lastQuestion: {
-          type: Boolean,
-          required: true
-      }
-    },
-    methods: {
-      onButtonClick() {
-        this.$emit("answerPicked", this.pickedAnswer);
-        this.pickedAnswer = "";
-        this.showAnswer = false;
-      }
+    possibleAnswers: {
+      type: Array,
+      required: true
     }
+  },
+  methods: {
+    onButtonClick(id: any, text: any) {
+      this.$emit("answerPicked", id, text);
+      this.showAnswer = false;
+    }
+  }
 });
 </script>
 
 <style lang="scss">
-  @import '../css/colors';
-  @import '../css/speech-bubble';
-
-  .linkToResult {
-    border: none;
-    background-color: $secondary-color !important;
-    color: $surface !important;
-  }
+@import "../css/colors";
+@import "../css/speech-bubble";
 </style>
