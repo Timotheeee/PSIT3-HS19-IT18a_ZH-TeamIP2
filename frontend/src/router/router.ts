@@ -25,6 +25,11 @@ export default new Router({
       component: TheResultSite
     },
     {
+      path: '/results/',
+      name: 'ResultsWithoutId',
+      component: TheResultSite
+    },
+    {
       path: '/adminpage',
       name: 'AdminPage',
       component: TheAdminPage
