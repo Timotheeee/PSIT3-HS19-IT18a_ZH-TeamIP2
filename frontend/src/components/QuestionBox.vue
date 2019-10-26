@@ -2,7 +2,7 @@
   <div>
     <p class="speech-bubble question">{{question}}</p>
 
-    <b-button-group vertical class="speech-bubble possible-answer float-right" v-if="showAnswer">
+    <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
       <b-button
         v-for="answer in possibleAnswers"
         :key="answer.id"

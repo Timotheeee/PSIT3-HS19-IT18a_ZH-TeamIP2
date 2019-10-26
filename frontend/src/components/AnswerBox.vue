@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p class="speech-bubble answer float-right" v-if="answer">{{ this.answer }}</p>
+      <p class="speech-bubble answer d-inline-block" v-if="answer">{{ this.answer }}</p>
   </div>
 </template>
 

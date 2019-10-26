@@ -121,7 +121,7 @@ export default Vue.extend({
   #chat-box {
     overflow-y: scroll;
     height: calc(100vh - 100px);
-    display: grid;
+    text-align: right;
     background-color: $surface;
   }
 
