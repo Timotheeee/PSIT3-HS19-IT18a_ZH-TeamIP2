@@ -28,16 +28,13 @@ import TheHeader from './TheHeader.vue';
 export default Vue.extend({
   data() {
     // v-if={}
+    var result = JSON.parse(this.$route.params.result);
     return {
       score: 0,
-      finalscore: 31,
+      finalscore: Number(result.score),
       showadvice: false,
       advices: [""],
-      advices2: [
-        "your such a bad student",
-        "holy are you a bad student",
-        "flextape can't fix your student habits"
-      ]
+      advices2: result.recommendations
     };
   },
   components: {
@@ -60,7 +57,7 @@ export default Vue.extend({
             this2.showadvice = true;
             var i = -1;
             setInterval(function() {
-              if (i < this2.advices2.length && i >= 0) {
+              if (this2.advices2 != null && i < this2.advices2.length && i >= 0) {
                 this2.advices.push(this2.advices2[i]);
               }
               i++;

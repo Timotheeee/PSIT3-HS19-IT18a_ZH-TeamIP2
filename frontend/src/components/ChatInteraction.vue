@@ -22,6 +22,7 @@ import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
 import TheHeader from './TheHeader.vue';
 import axios from "axios";
+import {Result} from "../model/Result";
 
 export default Vue.extend({
     data() {
@@ -81,15 +82,13 @@ export default Vue.extend({
             }
         },
         onSubmit(event: Event) {
-
             // prevents form from reloading the page
             event.preventDefault();
-            var result = this.getCalculatedResult();
-            this.$router.replace("/results");
+            var resultScore = this.getCalculatedResult();
+            this.$router.push({name: 'Results', params: {result: JSON.stringify(resultScore)}});
         },
-        getCalculatedResult() {
-            var resultScore = {score: 0, tips: []};
-
+        async getCalculatedResult() {
+            var resultScore = new Result(10, ["test", "pizza"]);
             axios({
                 method: "post",
                 url: "/score",

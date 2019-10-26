@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {Dao} from "./Dao"
 import { AnyNaptrRecord } from "dns";
+import {Result} from "../../frontend/src/model/Result";
 
 const express = require('express'),
   bodyParser = require('body-parser'),
@@ -39,9 +40,9 @@ app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (
   console.log(req.body);
 });
 
-app.post('/score/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { score: number, tips: string[]; }) => void; }; }) {
+app.post('/score/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { result: Result; }) => void; }; }) {
+  var result = new Result(75, ["Stop drinking soup", "Learn without sleeping"]);
   res.status(200).json({
-    score: 75,
-    tips: ["Stop drinking soup", "Learn without sleeping"]
+    result
   });
 });
