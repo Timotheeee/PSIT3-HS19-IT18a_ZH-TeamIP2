@@ -1,15 +1,9 @@
 {
   "nodes": [
     {
-      "id": "h",
-      "metadata": {
-        "isHead": true,
-    	  "title" : ""
-      }
-    },
-    {
       "id": "q1",
       "metadata": {
+        "isHead": true,
     	  "title" : "Do you play video games?"
       }
     },
@@ -40,10 +34,6 @@
     }
   ],
   "edges": [
-    {
-      "source": "h",
-      "target": "q1"
-    },
     {
       "source": "q1",
       "target": "q2",

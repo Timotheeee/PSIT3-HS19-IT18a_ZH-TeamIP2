@@ -24,7 +24,7 @@ describe("graph", () => {
 
     it("finds an existing node correctly", () => {
       graph.addNode("1", "dummy");
-      expect(graph.findNode("1").getId()).toBe("1");
+      expect(graph.findNode("1")!.getId()).toBe("1");
     })
 
     it("doesn't find non-existing nodes", () => {

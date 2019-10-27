@@ -3,6 +3,8 @@ import {Edge} from './Edge';
 export class Node {
   private id: string = "";
   private title: string = "";
+  private isHead: boolean = false;
+  private isFinalNode: boolean = false;
   private edges: Edge[];
 
   constructor() {
@@ -25,6 +27,21 @@ export class Node {
     this.title = title;
   }
 
+  getIsHead() : boolean {
+    return this.isHead;
+  }
+
+  setIsHead(isHead: boolean) {
+    this.isHead = isHead;
+  }
+
+  getIsFinalNode() : boolean {
+    return this.isFinalNode;
+  }
+
+  setIsFinalNode(isFinalNode: boolean) {
+    this.isFinalNode = isFinalNode;
+  }
   getEdges() : Edge[]  {
     return this.edges;
   }
@@ -32,11 +49,14 @@ export class Node {
   addEdge(edge: Edge) {
     this.edges.push(edge);
   }
+
 }
 
 export interface NodeJSON {
   id: string;
   metadata: {
-    title: string;
+    title: string,
+    isHead: boolean,
+    isFinalNode: boolean
   }
 }
