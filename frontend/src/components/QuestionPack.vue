@@ -29,7 +29,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    updateAnswer(id: any, text: any) {
+    updateAnswer(id: Number, text: String) {
       this.$data.pickedAnswer = text;
       this.$emit("processNextQuestion", this.$props.question.getId(), id);
     }
