@@ -5,12 +5,12 @@ describe("graph", () => {
   let graph: Graph = new Graph();
   beforeEach(() => {
     graph = new Graph();
-  })
+  });
 
   describe("is graph working correctly", () => {
     it("adds a node correctly", () => {
       expect(graph.addNode("1", "dummy").getId()).toBe("1");
-    })
+    });
 
     it("adds multiple nodes correctly", () => {
       graph.addNode("1", "dummy");
@@ -24,7 +24,7 @@ describe("graph", () => {
 
     it("finds an existing node correctly", () => {
       graph.addNode("1", "dummy");
-      expect(graph.findNode("1").getId()).toBe("1");
+      expect(graph.findNode("1")!.getId()).toBe("1");
     })
 
     it("doesn't find non-existing nodes", () => {
@@ -46,6 +46,10 @@ describe("graph", () => {
       graph.addEdge("q1", "q3", "dummyAnswer2", -1);
       expect(graph.getNodes()[0].getEdges()[0].getAnswer()).toBe("dummyAnswer1");
       expect(graph.getNodes()[0].getEdges()[1].getAnswer()).toBe("dummyAnswer2");
+    })
+
+    it("returns head noded correctly", () => {
+      // TODO: michaeal write test
     })
   })
 })
