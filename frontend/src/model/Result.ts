@@ -11,7 +11,11 @@ export class Result {
     this.recommendations.push(recommendation);
   }
 
-  public getScore() : number {
-    return this.score;
+  public getScore(): number {
+    return this.score
+  }
+
+  public getRecommendations(): string[] {
+    return this.recommendations;
   }
 }
