@@ -20,9 +20,9 @@ import Vue from 'vue';
 import QuestionPack from './QuestionPack.vue';
 import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
+import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
 import axios from "axios";
-import {Result} from "../model/Result";
 
 export default Vue.extend({
     data() {
@@ -37,14 +37,15 @@ export default Vue.extend({
             questions: [
                 question1
             ],
-            result: [] as number[],
+            chosenAnswers: [] as number[],
+            result: new Result(0, ["Couldn't load result"]),
             counter
         }
     },
     methods: {
         processQuestion(questionId: number, answerId: number) {
 
-            this.result.push(questionId, answerId);
+            this.chosenAnswers.push(questionId, answerId);
             this.questions.push(this.getNextQuestion(answerId));
             this.scrollToBottom();
         },
@@ -70,9 +71,23 @@ export default Vue.extend({
 
                 nextQuestion = new Question(100, "Great! We are finished! It was nice talking to you ;)", true);
                 nextQuestion.addPossibleAnswer(new Answer(1, "Nice! Let me see the result"));
+                this.calculatedResult();
             }
-
             return nextQuestion;
+        },
+        calculatedResult() {
+            axios({
+                method: "post",
+                url: "/score",
+                data: {
+                    result: this.chosenAnswers
+                }
+            }).then(resolve => {
+                this.result = resolve.data.result;
+            })
+                .catch(error => {
+                    alert('error while sending the answers');
+                });
         },
         scrollToBottom() {
             var chatBox = this.$el.querySelector("#chat-box");
@@ -84,24 +99,9 @@ export default Vue.extend({
         onSubmit(event: Event) {
             // prevents form from reloading the page
             event.preventDefault();
-            var resultScore = this.getCalculatedResult();
-            this.$router.push({name: 'Results', params: {result: JSON.stringify(resultScore)}});
-        },
-        async getCalculatedResult() {
-            var resultScore = new Result(10, ["test", "pizza"]);
-            axios({
-                method: "post",
-                url: "/score",
-                data: {
-                    result: this.result
-                }
-            }).then(resolve => {
-                resultScore = resolve.data;
-            })
-            .catch(error => {
-                alert('error while sending the answers')
-            });
-            return resultScore;
+
+            // go to the next result page
+            this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
         }
     },
     components: {
