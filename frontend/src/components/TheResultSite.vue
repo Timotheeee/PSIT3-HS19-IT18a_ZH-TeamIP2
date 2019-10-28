@@ -24,11 +24,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
+import {Result} from './../model/Result';
 
 export default Vue.extend({
   data() {
     // v-if={}
-    var result = JSON.parse(this.$route.params.result);
+    if(this.$route) {
+      var result = JSON.parse(this.$route.params.result);
+    } else {
+      result = new Result(1, []);
+    }
+
     return {
       score: 0,
       finalscore: Number(result.score),

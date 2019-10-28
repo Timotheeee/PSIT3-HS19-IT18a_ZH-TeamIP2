@@ -27,13 +27,13 @@ describe("questionbox", () => {
     })
 
     it("has to contain a button for atleast one possibleAnswer", () => {
-      expect(wrapper.contains("b-button.btn")).toBeTruthy();
+      expect(wrapper.contains("b-button.answer-button")).toBeTruthy();
     })
 
-    test("answers have to dissappear if button pressed" , () => {
+    test("answers have to disappear if button pressed" , () => {
       expect(wrapper.contains('b-button[name="Hello?"]')).toBeTruthy();
       // selector .btn only works because only one answer button is on the site
-      let button = wrapper.find(".btn");
+      let button = wrapper.find(".answer-button");
       button.trigger("click");
       expect(wrapper.contains('b-button[name="Hello?"]')).toBeFalsy();
     })
@@ -51,7 +51,7 @@ describe("questionbox", () => {
       let onButtonClickStub = jest.fn();
       wrapper.setMethods({ onButtonClick: onButtonClickStub()  });
 
-      let button = wrapper.find(".btn");
+      let button = wrapper.find(".answer-button");
       button.trigger("click");
       expect(onButtonClickStub.mock.calls.length).toBe(1);
     })
@@ -60,7 +60,7 @@ describe("questionbox", () => {
   describe("are events of questionbox emitted", () => {
 
     test("onButtonClick event", () => {
-      let button = wrapper.find(".btn");
+      let button = wrapper.find(".answer-button");
       button.trigger("click");
       expect(wrapper.emitted('answerPicked').length).toBe(1);
 

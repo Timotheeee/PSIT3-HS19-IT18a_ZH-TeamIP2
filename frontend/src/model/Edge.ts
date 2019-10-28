@@ -44,4 +44,18 @@ export class Edge {
   getAnswer() : string {
     return this.answer;
   }
+
+  getWeight() : number {
+    // TODO: ryan populate this
+    return 0;
+  }
+}
+
+export interface EdgeJSON {
+  source: string;
+  target: string;
+  metadata: {
+    answer: string;
+    score: string;
+  }
 }
