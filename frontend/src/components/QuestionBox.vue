@@ -5,14 +5,14 @@
     <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
       <b-button v-for="answer in possibleAnswers"
         :key="answer.id"
-        class="answer-button"
+        class="possible-answer"
         v-on:click="onButtonClick(answer.getId(),answer.getAnswer())"
         :name="question"
-        :value="answer"
+        :value="answer.getAnswer()"
         v-if="!lastQuestion"
       >{{answer.answer}}</b-button>
       <b-button id="goToResultPage"
-        class="answer-button"
+        class="possible-answer"
         v-for="answer in possibleAnswers"
         :key="answer.id"
         type="submit"
@@ -61,7 +61,7 @@ export default Vue.extend({
 @import "../css/colors";
 @import "../css/speech-bubble";
 
-.possible-answer > button {
+/*.possible-answer > button {
   background-color: $secondary-color;
   margin: 10px 0px;
   border: none;
@@ -72,5 +72,5 @@ export default Vue.extend({
   background-color: $surface;
   color: $secondary-color;
   border: none;
-}
+}*/
 </style>
