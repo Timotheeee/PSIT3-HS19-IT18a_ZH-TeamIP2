@@ -1,12 +1,12 @@
 import {Answer} from './Answer';
 
 export class Question {
-  private id: number;
+  private id: string;
   private question: string;
   private possibleAnswers: Answer[];
   private lastQuestion: boolean;
 
-  constructor(id: number, question: string, lastQuestion: boolean) {
+  constructor(id: string, question: string, lastQuestion: boolean) {
     this.id = id;
     this.question = question;
     this.possibleAnswers = [];
@@ -17,7 +17,7 @@ export class Question {
     this.possibleAnswers.push(answer);
   }
 
-  public getId() : number {
+  public getId() : string {
     return this.id;
   }
 

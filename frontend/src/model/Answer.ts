@@ -11,7 +11,7 @@ export class Answer {
     return this.id;
   }
 
-  getAnswer() : String {
+  getAnswer() : string {
     return this.answer;
   }
 }

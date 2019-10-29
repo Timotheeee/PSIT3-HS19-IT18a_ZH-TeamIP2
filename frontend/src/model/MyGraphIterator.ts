@@ -50,6 +50,6 @@ export class MyGraphIterator implements GraphIterator {
     }
 
     isFinalNode(): boolean {
-        return false;
+        return this.currentNode.getIsFinalNode();
     }
 }

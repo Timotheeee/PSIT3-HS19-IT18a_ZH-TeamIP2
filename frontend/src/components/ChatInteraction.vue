@@ -23,54 +23,50 @@ import {Answer} from './../model/Answer';
 import TheHeader from './TheHeader.vue';
 import axios from "axios";
 import {Result} from "../model/Result";
+import { GraphFactory } from '../model/GraphFactory';
+import { MyGraphIterator } from '../model/MyGraphIterator';
+import { Node } from '../model/Node';
 
 export default Vue.extend({
     data() {
-        var question1 = new Question(1, "How much did you sleep?", false);
-        question1.addPossibleAnswer(new Answer(1, 'below 6 hours'));
-        question1.addPossibleAnswer(new Answer(2, '6 to 8 hours'));
-        question1.addPossibleAnswer(new Answer(3, 'over 8 hours'));
+        let graphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
+        var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
+
+        // TODO: ryan duplicate code smell
+        const currentNode:Node = graphIterator.getCurrentNode();          
+          question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
+          let i = 1;
+          for(let currentAnswer of graphIterator.answersForCurrentNode()){
+            // TODO: ryan change return of getAnswers to {title : blah, target: q2} ...
+            question1.addPossibleAnswer(new Answer(i++, currentAnswer));
+          }
 
         var counter = 0;
 
         return {
+            graphIterator: graphIterator,
             questions: [
                 question1
-            ],
-            result: [] as number[],
-            counter
+            ]
         }
     },
     methods: {
-        processQuestion(questionId: number, answerId: number) {
-
-            this.result.push(questionId, answerId);
-            this.questions.push(this.getNextQuestion(answerId));
+        processQuestion(questionId: number, answerId: string) {
+            //TODO: ryan has no idea what he is doing
+            console.log(`answerId: ${answerId}`)
+            this.graphIterator.choose(answerId);
+            this.questions.push(this.getNextQuestion());
             this.scrollToBottom();
         },
-        getNextQuestion(answerId: number) {
-            // should get next question with the answerId
-
-            var nextQuestion;
-
-            // only temp so the program will stop
-            this.counter += 1;
-            if(this.counter <= 3) {
-
-                nextQuestion = new Question(2 + this.counter, "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", false);
-                nextQuestion.addPossibleAnswer(new Answer(1, 'None because they are not vegan'));
-                nextQuestion.addPossibleAnswer(new Answer(2, 'Maybe 4'));
-                nextQuestion.addPossibleAnswer(new Answer(3, 'New York state wildlife expert Richard ' +
-                    'Thomas found that a woodchuck could (and does) chuck around 35 cubic feet of ' +
-                    'dirt in the course of digging a burrow. Thomas reasoned that if a woodchuck ' +
-                    'could chuck wood, he would chuck an amount equivalent to the weight of the ' +
-                    'dirt, or 700 pounds.'));
-            }
-            else {
-
-                nextQuestion = new Question(100, "Great! We are finished! It was nice talking to you ;)", true);
-                nextQuestion.addPossibleAnswer(new Answer(1, "Nice! Let me see the result"));
-            }
+        getNextQuestion() {     
+          console.log('inside of getNextQuestion');
+          
+          const currentNode:Node = this.graphIterator.getCurrentNode();          
+          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
+          let i = 1;
+          for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
+            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer));
+          }
 
             return nextQuestion;
         },
@@ -80,28 +76,6 @@ export default Vue.extend({
 
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
-        },
-        onSubmit(event: Event) {
-            // prevents form from reloading the page
-            event.preventDefault();
-            var resultScore = this.getCalculatedResult();
-            this.$router.push({name: 'Results', params: {result: JSON.stringify(resultScore)}});
-        },
-        async getCalculatedResult() {
-            var resultScore = new Result(10, ["test", "pizza"]);
-            axios({
-                method: "post",
-                url: "/score",
-                data: {
-                    result: this.result
-                }
-            }).then(resolve => {
-                resultScore = resolve.data;
-            })
-            .catch(error => {
-                alert('error while sending the answers')
-            });
-            return resultScore;
         }
     },
     components: {
