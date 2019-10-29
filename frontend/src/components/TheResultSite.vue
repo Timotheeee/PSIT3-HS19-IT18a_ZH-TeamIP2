@@ -30,17 +30,18 @@ export default Vue.extend({
   data() {
     // v-if={}
     if(this.$route) {
-      var result = JSON.parse(this.$route.params.result);
+      var resultJSON = JSON.parse(this.$route.params.result);
+      var result = new Result(resultJSON.score, resultJSON.recommendations);
     } else {
       result = new Result(1, []);
     }
 
     return {
       score: 0,
-      finalscore: Number(result.score),
+      finalscore: Number(result.getScore()),
       showadvice: false,
       advices: [""],
-      advices2: result.recommendations
+      advices2: result.getRecommendations()
     };
   },
   components: {
