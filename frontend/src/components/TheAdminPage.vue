@@ -2,7 +2,18 @@
   <div class="w-100 min-vh-100 background">
     <div class="container p-0 shadow-lg">
       <the-header />
-      <div class="jumbotron text-center jumbotron-fluid">
+      <div v-if="!loggedin" class="jumbotron text-center jumbotron-fluid">
+        <div class="container">
+          <div class="large-12 medium-12 small-12 cell">
+            <button id="goToWelcomePage" @click="goTo('/welcome')" type="button" class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
+            <label>
+              <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg"/>
+            </label>
+            <button id="passwordsubmit" type="button" class="btn btn-secondary btn-lg" @click="submitPass">Submit</button><br>
+          </div>
+        </div>
+      </div>
+      <div v-if="loggedin"  class="jumbotron text-center jumbotron-fluid">
         <div class="container">
           <div class="large-12 medium-12 small-12 cell">
             <button id="goToWelcomePage" @click="goTo('/welcome')" type="button" class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
@@ -27,12 +38,38 @@ export default Vue.extend({
   name: 'AdminPage',
   data() {
     return {
+      loggedin:false,
+      password:"",
       file: new Blob([""])
     };
   },
   methods: {
     goTo(route: string): void {
       this.$router.push(route);
+    },
+    submitPass(): void {
+      let inputElement: HTMLInputElement = <HTMLInputElement>this.$refs.password;
+      if(inputElement.value) {
+        this.password=inputElement.value;
+        axios({
+        method: "post",
+        url: "/password",
+        data: {
+          password: this.password
+        }
+      }).then(resolve => {
+        console.log(resolve.data.response);
+        if(resolve.data.response){
+          console.log(resolve.data.response);
+          this.loggedin=true;
+        }
+
+        })
+        .catch(error => {
+          alert('error')
+        });
+
+      }
     },
     handleFileUpload() {
       // get file from input field
@@ -59,7 +96,8 @@ export default Vue.extend({
         method: "post",
         url: "/api",
         data: {
-          graph: graph
+          graph: graph,
+          password:this.password
         }
       }).then(resolve => {
           console.log(resolve);
@@ -77,3 +115,11 @@ export default Vue.extend({
   }
 });
 </script>
+<style lang="scss">
+
+#password::placeholder {
+  color: white;
+}
+
+</style>
+
