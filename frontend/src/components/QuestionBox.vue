@@ -57,17 +57,15 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../css/colors";
 @import "../css/speech-bubble";
-
 /*.possible-answer > button {
   background-color: $secondary-color;
   margin: 10px 0px;
   border: none;
   border-radius: 0px;
 }
-
 .possible-answer > button:hover {
   background-color: $surface;
   color: $secondary-color;

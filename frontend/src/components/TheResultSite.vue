@@ -25,7 +25,6 @@
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import {Result} from './../model/Result';
-
 export default Vue.extend({
   data() {
     // v-if={}
@@ -35,7 +34,6 @@ export default Vue.extend({
     } else {
       result = new Result(1, []);
     }
-
     return {
       score: 0,
       finalscore: Number(result.getScore()),
@@ -80,29 +78,24 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../css/colors';
-
 #jumbotron {
   overflow-y: scroll;
   height: calc(100vh - 100px);
   display: grid;
   background-color: $surface;
 }
-
 #score {
   margin-bottom: 60px;
 }
-
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.9s;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 1;
   transform: scale(3);
 }
 </style>
-
