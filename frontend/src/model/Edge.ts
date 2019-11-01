@@ -59,3 +59,13 @@ export interface EdgeJSON {
     score: string;
   }
 }
+
+export class EdgeResult {
+  public answer:string;
+  public targetId:string;
+
+  constructor(answer:string, targetId: string) {
+    this.answer = answer;
+    this.targetId = targetId;
+  }
+}

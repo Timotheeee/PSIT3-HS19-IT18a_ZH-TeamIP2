@@ -1,13 +1,13 @@
 import { Graph } from "./Graph";
 import { Node } from "./Node";
-import { Edge } from './Edge';
+import { Edge, EdgeResult } from './Edge';
 
 export interface GraphIterator {
     currentNode: Node;
     catalogue: Graph;
 
     // TODO: ryan: yeah man you will probably need object types for answers ..
-    answersForCurrentNode(): string[];
+    answersForCurrentNode(): EdgeResult[];
     choose(chosenAnswer: string): void;
     isFinalNode(): boolean;
 }
@@ -27,15 +27,15 @@ export class MyGraphIterator implements GraphIterator {
         return this.currentNode;
     }
 
-    answersForCurrentNode(): string[] {
-        let answers: string[] = [];
+    answersForCurrentNode(): EdgeResult[] {
+        let answers: EdgeResult[] = [];
 
         for(let outgoingEdge of this.currentNode.getEdges()) {
-            answers.push(outgoingEdge.getAnswer());
+            answers.push(new EdgeResult(outgoingEdge.getAnswer(), outgoingEdge.getTarget().getId()));
         }
 
         return answers;        
-    }
+    }    
 
     choose(chosenAnswer: string): void {
         // TODO: ryan throw if it doesn't move

@@ -11,7 +11,8 @@ export default Vue.extend({
     props: {
       answer: {
           type:String
-      }
+      }, 
+      targetId: { type:String}
     }
 });
 </script>

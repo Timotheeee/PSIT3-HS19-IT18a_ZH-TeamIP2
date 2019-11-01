@@ -41,7 +41,10 @@ app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (
 });
 
 app.post('/score/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { result: Result; }) => void; }; }) {
-  var result = new Result(75, ["Stop drinking soup", "Learn without sleeping"]);
+  var result = new Result(75, [
+    "Try avoiding any distractions while learning",
+    "Attend the lectures more often"
+  ]);
   res.status(200).json({
     result
   });

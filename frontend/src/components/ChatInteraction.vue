@@ -18,16 +18,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import QuestionPack from './QuestionPack.vue';
-import {Question} from './../model/Question';
+import {Question} from './../model/Question'; 
 import {Answer} from './../model/Answer';
+import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
 import axios from "axios";
-import {Result} from "../model/Result";
 import { GraphFactory } from '../model/GraphFactory';
 import { MyGraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
 
-export default Vue.extend({
+export default Vue.extend({    
     data() {
         let graphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
         var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
@@ -38,37 +38,48 @@ export default Vue.extend({
           let i = 1;
           for(let currentAnswer of graphIterator.answersForCurrentNode()){
             // TODO: ryan change return of getAnswers to {title : blah, target: q2} ...
-            question1.addPossibleAnswer(new Answer(i++, currentAnswer));
+            question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
           }
-
-        var counter = 0;
 
         return {
             graphIterator: graphIterator,
             questions: [
                 question1
-            ]
+            ],
+            result: new Result(0, ["Couldn't load result"]),
         }
     },
     methods: {
-        processQuestion(questionId: number, answerId: string) {
-            //TODO: ryan has no idea what he is doing
-            console.log(`answerId: ${answerId}`)
-            this.graphIterator.choose(answerId);
+        processQuestion(targetId: string) {
+            console.log(`inside of processQeustion. targetId: ${targetId}`);
+            this.graphIterator.choose(targetId);
             this.questions.push(this.getNextQuestion());
             this.scrollToBottom();
         },
-        getNextQuestion() {     
-          console.log('inside of getNextQuestion');
-          
+        getNextQuestion():Question {
+          console.log(`inside of getNextQuestion()`);
           const currentNode:Node = this.graphIterator.getCurrentNode();          
           const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
-            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer));
+            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
           }
 
-            return nextQuestion;
+          return nextQuestion;
+        },
+        calculatedResult() {
+            axios({
+                method: "post",
+                url: "/score",
+                data: {
+                    //result: this.chosenAnswers
+                }
+            }).then(resolve => {
+                this.result = resolve.data.result;
+            })
+                .catch(error => {
+                    alert('error while sending the answers');
+                });
         },
         scrollToBottom() {
             var chatBox = this.$el.querySelector("#chat-box");
@@ -76,6 +87,13 @@ export default Vue.extend({
 
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
+        },
+        onSubmit(event: Event) {
+            // prevents form from reloading the page
+            event.preventDefault();
+
+            // go to the next result page
+            this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
         }
     },
     components: {
