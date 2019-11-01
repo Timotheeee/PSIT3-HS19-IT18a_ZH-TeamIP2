@@ -37,7 +37,6 @@ export default Vue.extend({
           question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of graphIterator.answersForCurrentNode()){
-            // TODO: ryan change return of getAnswers to {title : blah, target: q2} ...
             question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
           }
 

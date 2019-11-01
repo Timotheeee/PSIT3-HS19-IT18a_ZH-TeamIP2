@@ -25,22 +25,21 @@
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import {Result} from './../model/Result';
-
 export default Vue.extend({
   data() {
     // v-if={}
     if(this.$route) {
-      var result = JSON.parse(this.$route.params.result);
+      var resultJSON = JSON.parse(this.$route.params.result);
+      var result = new Result(resultJSON.score, resultJSON.recommendations);
     } else {
       result = new Result(1, []);
     }
-
     return {
       score: 0,
-      finalscore: Number(result.score),
+      finalscore: Number(result.getScore()),
       showadvice: false,
       advices: [""],
-      advices2: result.recommendations
+      advices2: result.getRecommendations()
     };
   },
   components: {
@@ -79,29 +78,24 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../css/colors';
-
 #jumbotron {
   overflow-y: scroll;
   height: calc(100vh - 100px);
   display: grid;
   background-color: $surface;
 }
-
 #score {
   margin-bottom: 60px;
 }
-
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.9s;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 1;
   transform: scale(3);
 }
 </style>
-

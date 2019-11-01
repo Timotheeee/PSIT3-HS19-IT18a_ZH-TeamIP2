@@ -8,11 +8,11 @@
         class="answer-button"
         v-on:click="onButtonClick(answer)"
         :name="question"
-        :value="answer"
+        :value="answer.getAnswer()"
         v-if="!lastQuestion"
       >{{answer.answer}}</b-button>
       <b-button id="goToResultPage"
-        class="answer-button"
+        class="possible-answer"
         v-for="answer in possibleAnswers"
         :key="answer.id"
         type="submit"
@@ -57,20 +57,18 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../css/colors";
 @import "../css/speech-bubble";
-
-.possible-answer > button {
+/*.possible-answer > button {
   background-color: $secondary-color;
   margin: 10px 0px;
   border: none;
   border-radius: 0px;
 }
-
 .possible-answer > button:hover {
   background-color: $surface;
   color: $secondary-color;
   border: none;
-}
+}*/
 </style>

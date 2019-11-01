@@ -8,7 +8,8 @@ const express = require('express'),
   morgan = require('morgan'),
   app = express(),
   mysql = require('mysql'),
-  fs = require('fs');
+  fs = require('fs'),
+  dbpassword = "psit";
 
 
 var dao = new Dao();
@@ -35,8 +36,15 @@ app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (a
 });
 
 app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+  if(req.body.password===dbpassword)
   dao.saveGraph(req.body.graph);
   res.status(200).json({response:"ok"});
+  console.log(req.body);
+});
+
+app.post('/password/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: boolean; }) => void; }; }) {
+  let response = req.body.password===dbpassword;
+  res.status(200).json({"response":response});
   console.log(req.body);
 });
 

@@ -10,9 +10,10 @@ export interface GraphIterator {
     answersForCurrentNode(): EdgeResult[];
     choose(chosenAnswer: string): void;
     isFinalNode(): boolean;
+    getPathScore(): number;
 }
 
-export class MyGraphIterator implements GraphIterator {
+export class MyGraphIterator implements GraphIterator {    
     currentNode: Node;
     catalogue: Graph;
     score : number;
@@ -51,5 +52,14 @@ export class MyGraphIterator implements GraphIterator {
 
     isFinalNode(): boolean {
         return this.currentNode.getIsFinalNode();
+    }
+
+    // TODO: ryan correctly implement this method here
+    getPathScore(): number {
+        if(!this.isFinalNode()){
+            throw new Error("Cannot calculate score until a finalNode has been reached!");
+        }
+
+        return this.score;     
     }
 }

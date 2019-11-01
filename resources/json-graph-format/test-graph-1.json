@@ -22,14 +22,15 @@
     {
       "id": "q4",
       "metadata": {
-    	  "title" : "Do you get more than 7 hours of sleep every night?"
+    	  "title" : "Do you get more than 7 hours of sleep every night?",
+          "isFinalNode": false
       }
     },
     {
-      "id": "fn",
+      "id": "fn1",
       "metadata": {
-        "isFinalNode" : true,
-    	  "title" : ""
+    	  "title" : null,
+          "isFinalNode" : true
       }
     }
   ],
@@ -54,7 +55,7 @@
       "source": "q2",
       "target": "q4",
       "metadata": {
-        "answer": "Yes, Riven is my Bae!",
+        "answer": "Yes",
         "score": -1000
       }
     },
@@ -62,8 +63,8 @@
       "source": "q2",
       "target": "q4",
       "metadata": {
-        "answer": "No, I play CS GO instead xD",
-        "score": 1000
+        "answer": "I play other games",
+        "score": -200
       }
     },
     {
@@ -84,7 +85,19 @@
     },
     {
       "source": "q4",
-      "target": "fn"
+      "target": "fn1",
+      "metadata": {
+        "answer": "Yes, I love my bed!",
+        "score": 500
+      }
+    },
+    {
+      "source": "q4",
+      "target": "fn1",
+      "metadata": {
+        "answer": "No, I like Netflix way too much :(",
+        "score": -500
+      }
     }
   ]
 }
