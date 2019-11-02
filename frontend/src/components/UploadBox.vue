@@ -30,7 +30,7 @@ export default Vue.extend({
       if(inputElement.files) {
         this.file = inputElement.files[0];
       } else {
-        // file could not be chosen
+        this.$emit("errorWithFile");
       }
     },
     submitFile() {
@@ -43,14 +43,14 @@ export default Vue.extend({
       reader.onload = evt => {
         graphService.postGraphToServer(evt.target!.result)
         .then(res => {
-          // file could be uploaded to server
+          this.$emit("successfullUpload");
         })
         .catch(rej => {
-          // file could not be uploaded to server
+          this.$emit("errorWithFile");
         })
       }
       reader.onerror = evt => {
-        // file could not be read
+        this.$emit("errorWithFile");
       }
     }
   }

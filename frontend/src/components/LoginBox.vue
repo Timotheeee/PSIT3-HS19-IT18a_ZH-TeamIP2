@@ -30,10 +30,10 @@ export default Vue.extend({
         loginService.checkPassword(this.password)
         .then(result => {
           var loggedin = result;
-          this.$emit('answerFromServer', loggedin);
+          this.$emit('loginOK', loggedin);
         })
         .catch(reject => {
-          // password could not be checked from the server
+          this.$emit('errorWithLogin');
         })
       }
     }
