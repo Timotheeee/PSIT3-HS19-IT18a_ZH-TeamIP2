@@ -9,9 +9,9 @@
         </h1>
 
         <transition-group name="fade" mode="out-in">
-          <h3 key="1" v-if="showadvice">StudentScore's advices for you are:</h3>
-          <div key="2" v-if="showadvice">
-            <div v-for="advice in advices" :key="advice">
+          <h3 key="1" v-if="showAdvice">StudentScore's advices for you are:</h3>
+          <div key="2" v-if="showAdvice">
+            <div v-for="advice in recommendations" :key="advice">
               <p class="lead advice">{{advice}}</p>
             </div>
           </div>
@@ -25,22 +25,24 @@
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import {Result} from './../model/Result';
+
 export default Vue.extend({
   data() {
-    // v-if={}
-    if(this.$route) {
-      var resultJSON = JSON.parse(this.$route.params.result);
-      var result = new Result(resultJSON.score, resultJSON.recommendations);
-    } else {
-      result = new Result(1, []);
-    }
     return {
+      result: new Result(1, []),
       score: 0,
-      finalscore: Number(result.getScore()),
-      showadvice: false,
-      advices: [""],
-      advices2: result.getRecommendations()
-    };
+      showAdvice: false,
+      recommendations: [""],
+    }
+  },
+  created() {
+    if(this.$route) {
+      let resultJSON = JSON.parse(this.$route.params.result);
+      this.result = new Result(resultJSON.score, resultJSON.recommendations);
+    }
+    else {
+      this.recommendations.push("Couldn't load result");
+    }
   },
   components: {
     TheHeader
@@ -49,21 +51,25 @@ export default Vue.extend({
     countDown() {
       var this2 = this;
       setInterval(function() {
-        if (this2.score * 4 < this2.finalscore) {
+        if (this2.score * 4 < this2.result.getScore()) {
           this2.score++;
         }
-        if (this2.score * 2 < this2.finalscore) {
+        if (this2.score * 2 < this2.result.getScore()) {
           this2.score++;
         }
-        if (this2.score < this2.finalscore) {
+        if (this2.score < this2.result.getScore()) {
           this2.score++;
-        } else {
-          if (!this2.showadvice) {
-            this2.showadvice = true;
+        }
+        else {
+          if (!this2.showAdvice) {
+            this2.showAdvice = true;
             var i = -1;
+
             setInterval(function() {
-              if (this2.advices2 != null && i < this2.advices2.length && i >= 0) {
-                this2.advices.push(this2.advices2[i]);
+              if (this2.recommendations != null
+                  && i < this2.recommendations.length
+                  && i >= 0) {
+                this2.recommendations.push(this2.result.getRecommendations()[i]);
               }
               i++;
             }, 600);
@@ -79,23 +85,27 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '../css/colors';
-#jumbotron {
-  overflow-y: scroll;
-  height: calc(100vh - 100px);
-  display: grid;
-  background-color: $surface;
-}
-#score {
-  margin-bottom: 60px;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.9s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 1;
-  transform: scale(3);
-}
+  @import '../css/colors';
+
+  #jumbotron {
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+    display: grid;
+    background-color: $surface;
+  }
+
+  #score {
+    margin-bottom: 60px;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.9s;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 1;
+    transform: scale(3);
+  }
 </style>

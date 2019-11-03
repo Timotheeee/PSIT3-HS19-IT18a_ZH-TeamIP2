@@ -27,13 +27,13 @@ import { GraphFactory } from '../model/GraphFactory';
 import { MyGraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
 
-export default Vue.extend({    
+export default Vue.extend({
     data() {
         let graphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
         var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
 
         // TODO: ryan duplicate code smell
-        const currentNode:Node = graphIterator.getCurrentNode();          
+        const currentNode:Node = graphIterator.getCurrentNode();
           question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of graphIterator.answersForCurrentNode()){
@@ -45,7 +45,7 @@ export default Vue.extend({
             questions: [
                 question1
             ],
-            result: new Result(0, ["Couldn't load result"]),
+            result: new Result(0, []),
         }
     },
     methods: {
@@ -57,7 +57,7 @@ export default Vue.extend({
         },
         getNextQuestion():Question {
           console.log(`inside of getNextQuestion()`);
-          const currentNode:Node = this.graphIterator.getCurrentNode();          
+          const currentNode:Node = this.graphIterator.getCurrentNode();
           const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
@@ -65,20 +65,6 @@ export default Vue.extend({
           }
 
           return nextQuestion;
-        },
-        calculatedResult() {
-            axios({
-                method: "post",
-                url: "/score",
-                data: {
-                    //result: this.chosenAnswers
-                }
-            }).then(resolve => {
-                this.result = resolve.data.result;
-            })
-                .catch(error => {
-                    alert('error while sending the answers');
-                });
         },
         scrollToBottom() {
             var chatBox = this.$el.querySelector("#chat-box");
@@ -91,8 +77,27 @@ export default Vue.extend({
             // prevents form from reloading the page
             event.preventDefault();
 
-            // go to the next result page
+            this.postUserPath();
+
+            console.log(this.graphIterator.getPathScore());
+            this.result.setScore(this.graphIterator.getPathScore());
+            // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
+        },
+        postUserPath() {
+            axios({
+                method: "post",
+                url: "/userPath",
+                data: {
+                    // TODO: Get answers from user
+                    userPath: 1
+                }
+            }).then(resolve => {
+                this.result = resolve.data.result;
+            })
+            .catch(error => {
+                alert('error while sending the user path');
+            });
         }
     },
     components: {

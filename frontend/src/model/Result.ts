@@ -15,6 +15,10 @@ export class Result {
     return this.score
   }
 
+  public setScore(score: number) {
+    this.score = score;
+  }
+
   public getRecommendations(): string[] {
     return this.recommendations;
   }

@@ -20,9 +20,12 @@ export default new Router({
       component: ChatInteraction
     },
     {
-      path: '/results/:result',
+      path: '/results',
       name: 'Results',
-      component: TheResultSite
+      component: TheResultSite,
+      props: {
+        result: String
+      }
     },
     {
       path: '/results/',
