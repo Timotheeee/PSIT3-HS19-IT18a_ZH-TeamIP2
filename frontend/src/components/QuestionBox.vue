@@ -27,6 +27,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Answer } from "./../model/Answer";
+import { Username } from "./../model/Username";
 export default Vue.extend({
   name: "QuestionBox",
   data() {
@@ -45,6 +46,10 @@ export default Vue.extend({
     },
     lastQuestion: {
       type: Boolean,
+      required: true
+    },
+    username: {
+      type: String,
       required: true
     }
   },
