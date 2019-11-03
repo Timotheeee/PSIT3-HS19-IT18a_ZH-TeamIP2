@@ -36,12 +36,13 @@ export default Vue.extend({
     }
   },
   created() {
-    if(this.$route) {
-      let resultJSON = JSON.parse(this.$route.params.result);
-      this.result = new Result(resultJSON.score, resultJSON.recommendations);
+    if(this.$route && this.$route.params.result) {
+        let resultJSON = JSON.parse(this.$route.params.result);
+        this.result = new Result(resultJSON.score, resultJSON.recommendations);
     }
-    else {
-      this.recommendations.push("Couldn't load result");
+    if(this.recommendations.length == 1
+        && this.recommendations[0] == "") {
+      this.recommendations.push("No recommendations available");
     }
   },
   components: {

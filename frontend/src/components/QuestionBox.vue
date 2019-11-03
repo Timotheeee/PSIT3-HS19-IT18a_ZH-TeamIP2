@@ -3,15 +3,15 @@
     <p class="speech-bubble question">{{question}}</p>
 
     <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
-      <b-button v-for="answer in possibleAnswers"
+      <button v-for="answer in possibleAnswers"
         :key="answer.id"
-        class="answer-button"
+        class="possible-answer"
         v-on:click="onButtonClick(answer)"
         :name="question"
         :value="answer.getAnswer()"
         v-if="!lastQuestion"
-      >{{answer.answer}}</b-button>
-      <b-button id="goToResultPage"
+      >{{answer.answer}}</button>
+      <button id="goToResultPage"
         class="possible-answer"
         v-for="answer in possibleAnswers"
         :key="answer.id"
@@ -19,7 +19,7 @@
         :name="question"
         :value="answer"
         v-else
-      >{{answer.answer}}</b-button>
+      >{{answer.answer}}</button>
     </b-button-group>
   </div>
 </template>
@@ -60,15 +60,4 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "../css/colors";
 @import "../css/speech-bubble";
-/*.possible-answer > button {
-  background-color: $secondary-color;
-  margin: 10px 0px;
-  border: none;
-  border-radius: 0px;
-}
-.possible-answer > button:hover {
-  background-color: $surface;
-  color: $secondary-color;
-  border: none;
-}*/
 </style>

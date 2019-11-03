@@ -10,6 +10,10 @@ export class AnswerStub {
   getAnswer() : String {
     return 'this is my answer';
   }
+
+  getTargetId() : string {
+    return 'q1';
+  }
 }
 
 let answerStub = new AnswerStub();

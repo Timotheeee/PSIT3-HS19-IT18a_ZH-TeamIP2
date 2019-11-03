@@ -20,7 +20,7 @@ describe("resultsite", () => {
     })
 
     it("should render at least one advice", () => {
-      wrapper.vm.$data.showadvice = true;
+      wrapper.vm.$data.showAdvice = true;
       expect(wrapper.contains('p.advice')).toBeTruthy();
     })
   })

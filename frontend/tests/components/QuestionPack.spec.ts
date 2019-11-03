@@ -38,7 +38,7 @@ describe("questionpack", () => {
   describe("are events of questionPack emitted", () => {
     test("if updateAnswer called, is processNextQuestion emitted", () =>  {
       // after answerPicked event updateAnswer is called
-      wrapper.find(QuestionBox).vm.$emit('answerPicked', answerStub.getId(), answerStub.getAnswer());
+      wrapper.find(QuestionBox).vm.$emit('answerPicked', answerStub);
       expect(wrapper.emitted('processNextQuestion').length).toBe(1);
     })
   })
