@@ -8,11 +8,12 @@ export class LoginService {
 
   }
 
-  checkPassword(password: string): Promise<boolean> {
+  checkPassword(name: string,password: string): Promise<boolean> {
     return new Promise((resolve,reject) => {
       let promise  = axios({
         method: "post", url: this.url,
         data: {
+          name:name,
           password: password
         }
       })

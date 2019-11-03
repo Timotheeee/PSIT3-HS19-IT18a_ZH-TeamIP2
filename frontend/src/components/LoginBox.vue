@@ -2,7 +2,8 @@
   <div class="container">
     <div class="large-12 medium-12 small-12 cell">
       <label>
-        <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg"/>
+        <input id="name" ref="name" type="text" placeholder="name" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitPass"/>
+        <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitPass"/>
       </label>
       <button id="passwordsubmit" type="button" class="btn btn-secondary btn-lg" @click="submitPass">Submit</button><br>
     </div>
@@ -18,16 +19,19 @@ export default Vue.extend({
   name: 'LoginBox',
   data() {
     return {
+      name: '',
       password: ''
     }
   },
   methods: {
     submitPass(): void {
       let inputElement: HTMLInputElement = <HTMLInputElement>this.$refs.password;
+      let inputElementname: HTMLInputElement = <HTMLInputElement>this.$refs.name;
       if(inputElement.value) {
         this.password=inputElement.value;
+        this.name=inputElementname.value;
         var loginService: LoginService = new LoginService();
-        loginService.checkPassword(this.password)
+        loginService.checkPassword(this.name,this.password)
         .then(result => {
           var loggedin = result;
           this.$emit('loginOK', loggedin);
@@ -46,6 +50,9 @@ export default Vue.extend({
 .btn {
   margin-top: 30px;
   margin-bottom: 30px;
+}
+.btn::placeholder {
+  color:white;
 }
 
 </style>
