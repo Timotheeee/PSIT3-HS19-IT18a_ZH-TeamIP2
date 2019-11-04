@@ -20,7 +20,8 @@ export default Vue.extend({
   data() {
     return {
       name: '',
-      password: ''
+      password: '',
+      loginService: new LoginService(),
     }
   },
   methods: {
@@ -30,8 +31,7 @@ export default Vue.extend({
       if(inputElement.value) {
         this.password=inputElement.value;
         this.name=inputElementname.value;
-        var loginService: LoginService = new LoginService();
-        loginService.checkPassword(this.name,this.password)
+        this.loginService.checkPassword(this.name,this.password)
         .then(result => {
           var loggedin = result;
           this.$emit('loginOK', loggedin);

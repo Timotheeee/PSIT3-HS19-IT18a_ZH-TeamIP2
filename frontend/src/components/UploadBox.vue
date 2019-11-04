@@ -19,7 +19,8 @@ export default Vue.extend({
   name: 'UploadBox',
   data() {
     return {
-      file: new Blob([""])
+      file: new Blob([""]),
+      graphService: new GraphService()
     }
   },
   methods: {
@@ -34,14 +35,11 @@ export default Vue.extend({
       }
     },
     submitFile() {
-      // instantiate graphservice
-      let graphService: GraphService = new GraphService();
-
       // transform file to json format
       var reader = new FileReader();
       reader.readAsText(this.file, "UTF-8");
       reader.onload = evt => {
-        graphService.postGraphToServer(evt.target!.result)
+        this.graphService.postGraphToServer(evt.target!.result)
         .then(res => {
           this.$emit("successfullUpload");
         })
