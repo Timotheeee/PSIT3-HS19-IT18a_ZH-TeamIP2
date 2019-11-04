@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 export class LoginService {
-  readonly url: string = '/password';
+  private readonly url: string = '/password';
 
   constructor() {
 

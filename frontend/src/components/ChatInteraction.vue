@@ -26,6 +26,7 @@ import axios from "axios";
 import { GraphFactory } from '../model/GraphFactory';
 import { MyGraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
+import { PathService } from '../services/PathService'
 
 export default Vue.extend({
     data() {
@@ -46,6 +47,7 @@ export default Vue.extend({
                 question1
             ],
             result: new Result(0, []),
+            pathService: new PathService()
         }
     },
     methods: {
@@ -77,27 +79,19 @@ export default Vue.extend({
             // prevents form from reloading the page
             event.preventDefault();
 
-            this.postUserPath();
+            // TODO: Get answers from user
+            this.pathService.sendPathToServer([1])
+            .then(result => {
+              this.result = result;
+            })
+            .catch(error => {
+              alert('error while sending the user path');
+            })
 
             console.log(this.graphIterator.getPathScore());
             this.result.setScore(this.graphIterator.getPathScore());
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
-        },
-        postUserPath() {
-            axios({
-                method: "post",
-                url: "/userPath",
-                data: {
-                    // TODO: Get answers from user
-                    userPath: 1
-                }
-            }).then(resolve => {
-                this.result = resolve.data.result;
-            })
-            .catch(error => {
-                alert('error while sending the user path');
-            });
         }
     },
     components: {
