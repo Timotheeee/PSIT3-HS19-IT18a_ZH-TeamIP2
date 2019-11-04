@@ -1,29 +1,19 @@
 <template>
   <div class="w-100 min-vh-100 background">
     <div class="container p-0 shadow-lg">
-      <the-header />
-      <div v-if="!loggedin" class="jumbotron text-center jumbotron-fluid">
-        <div class="container">
-          <div class="large-12 medium-12 small-12 cell">
-            <button id="goToWelcomePage" @click="goTo('/welcome')" type="button" class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
-            <label>
-              <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg"/>
-            </label>
-            <button id="passwordsubmit" type="button" class="btn btn-secondary btn-lg" @click="submitPass">Submit</button><br>
-          </div>
-        </div>
-      </div>
-      <div v-if="loggedin"  class="jumbotron text-center jumbotron-fluid">
-        <div class="container">
-          <div class="large-12 medium-12 small-12 cell">
-            <button id="goToWelcomePage" @click="goTo('/welcome')" type="button" class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
-            <label>
-              <input id="file" type="file" ref="file" class="btn btn-secondary btn-lg" @change="handleFileUpload"/>
-            </label>
-            <button id="submitFile" type="button" class="btn btn-secondary btn-lg" @click="submitFile">Submit</button><br>
-            <a href="example.json"><button type="button" class="btn btn-secondary btn-lg">Example file format</button></a><br>
-          </div>
-        </div>
+      <div class="jumbotron text-center jumbotron-fluid">
+        <the-header />
+        <login-box v-if="!loggedin"
+        @loginOK="updateViewToUpload"
+        @errorWithLogin="makeToast('warning', loginErrorTitle, loginErrorBody)" />
+        <upload-box v-else
+        @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
+        @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)" />
+        <button
+          id="goToWelcomePage"
+          @click="goTo('/welcome')"
+          type="button"
+          class="btn btn-secondary btn-lg">Go to Welcome page</button><br>
       </div>
     </div>
   </div>
@@ -32,90 +22,53 @@
 <script lang="ts">
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
-import axios from 'axios';
+import LoginBox from './LoginBox.vue';
+import UploadBox from './UploadBox.vue';
 
 export default Vue.extend({
   name: 'AdminPage',
   data() {
     return {
       loggedin:false,
-      password:"",
-      file: new Blob([""])
+      loginSuccessfulTitle: "Success!",
+      loginNotSuccessfulTitle: "Something went wrong!",
+      loginSuccessfulBody: "You're logged in.",
+      loginNotSuccessfulBody: "Password or username was wrong.",
+      loginErrorTitle: "Error with login.",
+      loginErrorBody: "There was an error with the login. Please try again",
+      fileUploadSuccessTitle: "File upload successfully!",
+      fileUploadSuccessBody: "File was uploaded to the server and saved.",
+      fileUploadErrorTitle: "File coulnd't be uploaded!",
+      fileUploadErrorBody: "There was an error with the file upload. Please try again."
     };
   },
   methods: {
+    updateViewToUpload(loggedin: boolean) {
+      this.loggedin = loggedin;
+      loggedin ? this.makeToast('success', this.loginSuccessfulTitle, this.loginSuccessfulBody) :
+                 this.makeToast('danger', this.loginNotSuccessfulTitle, this.loginNotSuccessfulBody);
+    },
     goTo(route: string): void {
       this.$router.push(route);
     },
-    submitPass(): void {
-      let inputElement: HTMLInputElement = <HTMLInputElement>this.$refs.password;
-      if(inputElement.value) {
-        this.password=inputElement.value;
-        axios({
-        method: "post",
-        url: "/password",
-        data: {
-          password: this.password
-        }
-      }).then(resolve => {
-        console.log(resolve.data.response);
-        if(resolve.data.response){
-          console.log(resolve.data.response);
-          this.loggedin=true;
-        }
-
+    makeToast(variant: string, title: string, bodyContent: string) {
+        this.$bvToast.toast(bodyContent, {
+          title: title,
+          variant: variant,
+          solid: true
         })
-        .catch(error => {
-          alert('error')
-        });
-
-      }
-    },
-    handleFileUpload() {
-      // get file from input field
-      let inputElement: HTMLInputElement = (<HTMLInputElement>this.$refs.file);
-
-
-      if(inputElement.files) {
-        this.file = inputElement.files[0];
-      }
-    },
-    submitFile() {
-      // transform file to json format
-      var reader = new FileReader();
-      reader.readAsText(this.file, "UTF-8");
-      reader.onload = evt => {
-        this.post(evt.target!.result);
-      }
-      reader.onerror = evt => {
-        alert('error while loading the file');
-      }
-    },
-    post(graph: any) {
-      axios({
-        method: "post",
-        url: "/api",
-        data: {
-          graph: graph,
-          password:this.password
-        }
-      }).then(resolve => {
-          console.log(resolve);
-        })
-        .catch(error => {
-          alert('error while uploading the file')
-        });
-    },
-    downloadExampleFile() {
-
     }
   },
   components: {
-    TheHeader
+    TheHeader,
+    LoginBox,
+    UploadBox
   }
 });
 </script>
-<style lang="scss">
+
+
+<style lang="scss" scoped>
 
 #password::placeholder {
   color: white;

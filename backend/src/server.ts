@@ -9,6 +9,7 @@ const express = require('express'),
   app = express(),
   mysql = require('mysql'),
   fs = require('fs'),
+  dbname = "psit",
   dbpassword = "psit";
 
 
@@ -43,7 +44,7 @@ app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (
 });
 
 app.post('/password/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: boolean; }) => void; }; }) {
-  let response = req.body.password===dbpassword;
+  let response = req.body.password===dbpassword&&req.body.name===dbname;
   res.status(200).json({"response":response});
   console.log(req.body);
 });
