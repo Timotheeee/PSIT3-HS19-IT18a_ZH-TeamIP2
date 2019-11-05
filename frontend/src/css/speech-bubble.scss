@@ -35,12 +35,6 @@
   box-shadow: 0 10px 14px 0 rgba(0,0,0,0.08), 0 17px 50px 0 rgba(0,0,0,0.08) !important;
 }
 
-/*.possible-answer {
-  color: black;
-  font-size: 18px;
-  background: $secondary-light;
-}*/
-
 .question:after {
   content: '';
   position: absolute;
@@ -71,7 +65,7 @@
   margin-right: -25px;
 }
 
-/*.possible-answer:after {
+.possible-answer:after {
   content: '';
   position: absolute;
   right: 0;
@@ -84,4 +78,4 @@
   border-bottom: 0;
   margin-top: -10px;
   margin-right: -25px;
-}*/
+}

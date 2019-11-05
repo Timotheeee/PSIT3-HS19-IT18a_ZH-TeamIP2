@@ -26,7 +26,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
-import {Username} from "../model/Username";
 
 export default Vue.extend({
   name: 'WelcomeSite',

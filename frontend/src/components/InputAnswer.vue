@@ -1,17 +1,13 @@
 <template>
-  <div>
     <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
-    <button id="goToResultPage"
-            class="possible-answer"
-            v-for="answer in possibleAnswers"
-            :key="answer.id"
-            type="submit"
-            :name="question"
-            :value="answer"
-    >{{answer.answer}}</button>
+      <input type="text" value="bla" placeholder="Bob">
+      <button v-for="answer in possibleAnswers"
+              :key="answer.id"
+              class="possible-answer"
+              v-on:click="onButtonClick(answer)"
+              :value="answer.getAnswer()"
+      >{{answer.answer}}</button>
     </b-button-group>
-  </div>
-    
 </template>
 
 <script lang="ts">
@@ -19,7 +15,7 @@
   import { Answer } from "./../model/Answer";
 
   export default Vue.extend({
-    name: "ResultSiteAnswer",
+    name: "InputAnswer",
     data() {
       return {
         showAnswer: true

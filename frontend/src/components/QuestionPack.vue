@@ -1,17 +1,20 @@
 <template>
   <div class="px-5 py-3">
-    <p class="speech-bubble question">{{question}}</p>
+    <p class="speech-bubble question">{{question.getQuestion()}}</p>
 
-    <question-box
-      :question="this.question.getQuestion()"
+    <input-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
-      :lastQuestion="this.question.isLastQuestion()"
       @answerPicked="updateAnswer"
-    />
-    <inputfield-answer/>
-    <choice-answer/>
-    <result-site-answer/>
-    
+      v-if="question.getAnswerType() == 'input'"/>
+    <choice-answer
+      :possibleAnswers="this.question.getPossibleAnswers()"
+      @answerPicked="updateAnswer"
+      v-else-if="question.getAnswerType() == 'choice'"/>
+    <result-site-answer
+      :possibleAnswers="this.question.getPossibleAnswers()"
+      @answerPicked="updateAnswer"
+      v-else/>
+
     <answer-box :answer="this.pickedAnswer" />
   </div>
 </template>
@@ -22,9 +25,9 @@ import { Question } from "./../model/Question";
 import { Answer } from "./../model/Answer";
 import QuestionBox from "./QuestionBox.vue";
 import AnswerBox from "./AnswerBox.vue";
-import InputfieldAnswer from "./InputfieldAnswer";
-import ChoiceAnswer from "./ChoiceAnswer";
-import ResultSiteAnswer from "./ResultSiteAnswer";
+import InputAnswer from "./InputAnswer.vue";
+import ChoiceAnswer from "./ChoiceAnswer.vue";
+import ResultSiteAnswer from "./ResultAnswer.vue";
 
 export default Vue.extend({
   data() {
@@ -39,18 +42,21 @@ export default Vue.extend({
     }
   },
   methods: {
-      updateAnswer(event: Answer) {
-        console.log(this.$props);
-      //this.$data.pickedAnswer = targetdId;
+    updateAnswer(event: Answer) {
       this.$emit("processNextQuestion", event.getTargetId());
     }
   },
   components: {
     QuestionBox,
     AnswerBox,
-    InputfieldAnswer,
+    InputAnswer,
     ChoiceAnswer,
     ResultSiteAnswer
   }
 });
 </script>
+
+<style lang="scss" scoped>
+  @import "../css/colors";
+  @import "../css/speech-bubble";
+</style>

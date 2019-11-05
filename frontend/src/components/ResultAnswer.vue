@@ -1,12 +1,15 @@
 <template>
-  <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
-    <button v-for="answer in possibleAnswers"
-            :key="answer.id"
+  <div>
+    <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
+    <button id="goToResultPage"
             class="possible-answer"
-            v-on:click="onButtonClick(answer)"
-            :value="answer.getAnswer()"
+            v-for="answer in possibleAnswers"
+            :key="answer.id"
+            type="submit"
+            :value="answer"
     >{{answer.answer}}</button>
-  </b-button-group>
+    </b-button-group>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,7 +17,7 @@
   import { Answer } from "./../model/Answer";
 
   export default Vue.extend({
-    name: "ChoiceAnswer",
+    name: "ResultAnswer",
     data() {
       return {
         showAnswer: true

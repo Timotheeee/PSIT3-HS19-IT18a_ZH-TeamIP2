@@ -22,7 +22,6 @@ import {Question} from './../model/Question'; 
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
-import axios from "axios";
 import { GraphFactory } from '../model/GraphFactory';
 import { MyGraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
@@ -31,11 +30,11 @@ import { PathService } from '../services/PathService'
 export default Vue.extend({
     data() {
         let graphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
-        var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
+        var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), "choice", false);
 
         // TODO: ryan duplicate code smell
         const currentNode:Node = graphIterator.getCurrentNode();
-          question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
+          question1 = new Question(currentNode.getId(), currentNode.getTitle(), "choice", currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of graphIterator.answersForCurrentNode()){
             question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
@@ -60,7 +59,7 @@ export default Vue.extend({
         getNextQuestion():Question {
           console.log(`inside of getNextQuestion()`);
           const currentNode:Node = this.graphIterator.getCurrentNode();
-          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
+          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), "input", currentNode.getIsFinalNode());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
