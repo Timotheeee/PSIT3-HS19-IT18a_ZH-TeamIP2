@@ -8,6 +8,10 @@
       :lastQuestion="this.question.isLastQuestion()"
       @answerPicked="updateAnswer"
     />
+    <inputfield-answer/>
+    <choice-answer/>
+    <result-site-answer/>
+    
     <answer-box :answer="this.pickedAnswer" />
   </div>
 </template>
@@ -18,6 +22,10 @@ import { Question } from "./../model/Question";
 import { Answer } from "./../model/Answer";
 import QuestionBox from "./QuestionBox.vue";
 import AnswerBox from "./AnswerBox.vue";
+import InputfieldAnswer from "./InputfieldAnswer";
+import ChoiceAnswer from "./ChoiceAnswer";
+import ResultSiteAnswer from "./ResultSiteAnswer";
+
 export default Vue.extend({
   data() {
     return {
@@ -39,7 +47,10 @@ export default Vue.extend({
   },
   components: {
     QuestionBox,
-    AnswerBox
+    AnswerBox,
+    InputfieldAnswer,
+    ChoiceAnswer,
+    ResultSiteAnswer
   }
 });
 </script>
