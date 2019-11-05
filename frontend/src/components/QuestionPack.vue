@@ -31,7 +31,7 @@ export default Vue.extend({
   methods: {
       updateAnswer(event: Answer) {
         console.log(this.$props);
-      //this.$data.pickedAnswer = targetdId;
+      this.$data.pickedAnswer = event.getAnswer();
       this.$emit("processNextQuestion", event.getTargetId());
     }
   },
