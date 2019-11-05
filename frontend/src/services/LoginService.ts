@@ -2,13 +2,13 @@ import axios from 'axios';
 
 
 export class LoginService {
-  private readonly url: string = '/password';
+  private readonly url: string = '/login';
 
   constructor() {
 
   }
 
-  checkPassword(name: string,password: string): Promise<boolean> {
+  verifyLoginData(name: string,password: string): Promise<boolean> {
     return new Promise((resolve,reject) => {
       let promise  = axios({
         method: "post", url: this.url,
