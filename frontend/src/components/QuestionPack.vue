@@ -1,5 +1,7 @@
 <template>
   <div class="px-5 py-3">
+    <p class="speech-bubble question">{{question}}</p>
+
     <question-box
       :question="this.question.getQuestion()"
       :possibleAnswers="this.question.getPossibleAnswers()"
