@@ -24,14 +24,25 @@ import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
 import axios from "axios";
 import { GraphFactory } from '../model/GraphFactory';
-import { MyGraphIterator } from '../model/MyGraphIterator';
+import { MyGraphIterator, GraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
 import { PathService } from '../services/PathService'
+import { GraphService } from '../services/GraphService'
 
 export default Vue.extend({
     data() {
-        let graphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
-        var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
+      let graphService = new GraphService();
+      let graphIterator: MyGraphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
+      graphService.getGraphIterator()
+      .then(result => {
+        graphIterator = result;
+      })
+      .catch(error => {
+        alert('Please upload a file first in the adminpanel');
+        this.$router.push('/welcome')
+      })
+
+      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
 
         // TODO: ryan duplicate code smell
         const currentNode:Node = graphIterator.getCurrentNode();
@@ -42,23 +53,21 @@ export default Vue.extend({
           }
 
         return {
-            graphIterator: graphIterator,
             questions: [
-                question1
+              question1
             ],
             result: new Result(0, []),
-            pathService: new PathService()
+            pathService: new PathService(),
+            graphIterator: graphIterator
         }
     },
     methods: {
         processQuestion(targetId: string) {
-            console.log(`inside of processQeustion. targetId: ${targetId}`);
             this.graphIterator.choose(targetId);
             this.questions.push(this.getNextQuestion());
             this.scrollToBottom();
         },
-        getNextQuestion():Question {
-          console.log(`inside of getNextQuestion()`);
+        getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.getCurrentNode();
           const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
           let i = 1;
@@ -80,7 +89,7 @@ export default Vue.extend({
             event.preventDefault();
 
             // TODO: Get answers from user
-            this.pathService.sendPathToServer([1])
+            this.pathService.postPath([1])
             .then(result => {
               this.result = result;
             })
@@ -92,7 +101,7 @@ export default Vue.extend({
             this.result.setScore(this.graphIterator.getPathScore());
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
-        }
+        },
     },
     components: {
         TheHeader,

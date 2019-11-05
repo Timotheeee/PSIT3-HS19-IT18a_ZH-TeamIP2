@@ -31,19 +31,23 @@ function listen() {
   console.log('app listening at http://' + host + ':' + port);
 }
 
-app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
+app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
   var graph = dao.getGraph();
-  res.status(200).json(graph);
+  if(graph) {
+    res.status(200).json(graph);
+  } else {
+    throw new Error();
+  }
+
 });
 
-app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
-  if(req.body.password===dbpassword)
-  dao.saveGraph(req.body.graph);
+app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+  dao.saveGraph(JSON.parse(req.body.graph));
   res.status(200).json({response:"ok"});
   console.log(req.body);
 });
 
-app.post('/password/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: boolean; }) => void; }; }) {
+app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: boolean; }) => void; }; }) {
   let response = req.body.password===dbpassword&&req.body.name===dbname;
   res.status(200).json({"response":response});
   console.log(req.body);
