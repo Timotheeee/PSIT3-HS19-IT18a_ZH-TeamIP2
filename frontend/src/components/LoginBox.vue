@@ -31,7 +31,7 @@ export default Vue.extend({
       if(inputElement.value) {
         this.password=inputElement.value;
         this.name=inputElementname.value;
-        this.loginService.checkPassword(this.name,this.password)
+        this.loginService.verifyLoginData(this.name,this.password)
         .then(result => {
           var loggedin = result;
           this.$emit('loginOK', loggedin);
