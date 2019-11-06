@@ -8,7 +8,7 @@ export class PathService {
 
   }
 
-  sendPathToServer(path: [Number]) : Promise<any> {
+  postPath(path: [Number]) : Promise<any> {
     return new Promise((resolve, reject) => {
       let promise = axios({
         method: "post",

@@ -1,12 +1,13 @@
 import axios from 'axios';
+import {GraphIterator, MyGraphIterator} from './../model/MyGraphIterator';
 
 export class GraphService {
-  readonly url: string = '/api';
+  readonly url: string = '/graph';
   constructor() {
 
   }
 
-  postGraphToServer(graph: any): Promise<any> {
+  postGraph(graph: any): Promise<any> {
     return new Promise((resolve, reject) => {
       axios({
         method: "post",
@@ -23,5 +24,35 @@ export class GraphService {
       });
     })
 
+  }
+
+  getGraphIterator(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let promise = this.getGraph();
+
+      promise.then(result => {
+        let graphIterator = new MyGraphIterator(result);
+        resolve(graphIterator);
+      })
+
+      promise.catch(error => {
+        reject(error);
+      })
+    })
+  }
+
+  private getGraph(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "get",
+        url: this.url,
+      })
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    })
   }
 }
