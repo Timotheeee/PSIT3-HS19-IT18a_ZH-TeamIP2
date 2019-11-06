@@ -41,24 +41,24 @@ export default Vue.extend({
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), "choice", false);
+      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), graphIterator.getCurrentNode().getAnswerType());
 
-        // TODO: ryan duplicate code smell
-        const currentNode:Node = graphIterator.getCurrentNode();
-          question1 = new Question(currentNode.getId(), currentNode.getTitle(), "choice", currentNode.getIsFinalNode());
-          let i = 1;
-          for(let currentAnswer of graphIterator.answersForCurrentNode()){
-            question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
-          }
-
-        return {
-            questions: [
-              question1
-            ],
-            result: new Result(0, []),
-            pathService: new PathService(),
-            graphIterator: graphIterator
+      // TODO: ryan duplicate code smell
+      const currentNode:Node = graphIterator.getCurrentNode();
+        question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
+        let i = 1;
+        for(let currentAnswer of graphIterator.answersForCurrentNode()){
+          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
         }
+
+      return {
+          questions: [
+            question1
+          ],
+          result: new Result(0, []),
+          pathService: new PathService(),
+          graphIterator: graphIterator
+      }
     },
     methods: {
         processQuestion(targetId: string) {
@@ -68,7 +68,7 @@ export default Vue.extend({
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.getCurrentNode();
-          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), "input", currentNode.getIsFinalNode());
+          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));

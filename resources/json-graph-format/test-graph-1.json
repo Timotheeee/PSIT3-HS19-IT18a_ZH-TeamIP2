@@ -4,33 +4,44 @@
       "id": "q1",
       "metadata": {
         "isHead": true,
-    	  "title" : "Do you play video games?"
+        "answerType": "input",
+        "title" : "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I'll just call you Bob"
       }
     },
     {
       "id": "q2",
       "metadata": {
-    	  "title" : "Do you play League of Legends or World of Warcraft Classic?"
+        "answerType": "choice",
+    	  "title" : "Do you play video james?"
       }
     },
     {
       "id": "q3",
       "metadata": {
-    	  "title" : "Do you exercise at least twice a week?"
+        "answerType": "choice",
+    	  "title" : "Do you play League of Legends or World of Warcraft Classic?"
       }
     },
     {
       "id": "q4",
       "metadata": {
-    	  "title" : "Do you get more than 7 hours of sleep every night?",
-          "isFinalNode": false
+        "answerType": "choice",
+    	  "title" : "Do you exercise at least twice a week?"
+      }
+    },
+    {
+      "id": "q5",
+      "metadata": {
+        "answerType": "choice",
+    	  "title" : "Do you get more than 7 hours of sleep every night?"
       }
     },
     {
       "id": "fn1",
       "metadata": {
-    	  "title" : null,
-          "isFinalNode" : true
+    	  "title" : "Great! You are finished! Would you like to see the results?",
+        "answerType": "result",
+        "isFinalNode" : true
       }
     }
   ],
@@ -39,52 +50,60 @@
       "source": "q1",
       "target": "q2",
       "metadata": {
+        "answer": "Bob",
+        "score": 0
+      }
+    },
+    {
+      "source": "q2",
+      "target": "q3",
+      "metadata": {
         "answer": "Yes",
         "score": -10
       }
     },
     {
-      "source": "q1",
-      "target": "q3",
+      "source": "q2",
+      "target": "q4",
       "metadata": {
         "answer": "No",
         "score": 10
       }
     },
     {
-      "source": "q2",
-      "target": "q4",
+      "source": "q3",
+      "target": "q5",
       "metadata": {
         "answer": "Yes",
         "score": -1000
       }
     },
     {
-      "source": "q2",
-      "target": "q4",
+      "source": "q3",
+      "target": "q5",
       "metadata": {
         "answer": "I play other games",
         "score": -200
       }
     },
     {
-      "source": "q3",
-      "target": "q4",
+      "source": "q4",
+      "target": "q5",
       "metadata": {
         "answer": "Yes, I am a true gym rat!",
         "score": 200
       }
     },
     {
-      "source": "q3",
-      "target": "q4",
+      "source": "q4",
+      "target": "q5",
       "metadata": {
         "answer": "No less than that",
         "score": 0
       }
     },
     {
-      "source": "q4",
+      "source": "q5",
       "target": "fn1",
       "metadata": {
         "answer": "Yes, I love my bed!",
@@ -97,6 +116,14 @@
       "metadata": {
         "answer": "No, I like Netflix way too much :(",
         "score": -500
+      }
+    },
+    {
+      "source": "fn1",
+      "target": "fn1",
+      "metadata": {
+        "answer": "Yes please!",
+        "score": 0
       }
     }
   ]

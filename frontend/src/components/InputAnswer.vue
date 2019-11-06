@@ -1,13 +1,13 @@
 <template>
-    <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
-      <input type="text" value="bla" placeholder="Bob">
-      <button v-for="answer in possibleAnswers"
-              :key="answer.id"
+  <div vertical class="speech-bubble possible-answer d-inline-flex text-left" v-if="showAnswer">
+    <div v-for="answer in possibleAnswers">
+      <input type="text" v-model="userInput">
+      <button :key="answer.id"
               class="possible-answer"
               v-on:click="onButtonClick(answer)"
-              :value="answer.getAnswer()"
-      >{{answer.answer}}</button>
-    </b-button-group>
+      >Enter</button>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,7 +18,8 @@
     name: "InputAnswer",
     data() {
       return {
-        showAnswer: true
+        showAnswer: true,
+        userInput: ""
       };
     },
     props: {
@@ -29,6 +30,7 @@
     },
     methods: {
       onButtonClick(event: Answer) {
+        event.setAnswer(this.$data.userInput);
         this.$emit("answerPicked", event);
         this.showAnswer = false;
       }

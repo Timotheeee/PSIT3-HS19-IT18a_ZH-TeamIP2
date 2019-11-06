@@ -5,14 +5,12 @@ export class Question {
   private question: string;
   private possibleAnswers: Answer[];
   private answerType: string;
-  private lastQuestion: boolean;
 
-  constructor(id: string, question: string, answerType: string, lastQuestion: boolean) {
+  constructor(id: string, question: string, answerType: string) {
     this.id = id;
     this.question = question;
-    this.possibleAnswers = [];
     this.answerType = answerType;
-    this.lastQuestion = lastQuestion;
+    this.possibleAnswers = [];
   }
 
   public addPossibleAnswer(answer: Answer) {
@@ -33,9 +31,5 @@ export class Question {
 
   public getAnswerType() : string {
     return this.answerType;
-  }
-
-  public isLastQuestion() : boolean {
-    return this.lastQuestion;
   }
 }

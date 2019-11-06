@@ -3,7 +3,136 @@ import {Node, NodeJSON} from './Node';
 import {Edge, EdgeJSON} from './Edge';
 
 export class GraphFactory {
-  public static STATIC_JSON_STR_1:string = '{\r\n  \"nodes\": [\r\n    {\r\n      \"id\": \"q1\",\r\n      \"metadata\": {\r\n        \"isHead\": true,\r\n    \t  \"title\" : \"Do you play video games?\"\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"q2\",\r\n      \"metadata\": {\r\n    \t  \"title\" : \"Do you play League of Legends or World of Warcraft Classic?\"\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"q3\",\r\n      \"metadata\": {\r\n    \t  \"title\" : \"Do you exercise at least twice a week?\"\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"q4\",\r\n      \"metadata\": {\r\n    \t  \"title\" : \"Do you get more than 7 hours of sleep every night?\",\r\n          \"isFinalNode\": false\r\n      }\r\n    },\r\n    {\r\n      \"id\": \"fn1\",\r\n      \"metadata\": {\r\n    \t  \"title\" : null,\r\n          \"isFinalNode\" : true\r\n      }\r\n    }\r\n  ],\r\n  \"edges\": [\r\n    {\r\n      \"source\": \"q1\",\r\n      \"target\": \"q2\",\r\n      \"metadata\": {\r\n        \"answer\": \"Yes\",\r\n        \"score\": -10\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q1\",\r\n      \"target\": \"q3\",\r\n      \"metadata\": {\r\n        \"answer\": \"No\",\r\n        \"score\": 10\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q2\",\r\n      \"target\": \"q4\",\r\n      \"metadata\": {\r\n        \"answer\": \"Yes\",\r\n        \"score\": -1000\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q2\",\r\n      \"target\": \"q4\",\r\n      \"metadata\": {\r\n        \"answer\": \"I play other games\",\r\n        \"score\": -200\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q3\",\r\n      \"target\": \"q4\",\r\n      \"metadata\": {\r\n        \"answer\": \"Yes, I am a true gym rat!\",\r\n        \"score\": 200\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q3\",\r\n      \"target\": \"q4\",\r\n      \"metadata\": {\r\n        \"answer\": \"No less than that\",\r\n        \"score\": 0\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q4\",\r\n      \"target\": \"fn1\",\r\n      \"metadata\": {\r\n        \"answer\": \"Yes, I love my bed!\",\r\n        \"score\": 500\r\n      }\r\n    },\r\n    {\r\n      \"source\": \"q4\",\r\n      \"target\": \"fn1\",\r\n      \"metadata\": {\r\n        \"answer\": \"No, I like Netflix way too much :(\",\r\n        \"score\": -500\r\n      }\r\n    }\r\n  ]\r\n}';
+  public static STATIC_JSON_STR_1:string = '{\n' +
+    '  "nodes": [\n' +
+    '    {\n' +
+    '      "id": "q1",\n' +
+    '      "metadata": {\n' +
+    '        "isHead": true,\n' +
+    '        "answerType": "input",\n' +
+    '        "title" : "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I\'ll just call you Bob"\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "id": "q2",\n' +
+    '      "metadata": {\n' +
+    '        "answerType": "choice",\n' +
+    '    \t  "title" : "Do you play video james?"\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "id": "q3",\n' +
+    '      "metadata": {\n' +
+    '        "answerType": "choice",\n' +
+    '    \t  "title" : "Do you play League of Legends or World of Warcraft Classic?"\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "id": "q4",\n' +
+    '      "metadata": {\n' +
+    '        "answerType": "choice",\n' +
+    '    \t  "title" : "Do you exercise at least twice a week?"\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "id": "q5",\n' +
+    '      "metadata": {\n' +
+    '        "answerType": "choice",\n' +
+    '    \t  "title" : "Do you get more than 7 hours of sleep every night?"\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "id": "fn1",\n' +
+    '      "metadata": {\n' +
+    '    \t  "title" : "Great! You are finished! Would you like to see the results?",\n' +
+    '        "answerType": "result",\n' +
+    '        "isFinalNode" : true\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ],\n' +
+    '  "edges": [\n' +
+    '    {\n' +
+    '      "source": "q1",\n' +
+    '      "target": "q2",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Bob",\n' +
+    '        "score": 0\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q2",\n' +
+    '      "target": "q3",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Yes",\n' +
+    '        "score": -10\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q2",\n' +
+    '      "target": "q4",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "No",\n' +
+    '        "score": 10\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q3",\n' +
+    '      "target": "q5",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Yes",\n' +
+    '        "score": -1000\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q3",\n' +
+    '      "target": "q5",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "I play other games",\n' +
+    '        "score": -200\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q4",\n' +
+    '      "target": "q5",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Yes, I am a true gym rat!",\n' +
+    '        "score": 200\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q4",\n' +
+    '      "target": "q5",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "No less than that",\n' +
+    '        "score": 0\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q5",\n' +
+    '      "target": "fn1",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Yes, I love my bed!",\n' +
+    '        "score": 500\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "q4",\n' +
+    '      "target": "fn1",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "No, I like Netflix way too much :(",\n' +
+    '        "score": -500\n' +
+    '      }\n' +
+    '    },\n' +
+    '    {\n' +
+    '      "source": "fn1",\n' +
+    '      "target": "fn1",\n' +
+    '      "metadata": {\n' +
+    '        "answer": "Yes please!",\n' +
+    '        "score": 0\n' +
+    '      }\n' +
+    '    }\n' +
+    '  ]\n' +
+    '}\n';
 
   /**
    * This method is purely to be used for test purposes.
@@ -44,13 +173,13 @@ export class GraphFactory {
     }
 
     if(headNode == null){
-      throw new Error('Couln\'t set head node!');
+      throw new Error('Couldn\'t set head node!');
     }
 
-    graph.setHeadNode(headNode);    
+    graph.setHeadNode(headNode);
   }
 
-  static createGraphFromJSON(data: string): Graph {   
+  static createGraphFromJSON(data: string): Graph {
     let graph: GraphJSON = JSON.parse(data);
     return (this.createGraph(graph));
   }
@@ -60,10 +189,10 @@ export class GraphFactory {
       // TODO: ryan don't forget about about isFinalNode
       // TODO: ryan clean this mess up
       if(node.metadata !== undefined && (node.metadata.isHead !== undefined || node.metadata.isFinalNode !== undefined)) {
-        graph.addNode(node.id, node.metadata.title, node.metadata.isHead, node.metadata.isFinalNode!);
+        graph.addNode(node.id, node.metadata.title, node.metadata.answerType, node.metadata.isHead, node.metadata.isFinalNode!);
       } else {
-        graph.addNode(node.id, node.metadata.title);
-      }      
+        graph.addNode(node.id, node.metadata.title, node.metadata.answerType);
+      }
     }
   }
 
