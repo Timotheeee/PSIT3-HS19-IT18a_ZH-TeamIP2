@@ -13,7 +13,7 @@ export class Graph {
   /*
    * Adds a new node to the graph. The newly added or existing node is returned.
    */
-  addNode(id: string,  title: string, answerType: string = "choice", isHead: boolean = false, isFinalNode: boolean = false) {
+  addNode(id: string,  title: string, answerType: string, isHead: boolean = false, isFinalNode: boolean = false) {
     let node: Node|null = this.findNode(id);
     if (node == null) {
       node = new Node();

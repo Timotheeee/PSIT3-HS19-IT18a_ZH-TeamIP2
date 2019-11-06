@@ -1,7 +1,7 @@
 <template>
   <div vertical class="speech-bubble possible-answer d-inline-flex text-left" v-if="showAnswer">
     <div v-for="answer in possibleAnswers">
-      <input type="text" v-model="userInput">
+      <input type="text" v-model="userInput" :placeholder="[[answer.getAnswer()]]">
       <button :key="answer.id"
               class="possible-answer"
               v-on:click="onButtonClick(answer)"
@@ -30,8 +30,11 @@
     },
     methods: {
       onButtonClick(event: Answer) {
-        event.setAnswer(this.$data.userInput);
-        this.$emit("answerPicked", event);
+          let username = this.$data.userInput;
+          if(username != "") {
+              event.setAnswer(username);
+          }
+          this.$emit("answerPicked", event);
         this.showAnswer = false;
       }
     }

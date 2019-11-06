@@ -4,44 +4,33 @@
       "id": "q1",
       "metadata": {
         "isHead": true,
-        "answerType": "input",
-        "title" : "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I'll just call you Bob"
+    	  "title" : "Do you play video games?"
       }
     },
     {
       "id": "q2",
       "metadata": {
-        "answerType": "choice",
-    	  "title" : "Do you play video james?"
+    	  "title" : "Do you play League of Legends or World of Warcraft Classic?"
       }
     },
     {
       "id": "q3",
       "metadata": {
-        "answerType": "choice",
-    	  "title" : "Do you play League of Legends or World of Warcraft Classic?"
+    	  "title" : "Do you exercise at least twice a week?"
       }
     },
     {
       "id": "q4",
       "metadata": {
-        "answerType": "choice",
-    	  "title" : "Do you exercise at least twice a week?"
-      }
-    },
-    {
-      "id": "q5",
-      "metadata": {
-        "answerType": "choice",
-    	  "title" : "Do you get more than 7 hours of sleep every night?"
+    	  "title" : "Do you get more than 7 hours of sleep every night?",
+          "isFinalNode": false
       }
     },
     {
       "id": "fn1",
       "metadata": {
-    	  "title" : "Great! You are finished! Would you like to see the results?",
-        "answerType": "result",
-        "isFinalNode" : true
+    	  "title" : null,
+          "isFinalNode" : true
       }
     }
   ],
@@ -116,14 +105,6 @@
       "metadata": {
         "answer": "No, I like Netflix way too much :(",
         "score": -500
-      }
-    },
-    {
-      "source": "fn1",
-      "target": "fn1",
-      "metadata": {
-        "answer": "Yes please!",
-        "score": 0
       }
     }
   ]
