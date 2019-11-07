@@ -62,11 +62,11 @@ export default Vue.extend({
     goTo(route: string): void {
       this.$router.push(route);
     },
-    onSubmit(evt) {
+    onSubmit(evt: any) {
       evt.preventDefault()
       alert("You chose " + this.form.username + " as your username.\nNow click on the button down there ↓ to start StudentScore!")
     },
-    onReset(evt) {
+    onReset(evt: any) {
       evt.preventDefault()
       this.form.username = ''
       this.show = false

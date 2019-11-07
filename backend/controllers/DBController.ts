@@ -38,7 +38,13 @@ export class DBController {
   }
 
   public getGraph(){
-    return JSON.parse(this.graph);
+    let graphJson;
+    try {
+      graphJson = JSON.parse(this.graph)
+    } catch {
+      graphJson = null;
+    }
+    return graphJson;
   }
 
   public saveGraph(graph:any){
