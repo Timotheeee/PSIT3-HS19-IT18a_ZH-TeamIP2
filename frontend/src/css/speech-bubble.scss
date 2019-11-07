@@ -35,6 +35,11 @@
   box-shadow: 0 10px 14px 0 rgba(0,0,0,0.08), 0 17px 50px 0 rgba(0,0,0,0.08) !important;
 }
 
+.possible-answer .active-item {
+  background: $secondary-color !important;
+  border-radius: 5px;
+}
+
 /*.possible-answer {
   color: black;
   font-size: 18px;
