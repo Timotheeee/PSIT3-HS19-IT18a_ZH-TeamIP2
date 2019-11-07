@@ -1,13 +1,14 @@
 const mysql = require('mysql');
 const fs = require('fs');
+const filelocation = "./config/db.json";
 
-export class Dao {
+export class DBController {
   private graph:string = "";
   private con:any;
 
   constructor(){
     var this2 = this;
-    fs.readFile("./db.json", function (err: any, data: string) {
+    fs.readFile(filelocation, function (err: any, data: string) {
       if (err) {
         console.log("err: " + err);
         return;
@@ -16,6 +17,7 @@ export class Dao {
     });
 
     return;
+    //the code to use a mysql db in case we want to use that instead
     this.con = mysql.createConnection({
       host: "timotheeee1.site",
       port: 3306,
@@ -27,7 +29,6 @@ export class Dao {
     this.con.connect(function (err: any) {
       if (err) throw err;
       console.log("Connected to db!");
-      // this2.runQuery("use timothel_psit3");
       this2.con.query("SELECT * FROM graph", function (err: any, result: any) {
         if (err) throw err;
         this2.graph = result[0].data;
@@ -41,7 +42,7 @@ export class Dao {
   }
 
   public saveGraph(graph:any){
-    fs.writeFile("./db.json", JSON.stringify(graph), function (err: any) {
+    fs.writeFile(filelocation, JSON.stringify(graph), function (err: any) {
       if (err) {
           console.log(err);
       }

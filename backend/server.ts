@@ -1,23 +1,22 @@
 #!/usr/bin/env node
-import {Dao} from "./Dao"
+import {DBController} from "./controllers/DBController"
 import { AnyNaptrRecord } from "dns";
-import {Result} from "../../frontend/src/model/Result";
+import {Result} from "../frontend/src/model/Result";
+import { LoginController } from "./controllers/LoginController";
 
 const express = require('express'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   app = express(),
   mysql = require('mysql'),
-  fs = require('fs'),
-  dbname = "psit",
-  dbpassword = "psit";
+  fs = require('fs');
 
 
-var dao = new Dao();
+var dao = new DBController();
 
 
 app.use(morgan('dev'));
-app.use(express.static(__dirname + '//..//..//frontend//public'));
+app.use(express.static(__dirname + '//..//frontend//public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -37,14 +36,13 @@ app.get('/api/', function (req: any, res: { status: (arg0: number) => { json: (a
 });
 
 app.post('/api/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
-  if(req.body.password===dbpassword)
   dao.saveGraph(req.body.graph);
   res.status(200).json({response:"ok"});
   console.log(req.body);
 });
 
 app.post('/password/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: boolean; }) => void; }; }) {
-  let response = req.body.password===dbpassword&&req.body.name===dbname;
+  let response = LoginController.login(req);
   res.status(200).json({"response":response});
   console.log(req.body);
 });

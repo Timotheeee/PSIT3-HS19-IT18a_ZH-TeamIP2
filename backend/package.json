@@ -5,10 +5,10 @@
   "main": "dist/server.js",
   "watch": "node_modules/concurrently/src/main.js -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"node_modules/nodemon/bin/nodemon.js --inspect --delay 500ms server.js\"",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon server.ts",
     "start": "node dist/server.js",
     "build": "tsc -p .",
-    "test": "tsc & jasmine dist/DaoSpec.js",
+    "test": "tsc & jasmine dist/backend/test/DBControllerSpec.js",
     "test2": "node_modules/nodemon/bin/nodemon.js -w dist ./node_modules/.bin/jasmine — config=jasmine.json",
     "ex": "jasmine examples"
   },
