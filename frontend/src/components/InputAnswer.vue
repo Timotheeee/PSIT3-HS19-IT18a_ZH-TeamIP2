@@ -12,6 +12,7 @@
 
 <script lang="ts">
   import Vue from "vue";
+  import { EventBus } from "../event-bus";
   import { Answer } from "./../model/Answer";
 
   export default Vue.extend({
@@ -30,12 +31,15 @@
     },
     methods: {
       onButtonClick(event: Answer) {
-          let username = this.$data.userInput;
-          if(username != "") {
-              event.setAnswer(username);
-          }
-          this.$emit("answerPicked", event);
+        let username = this.$data.userInput;
+        if(username != "") {
+            event.setAnswer(username);
+        }
+        this.$emit("answerPicked", event);
         this.showAnswer = false;
+
+        // set the username for the questions
+        EventBus.$emit("setUsername", event.getAnswer());
       }
     }
   });

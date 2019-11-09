@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { EventBus } from '../event-bus';
 import QuestionPack from './QuestionPack.vue';
 import {Question} from './../model/Question'; 
 import {Answer} from './../model/Answer';
@@ -57,7 +58,8 @@ export default Vue.extend({
           ],
           result: new Result(0, []),
           pathService: new PathService(),
-          graphIterator: graphIterator
+          graphIterator: graphIterator,
+          username: ""
       }
     },
     methods: {
@@ -68,13 +70,20 @@ export default Vue.extend({
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.getCurrentNode();
-          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
+          const nextQuestion: Question = new Question(
+              currentNode.getId(),
+              this.insertUsernameInQuestion(currentNode.getTitle()),
+              currentNode.getAnswerType());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
           }
 
           return nextQuestion;
+        },
+        insertUsernameInQuestion(question: string): string {
+            let result = question.replace("%username%", this.$data.username);
+            return result;
         },
         scrollToBottom() {
             var chatBox = this.$el.querySelector("#chat-box");
@@ -100,7 +109,12 @@ export default Vue.extend({
             this.result.setScore(this.graphIterator.getPathScore());
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
-        },
+        }
+    },
+    created() {
+      EventBus.$on("setUsername", (username: String) => {
+        this.$data.username = username;
+      });
     },
     components: {
         TheHeader,
