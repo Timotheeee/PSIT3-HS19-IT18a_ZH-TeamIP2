@@ -53,7 +53,6 @@ export default Vue.extend({
       }
     },
     logout() {
-      console.log("logout event emitted");
       this.$emit("logout");
     }
   }

@@ -4,6 +4,7 @@
       <div class="jumbotron text-center jumbotron-fluid">
         <the-header />
         <login-box v-if="!loggedin"
+        :loginService="this.loginService"
         @loginOK="updateViewToUpload"
         @errorWithLogin="makeToast('warning', loginErrorTitle, loginErrorBody)" />
         <upload-box v-else
@@ -32,6 +33,7 @@ export default Vue.extend({
   data() {
     return {
       loggedin:false,
+      loginService: new LoginService(),
       loginSuccessfulTitle: "Success!",
       loginNotSuccessfulTitle: "Something went wrong!",
       loginSuccessfulBody: "You're logged in.",
@@ -63,11 +65,11 @@ export default Vue.extend({
     logout() {
       console.log("event received");
       this.loggedin = false;
-      LoginService.logout();
+      this.loginService.logout();
     }
   },
   created() {
-    if(LoginService.checkLoggedIn()) {
+    if(this.loginService.checkLoggedIn()) {
       this.loggedin = true;
     }
   },

@@ -8,11 +8,11 @@ export class LoginService {
 
   }
 
-  public static checkLoggedIn(): boolean {
+  public checkLoggedIn(): boolean {
     return axios.defaults.headers.common['token'] ? true : false;
   }
 
-  public static logout() {
+  public logout() {
     axios.defaults.headers.common['token'] = '';
   }
 
