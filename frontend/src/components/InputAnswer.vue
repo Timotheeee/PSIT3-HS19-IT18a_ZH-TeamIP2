@@ -1,7 +1,7 @@
 <template>
   <div vertical class="speech-bubble possible-answer d-inline-flex text-left" v-if="showAnswer">
     <div v-for="answer in possibleAnswers">
-      <input type="text" v-model="userInput" :placeholder="[[answer.getAnswer()]]">
+      <input type="text" v-model="userInput" :placeholder="[[answer.getAnswer()]]" class="text">
       <button :key="answer.id"
               class="possible-answer"
               v-on:click="onButtonClick(answer)"
@@ -48,4 +48,14 @@
 <style lang="scss" scoped>
   @import "../css/colors";
   @import "../css/speech-bubble";
+
+.text {
+  margin-left: 15px;
+  border-color: transparent;
+}
+
+  ::placeholder {
+    color: lightgrey;
+    text-align: center;
+  }
 </style>

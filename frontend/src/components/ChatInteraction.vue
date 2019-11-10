@@ -66,7 +66,6 @@ export default Vue.extend({
         processQuestion(targetId: string) {
             this.graphIterator.choose(targetId);
             this.questions.push(this.getNextQuestion());
-            this.scrollToBottom();
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.getCurrentNode();
@@ -85,13 +84,7 @@ export default Vue.extend({
             let result = question.replace("%username%", this.$data.username);
             return result;
         },
-        scrollToBottom() {
-            var chatBox = this.$el.querySelector("#chat-box");
-            if(chatBox != null) {
 
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        },
         onSubmit(event: Event) {
             // prevents form from reloading the page
             event.preventDefault();
@@ -115,6 +108,14 @@ export default Vue.extend({
       EventBus.$on("setUsername", (username: String) => {
         this.$data.username = username;
       });
+    },
+    updated() {
+      var chatBox = this.$el.querySelector("#chat-box");
+      if(chatBox != null) {
+
+        chatBox.scrollTop = chatBox.clientHeight;
+      }
+
     },
     components: {
         TheHeader,

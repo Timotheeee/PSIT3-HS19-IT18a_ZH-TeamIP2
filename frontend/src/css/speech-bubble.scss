@@ -11,6 +11,7 @@
   color: white;
   font-size: 18px;
   background: $primary-color;
+  text-align: left;
 }
 
 .answer {
@@ -22,6 +23,7 @@
 .possible-answer {
   color: white !important;
   font-size: 18px !important;
+  padding: 5px 15px 5px 10px;
   margin: 5px !important;
   background: $secondary-light !important;
   border: none !important;
