@@ -24,8 +24,8 @@ export class LoginController {
   }
 
   private checkLoginData(req:any): string{
-    // token not set
     if(!req.header('token')) {
+
       // sign and send token back if correct login data
       let token = '';
 
@@ -34,6 +34,7 @@ export class LoginController {
       }
       return token;
     } else {
+      // token is already set so just verify if token is still valid
       let correctToken = this.verify(req.header('token'));
       if(correctToken) {
         return req.header('token');

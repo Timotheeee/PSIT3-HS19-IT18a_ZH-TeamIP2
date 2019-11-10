@@ -67,14 +67,16 @@ export default Vue.extend({
       this.loginService.logout();
     },
     checkIfTokenStillValid() {
-      // check if the token hasn't expired
       this.loginService.checkLoggedIn()
       .then(result => {
-      // token is still valid
       this.loggedin = result;
     })
     .catch(error => {
-
+      // if the token is still set, but the server sent an error back has to mean that
+      // that the token is not valid anymore
+      if(this.loginService.isTokenSet()) {
+        this.makeToast('danger', 'Session expired', "You're session has expired.");
+      }
     })
     }
   },

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { resolve } from 'dns';
 
 
 export class LoginService {
@@ -23,11 +22,15 @@ export class LoginService {
     });
   }
 
+  public isTokenSet(): boolean {
+    return axios.defaults.headers.common['token'] ? true : false;
+  }
+
   public logout() {
     axios.defaults.headers.common['token'] = '';
   }
 
-  public verifyLoginData(name: string,password: string): Promise<boolean> {
+  public verifyLoginData(name: string, password: string): Promise<boolean> {
     return new Promise((resolve,reject) => {
       this.post({name: name, password: password})
       .then(result => {
