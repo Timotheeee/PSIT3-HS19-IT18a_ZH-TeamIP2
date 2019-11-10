@@ -24,6 +24,7 @@ import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import LoginBox from './LoginBox.vue';
 import UploadBox from './UploadBox.vue';
+import { LoginService } from '../services/LoginService';
 
 export default Vue.extend({
   name: 'AdminPage',
@@ -57,6 +58,11 @@ export default Vue.extend({
           variant: variant,
           solid: true
         })
+    }
+  },
+  created() {
+    if(LoginService.checkLoggedIn()) {
+      this.loggedin = true;
     }
   },
   components: {
