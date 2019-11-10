@@ -21,7 +21,12 @@ export default Vue.extend({
     return {
       name: '',
       password: '',
-      loginService: new LoginService(),
+    }
+  },
+  props: {
+    loginService: {
+      type: LoginService,
+      required: true
     }
   },
   methods: {

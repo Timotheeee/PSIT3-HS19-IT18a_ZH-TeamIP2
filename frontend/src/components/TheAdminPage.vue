@@ -4,11 +4,13 @@
       <div class="jumbotron text-center jumbotron-fluid">
         <the-header />
         <login-box v-if="!loggedin"
+        :loginService="this.loginService"
         @loginOK="updateViewToUpload"
         @errorWithLogin="makeToast('warning', loginErrorTitle, loginErrorBody)" />
         <upload-box v-else
         @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
-        @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)" />
+        @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)"
+        @logout="logout" />
         <button
           id="goToWelcomePage"
           @click="goTo('/welcome')"
@@ -24,12 +26,14 @@ import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import LoginBox from './LoginBox.vue';
 import UploadBox from './UploadBox.vue';
+import { LoginService } from '../services/LoginService';
 
 export default Vue.extend({
   name: 'AdminPage',
   data() {
     return {
       loggedin:false,
+      loginService: new LoginService(),
       loginSuccessfulTitle: "Success!",
       loginNotSuccessfulTitle: "Something went wrong!",
       loginSuccessfulBody: "You're logged in.",
@@ -57,6 +61,16 @@ export default Vue.extend({
           variant: variant,
           solid: true
         })
+    },
+    logout() {
+      console.log("event received");
+      this.loggedin = false;
+      this.loginService.logout();
+    }
+  },
+  created() {
+    if(this.loginService.checkLoggedIn()) {
+      this.loggedin = true;
     }
   },
   components: {

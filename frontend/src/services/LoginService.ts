@@ -8,24 +8,68 @@ export class LoginService {
 
   }
 
+  public checkLoggedIn(): boolean {
+    return axios.defaults.headers.common['token'] ? true : false;
+  }
+
+  public logout() {
+    axios.defaults.headers.common['token'] = '';
+  }
+
   verifyLoginData(name: string,password: string): Promise<boolean> {
-    return new Promise((resolve,reject) => {
-      let promise  = axios({
-        method: "post", url: this.url,
-        data: {
-          name:name,
-          password: password
-        }
+    if(!axios.defaults.headers.common['token']) {
+      return new Promise((resolve,reject) => {
+        let promise  = axios({
+          method: "post", url: this.url,
+          data: {
+            name:name,
+            password: password
+          }
+        })
+        promise.then(result => {
+          let correctLogin = false;
+
+
+          if(result.data.token) {
+            correctLogin = true;
+            axios.defaults.headers.common['token'] = result.data.token;
+          }
+          resolve(correctLogin);
+        })
+
+        promise.catch(error => {
+          reject(error);
+        })
       })
-      promise.then(result => {
-        var loggedIn = result.data.response;
-        resolve(loggedIn);
+    } else {
+      return new Promise((resolve,reject) => {
+        let promise  = axios({
+          method: "post", url: this.url,
+          data: {
+            name:name,
+            password: password,
+          }
+        },)
+        promise.then(result => {
+          let correctLogin = false;
+
+          if(result.data.token) {
+            correctLogin = true;
+          } else {
+            axios.defaults.headers.common['token'] = '';
+          }
+
+          resolve(correctLogin);
+        })
+
+        promise.catch(error => {
+          reject(error);
+        })
       })
 
-      promise.catch(error => {
-        reject(error);
-      })
-    })
+    }
+
+
   }
 
 }
