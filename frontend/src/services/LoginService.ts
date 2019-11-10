@@ -12,6 +12,10 @@ export class LoginService {
     return axios.defaults.headers.common['token'] ? true : false;
   }
 
+  public static logout() {
+    axios.defaults.headers.common['token'] = '';
+  }
+
   verifyLoginData(name: string,password: string): Promise<boolean> {
     if(!axios.defaults.headers.common['token']) {
       return new Promise((resolve,reject) => {

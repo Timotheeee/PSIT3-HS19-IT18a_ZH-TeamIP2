@@ -8,7 +8,8 @@
         @errorWithLogin="makeToast('warning', loginErrorTitle, loginErrorBody)" />
         <upload-box v-else
         @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
-        @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)" />
+        @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)"
+        @logout="logout" />
         <button
           id="goToWelcomePage"
           @click="goTo('/welcome')"
@@ -58,6 +59,11 @@ export default Vue.extend({
           variant: variant,
           solid: true
         })
+    },
+    logout() {
+      console.log("event received");
+      this.loggedin = false;
+      LoginService.logout();
     }
   },
   created() {
