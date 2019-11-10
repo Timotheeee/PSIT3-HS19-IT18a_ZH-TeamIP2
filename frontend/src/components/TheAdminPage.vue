@@ -1,8 +1,8 @@
 <template>
   <div class="w-100 min-vh-100 background">
     <div class="container p-0 shadow-lg">
+      <the-header />
       <div class="jumbotron text-center jumbotron-fluid">
-        <the-header />
         <login-box v-if="!loggedin"
         :loginService="this.loginService"
         @loginOK="updateViewToUpload"
@@ -63,15 +63,23 @@ export default Vue.extend({
         })
     },
     logout() {
-      console.log("event received");
       this.loggedin = false;
       this.loginService.logout();
+    },
+    checkIfTokenStillValid() {
+      // check if the token hasn't expired
+      this.loginService.checkLoggedIn()
+      .then(result => {
+      // token is still valid
+      this.loggedin = result;
+    })
+    .catch(error => {
+
+    })
     }
   },
   created() {
-    if(this.loginService.checkLoggedIn()) {
-      this.loggedin = true;
-    }
+    this.checkIfTokenStillValid();
   },
   components: {
     TheHeader,

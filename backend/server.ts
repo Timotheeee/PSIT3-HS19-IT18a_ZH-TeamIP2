@@ -43,21 +43,10 @@ app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (
 app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
   dao.saveGraph(JSON.parse(req.body.graph));
   res.status(200).json({response:"ok"});
-  console.log(req.body);
 });
 
 app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { token: string; }) => void; }; }) {
-  let token = new LoginController().login(req);
-
-  // if login succesful
-  if(token) {
-    res.status(200).json({"token": token});
-  } else {
-    // wrong login
-    res.status(400).json({"token": ''});
-  }
-
-  console.log(req.body);
+  new LoginController().auth(req, res);
 });
 
 app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
