@@ -1,51 +1,41 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Vue from 'vue';
-import QuestionBox from './../../src/components/QuestionBox.vue';
+import QuestionBox from './../../src/components/ChoiceAnswer.vue';
 import answerArrayStub from './AnswerArrayStub';
 import answerStub from './AnswerStub';
 
-describe("questionbox", () => {
+describe("choiceAnswer", () => {
   let wrapper: Wrapper<Vue>;
 
   beforeEach(() => {
     wrapper = shallowMount(QuestionBox, {
       propsData: {
-        question: "Hello?",
-        possibleAnswers: answerArrayStub,
-        lastQuestion: false
+        possibleAnswers: answerArrayStub
       }
     })
   })
 
-  describe("is questionbox rendered correctly", () => {
+  describe("is choice-answer rendered correctly", () => {
 
     it("has to contain a button group", () => {
       expect(wrapper.html().includes("button-group")).toBeTruthy();
     })
 
-    it("has to contain a question", () => {
-      expect(wrapper.contains(".question")).toBeTruthy();
-    })
-
-    it("has to contain a button for atleast one possibleAnswer", () => {
+    it("has to contain a button for at least one possibleAnswer", () => {
       expect(wrapper.contains("button.possible-answer")).toBeTruthy();
     })
 
     test("answers have to disappear if button pressed" , () => {
-      expect(wrapper.contains('button[name="Hello?"]')).toBeTruthy();
+      expect(wrapper.contains('button[value="this is my answer"]')).toBeTruthy();
       // selector .btn only works because only one answer button is on the site
       let button = wrapper.find("button.possible-answer");
       button.trigger("click");
-      expect(wrapper.contains('button[name="Hello?"]')).toBeFalsy();
+      expect(wrapper.contains('button[value="this is my answer"]')).toBeFalsy();
     })
 
-    test("if last question, button for resultpage should appear", () => {
-      wrapper.vm.$props.lastQuestion = true;
-      expect(wrapper.contains("button#goToResultPage")).toBeTruthy();
-    })
   })
 
-  describe("are functions of questionbox called", () => {
+  describe("are functions of choice-answer called", () => {
 
     test("onButtonClick function", () => {
       // declare stub method
@@ -58,7 +48,7 @@ describe("questionbox", () => {
     })
   })
 
-  describe("are events of questionbox emitted", () => {
+  describe("are events of choice-answer emitted", () => {
 
     test("onButtonClick event", () => {
       let button = wrapper.find("button.possible-answer");

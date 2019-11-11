@@ -17,12 +17,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { EventBus } from '../event-bus';
 import QuestionPack from './QuestionPack.vue';
 import {Question} from './../model/Question'; 
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
-import axios from "axios";
 import { GraphFactory } from '../model/GraphFactory';
 import { MyGraphIterator, GraphIterator } from '../model/MyGraphIterator';
 import { Node } from '../model/Node';
@@ -42,34 +42,37 @@ export default Vue.extend({
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), false);
+      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), graphIterator.getCurrentNode().getAnswerType());
 
-        // TODO: ryan duplicate code smell
-        const currentNode:Node = graphIterator.getCurrentNode();
-          question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
-          let i = 1;
-          for(let currentAnswer of graphIterator.answersForCurrentNode()){
-            question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
-          }
-
-        return {
-            questions: [
-              question1
-            ],
-            result: new Result(0, []),
-            pathService: new PathService(),
-            graphIterator: graphIterator
+      // TODO: ryan duplicate code smell
+      const currentNode:Node = graphIterator.getCurrentNode();
+        question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
+        let i = 1;
+        for(let currentAnswer of graphIterator.answersForCurrentNode()){
+          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
         }
+
+      return {
+          questions: [
+            question1
+          ],
+          result: new Result(0, []),
+          pathService: new PathService(),
+          graphIterator: graphIterator,
+          username: ""
+      }
     },
     methods: {
         processQuestion(targetId: string) {
             this.graphIterator.choose(targetId);
             this.questions.push(this.getNextQuestion());
-            this.scrollToBottom();
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.getCurrentNode();
-          const nextQuestion: Question = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getIsFinalNode());
+          const nextQuestion: Question = new Question(
+              currentNode.getId(),
+              this.insertUsernameInQuestion(currentNode.getTitle()),
+              currentNode.getAnswerType());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
@@ -77,13 +80,11 @@ export default Vue.extend({
 
           return nextQuestion;
         },
-        scrollToBottom() {
-            var chatBox = this.$el.querySelector("#chat-box");
-            if(chatBox != null) {
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
+        insertUsernameInQuestion(question: string): string {
+            let result = question.replace("%username%", this.$data.username);
+            return result;
         },
+
         onSubmit(event: Event) {
             // prevents form from reloading the page
             event.preventDefault();
@@ -101,7 +102,20 @@ export default Vue.extend({
             this.result.setScore(this.graphIterator.getPathScore());
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
-        },
+        }
+    },
+    created() {
+      EventBus.$on("setUsername", (username: String) => {
+        this.$data.username = username;
+      });
+    },
+    updated() {
+      var chatBox = this.$el.querySelector("#chat-box");
+      if(chatBox != null) {
+
+        chatBox.scrollTop = chatBox.clientHeight;
+      }
+
     },
     components: {
         TheHeader,

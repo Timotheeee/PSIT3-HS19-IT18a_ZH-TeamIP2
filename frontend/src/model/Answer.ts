@@ -17,6 +17,10 @@ export class Answer {
     return this.answer;
   }
 
+  setAnswer(answer: string) {
+    this.answer = answer;
+  }
+
   getTargetId(): string {
     return this.targetId;
   }
