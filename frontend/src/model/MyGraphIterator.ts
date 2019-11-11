@@ -13,15 +13,15 @@ export interface GraphIterator {
     getPathScore(): number;
 }
 
-export class MyGraphIterator implements GraphIterator {    
+export class MyGraphIterator implements GraphIterator {
     currentNode: Node;
     catalogue: Graph;
     score : number;
 
     constructor(catalogue: Graph) {
         this.catalogue = catalogue;
-        this.currentNode = catalogue.getHead();    
-        this.score = 0;      
+        this.currentNode = catalogue.getHead();
+        this.score = 0;
     }
 
     getCurrentNode(): Node {
@@ -35,8 +35,8 @@ export class MyGraphIterator implements GraphIterator {
             answers.push(new EdgeResult(outgoingEdge.getAnswer(), outgoingEdge.getTarget().getId()));
         }
 
-        return answers;        
-    }    
+        return answers;
+    }
 
     choose(chosenAnswer: string): void {
         // TODO: ryan throw if it doesn't move
@@ -45,7 +45,7 @@ export class MyGraphIterator implements GraphIterator {
         for (let outgoingEdge of this.currentNode.getEdges()) {
             if(outgoingEdge.getTarget().getId() === chosenAnswer){
                 this.currentNode = outgoingEdge.getTarget();
-                this.score += outgoingEdge.getWeight();
+                this.score += outgoingEdge.getScore();
             }
         }
     }
@@ -60,6 +60,6 @@ export class MyGraphIterator implements GraphIterator {
             throw new Error("Cannot calculate score until a finalNode has been reached!");
         }
 
-        return this.score;     
+        return this.score;
     }
 }

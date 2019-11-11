@@ -5,7 +5,7 @@
       <div class="jumbotron text-center jumbotron-fluid">
         <h1 class="display-4">This is your score:</h1>
         <h1 id="score" class="display-4">
-          <b>{{ this.score }}</b>
+          <b>{{ this.result.getScore() }}</b>
         </h1>
 
         <transition-group name="fade" mode="out-in">
