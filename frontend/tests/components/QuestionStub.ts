@@ -4,8 +4,10 @@ import answerStub from './AnswerStub';
 
 export class QuestionStub {
 
-  constructor() {
+  private answerType: string;
 
+  constructor(answerType: string) {
+    this.answerType = answerType;
   }
 
   public getId() : number {
@@ -14,6 +16,10 @@ export class QuestionStub {
 
   public getQuestion() : string {
     return "this is my question";
+  }
+
+  public getAnswerType() : string {
+    return this.answerType;
   }
 
   public getPossibleAnswers() : AnswerStub[] {
@@ -25,6 +31,6 @@ export class QuestionStub {
   }
 }
 
-let questionStub = new QuestionStub();
+let questionStub = new QuestionStub("choice");
 export default questionStub;
 

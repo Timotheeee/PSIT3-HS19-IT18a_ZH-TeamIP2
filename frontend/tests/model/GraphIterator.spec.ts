@@ -2,13 +2,14 @@ import { MyGraphIterator } from "../../src/model/MyGraphIterator";
 import { GraphFactory } from "../../src/model/GraphFactory";
 import { Graph } from "../../src/model/Graph";
 
-describe("MyGraphIterator", () => {        
-    const q1Text = "Do you play video games?";
-    const q2Text = "Do you play League of Legends or World of Warcraft Classic?";
-    const q3Text = "Do you exercise at least twice a week?";
-    const q4Text = "Do you get more than 7 hours of sleep every night?";
+describe("MyGraphIterator", () => {
+    const q1Text = "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I'll just call you Bob";
+    const q2Text = "Do you play video games?";
+    const q3Text = "Ah I see you are a person of culture as well %username%. Do you play League of Legends or World of Warcraft Classic?";
+    const q4Text = "Do you exercise at least twice a week?";
+    const q5Text = "Do you get more than 7 hours of sleep every night?";
 
-    let createMinimumViableGraph = function (): Graph {        
+    let createMinimumViableGraph = function (): Graph {
         let graph = GraphFactory.createTestGraph();
         return graph;
     };
@@ -20,24 +21,28 @@ describe("MyGraphIterator", () => {
 
     describe("test gaming graph: left path", () =>{
         it("should folllow the path and eventually arrive at the final node.", () => {
-            let graphIterator = new MyGraphIterator(createMinimumViableGraph());            
+            let graphIterator = new MyGraphIterator(createMinimumViableGraph());
             expect(graphIterator.getCurrentNode().getTitle()).toBe(q1Text);
 
             graphIterator.choose("q2");
-            
-            expect(graphIterator.getCurrentNode().getTitle()).toBe(q2Text);
-            graphIterator.choose("q4");
 
-            expect(graphIterator.getCurrentNode().getTitle()).toBe(q4Text);    
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q2Text);
+            graphIterator.choose("q3");
+
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q3Text);
+            graphIterator.choose("q5");
+
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q5Text);
             graphIterator.choose("fn1");
-            
-            expect(graphIterator.getCurrentNode().getIsFinalNode()).toBe(true);                        
+
+            expect(graphIterator.getCurrentNode().getIsFinalNode()).toBe(true);
         });
 
         it("should create a very low score", function(){
             let graphIterator = new MyGraphIterator(createMinimumViableGraph());
             graphIterator.choose('q2');
-            graphIterator.choose('q4');
+            graphIterator.choose('q3');
+            graphIterator.choose('q5');
             graphIterator.choose('fn1');
             expect(graphIterator.getPathScore()).toBe(-1510);
         });
@@ -45,27 +50,27 @@ describe("MyGraphIterator", () => {
 
     describe("test non-gaming path: right path", () => {
         it("should follow the path and and eventually arrive at the final node", () => {
-            let graphIterator = new MyGraphIterator(createMinimumViableGraph());            
-            expect(graphIterator.getCurrentNode().getTitle()).toBe(q1Text);
+            let graphIterator = new MyGraphIterator(createMinimumViableGraph());
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q2Text);
 
             graphIterator.choose("q3");
-            
-            expect(graphIterator.getCurrentNode().getTitle()).toBe(q2Text);
+
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q3Text);
             graphIterator.choose("q4"); // TODO: choose that you play league
 
-            expect(graphIterator.getCurrentNode().getTitle()).toBe(q4Text);    
+            expect(graphIterator.getCurrentNode().getTitle()).toBe(q5Text);
             graphIterator.choose("fn1"); // TODO: choose that you don't like to sleep
-            
-            expect(graphIterator.getCurrentNode().getIsFinalNode()).toBe(true);             
+
+            expect(graphIterator.getCurrentNode().getIsFinalNode()).toBe(true);
         });
 
         it("should have a decent score", function(){
             let graphIterator = new MyGraphIterator(createMinimumViableGraph());
+            graphIterator.choose('q2');
             graphIterator.choose('q3');
-            graphIterator.choose('q4'); // TODO: choose no to work out
+            graphIterator.choose('q5');
             graphIterator.choose('fn1');
             expect(graphIterator.getPathScore()).toBe(510);
         });
     });
-
 });

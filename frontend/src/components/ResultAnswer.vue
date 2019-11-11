@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
+  <b-button-group vertical class="speech-bubble possible-answer text-left" v-if="showAnswer">
     <button id="goToResultPage"
             class="possible-answer"
             v-for="answer in possibleAnswers"
@@ -8,8 +7,7 @@
             type="submit"
             :value="answer"
     >{{answer.answer}}</button>
-    </b-button-group>
-  </div>
+  </b-button-group>
 </template>
 
 <script lang="ts">
@@ -27,12 +25,6 @@
       possibleAnswers: {
         type: Array,
         required: true
-      }
-    },
-    methods: {
-      onButtonClick(event: Answer) {
-        this.$emit("answerPicked", event);
-        this.showAnswer = false;
       }
     }
   });
