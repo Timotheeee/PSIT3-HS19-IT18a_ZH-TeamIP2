@@ -24,11 +24,14 @@ describe("uploadbox", () => {
     it("has to contain a button to download the example file", () => {
       expect(wrapper.find("a.btn")).toBeTruthy();
     })
+
+    it("has to contain a button to log out of the admin panel", () => {
+      expect(wrapper.find("button#logout")).toBeTruthy();
+    })
   })
 
   describe("are methods of uploadbox called", () => {
     test("handleFileUpload method", () => {
-
       // declare stub method
       let handleFileUploadStub = jest.fn();
       wrapper.setMethods({ handleFileUpload: handleFileUploadStub()  });
@@ -49,6 +52,16 @@ describe("uploadbox", () => {
       let button = wrapper.find("button#submitFile");
       button.trigger("click");
       expect(submitFileStub.mock.calls.length).toBe(1);
+    })
+
+    test("log out method", () => {
+      // declare stub method
+      let logoutStub = jest.fn();
+      wrapper.setMethods({ logout: logoutStub()  });
+
+      let button = wrapper.find("button#logout");
+      button.trigger("click");
+      expect(logoutStub.mock.calls.length).toBe(1);
     })
   })
 
