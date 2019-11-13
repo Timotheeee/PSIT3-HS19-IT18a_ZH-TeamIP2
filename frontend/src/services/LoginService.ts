@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {AxiosController} from './AxiosController'
 
 export class LoginService {
@@ -10,9 +9,9 @@ export class LoginService {
   }
 
   private async post(userData: any): Promise<String> {
-     const result = await this.axiosController.post(this.url, userData);
-     const token: string = result.data.token;
-     return token;
+    const result = await this.axiosController.post(this.url, userData);
+    const token: string = result.data.token;
+    return token;
   }
 
   public async checkLoggedIn(): Promise<boolean> {
@@ -23,11 +22,11 @@ export class LoginService {
   }
 
   public isTokenSet(): boolean {
-    return axios.defaults.headers.common['token'] ? true : false;
+    return this.axiosController.isHeaderSet('token');
   }
 
   public logout() {
-    axios.defaults.headers.common['token'] = '';
+    this.axiosController.setHeader('token', '');
   }
 
   public async verifyLoginData(name: string, password: string): Promise<boolean> {
@@ -36,7 +35,7 @@ export class LoginService {
     let correctLogin: boolean = false;
     if(result.data.token) {
       correctLogin = true;
-      axios.defaults.headers.common['token'] = result.data.token;
+      this.axiosController.setHeader('token', result.data.token)
     }
     return correctLogin;
   }

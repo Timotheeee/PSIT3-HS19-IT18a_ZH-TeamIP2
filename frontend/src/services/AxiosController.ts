@@ -32,4 +32,12 @@ export class AxiosController {
       });
     })
   }
+
+  public isHeaderSet(header: string): boolean {
+    return axios.defaults.headers.common[header] ? true : false;
+  }
+
+  public setHeader(header: string, value:string) {
+    axios.defaults.headers.common[header] = value;
+  }
 }
