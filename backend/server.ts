@@ -30,28 +30,28 @@ function listen() {
   console.log('app listening at http://' + host + ':' + port);
 }
 
-app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
+app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { graph: any; }) => void; }; }) {
   var graph = dao.getGraph();
   if(graph) {
-    res.status(200).json(graph);
+    res.status(200).json({graph: graph});
   } else {
     throw new Error();
   }
 
 });
 
-app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
   dao.saveGraph(JSON.parse(req.body.graph));
-  res.status(200).json({response:"ok"});
+  res.status(200).json({message:"ok"});
 });
 
 app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { token: string; }) => void; }; }) {
   new LoginController().auth(req, res);
 });
 
-app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
   // for future features
   let path = req.body.userPath;
 
-  res.status(200).json({response:"ok"});
+  res.status(200).json({message:"ok"});
 });

@@ -1,0 +1,35 @@
+import axios from 'axios';
+
+export class AxiosController {
+
+  get(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "get",
+        url: url
+      })
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    })
+  }
+
+  post(url: string, dataToPost: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "post",
+        url: url,
+        data: dataToPost
+      })
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+    })
+  }
+}
