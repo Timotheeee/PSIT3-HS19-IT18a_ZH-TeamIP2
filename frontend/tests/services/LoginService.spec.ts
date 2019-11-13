@@ -13,26 +13,7 @@ describe("loginService", () => {
     moxios.uninstall()
   })
 
-  test("post if token is still valid", async (done) => {
-    moxios.wait(() => {
-      let request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: {
-          token: '1234'
-        }
-      })
-    })
-
-    // no user data needed
-    loginService.post({})
-    .then((result) => {
-      expect(result).toBe('1234');
-      done();
-    })
-  })
-
-  test("post if token is not valid anymore", async (done) => {
+  test("verifyLoginData", async (done) => {
     moxios.wait(() => {
       let request = moxios.requests.mostRecent()
       request.respondWith({
@@ -44,11 +25,68 @@ describe("loginService", () => {
     })
 
     // no user data needed
-    loginService.post({})
+    loginService.verifyLoginData('name', 'password')
     .then((result) => {
     })
     .catch(error => {
       expect(error).toBeTruthy();
+      done();
+    })
+  })
+
+  test("verifyLoginData if token is still valid", async (done) => {
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          token: '1234'
+        }
+      })
+    })
+
+    // no user data needed
+    loginService.verifyLoginData('name', 'passowrd')
+    .then((result) => {
+      expect(result).toBe(true);
+      done();
+    })
+  })
+
+  test("checkLoggedIn if token is still valid", async (done) => {
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          token: '1234'
+        }
+      })
+    })
+
+    // no user data needed
+    loginService.checkLoggedIn()
+    .then((result) => {
+      expect(result).toBe(true);
+      done();
+    })
+  })
+
+  test("checkLoggedIn if token is still valid", async (done) => {
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          token: '1234'
+        }
+      })
+    })
+
+    // no user data needed
+    loginService.checkLoggedIn()
+    .then((result) => {
+      expect(result).toBe(true);
       done();
     })
   })

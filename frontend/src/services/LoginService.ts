@@ -9,16 +9,17 @@ export class LoginService {
     this.axiosController = new AxiosController();
   }
 
-  public async post(userData: any): Promise<String> {
+  private async post(userData: any): Promise<String> {
      const result = await this.axiosController.post(this.url, userData);
      const token: string = result.data.token;
      return token;
   }
 
   public async checkLoggedIn(): Promise<boolean> {
-    // if the token is still valid, the response will send code 200 back and thus we can return true
-    const response = this.axiosController.post(this.url, {});
-    return true;
+    const token = await this.post({});
+
+    // if the token is still valid, then the token is set, else the token is the empty string
+    return token != '';
   }
 
   public isTokenSet(): boolean {
@@ -29,23 +30,15 @@ export class LoginService {
     axios.defaults.headers.common['token'] = '';
   }
 
-  public verifyLoginData(name: string, password: string): Promise<boolean> {
-    return new Promise((resolve,reject) => {
-      this.axiosController.post(this.url, {name: name, password: password})
-      .then(result => {
-        let correctLogin = false;
+  public async verifyLoginData(name: string, password: string): Promise<boolean> {
+    const result = await this.axiosController.post(this.url, {name: name, password: password});
 
-        // login was succesful, set token in header
-        if(result.data.token) {
-          correctLogin = true;
-          axios.defaults.headers.common['token'] = result.data.token;
-        }
-        resolve(correctLogin);
-      })
-      .catch(error => {
-        reject(error);
-      })
-    })
+    let correctLogin: boolean = false;
+    if(result.data.token) {
+      correctLogin = true;
+      axios.defaults.headers.common['token'] = result.data.token;
+    }
+    return correctLogin;
   }
 
 }
