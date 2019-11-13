@@ -26,11 +26,11 @@ describe("header", () => {
     test("goTo Function", () => {
       // declare stub method
       let goToStub = jest.fn();
-      wrapper.setMethods({ goTo: goToStub()  });
+      wrapper.setMethods({ goTo: goToStub  });
 
       let image = wrapper.find("b-img");
       image.trigger("click");
-      expect(goToStub.mock.calls.length).toBe(1);
+      expect(goToStub).toHaveBeenCalled()
     })
   })
 

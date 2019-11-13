@@ -52,10 +52,10 @@ describe("adminsite", () => {
   describe("functions of adminpage", () => {
     test("is updateAnswer method called", () => {
       let updateViewToUploadStub = jest.fn();
-      wrapper.setMethods({ updateAnswer: updateViewToUploadStub()})
+      wrapper.setMethods({ updateViewToUpload: updateViewToUploadStub})
 
       wrapper.find(LoginBox).vm.$emit('loginOK');
-      expect(updateViewToUploadStub.mock.calls.length).toBe(1);
+      expect(updateViewToUploadStub).toHaveBeenCalled()
     })
 
     test("is logout method called ", () => {
@@ -75,7 +75,7 @@ describe("adminsite", () => {
 
       let button = wrapper.find('button#goToWelcomePage');
       button.trigger('click');
-      expect(goToStub.mock.calls.length).toBe(1);
+      expect(goToStub).toHaveBeenCalled();
     })
 
     describe("makeToast", () => {
@@ -90,7 +90,7 @@ describe("adminsite", () => {
 
       test("is a toast made when there's an error with the login", () => {
           wrapper.find(LoginBox).vm.$emit('errorWithLogin');
-          expect(makeToastStub.mock.calls.length).toBe(1);
+          expect(makeToastStub).toHaveBeenCalled();
       })
 
       test ("is a toast made when there was a succesful file upload", () => {
@@ -101,7 +101,7 @@ describe("adminsite", () => {
         })
 
         wrapper.find(UploadBox).vm.$emit('successfullUpload');
-        expect(makeToastStub.mock.calls.length).toBe(1);
+        expect(makeToastStub).toHaveBeenCalled();
       })
 
       test ("is a toast made when there was an unsuccesful file upload", () => {
@@ -112,7 +112,7 @@ describe("adminsite", () => {
         })
 
         wrapper.find(UploadBox).vm.$emit('errorWithFile');
-        expect(makeToastStub.mock.calls.length).toBe(1);
+        expect(makeToastStub).toHaveBeenCalled();
       })
     })
   })

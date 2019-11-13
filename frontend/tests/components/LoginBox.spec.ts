@@ -27,11 +27,11 @@ describe("loginBox", () => {
   describe("are functions of loginbox called", () => {
     test("submitUserdata function", () => {
       let submitUserdataStub = jest.fn();
-      wrapper.setMethods({ submitUserdata: submitUserdataStub()  });
+      wrapper.setMethods({ submitUserdata: submitUserdataStub  });
 
       let button = wrapper.find("button#userDataSubmit");
       button.trigger("click");
-      expect(submitUserdataStub.mock.calls.length).toBe(1);
+      expect(submitUserdataStub).toHaveBeenCalled()
     })
   })
 })
