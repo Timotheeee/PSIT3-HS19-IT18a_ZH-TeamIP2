@@ -1,19 +1,62 @@
 import {GraphService} from './../../src/services/GraphService';
-import mockAxios from "axios";
-
-
-get: jest.fn(() => Promise.resolve({ data: {} }));
+import {GraphFactory} from './../../src/model/GraphFactory';
+import {Graph} from './../../src/model/Graph';
+import moxios from 'moxios';
 
 describe("graphService", () => {
+  let testGraph: Graph;
+  let graphService: GraphService;
+  let graphString: string;
 
-  test ("getGraphIterator should return an object of graphIterator", () => {
+  beforeEach(() => {
+    graphService = new GraphService();
+    graphString = GraphFactory.STATIC_JSON_STR_1;
+    testGraph = GraphFactory.createTestGraph();
+    moxios.install();
+  })
 
-    // setup
-    mockAxios.get.mockImplementationOnce(() =>
-    Promise.resolve({
-      data: { results: ["cat.jpg"] }
+  afterEach(function () {
+    moxios.uninstall()
+  })
+
+  test("getGraph function", async (done) => {
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          graph: graphString
+        }
+      })
     })
-  );
+
+    graphService.get()
+    .then((result) => {
+      expect(result).toStrictEqual(testGraph);
+        done();
+    })
+
+  })
+
+  test("post function", async (done) => {
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {
+          message: 'ok'
+        }
+      })
+    })
+
+    const graphJson = JSON.parse(graphString);
+    graphService.post(graphJson)
+    .then((result) => {
+      expect(result).toStrictEqual('ok');
+      done();
+    })
+
   })
 
 })

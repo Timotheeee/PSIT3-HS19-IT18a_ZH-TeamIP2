@@ -19,7 +19,7 @@
 import Vue from 'vue';
 import { EventBus } from '../event-bus';
 import QuestionPack from './QuestionPack.vue';
-import {Question} from './../model/Question'; 
+import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
@@ -33,9 +33,9 @@ export default Vue.extend({
     data() {
       let graphService = new GraphService();
       let graphIterator: MyGraphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
-      graphService.getGraphIterator()
+      graphService.get()
       .then(result => {
-        graphIterator = result;
+        graphIterator = new MyGraphIterator(result);
       })
       .catch(error => {
         alert('Please upload a file first in the adminpanel');

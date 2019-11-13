@@ -1,25 +1,24 @@
 import axios from 'axios';
-
+import {AxiosController} from './AxiosController'
 
 export class LoginService {
   private readonly url: string = '/login';
+  private readonly axiosController: AxiosController;
 
   constructor() {
-
+    this.axiosController = new AxiosController();
   }
 
-  public checkLoggedIn(): Promise<boolean> {
-    // check if token is still valid
-    return new Promise((resolve,reject) => {
-      this.post({})
-    .then(result => {
-      // token still verified
-      resolve(true);
-    })
-    .catch(error => {
-      reject(error)
-    })
-    });
+  public async post(userData: any): Promise<String> {
+     const result = await this.axiosController.post(this.url, userData);
+     const token: string = result.data.token;
+     return token;
+  }
+
+  public async checkLoggedIn(): Promise<boolean> {
+    // if the token is still valid, the response will send code 200 back and thus we can return true
+    const response = this.axiosController.post(this.url, {});
+    return true;
   }
 
   public isTokenSet(): boolean {
@@ -32,7 +31,7 @@ export class LoginService {
 
   public verifyLoginData(name: string, password: string): Promise<boolean> {
     return new Promise((resolve,reject) => {
-      this.post({name: name, password: password})
+      this.axiosController.post(this.url, {name: name, password: password})
       .then(result => {
         let correctLogin = false;
 
@@ -46,13 +45,6 @@ export class LoginService {
       .catch(error => {
         reject(error);
       })
-    })
-  }
-
-  post(data: any): Promise<any> {
-    return axios({
-      method: "post", url: this.url,
-      data: data
     })
   }
 
