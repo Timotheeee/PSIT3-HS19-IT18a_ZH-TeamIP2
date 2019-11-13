@@ -40,11 +40,12 @@ export default Vue.extend({
       var reader = new FileReader();
       reader.readAsText(this.file, "UTF-8");
       reader.onload = evt => {
-        this.graphService.postGraph(evt.target!.result)
-        .then(res => {
+        const graphString: string = evt.target!.result!.toString();
+        this.graphService.post(graphString)
+        .then(result => {
           this.$emit("successfullUpload");
         })
-        .catch(rej => {
+        .catch(error => {
           this.$emit("errorWithFile");
         })
       }

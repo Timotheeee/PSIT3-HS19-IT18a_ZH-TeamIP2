@@ -50,8 +50,7 @@ describe("graphService", () => {
       })
     })
 
-    const graphJson = JSON.parse(graphString);
-    graphService.post(graphJson)
+    graphService.post(graphString)
     .then((result) => {
       expect(result).toStrictEqual('ok');
       done();

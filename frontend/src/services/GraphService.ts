@@ -10,7 +10,7 @@ export class GraphService {
     this.axiosSerivce = new AxiosController();
   }
 
-  public async post(graphToPost: JSON): Promise<string> {
+  public async post(graphToPost: string): Promise<string> {
     const result = await this.axiosSerivce.post(this.url, {graph: graphToPost});
     const status: string = result.data.message;
     return status;
