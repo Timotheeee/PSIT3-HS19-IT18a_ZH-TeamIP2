@@ -31,4 +31,24 @@ describe("welcomesite", () => {
       expect(wrapper.contains('ul#teammembers')).toBeTruthy();
     })
   })
+
+  describe("are functions of the welcomesite called", () => {
+    let goToStub: jest.Mock<any,any>;
+
+    beforeEach(() => {
+      goToStub = jest.fn();
+      wrapper.setMethods({goTo: goToStub});
+    })
+    test ("go to adminpage button", () => {
+      let button = wrapper.find("button#goToQuestionnaire");
+      button.trigger('click');
+      expect(goToStub).toHaveBeenCalled();
+    })
+
+    test ("go to questionnaire button", () => {
+      let button = wrapper.find("button#goToAdminPage");
+      button.trigger('click');
+      expect(goToStub).toHaveBeenCalled();
+    })
+  })
 })
