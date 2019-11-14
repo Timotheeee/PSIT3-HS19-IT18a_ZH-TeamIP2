@@ -11,6 +11,9 @@
         @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
         @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)"
         @logout="logout" />
+
+        <graph-visualizer v-if="loggedin"></graph-visualizer>
+
         <button
           id="goToWelcomePage"
           @click="goTo('/welcome')"
@@ -26,6 +29,7 @@ import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import LoginBox from './LoginBox.vue';
 import UploadBox from './UploadBox.vue';
+import GraphVisualizer from './GraphVisualizer.vue';
 import { LoginService } from '../services/LoginService';
 
 export default Vue.extend({
@@ -86,7 +90,8 @@ export default Vue.extend({
   components: {
     TheHeader,
     LoginBox,
-    UploadBox
+    UploadBox,
+    GraphVisualizer
   }
 });
 </script>

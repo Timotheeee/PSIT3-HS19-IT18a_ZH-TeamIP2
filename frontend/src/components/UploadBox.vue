@@ -6,7 +6,6 @@
       </label>
       <button id="submitFile" type="button" class="btn btn-secondary btn-lg" @click="submitFile">Submit</button><br>
       <button id="logout" type="button" class="btn btn-secondary btn-lg" @click="logout">Logout</button><br>
-      <a href="example.json"><button type="button" class="btn btn-secondary btn-lg">Example file format</button></a><br>
     </div>
   </div>
 </template>
