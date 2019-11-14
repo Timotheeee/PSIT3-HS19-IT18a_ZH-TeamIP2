@@ -19,7 +19,7 @@
 import Vue from 'vue';
 import { EventBus } from '../event-bus';
 import QuestionPack from './QuestionPack.vue';
-import {Question} from './../model/Question'; 
+import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
@@ -33,9 +33,9 @@ export default Vue.extend({
     data() {
       let graphService = new GraphService();
       let graphIterator: MyGraphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
-      graphService.getGraphIterator()
+      graphService.get()
       .then(result => {
-        graphIterator = result;
+        graphIterator = new MyGraphIterator(result);
       })
       .catch(error => {
         alert('Please upload a file first in the adminpanel');
@@ -89,14 +89,14 @@ export default Vue.extend({
             // prevents form from reloading the page
             event.preventDefault();
 
-            // TODO: Get answers from user
-            this.pathService.postPath([1])
+           /* // TODO: Get answers from user
+            this.pathService.post([1,2,3,4])
             .then(result => {
               this.result = result;
             })
             .catch(error => {
               alert('error while sending the user path');
-            })
+            })*/
 
             console.log(this.graphIterator.getPathScore());
             this.result.setScore(this.graphIterator.getPathScore());
