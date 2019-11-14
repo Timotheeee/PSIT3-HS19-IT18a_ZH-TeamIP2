@@ -21,4 +21,9 @@ export class GraphService {
     const graph: Graph = GraphFactory.createGraphFromJSON(result.data.graph);
     return graph;
   }
+
+  public async getJSON(): Promise<Graph> {
+    const result = await this.axiosSerivce.get(this.url);
+    return result.data.graph;
+  }
 }

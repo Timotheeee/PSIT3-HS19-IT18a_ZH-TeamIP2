@@ -40,9 +40,9 @@ export default Vue.extend({
     downloadGraph() {
       var this2 = this;
       this.graphService
-        .getGraph()
+        .getJSON()
         .then(res => {
-          var data = JSON.parse(JSON.stringify(res.data));
+          var data = JSON.parse(JSON.stringify(res));
 
           for (var i = 0; i < data.nodes.length; i++) {
             data.nodes[i].answers = [];
