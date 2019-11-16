@@ -23,16 +23,16 @@ import {Question} from './../model/Question'; 
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
-import { GraphFactory } from '../model/GraphFactory';
-import { MyGraphIterator, GraphIterator } from '../model/MyGraphIterator';
-import { Node } from '../model/Node';
+import { GraphFactory } from '../model/Graph/GraphFactory';
+import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/MyGraphIterator';
+import { Node } from '../model/Graph/Node';
 import { PathService } from '../services/PathService'
 import { GraphService } from '../services/GraphService'
 
 export default Vue.extend({
     data() {
       let graphService = new GraphService();
-      let graphIterator: MyGraphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
+      let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, GraphFactory.createTestGraph());
       graphService.getGraphIterator()
       .then(result => {
         graphIterator = result;
@@ -42,14 +42,14 @@ export default Vue.extend({
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), graphIterator.getCurrentNode().getAnswerType());
+      var question1 = new Question('1', graphIterator.currentNode.getTitle(), graphIterator.currentNode.getAnswerType());
 
       // TODO: ryan duplicate code smell
-      const currentNode:Node = graphIterator.getCurrentNode();
+      const currentNode:Node = graphIterator.currentNode;
         question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
         let i = 1;
         for(let currentAnswer of graphIterator.answersForCurrentNode()){
-          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
+          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
         }
 
       return {
@@ -68,14 +68,14 @@ export default Vue.extend({
             this.questions.push(this.getNextQuestion());
         },
         getNextQuestion(): Question {
-          const currentNode:Node = this.graphIterator.getCurrentNode();
+          const currentNode:Node = this.graphIterator.currentNode;
           const nextQuestion: Question = new Question(
               currentNode.getId(),
               this.insertUsernameInQuestion(currentNode.getTitle()),
               currentNode.getAnswerType());
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
-            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
+            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
           }
 
           return nextQuestion;
@@ -98,8 +98,9 @@ export default Vue.extend({
               alert('error while sending the user path');
             })
 
-            console.log(this.graphIterator.getPathScore());
-            this.result.setScore(this.graphIterator.getPathScore());
+            //this.result.setScore(this.graphIterator.getPathScore());
+            // TODO: ryan write this code -> use new classes for recommendations etc.
+            this.result.setScore(404);
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
         }

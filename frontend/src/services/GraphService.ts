@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {GraphIterator, MyGraphIterator} from './../model/MyGraphIterator';
+import {GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/MyGraphIterator';
+import { create } from 'istanbul-reports';
 
 export class GraphService {
   readonly url: string = '/graph';
@@ -23,7 +24,6 @@ export class GraphService {
         reject(error);
       });
     })
-
   }
 
   getGraphIterator(): Promise<any> {
@@ -31,7 +31,7 @@ export class GraphService {
       let promise = this.getGraph();
 
       promise.then(result => {
-        let graphIterator = new MyGraphIterator(result);
+        let graphIterator = createIterator(GraphIterator, result);
         resolve(graphIterator);
       })
 

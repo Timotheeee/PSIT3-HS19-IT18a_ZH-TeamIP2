@@ -46,8 +46,11 @@ export class Edge {
   }
 
   getWeight() : number {
-    // TODO: ryan populate this
-    return 0;
+    return this.score;
+  }
+
+  public getHash(): string {
+    return '';
   }
 }
 
@@ -61,11 +64,19 @@ export interface EdgeJSON {
 }
 
 export class EdgeResult {
-  public answer:string;
-  public targetId:string;
+  private readonly _answer:string;
+  private readonly _edgeId:string;
 
-  constructor(answer:string, targetId: string) {
-    this.answer = answer;
-    this.targetId = targetId;
+  constructor(answer:string, edgeId: string) {
+    this._answer = answer;
+    this._edgeId = edgeId;
+  }
+
+  get answer(): string {
+    return this._answer;
+  }
+
+  get edgeId(): string {
+    return this._edgeId;
   }
 }

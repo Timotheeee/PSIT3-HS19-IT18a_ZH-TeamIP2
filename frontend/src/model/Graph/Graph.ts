@@ -64,7 +64,7 @@ export class Graph {
     this.headNode = headNode;
   }
 
-  getHead() : Node {
+  getHeadNode() : Node {
     if(this.headNode == null) {
       throw new Error('Error while retrieving headNode: it hasn\'t been set yet');
     }
