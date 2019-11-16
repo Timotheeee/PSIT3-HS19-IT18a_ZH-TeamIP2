@@ -1,22 +1,22 @@
-import { RecommendationsGeneratorInterface , createRecommendationsGenerator} from '../../src/model/Graph/Recommendations/RecommendationsGenerator';
-import { AnswerBasedRecommendationsGenerator } from '../../src/model/Graph/Recommendations/AnswerBasedRecommendationsGenerator';
-import { GraphIterator } from '../../src/model/Graph/GraphIterator';
-import { GraphFactory } from '../../src/model/Graph/GraphFactory';
-import { Graph } from '../../src/model/Graph/Graph';
+import { RecommendationsGenerator , createRecommendationsGenerator} from "../../src/model/RecommendationsGenerator";
+import { AnswerBasedRecommendationsGenerator } from "../../src/model/AnswerBasedRecommendationsGenerator";
+import { MyGraphIterator } from "../../src/model/MyGraphIterator";
+import { GraphFactory } from "../../src/model/GraphFactory";
+import { Graph } from "../../src/model/Graph";
 
-describe('AnswerBasedRecommendationsGenerator', () => {
+describe("AnswerBasedRecommendationsGenerator", () => {
 
   let createMinimumViableGraph = function (): Graph {
       let graph = GraphFactory.createTestGraph();
       return graph;
   };
 
-  describe('test AnswerBasedRecommendationsGenerator creation', () => {
-    test('should create an AnswerBasedRecommendationsGenerator object', () => {
+  describe("test AnswerBasedRecommendationsGenerator creation", () => {
+    test("should create an AnswerBasedRecommendationsGenerator object", () => {
       //let gi: MyGraphIterator = new MyGraphIterator(new Graph());
-      /*let graphIterator = new GraphIterator(createMinimumViableGraph());
-      let answerBasedRecGen: AnswerBasedRecommendationsGenerator = createRecommendationsGenerator(AnswerBasedRecommendationsGenerator, '', graphIterator);
-      expect(answerBasedRecGen).toBeInstanceOf(AnswerBasedRecommendationsGenerator);/*
+      let graphIterator = new MyGraphIterator(createMinimumViableGraph());
+      let answerBasedRecGen: AnswerBasedRecommendationsGenerator = createRecommendationsGenerator(AnswerBasedRecommendationsGenerator, "", graphIterator);
+      expect(answerBasedRecGen).toBeInstanceOf(AnswerBasedRecommendationsGenerator);
     });
   });
 
