@@ -2,10 +2,10 @@
   <div class="container">
     <div class="large-12 medium-12 small-12 cell">
       <label>
-        <input id="name" ref="name" type="text" placeholder="name" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitPass"/>
-        <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitPass"/>
+        <input id="name" ref="name" type="text" placeholder="name" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitUserdata"/>
+        <input id="password" ref="password" type="password" placeholder="password" class="btn btn-secondary btn-lg" v-on:keyup.enter="submitUserdata"/>
       </label>
-      <button id="passwordsubmit" type="button" class="btn btn-secondary btn-lg" @click="submitPass">Submit</button><br>
+      <button id="userDataSubmit" type="button" class="btn btn-secondary btn-lg" @click="submitUserdata">Submit</button><br>
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    submitPass(): void {
+    submitUserdata(): void {
       let inputElement: HTMLInputElement = <HTMLInputElement>this.$refs.password;
       let inputElementname: HTMLInputElement = <HTMLInputElement>this.$refs.name;
       if(inputElement.value) {

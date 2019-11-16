@@ -41,11 +41,11 @@ describe("inputAnswer", () => {
     test("onButtonClick function", () => {
       // declare stub method
       let onButtonClickStub = jest.fn();
-      wrapper.setMethods({ onButtonClick: onButtonClickStub()  });
+      wrapper.setMethods({ onButtonClick: onButtonClickStub  });
 
       let button = wrapper.find("button.possible-answer");
       button.trigger("click");
-      expect(onButtonClickStub.mock.calls.length).toBe(1);
+      expect(onButtonClickStub).toHaveBeenCalled()
     })
   })
 
@@ -54,7 +54,7 @@ describe("inputAnswer", () => {
     test("onButtonClick event", () => {
       let button = wrapper.find("button.possible-answer");
       button.trigger("click");
-      expect(wrapper.emitted('answerPicked').length).toBe(1);
+      expect(wrapper.emitted().answerPicked).toBeTruthy();
 
       expect(wrapper.emitted('answerPicked')[0][0]).toStrictEqual(answerStub);
     })

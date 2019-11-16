@@ -44,14 +44,6 @@ export class Edge {
   getAnswer() : string {
     return this.answer;
   }
-
-  getWeight() : number {
-    return this.score;
-  }
-
-  public getHash(): string {
-    return '';
-  }
 }
 
 export interface EdgeJSON {

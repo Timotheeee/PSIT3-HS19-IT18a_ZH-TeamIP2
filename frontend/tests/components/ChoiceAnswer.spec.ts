@@ -31,6 +31,7 @@ describe("choiceAnswer", () => {
       let button = wrapper.find("button.possible-answer");
       button.trigger("click");
       expect(wrapper.contains('button[value="this is my answer"]')).toBeFalsy();
+      expect(wrapper.contains('b-button-group.possible-answer')).toBeFalsy();
     })
 
   })
@@ -46,6 +47,26 @@ describe("choiceAnswer", () => {
       button.trigger("click");
       expect(onButtonClickStub.mock.calls.length).toBe(1);
     })
+
+
+    test("select Answer", () => {
+      // declare stub method
+      let selectAnswerStub = jest.fn();
+      wrapper.setMethods({ selectAnswer: selectAnswerStub  });
+
+      let button = wrapper.find("button.possible-answer");
+
+      // test only the most important keyevents for our application
+      button.trigger("keyup.down");
+      expect(selectAnswerStub).toHaveBeenCalled();
+      button.trigger("keyup.up");
+      expect(selectAnswerStub).toHaveBeenCalledTimes(2);
+      button.trigger("keyup.right");
+      expect(selectAnswerStub).toHaveBeenCalledTimes(3);
+      button.trigger("keyup.enter");
+      expect(selectAnswerStub).toHaveBeenCalledTimes(4);
+
+    })
   })
 
   describe("are events of choice-answer emitted", () => {
@@ -53,10 +74,11 @@ describe("choiceAnswer", () => {
     test("onButtonClick event", () => {
       let button = wrapper.find("button.possible-answer");
       button.trigger("click");
-      expect(wrapper.emitted('answerPicked').length).toBe(1);
-
+      expect(wrapper.emitted().answerPicked).toBeTruthy();
       expect(wrapper.emitted('answerPicked')[0][0]).toStrictEqual(answerStub);
     })
+
+    
   })
 })
 

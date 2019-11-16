@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import {DBController} from "./controllers/DBController"
-import { AnyNaptrRecord } from "dns";
-import {Result} from "../frontend/src/model/Result";
-import { LoginController } from "./controllers/LoginController";
+import {DBController} from './controllers/DBController'
+import { AnyNaptrRecord } from 'dns';
+import {Result} from '../frontend/src/model/Result';
+import { LoginController } from './controllers/LoginController';
 
 const express = require('express'),
   bodyParser = require('body-parser'),
@@ -11,9 +11,7 @@ const express = require('express'),
   mysql = require('mysql'),
   fs = require('fs');
 
-
-var dao = new DBController();
-
+const dbController = new DBController();
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '//..//frontend//public'));
@@ -21,37 +19,32 @@ app.use(express.static(__dirname + '//..//frontend//public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var server = app.listen(process.env.PORT || 3000, listen);
+const server = app.listen(process.env.PORT || 3000, listen);
 
 // This call back just tells us that the server has started
 function listen() {
-  var host = server.address().address;
-  var port = server.address().port;
+  const host = server.address().address;
+  const port = server.address().port;
   console.log('app listening at http://' + host + ':' + port);
 }
 
-app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { db: any; }) => void; }; }) {
-  var graph = dao.getGraph();
-  if(graph) {
-    res.status(200).json(graph);
-  } else {
-    throw new Error();
-  }
-
+app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: string) => void; }; }) {
+  const graph = dbController.getLoadedFile();
+  res.status(200).json(graph);
 });
 
-app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
-  dao.saveGraph(JSON.parse(req.body.graph));
-  res.status(200).json({response:"ok"});
+app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
+  dbController.save2File(req.body.graph);
+  res.status(200).json({message:"ok"});
 });
 
 app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { token: string; }) => void; }; }) {
   new LoginController().auth(req, res);
 });
 
-app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { response: string; }) => void; }; }) {
+app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
   // for future features
   let path = req.body.userPath;
 
-  res.status(200).json({response:"ok"});
+  res.status(200).json({message:"ok"});
 });

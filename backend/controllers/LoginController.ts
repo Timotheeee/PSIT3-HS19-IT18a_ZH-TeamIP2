@@ -2,9 +2,9 @@ var jwt = require('jsonwebtoken');
 var fs = require('fs');
 
 export class LoginController {
-  private readonly username:string = "psit";
-  private readonly password:string = "psit";
-  private readonly privateKey = fs.readFileSync('secret.key');
+  private readonly username:string = fs.readFileSync('.env',"utf8").split("\n")[1];
+  private readonly password:string = fs.readFileSync('.env',"utf8").split("\n")[2];
+  private readonly privateKey = fs.readFileSync('.env',"utf8").split("\n")[0];
 
 
   constructor() {

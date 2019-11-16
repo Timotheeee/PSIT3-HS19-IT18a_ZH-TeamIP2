@@ -14,6 +14,11 @@ export class GraphFactory {
     return this.createGraphFromJSON(GraphFactory.STATIC_JSON_STR_1);
   }
 
+  static createGraphFromJSON(data: string): Graph {
+    let graph: GraphJSON = JSON.parse(data);
+    return (this.createGraph(graph));
+  }
+
   /*
    * Creates and returns a Graph object from the given JSONGraph.
    */
@@ -26,6 +31,8 @@ export class GraphFactory {
 
     return graph;
   }
+
+
 
   private static setHeadNode(graph: Graph): void {
     let headNode:Node|null = null;
@@ -48,11 +55,6 @@ export class GraphFactory {
     }
 
     graph.setHeadNode(headNode);
-  }
-
-  static createGraphFromJSON(data: string): Graph {
-    let graph: GraphJSON = JSON.parse(data);
-    return (this.createGraph(graph));
   }
 
   private static importNodes(graph: Graph, nodes: NodeJSON[]) {

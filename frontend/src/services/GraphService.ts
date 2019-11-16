@@ -1,58 +1,36 @@
-import axios from 'axios';
-import {GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/MyGraphIterator';
-import { create } from 'istanbul-reports';
+import {AxiosController} from './AxiosController'
+import { Graph } from '../model/Graph/Graph';
+import { GraphFactory } from '../model/Graph/GraphFactory';
 
 export class GraphService {
   readonly url: string = '/graph';
+  readonly axiosSerivce: AxiosController;
+
   constructor() {
-
+    this.axiosSerivce = new AxiosController();
   }
 
-  postGraph(graph: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "post",
-        url: this.url,
-        data: {
-          graph: graph
-        }
-      })
-      .then(result => {
-        resolve(result);
-      })
-      .catch(error => {
-        reject(error);
-      });
-    })
+  public async post(graphToPost: string): Promise<string> {
+    const result = await this.axiosSerivce.post(this.url, {graph: graphToPost});
+    const status: string = result.data.message;
+    return status;
   }
 
-  getGraphIterator(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let promise = this.getGraph();
+  public async get(): Promise<Graph> {
+    let json = await this.axiosSerivce.get(this.url, 'text');
 
-      promise.then(result => {
-        let graphIterator = createIterator(GraphIterator, result);
-        resolve(graphIterator);
-      })
+    console.log('inside of GraphService().get()');    
 
-      promise.catch(error => {
-        reject(error);
-      })
-    })
+    const jsonStr = JSON.stringify(json.data);
+    console.log(jsonStr);
+    //json = JSON.stringify(json.data);
+
+    const graph: Graph = GraphFactory.createGraphFromJSON(jsonStr);
+    return graph;
   }
 
-  private getGraph(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "get",
-        url: this.url,
-      })
-      .then(result => {
-        resolve(result);
-      })
-      .catch(error => {
-        reject(error);
-      });
-    })
+  public async getJSON(): Promise<Graph> {
+    const result = await this.axiosSerivce.get(this.url, 'text');
+    return result.data.graph;
   }
 }

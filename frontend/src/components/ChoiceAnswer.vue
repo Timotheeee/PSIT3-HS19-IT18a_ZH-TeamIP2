@@ -42,7 +42,7 @@
           this.currentItem++;
         }
         else if((e.key == "Enter" || e.key == "ArrowRight") && this.currentItem != 0) {
-          var answer = this.possibleAnswers[0];
+          var answer = this.possibleAnswers[this.currentItem-1];
           this.onButtonClick(answer as Answer);
         }
       }

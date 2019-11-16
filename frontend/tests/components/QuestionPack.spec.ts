@@ -49,7 +49,7 @@ describe("questionpack", () => {
       let updateAnswerStub = jest.fn();
       wrapper.setMethods({ updateAnswer: updateAnswerStub})
       wrapper.find(ChoiceAnswer).vm.$emit('answerPicked');
-      expect(updateAnswerStub.mock.calls.length).toBe(1);
+      expect(updateAnswerStub).toHaveBeenCalled()
     })
   })
 
@@ -57,7 +57,7 @@ describe("questionpack", () => {
     test("if updateAnswer called, is processNextQuestion emitted", () =>  {
       // after answerPicked event updateAnswer is called
       wrapper.find(ChoiceAnswer).vm.$emit('answerPicked', answerStub);
-      expect(wrapper.emitted('processNextQuestion').length).toBe(1);
+      expect(wrapper.emitted().processNextQuestion).toBeTruthy();
     })
   })
 })

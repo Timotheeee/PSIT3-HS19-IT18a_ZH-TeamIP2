@@ -1,6 +1,5 @@
 import {Node, NodeJSON} from './Node';
 import {Edge, EdgeJSON} from './Edge';
-import { GraphFactory } from './GraphFactory';
 
 export class Graph {
   private nodes: Node[];
