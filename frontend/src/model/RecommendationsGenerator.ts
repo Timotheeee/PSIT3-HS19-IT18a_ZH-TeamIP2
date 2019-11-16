@@ -1,10 +1,16 @@
-import { GraphIterator } from "./MyGraphIterator";
+import { MyGraphIterator } from "./MyGraphIterator";
+
+export interface RecommendationsGeneratorConstructor {
+  new (json: string, graphIterator: MyGraphIterator): RecommendationsGenerator;
+}
 
 export interface RecommendationsGenerator {
   json: string;
-  gi: GraphIterator;
-
-  constructor(json: string, gi : GraphIterator): void;
+  graphIterator: MyGraphIterator;
 
   generate(): string[];
+}
+
+export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string, graphIterator: MyGraphIterator): RecommendationsGenerator {
+    return new ctor(json, graphIterator);
 }
