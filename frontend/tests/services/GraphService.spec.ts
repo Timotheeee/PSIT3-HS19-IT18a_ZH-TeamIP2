@@ -1,6 +1,6 @@
 import {GraphService} from './../../src/services/GraphService';
-import {GraphFactory} from './../../src/model/GraphFactory';
-import {Graph} from './../../src/model/Graph';
+import {GraphFactory} from './../../src/model/Graph/GraphFactory';
+import {Graph} from './../../src/model/Graph/Graph';
 import moxios from 'moxios';
 
 describe("graphService", () => {
@@ -22,10 +22,11 @@ describe("graphService", () => {
   test("getGraph function", async (done) => {
     moxios.wait(() => {
       let request = moxios.requests.mostRecent()
-      request.respondWith({
+      request.respondWith({        
         status: 200,
         response: {
-          graph: graphString
+          success: true,
+          data: graphString
         }
       })
     })
@@ -45,14 +46,15 @@ describe("graphService", () => {
       request.respondWith({
         status: 200,
         response: {
-          message: 'ok'
+          success: true,
+          data: ''
         }
       })
     })
 
     graphService.post(graphString)
     .then((result) => {
-      expect(result).toStrictEqual('ok');
+      expect(result).toBe(true);
       done();
     })
 
