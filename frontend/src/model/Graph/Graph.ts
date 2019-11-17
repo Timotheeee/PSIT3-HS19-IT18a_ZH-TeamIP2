@@ -1,78 +1,64 @@
-import {Node, NodeJSON} from './Node';
-import {Edge, EdgeJSON} from './Edge';
+import {Node, NodeJSON, AnswerType} from './Node';
+import {Edge, EdgeJSON } from './Edge';
 
 export class Graph {
-  private nodes: Node[];
-  private headNode: Node|null = null;
+  private _nodes: Node[];
+  private _headNode: Node|null = null;
 
   constructor() {
-    this.nodes = [];
+    this._nodes = [];
   }
 
-  /*
-   * Adds a new node to the graph. The newly added or existing node is returned.
+  get nodes(): Node[] { return this._nodes }
+
+  get headNode() { return this.headNode }
+  set headNode(headNode: Node) { this._headNode = headNode }
+
+  /**
+   * Adds a node if a node with the same nodeId does not yet exist.
+   * The passed object will be cloned before it is added to the collection.
+   * @param node2Add 
    */
-  addNode(id: string,  title: string, answerType: string, isHead: boolean = false, isFinalNode: boolean = false) {
-    let node: Node|null = this.findNode(id);
-    if (node == null) {
-      node = new Node();
-      node.setId(id);
-      node.setTitle(title);
-      node.setAnswerType(answerType);
-      node.setIsFinalNode(isFinalNode);
-      node.setIsHead(isHead);
-      this.nodes.push(node);
+  addNode(node2Add: Node): void {
+    if (this.findNode(node2Add.id) === null) {
+      this.nodes.push(node2Add);
+    } else {
+      throw new Error(`error while adding Node: a node with the id: ${node2Add.id} already exists!`);
     }
-    return node;
   }
 
-  /*
-   * Adds an edge between two existing nodes.
+  /**
+   * Adds an edge to the graph if it's source node and target node do exist.
+   * The passed edge object will be cloned before it is added to the collection.
+   * @param edge2Add 
    */
-  addEdge(source: string, target: string, answer: string = "", score: number = 0) {
-    let sourceNode: Node|null = this.findNode(source);
+  addEdge(edge2Add: Edge): void {
+    /* check if the source node exists */
+    let sourceNode: Node|null = this.findNode(edge2Add.source.id);
     if (sourceNode == null) {
-      throw new Error("Source node not found.");
+      throw new Error(`error while adding edge: ${edge2Add.id} source: ${edge2Add.source.id} does not exist!`);
     }
-    let targetNode: Node|null = this.findNode(target);
+    /* check if the target node exists */
+    let targetNode: Node|null = this.findNode(edge2Add.target.id);
     if (targetNode == null) {
-      throw new Error("Target node not found.");
+      throw new Error(`error while adding edge: ${edge2Add.id} target: ${edge2Add.target.id} does not exist!`);
     }
-    let newEdge: Edge = new Edge(sourceNode, targetNode, answer, score);
-    sourceNode.addEdge(newEdge);
+    
+    sourceNode.addEdge(edge2Add);
   }
 
   /*
-   * Finds a existing node by Id. Returns null if node doesn't exist.
+   * Finds an existing node by Id. Returns null if node doesn't exist.
    */
-  findNode(id: string) : Node|null {
-    for (let node of this.nodes) {
+  findNode(nodeId: string) : Node|null {
+    for (let node of this._nodes) {      
       // check if node id already exists
-      if (node.getId().localeCompare(id) === 0) {
+      if (node.id === nodeId) {
         return node;
       }
     }
     return null;
-  }
-
-  getNodes() : Node[] {
-    return this.nodes;
-  }
-
-  setHeadNode(headNode: Node): void {
-    this.headNode = headNode;
-  }
-
-  getHeadNode() : Node {
-    if(this.headNode == null) {
-      throw new Error('Error while retrieving headNode: it hasn\'t been set yet');
-    }
-    return this.headNode;
-  }
-
-  /*static reviver(key: string, value: any): any {
-    return key === "" ? Graph.fromJSON(value) : value;
-  }*/
+  }  
 }
 
 export interface GraphJSON {

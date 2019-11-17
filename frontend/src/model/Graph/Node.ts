@@ -1,63 +1,52 @@
 import {Edge} from './Edge';
 
+export enum AnswerType {
+  InputAnswer = 0,
+  RegualAnswer = 1, 
+  ResultAnswer = 2
+}
+
 export class Node {
-  private id: string = "";
-  private title: string = "";
-  private answerType: string = "";
-  private isHead: boolean = false;
-  private isFinalNode: boolean = false;
-  private edges: Edge[];
+  private _id: string = "";
+  private _text: string = "";
+  private _answerType: AnswerType = AnswerType.RegualAnswer;
+  private _isHead: boolean = false;
+  private _isFinalNode: boolean = false;
+  private _edges: Edge[];
 
-  constructor() {
-    this.edges = [];
-  }
+  constructor(id: string, text: string, answerType: AnswerType = AnswerType.RegualAnswer,
+    isHead: boolean = false, isFinalNode: boolean = false) {
+    this._id = id;
+    this._text = text;
+    this._answerType = answerType;
+    this._isHead = isHead;
+    this._isFinalNode = isFinalNode;    
 
-  getId() : string {
-    return this.id;
-  }
-
-  setId(id: string) {
-    this.id = id;
-  }
-
-  getTitle() : string {
-    return this.title;
+    this._edges = [];
   }
 
-  setTitle(title: string) {
-    this.title = title;
-  }
+  set id(id: string) { this._id = id }
+  get id(): string { return this._id }
 
-  getAnswerType() : string {
-    return this.answerType;
-  }
+  set text(text: string ) { this._text = text }
+  get text(): string { return this._text }
 
-  setAnswerType(answerType: string) {
-    this.answerType = answerType;
-  }
+  set answerType(answerType: AnswerType) { this._answerType }
+  get answerType(): AnswerType { return this._answerType }
 
-  getIsHead() : boolean {
-    return this.isHead;
-  }
+  set isHead(isHead: boolean) { this._isHead = isHead }
+  get isHead(): boolean { return this._isHead }
 
-  setIsHead(isHead: boolean) {
-    this.isHead = isHead;
-  }
+  set isFinalNode(isFinalNode: boolean) { this._isFinalNode = isFinalNode }
+  get isFinalNode(): boolean { return this._isFinalNode }
 
-  getIsFinalNode() : boolean {
-    return this.isFinalNode;
-  }
-
-  setIsFinalNode(isFinalNode: boolean) {
-    this.isFinalNode = isFinalNode;
-  }
-  getEdges() : Edge[]  {
-    return this.edges;
-  }
+  set edges(edges: Edge[]) { this._edges = edges }
+  get edges(): Edge[] { return this._edges }
 
   addEdge(edge: Edge) {
-    this.edges.push(edge);
+    this._edges.push(edge);
   }
+
 }
 
 export interface NodeJSON {

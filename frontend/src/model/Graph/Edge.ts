@@ -1,49 +1,33 @@
 import {Node} from './Node';
 
 export class Edge {
-  private source: Node;
-  private target: Node;
-  private answer: string;
-  private score: number;
+  private readonly _id: string;
+  private readonly _source: Node;
+  private readonly _target: Node;
+  private readonly _answer: string;
+  private readonly _weight: number;
 
-  constructor(source: Node, target: Node, answer: string, score: number) {
-    this.source = source;
-    this.target = target;
-    this.answer = answer;
-    this.score = score;
+  constructor(id: string, source: Node, target: Node, answer: string, weight: number) {
+    this._id = id;
+    this._source = source;
+    this._target = target;
+    this._answer = answer;
+    this._weight = weight;
   }
 
-  setSource(node: Node) {
-    this.source = node;
-  }
+  get id(): string { return this._id }
 
-  getSource() : Node {
-    return this.source;
-  }
+  //set source(node: Node) { this._source = node }
+  get source() : Node { return this._source }
 
-  setTarget(node: Node) {
-    this.target = node;
-  }
+  //set target(node: Node) { this._target = node }
+  get target(): Node { return this._target }
 
-  getTarget() : Node {
-    return this.target;
-  }
+  //set weight(n: number) { this._weight = n }
+  get weight(): number { return this._weight }
 
-  setScore(score: number) {
-    this.score = score;
-  }
-
-  getScore() : number {
-    return this.score;
-  }
-
-  setAnswer(answer: string) {
-    this.answer = answer;
-  }
-
-  getAnswer() : string {
-    return this.answer;
-  }
+  //set answer(answer: string) { this._answer = answer }
+  get answer() : string { return this._answer }
 }
 
 export interface EdgeJSON {

@@ -1,55 +1,98 @@
-import {Graph} from './../../src/model/Graph';
-import {Node} from './../../src/model/Node';
+import {Graph} from './../../src/model/Graph/Graph';
+import {Node} from './../../src/model/Graph/Node';
+import { Edge } from '../../src/model/Graph/Edge';
 
-describe("graph", () => {
+describe('Graph', () => {
   let graph: Graph = new Graph();
+
   beforeEach(() => {
     graph = new Graph();
   });
 
-  describe("is graph working correctly", () => {
-    it("adds a node correctly", () => {
-      expect(graph.addNode("1", "dummy").getId()).toBe("1");
+  describe('constructor()', ()  => {
+    it('should work, nothing to test here yet ...', () => {
+      expect(() => {new Graph()}).toEqual(expect.anything());
+    });
+  });
+
+  describe('addNode()', () => {
+    it('should work on an empty graph.', () => {
+      graph.addNode(new Node('q1', 'How old are you'));
     });
 
-    it("adds multiple nodes correctly", () => {
-      graph.addNode("1", "dummy");
-      graph.addNode("2", "dummy");
-      graph.addNode("3", "dummy");
-      expect(graph.getNodes().length).toBe(3);
-      expect(graph.getNodes()[0].getId()).toBe("1");
-      expect(graph.getNodes()[1].getId()).toBe("2");
-      expect(graph.getNodes()[2].getId()).toBe("3");
-    })
+    it('should throw if a node witht the same nodeId already exists', () => {
+      let node2Add: Node = new Node('q1', 'How old are you');
+      graph.addNode(node2Add);
 
-    it("finds an existing node correctly", () => {
-      graph.addNode("1", "dummy");
-      expect(graph.findNode("1")!.getId()).toBe("1");
-    })
+      expect(() => { 
+        graph.addNode(node2Add);
+      }).toThrow();
+    });
+  });
 
-    it("doesn't find non-existing nodes", () => {
-      expect(graph.findNode("2")).toBeNull();
-    })
+  describe('addEdge()' , () => {
+    it('should work if source and target do exist', () => {
+      let node1: Node = new Node('q1', 'How old are you');
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      graph.addNode(node1);
+      graph.addNode(node2);
 
-    it("adds a single edge correctly to a node", () => {
-      graph.addNode("q1", "dummy");
-      graph.addNode("q2", "dummy");
-      graph.addEdge("q1", "q2", "dummyAnswer", 1);
-      expect(graph.getNodes()[0].getEdges()[0].getAnswer()).toBe("dummyAnswer");
-    })
+      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
 
-    it("adds multiple edges correctly to a node", () => {
-      graph.addNode("q1", "dummy");
-      graph.addNode("q2", "dummy");
-      graph.addNode("q3", "dummy");
-      graph.addEdge("q1", "q2", "dummyAnswer1", 1);
-      graph.addEdge("q1", "q3", "dummyAnswer2", -1);
-      expect(graph.getNodes()[0].getEdges()[0].getAnswer()).toBe("dummyAnswer1");
-      expect(graph.getNodes()[0].getEdges()[1].getAnswer()).toBe("dummyAnswer2");
-    })
+      expect(() => {
+        graph.addEdge(edge2Add);
+      }).toEqual(expect.anything());
+    });
 
-    it("returns head noded correctly", () => {
-      // TODO: michaeal write test
-    })
-  })
-})
+    it('should throw if source does not exist', () => {
+      let node1: Node = new Node('q1', 'How old are you');
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      graph.addNode(node2);
+      
+      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
+
+      expect(() => {
+        graph.addEdge(edge2Add);
+      }).toThrow();
+    });
+
+    it('should throw if target does not exist', () => {
+      let node1: Node = new Node('q1', 'How old are you');
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      graph.addNode(node1);
+      
+      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
+
+      expect(() => {
+        graph.addEdge(edge2Add);
+      }).toThrow();
+    });
+  });
+
+  describe('findNode()', () => {
+    it('should return null if called on an empty graph.', () => {
+      expect(graph.findNode('q9999')).toBeNull();
+    });
+
+    it('should return null if no node exists in the collection that matches nodeId.', () => {
+      let node2Add: Node = new Node('q1', 'How old are you');
+
+      expect(graph.findNode('q99999')).toBeNull();
+    });
+
+    it('should return the node matching nodeId', () => {
+      let node2Add1: Node = new Node('q1', 'How old are you');
+      let node2Add2: Node = new Node('q2', 'Do you prefer dogs to cats?');
+      let node2Add3: Node = new Node('q3', 'Would you like to own a motorcycle?');
+
+      graph.addNode(node2Add1); 
+      graph.addNode(node2Add2); 
+      graph.addNode(node2Add3); 
+
+      let actual:Node|null = graph.findNode('q3');
+      expect(actual).not.toBeNull();
+    });
+
+  });
+    
+});

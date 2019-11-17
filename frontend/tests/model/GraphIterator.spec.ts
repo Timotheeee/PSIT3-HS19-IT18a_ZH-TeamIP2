@@ -1,9 +1,10 @@
-import { GraphIterator, GraphIteratorInterface, createIterator } from '../../src/model/Graph/MyGraphIterator';
+import { GraphIterator, GraphIteratorInterface, createIterator } from '../../src/model/Graph/GraphIterator';
 import { GraphFactory } from '../../src/model/Graph/GraphFactory';
 import { Graph } from '../../src/model/Graph/Graph';
 import { PathResult } from '../../src/model/Graph/PathResult';
+import { EdgeResult } from '../../src/model/Graph/Edge';
 
-describe('MyGraphIterator', () => {
+describe('GraphIterator', () => {
     const q1Text = 'Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I\'ll just call you Bob';
     const q2Text = 'Do you play video games?';
     const q3Text = 'Ah I see you are a person of culture as well %username%. Do you play League of Legends or World of Warcraft Classic?';
@@ -40,7 +41,7 @@ describe('MyGraphIterator', () => {
         it('current node should be a head node', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
 
-            expect(iterator.currentNode.getIsHead()).toBe(true);
+            expect(iterator.currentNode.isHead).toBe(true);
         });
     });
 
@@ -74,53 +75,92 @@ describe('MyGraphIterator', () => {
             const actual = iterator.getPath();
 
             // TODO: figure out how to check for this type
-            //expect(actual).toBeInstanceOf(PathResult[]);
+            expect(actual[0]).toBeInstanceOf(PathResult);
             expect(actual.length).toBe(0);
+        });
+
+        it('should return an array of 2 results if two answers were chosen', () => {
+            const iterator: GraphIteratorInterface = createTestGraph();
+            iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
+            iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
+            
+            const actual = iterator.getPath();
+
+            expect(actual.length).toBe(2);
+            expect(actual[0]).toBeInstanceOf(PathResult);
         });
     });
 
-    // TODO: ryan. graphIterator.choose arguments needs to be answerId, not targetNodeId
-    // The problem being that the current model does not support mutliple edges from node a to node b.
-    // It cannot keep the score, but simply knows which nodes were traversed.
-    // I will refactor this as soon as I can find the time.
+    describe('choose()', () => {
+        it('should change the currentNode to a different node', () => {
+            const iterator: GraphIteratorInterface = createTestGraph();
+
+            const startingNodeId: string = iterator.currentNode.id;
+            iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
+            const newNodeId: string = iterator.currentNode.id;
+
+            expect(startingNodeId).not.toEqual(newNodeId);
+        });
+
+        it('should throw if called on inviable edgeId', () => {
+            const iterator: GraphIteratorInterface = createTestGraph();
+
+            const illegalEdgeId = 'e¿3999';
+            expect(() => { 
+                iterator.choose(illegalEdgeId);
+            }).toThrow();
+        });
+    });
+
+    describe('answersForCurrentNode()', () => {
+        it('should return an array of type EdgeResult if called on any node that isn\nt a final node', () => {
+            const iterator: GraphIteratorInterface = createTestGraph();
+            // try on first node
+            expect(iterator.answersForCurrentNode()[0]).toBeInstanceOf(EdgeResult);
+            // try on third node
+            iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
+            iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
+            expect(iterator.answersForCurrentNode()[0]).toBeInstanceOf(EdgeResult);
+        });
+    });
 
     describe('composite test gaming graph: left path', () =>{
         it('should folllow the path and eventually arrive at the final node.', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
             
-            expect(iterator.currentNode.getTitle()).toBe(q1Text);
+            expect(iterator.currentNode.text).toBe(q1Text);
             iterator.choose('e1');
 
-            expect(iterator.currentNode.getTitle()).toBe(q2Text);
+            expect(iterator.currentNode.text).toBe(q2Text);
             iterator.choose('e2');
 
-            expect(iterator.currentNode.getTitle()).toBe(q3Text);
+            expect(iterator.currentNode.text).toBe(q3Text);
             iterator.choose('e4');
 
-            expect(iterator.currentNode.getTitle()).toBe(q5Text);
+            expect(iterator.currentNode.text).toBe(q5Text);
             iterator.choose('e9');
 
-            expect(iterator.currentNode.getIsFinalNode()).toBe(true);
+            expect(iterator.currentNode.isFinalNode).toBe(true);
         });
     });
 
     describe('composite test non-gaming path: right path', () => {
         it('should follow the path and and eventually arrive at the final node', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
-            expect(iterator.currentNode.getTitle()).toBe(q2Text);
+            expect(iterator.currentNode.text).toBe(q2Text);
 
             iterator.choose('e1');
 
-            expect(iterator.currentNode.getTitle()).toBe(q3Text);
-            iterator.choose('e3'); // TODO: choose that you play league
+            expect(iterator.currentNode.text).toBe(q3Text);
+            iterator.choose('e3');
 
-            expect(iterator.currentNode.getTitle()).toBe(q5Text);
-            iterator.choose('e6'); // TODO: choose that you don't like to sleep
+            expect(iterator.currentNode.text).toBe(q5Text);
+            iterator.choose('e6'); 
 
-            expect(iterator.currentNode.getTitle()).toBe(q5Text);
-            iterator.choose('e8'); // TODO: choose that you don't like to sleep
+            expect(iterator.currentNode.text).toBe(q5Text);
+            iterator.choose('e8');
 
-            expect(iterator.currentNode.getIsFinalNode()).toBe(true);
+            expect(iterator.currentNode.isFinalNode).toBe(true);
         });
     });
 });

@@ -41,26 +41,34 @@ export class GraphIterator implements GraphIteratorInterface {
     answersForCurrentNode(): EdgeResult[] {
         let answers: EdgeResult[] = [];
 
-        for(let outgoingEdge of this.currentNode.getEdges()) {
-            answers.push(new EdgeResult(outgoingEdge.getAnswer(), outgoingEdge.getTarget().getId()));
+        for(let outgoingEdge of this.currentNode.edges) {
+            answers.push(new EdgeResult(outgoingEdge.answer, outgoingEdge.target.id));
         }
 
         return answers;        
     }    
 
     choose(edgeId: string): void {
-        // TODO: ryan throw if it doesn't move
+        const outoingEdges: Edge[] = this.currentNode.edges;
+        let i: number = 0;
 
-        // TODO: ryan this should be a while
-        for (let outgoingEdge of this.currentNode.getEdges()) {
-            if(outgoingEdge.getTarget().getId() === edgeId){
-                this._currentNode = outgoingEdge.getTarget();            
-            }
+        while(outoingEdges[i].id != edgeId && i < outoingEdges.length) {
+            i++;
+        }
+
+        /**
+         * if edgeId is one of the connected edges set it as currentNode -> move
+         * Otherwise throw which means edgeId was invalid
+         *  */ 
+        if(i < outoingEdges.length) {
+            this._currentNode = outoingEdges[i].target;
+        } else {
+            throw Error(`edgeId: ${edgeId} could not be found on current node!`)
         }
     }
 
     isFinalNode(): boolean {
-        return this.currentNode.getIsFinalNode();
+        return this.currentNode.isFinalNode;
     }
 
     getPath(): PathResult[] {
