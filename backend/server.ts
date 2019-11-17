@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import {DBController} from './controllers/DBController'
 import { AnyNaptrRecord } from 'dns';
-import {Result} from '../frontend/src/model/Result';
 import { LoginController } from './controllers/LoginController';
+import { JSONResult } from './JSONResult';
+import * as expressNS from 'express';
 
 const express = require('express'),
   bodyParser = require('body-parser'),
@@ -28,23 +29,17 @@ function listen() {
   console.log('app listening at http://' + host + ':' + port);
 }
 
-app.get('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: string) => void; }; }) {
-  const graph = dbController.getLoadedFile();
-  res.status(200).json(graph);
+app.get('/graph', (request: expressNS.Request, response: expressNS.Response) => {
+  const graphJSONString: string = dbController.getLoadedFile();
+  response.status(200).json({ success: true, data: graphJSONString });
 });
 
-app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
-  dbController.save2File(req.body.graph);
-  res.status(200).json({message:"ok"});
+app.post('/graph', (request: expressNS.Request, response: expressNS.Response) => {
+  dbController.save2File(request.body.graph);
+  response.status(200).json({ success: true, data: '' });
 });
 
-app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { token: string; }) => void; }; }) {
-  new LoginController().auth(req, res);
-});
-
-app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
-  // for future features
-  let path = req.body.userPath;
-
-  res.status(200).json({message:"ok"});
+app.post('/login/', (request: expressNS.Request, response: expressNS.Response) => {
+  new LoginController().auth(request, response);
+  response.status(200).json({ success: true, data: '' });
 });

@@ -11,8 +11,7 @@ export class DBController {
       if (err) {
         throw Error(`error while reading file: ${err}`);
       }
-      this.graph = data;
-      console.log(data);
+      this.graph = data;      
     });
   }
 
