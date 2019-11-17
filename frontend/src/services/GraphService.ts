@@ -4,33 +4,31 @@ import { GraphFactory } from '../model/Graph/GraphFactory';
 
 export class GraphService {
   readonly url: string = '/graph';
-  readonly axiosSerivce: AxiosController;
+  readonly axiosService: AxiosController;
 
   constructor() {
-    this.axiosSerivce = new AxiosController();
+    this.axiosService = new AxiosController();
   }
 
-  public async post(graphToPost: string): Promise<string> {
-    const result = await this.axiosSerivce.post(this.url, {graph: graphToPost});
+  public async post(graphToPost: string): Promise<any> {
+    const result = await this.axiosService.post(this.url, {graph: graphToPost});
     const status: string = result.data.message;
     return status;
   }
 
   public async get(): Promise<Graph> {
-    let json = await this.axiosSerivce.get(this.url, 'text');
+    const resultFromServer = await this.axiosService.get(this.url);
 
-    console.log('inside of GraphService().get()');    
-
-    const jsonStr = JSON.stringify(json.data);
-    console.log(jsonStr);
-    //json = JSON.stringify(json.data);
-
-    const graph: Graph = GraphFactory.createGraphFromJSON(jsonStr);
-    return graph;
+    if(resultFromServer.success) {
+      const graph: Graph = GraphFactory.createGraphFromJSON(resultFromServer.data);
+      return graph;
+    } else {
+      throw Error(resultFromServer.error_message);
+    }
   }
 
   public async getJSON(): Promise<Graph> {
-    const result = await this.axiosSerivce.get(this.url, 'text');
+    const result = await this.axiosService.get(this.url);
     return result.data.graph;
   }
 }
