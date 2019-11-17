@@ -2,15 +2,15 @@ import {Node} from './Node';
 
 export class Edge {
   private readonly _id: string;
-  private readonly _source: Node;
-  private readonly _target: Node;
+  private readonly _sourceId: string;
+  private readonly _targetId: string;
   private readonly _answer: string;
   private readonly _weight: number;
 
-  constructor(id: string, source: Node, target: Node, answer: string, weight: number) {
+  constructor(id: string, sourceId: string, targetId: string, answer: string='', weight: number=0) {
     this._id = id;
-    this._source = source;
-    this._target = target;
+    this._sourceId = sourceId;
+    this._targetId = targetId;
     this._answer = answer;
     this._weight = weight;
   }
@@ -18,10 +18,10 @@ export class Edge {
   get id(): string { return this._id }
 
   //set source(node: Node) { this._source = node }
-  get source() : Node { return this._source }
+  get sourceId() : string { return this._sourceId }
 
   //set target(node: Node) { this._target = node }
-  get target(): Node { return this._target }
+  get targetId(): string { return this._targetId }
 
   //set weight(n: number) { this._weight = n }
   get weight(): number { return this._weight }
@@ -31,6 +31,7 @@ export class Edge {
 }
 
 export interface EdgeJSON {
+  id: string;
   source: string;
   target: string;
   metadata: {
@@ -43,7 +44,7 @@ export class EdgeResult {
   private readonly _answer:string;
   private readonly _edgeId:string;
 
-  constructor(answer:string, edgeId: string) {
+  constructor(edgeId: string, answer:string) {
     this._answer = answer;
     this._edgeId = edgeId;
   }

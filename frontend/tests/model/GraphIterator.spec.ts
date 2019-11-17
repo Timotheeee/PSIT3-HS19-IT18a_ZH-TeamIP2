@@ -147,14 +147,14 @@ describe('GraphIterator', () => {
     describe('composite test non-gaming path: right path', () => {
         it('should follow the path and and eventually arrive at the final node', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
-            expect(iterator.currentNode.text).toBe(q2Text);
 
+            expect(iterator.currentNode.text).toBe(q1Text);
             iterator.choose('e1');
 
-            expect(iterator.currentNode.text).toBe(q3Text);
+            expect(iterator.currentNode.text).toBe(q2Text);
             iterator.choose('e3');
 
-            expect(iterator.currentNode.text).toBe(q5Text);
+            expect(iterator.currentNode.text).toBe(q4Text);
             iterator.choose('e6'); 
 
             expect(iterator.currentNode.text).toBe(q5Text);

@@ -24,8 +24,8 @@ import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
 import { GraphFactory } from '../model/Graph/GraphFactory';
-import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/MyGraphIterator';
-import { Node } from '../model/Graph/Node';
+import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/GraphIterator';
+import { Node, AnswerType} from '../model/Graph/Node';
 import { PathService } from '../services/PathService'
 import { GraphService } from '../services/GraphService'
 
@@ -42,11 +42,11 @@ export default Vue.extend({
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.currentNode.getTitle(), graphIterator.currentNode.getAnswerType());
+      var question1 = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
 
       // TODO: ryan duplicate code smell
       const currentNode:Node = graphIterator.currentNode;
-        question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
+        question1 = new Question(currentNode.id, currentNode.text, currentNode.answerType);
         let i = 1;
         for(let currentAnswer of graphIterator.answersForCurrentNode()){
           question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
@@ -66,7 +66,7 @@ export default Vue.extend({
         processQuestion(edgeId: string) {
             this.graphIterator.choose(edgeId);
 
-            if(this.graphIterator.currentNode.getIsFinalNode()){
+            if(this.graphIterator.currentNode.isFinalNode){
               this.questions.push(this.getLastQuestion());
             } else {
               this.questions.push(this.getNextQuestion());
@@ -75,9 +75,9 @@ export default Vue.extend({
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.currentNode;
           const nextQuestion: Question = new Question(
-              currentNode.getId(),
-              this.insertUsernameInQuestion(currentNode.getTitle()),
-              currentNode.getAnswerType());
+              currentNode.id,
+              this.insertUsernameInQuestion(currentNode.text),
+              currentNode.answerType);
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
@@ -86,10 +86,10 @@ export default Vue.extend({
           return nextQuestion;
         },
         getLastQuestion() : Question {
-          const lastQuestion = new Question('fn999', 'Would you like to see how you did?', 'result');
+          const lastQuestion = new Question('fn999', 'Would you like to see how you did?', AnswerType.RegularAnswer);
+          lastQuestion.setIsFinalQuestion(true);
           lastQuestion.addPossibleAnswer(new Answer(999, 'Yes', 'fn999+1'));
           return lastQuestion;
-
         },
         insertUsernameInQuestion(question: string): string {
             let result = question.replace("%username%", this.$data.username);

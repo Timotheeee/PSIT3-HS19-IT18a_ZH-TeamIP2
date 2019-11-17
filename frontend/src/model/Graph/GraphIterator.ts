@@ -2,6 +2,7 @@ import { Graph } from "./Graph";
 import { Node } from "./Node";
 import { Edge, EdgeResult } from './Edge';
 import { PathResult } from "./PathResult";
+import { OutgoingMessage } from "http";
 
 export interface GraphIteratorConstructor {
     new (catalogue: Graph): GraphIteratorInterface;
@@ -31,7 +32,7 @@ export class GraphIterator implements GraphIteratorInterface {
 
     constructor(catalogue: Graph) {
         this._catalogue = catalogue;
-        this._currentNode = catalogue.getHeadNode();    
+        this._currentNode = catalogue.headNode;    
     }
 
     get currentNode() : Node {
@@ -42,7 +43,7 @@ export class GraphIterator implements GraphIteratorInterface {
         let answers: EdgeResult[] = [];
 
         for(let outgoingEdge of this.currentNode.edges) {
-            answers.push(new EdgeResult(outgoingEdge.answer, outgoingEdge.target.id));
+            answers.push(new EdgeResult(outgoingEdge.id, outgoingEdge.answer));
         }
 
         return answers;        
@@ -52,7 +53,7 @@ export class GraphIterator implements GraphIteratorInterface {
         const outoingEdges: Edge[] = this.currentNode.edges;
         let i: number = 0;
 
-        while(outoingEdges[i].id != edgeId && i < outoingEdges.length) {
+        while(i < outoingEdges.length && outoingEdges[i].id != edgeId ) {
             i++;
         }
 
@@ -60,8 +61,9 @@ export class GraphIterator implements GraphIteratorInterface {
          * if edgeId is one of the connected edges set it as currentNode -> move
          * Otherwise throw which means edgeId was invalid
          *  */ 
-        if(i < outoingEdges.length) {
-            this._currentNode = outoingEdges[i].target;
+        if(i < outoingEdges.length) {            
+            let newCurrentNode = this._catalogue.findNode(outoingEdges[i].targetId)!; 
+            this._currentNode = newCurrentNode;
         } else {
             throw Error(`edgeId: ${edgeId} could not be found on current node!`)
         }

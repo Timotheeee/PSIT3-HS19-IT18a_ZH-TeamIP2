@@ -2,19 +2,18 @@ import {Edge} from './Edge';
 
 export enum AnswerType {
   InputAnswer = 0,
-  RegualAnswer = 1, 
-  ResultAnswer = 2
+  RegularAnswer = 1
 }
 
 export class Node {
   private _id: string = "";
   private _text: string = "";
-  private _answerType: AnswerType = AnswerType.RegualAnswer;
+  private _answerType: AnswerType = AnswerType.RegularAnswer;
   private _isHead: boolean = false;
   private _isFinalNode: boolean = false;
   private _edges: Edge[];
 
-  constructor(id: string, text: string, answerType: AnswerType = AnswerType.RegualAnswer,
+  constructor(id: string, text: string, answerType: AnswerType = AnswerType.RegularAnswer,
     isHead: boolean = false, isFinalNode: boolean = false) {
     this._id = id;
     this._text = text;

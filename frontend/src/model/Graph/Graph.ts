@@ -11,7 +11,7 @@ export class Graph {
 
   get nodes(): Node[] { return this._nodes }
 
-  get headNode() { return this.headNode }
+  get headNode() { return this._headNode! }
   set headNode(headNode: Node) { this._headNode = headNode }
 
   /**
@@ -34,14 +34,14 @@ export class Graph {
    */
   addEdge(edge2Add: Edge): void {
     /* check if the source node exists */
-    let sourceNode: Node|null = this.findNode(edge2Add.source.id);
+    let sourceNode: Node|null = this.findNode(edge2Add.sourceId);
     if (sourceNode == null) {
-      throw new Error(`error while adding edge: ${edge2Add.id} source: ${edge2Add.source.id} does not exist!`);
+      throw new Error(`error while adding edge: ${edge2Add.id} source: ${edge2Add.sourceId} does not exist!`);
     }
     /* check if the target node exists */
-    let targetNode: Node|null = this.findNode(edge2Add.target.id);
+    let targetNode: Node|null = this.findNode(edge2Add.targetId);
     if (targetNode == null) {
-      throw new Error(`error while adding edge: ${edge2Add.id} target: ${edge2Add.target.id} does not exist!`);
+      throw new Error(`error while adding edge: ${edge2Add.id} target: ${edge2Add.targetId} does not exist!`);
     }
     
     sourceNode.addEdge(edge2Add);

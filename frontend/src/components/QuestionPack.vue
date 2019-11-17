@@ -9,7 +9,7 @@
     <result-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
       @answerPicked="updateAnswer"
-      v-else-if="question.getAnswerType() == 'result'"/>
+      v-else-if="question.isFinalQuestion()"/>
     <choice-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
       @answerPicked="updateAnswer"
