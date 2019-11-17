@@ -2,7 +2,6 @@
 import {DBController} from './controllers/DBController'
 import { AnyNaptrRecord } from 'dns';
 import { LoginController } from './controllers/LoginController';
-import { JSONResult } from './JSONResult';
 import * as expressNS from 'express';
 
 const express = require('express'),

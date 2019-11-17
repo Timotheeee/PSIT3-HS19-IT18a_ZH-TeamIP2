@@ -35,12 +35,9 @@ export default Vue.extend({
       let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, GraphFactory.createTestGraph());
       graphService.get()
       .then(result => {
-        console.log('graph service returns: ');
-        console.log(result);
         createIterator(GraphIterator, result);
       })
       .catch(error => {
-        console.log(error);
         alert('Please upload a file first in the adminpanel');
         this.$router.push('/welcome')
       })
@@ -66,9 +63,14 @@ export default Vue.extend({
       }
     },
     methods: {
-        processQuestion(targetId: string) {
-            this.graphIterator.choose(targetId);
-            this.questions.push(this.getNextQuestion());
+        processQuestion(edgeId: string) {
+            this.graphIterator.choose(edgeId);
+
+            if(this.graphIterator.currentNode.getIsFinalNode()){
+              this.questions.push(this.getLastQuestion());
+            } else {
+              this.questions.push(this.getNextQuestion());
+            }            
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.currentNode;
@@ -83,6 +85,12 @@ export default Vue.extend({
 
           return nextQuestion;
         },
+        getLastQuestion() : Question {
+          const lastQuestion = new Question('fn999', 'Would you like to see how you did?', 'result');
+          lastQuestion.addPossibleAnswer(new Answer(999, 'Yes', 'fn999+1'));
+          return lastQuestion;
+
+        },
         insertUsernameInQuestion(question: string): string {
             let result = question.replace("%username%", this.$data.username);
             return result;
@@ -92,16 +100,6 @@ export default Vue.extend({
             // prevents form from reloading the page
             event.preventDefault();
 
-           /* // TODO: Get answers from user
-            this.pathService.post([1,2,3,4])
-            .then(result => {
-              this.result = result;
-            })
-            .catch(error => {
-              alert('error while sending the user path');
-            })*/
-
-            //this.result.setScore(this.graphIterator.getPathScore());
             // TODO: ryan write this code -> use new classes for recommendations etc.
             this.result.setScore(404);
             // TODO: add recommendations
@@ -119,7 +117,6 @@ export default Vue.extend({
 
         chatBox.scrollTop = chatBox.clientHeight;
       }
-
     },
     components: {
         TheHeader,
