@@ -10,20 +10,24 @@ export class GraphService {
     this.axiosService = new AxiosController();
   }
 
-  public async post(graphToPost: string): Promise<any> {
+  public async post(graphToPost: string): Promise<boolean> {
     const result = await this.axiosService.post(this.url, {graph: graphToPost});
-    const status: string = result.data.message;
-    return status;
+
+    if(result.success) {
+      return true;
+    } else {
+      throw Error(result.error_message);
+    }
   }
 
   public async get(): Promise<Graph> {
-    const resultFromServer = await this.axiosService.get(this.url);
+    const result = await this.axiosService.get(this.url);
 
-    if(resultFromServer.success) {
-      const graph: Graph = GraphFactory.createGraphFromJSON(resultFromServer.data);
+    if(result.success) {
+      const graph: Graph = GraphFactory.createGraphFromJSON(result.data);
       return graph;
     } else {
-      throw Error(resultFromServer.error_message);
+      throw Error(result.error_message);
     }
   }
 
