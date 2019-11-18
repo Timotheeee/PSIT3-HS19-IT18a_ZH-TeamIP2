@@ -1,5 +1,5 @@
 import { RecommendationsGenerator } from "./RecommendationsGenerator";
-import { MyGraphIterator } from "./MyGraphIterator";
+import { GraphIterator } from "./GraphIterator";
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationsGenerator {
   json: string;
