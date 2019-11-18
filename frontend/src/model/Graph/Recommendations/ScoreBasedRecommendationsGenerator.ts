@@ -19,4 +19,8 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
 
     return [""];
   }
+
+  public getScore(): number {
+    throw new Error('not yet implemented');
+  }
 }
