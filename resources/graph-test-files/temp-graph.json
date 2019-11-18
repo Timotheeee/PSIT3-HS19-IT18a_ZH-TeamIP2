@@ -5,7 +5,7 @@
             "metadata": {
                 "isHead": true,
                 "answerType": "input",
-                "title": "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I''ll just call you Bob"
+                "title": "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I'll just call you Bob"
             }
         },
         {
@@ -49,7 +49,7 @@
         {
             "source": "q1",
             "target": "q2",
-            "edgeId": "e1",
+            "id": "e1",
             "metadata": {
                 "answer": "Bob",
                 "score": 0
@@ -58,7 +58,7 @@
         {
             "source": "q2",
             "target": "q3",
-            "edgeId": "e2",
+            "id": "e2",
             "metadata": {
                 "answer": "Yes",
                 "score": -10
@@ -67,7 +67,7 @@
         {
             "source": "q2",
             "target": "q4",
-            "edgeId": "e3",
+            "id": "e3",
             "metadata": {
                 "answer": "No",
                 "score": 10
@@ -76,7 +76,7 @@
         {
             "source": "q3",
             "target": "q5",
-            "edgeId": "e4",
+            "id": "e4",
             "metadata": {
                 "answer": "Yes",
                 "score": -1000
@@ -85,7 +85,7 @@
         {
             "source": "q3",
             "target": "q5",
-            "edgeId": "e5",
+            "id": "e5",
             "metadata": {
                 "answer": "I play other games",
                 "score": -200
@@ -94,7 +94,7 @@
         {
             "source": "q4",
             "target": "q5",
-            "edgeId": "e6",
+            "id": "e6",
             "metadata": {
                 "answer": "Yes, I am a true gym rat!",
                 "score": 200
@@ -103,7 +103,7 @@
         {
             "source": "q4",
             "target": "q5",
-            "edgeId": "e7",
+            "id": "e7",
             "metadata": {
                 "answer": "No less than that",
                 "score": 0
@@ -112,16 +112,16 @@
         {
             "source": "q5",
             "target": "fn1",
-            "edgeId": "e8",
+            "id": "e8",
             "metadata": {
                 "answer": "Yes, I love my bed!",
                 "score": 500
             }
         },
         {
-            "source": "q4",
+            "source": "q5",
             "target": "fn1",
-            "edgeId": "e9",
+            "id": "e9",
             "metadata": {
                 "answer": "No, I like Netflix way too much :(",
                 "score": -500

@@ -5,11 +5,11 @@
     <input-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
       @answerPicked="updateAnswer"
-      v-if="question.getAnswerType() == 'input'"/>
+      v-if="question.getAnswerType() == 0"/>
     <result-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
       @answerPicked="updateAnswer"
-      v-else-if="question.getAnswerType() == 'result'"/>
+      v-else-if="question.getIsFinalQuestion()"/>
     <choice-answer
       :possibleAnswers="this.question.getPossibleAnswers()"
       @answerPicked="updateAnswer"
@@ -23,6 +23,7 @@
 import Vue from "vue";
 import { Question } from "./../model/Question";
 import { Answer } from "./../model/Answer";
+import { AnswerType } from './../model/Graph/Node'
 import AnswerBox from "./AnswerBox.vue";
 import InputAnswer from "./InputAnswer.vue";
 import ChoiceAnswer from "./ChoiceAnswer.vue";

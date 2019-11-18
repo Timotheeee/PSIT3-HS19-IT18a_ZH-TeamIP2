@@ -23,33 +23,34 @@ import {Question} from './../model/Question';
 import {Answer} from './../model/Answer';
 import {Result} from "../model/Result";
 import TheHeader from './TheHeader.vue';
-import { GraphFactory } from '../model/GraphFactory';
-import { MyGraphIterator, GraphIterator } from '../model/MyGraphIterator';
-import { Node } from '../model/Node';
+import { GraphFactory } from '../model/Graph/GraphFactory';
+import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/Graph/GraphIterator';
+import { Node, AnswerType} from '../model/Graph/Node';
 import { PathService } from '../services/PathService'
 import { GraphService } from '../services/GraphService'
 
 export default Vue.extend({
     data() {
       let graphService = new GraphService();
-      let graphIterator: MyGraphIterator = new MyGraphIterator(GraphFactory.createTestGraph());
+      let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, GraphFactory.createTestGraph());
       graphService.get()
       .then(result => {
-        graphIterator = new MyGraphIterator(result);
+        createIterator(GraphIterator, result);
       })
       .catch(error => {
         alert('Please upload a file first in the adminpanel');
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.getCurrentNode().getTitle(), graphIterator.getCurrentNode().getAnswerType());
+      var question1 = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
 
       // TODO: ryan duplicate code smell
-      const currentNode:Node = graphIterator.getCurrentNode();
-        question1 = new Question(currentNode.getId(), currentNode.getTitle(), currentNode.getAnswerType());
+      const currentNode:Node = graphIterator.currentNode;
+        console.log(currentNode);
+        question1 = new Question(currentNode.id, currentNode.text, currentNode.answerType);
         let i = 1;
         for(let currentAnswer of graphIterator.answersForCurrentNode()){
-          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
+          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
         }
 
       return {
@@ -63,22 +64,33 @@ export default Vue.extend({
       }
     },
     methods: {
-        processQuestion(targetId: string) {
-            this.graphIterator.choose(targetId);
-            this.questions.push(this.getNextQuestion());
+        processQuestion(edgeId: string) {
+            this.graphIterator.choose(edgeId);
+
+            if(this.graphIterator.currentNode.isFinalNode){
+              this.questions.push(this.getLastQuestion());
+            } else {
+              this.questions.push(this.getNextQuestion());
+            }            
         },
         getNextQuestion(): Question {
-          const currentNode:Node = this.graphIterator.getCurrentNode();
+          const currentNode:Node = this.graphIterator.currentNode;
           const nextQuestion: Question = new Question(
-              currentNode.getId(),
-              this.insertUsernameInQuestion(currentNode.getTitle()),
-              currentNode.getAnswerType());
+              currentNode.id,
+              this.insertUsernameInQuestion(currentNode.text),
+              currentNode.answerType);
           let i = 1;
           for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
-            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.targetId));
+            nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
           }
 
           return nextQuestion;
+        },
+        getLastQuestion() : Question {
+          const lastQuestion = new Question('fn999', 'Would you like to see how you did?', AnswerType.RegularAnswer);
+          lastQuestion.setIsFinalQuestion(true);
+          lastQuestion.addPossibleAnswer(new Answer(999, 'Yes', 'fn999+1'));
+          return lastQuestion;
         },
         insertUsernameInQuestion(question: string): string {
             let result = question.replace("%username%", this.$data.username);
@@ -89,17 +101,8 @@ export default Vue.extend({
             // prevents form from reloading the page
             event.preventDefault();
 
-           /* // TODO: Get answers from user
-            this.pathService.post([1,2,3,4])
-            .then(result => {
-              this.result = result;
-            })
-            .catch(error => {
-              alert('error while sending the user path');
-            })*/
-
-            console.log(this.graphIterator.getPathScore());
-            this.result.setScore(this.graphIterator.getPathScore());
+            // TODO: ryan write this code -> use new classes for recommendations etc.
+            this.result.setScore(404);
             // TODO: add recommendations
             this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
         }
@@ -115,7 +118,6 @@ export default Vue.extend({
 
         chatBox.scrollTop = chatBox.clientHeight;
       }
-
     },
     components: {
         TheHeader,

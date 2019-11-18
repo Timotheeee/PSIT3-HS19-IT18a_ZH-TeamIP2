@@ -5,11 +5,11 @@ export class AxiosController {
   get(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       axios({
-        method: "get",
+        method: 'get',
         url: url
       })
       .then(result => {
-        resolve(result);
+        resolve(result.data);
       })
       .catch(error => {
         reject(error);
@@ -25,7 +25,7 @@ export class AxiosController {
         data: dataToPost
       })
       .then(result => {
-        resolve(result);
+        resolve(result.data);
       })
       .catch(error => {
         reject(error);
