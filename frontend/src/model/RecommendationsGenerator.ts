@@ -11,6 +11,7 @@ export interface RecommendationsGenerator {
   generate(): string[];
 }
 
-export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string, graphIterator: MyGraphIterator): RecommendationsGenerator {
+export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string, 
+  graphIterator: MyGraphIterator): RecommendationsGenerator {
     return new ctor(json, graphIterator);
 }
