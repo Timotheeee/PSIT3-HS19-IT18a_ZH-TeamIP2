@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { RecommendationsGeneratorInterface } from './RecommendationsGenerator';
 import { GraphIterator } from '../GraphIterator';
 import { Graph } from '../Graph';
@@ -73,4 +74,23 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
 export interface AnswerBasedRecommendationJSON {
   answerSet: string[];
   recommendation: string;
+=======
+import { RecommendationsGenerator } from "./RecommendationsGenerator";
+import { MyGraphIterator } from "./MyGraphIterator";
+
+export class AnswerBasedRecommendationsGenerator implements RecommendationsGenerator {
+  json: string;
+  graphIterator: MyGraphIterator;
+
+  constructor(json: string, graphIterator: MyGraphIterator) {
+    this.json = json;
+    this.graphIterator = graphIterator;
+  };
+
+  public generate(): string[] {
+    // implement generate function
+
+    return [""];
+  }
+>>>>>>> Change stuff
 }
