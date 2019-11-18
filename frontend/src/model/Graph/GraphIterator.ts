@@ -62,7 +62,7 @@ export class GraphIterator implements GraphIteratorInterface {
          * Otherwise throw which means edgeId was invalid
          *  */ 
         if(i < outoingEdges.length) {            
-            let newCurrentNode = this._catalogue.findNode(outoingEdges[i].targetId)!; 
+            let newCurrentNode = this._catalogue.findNode(outoingEdges[i].targetId)!;
             this._currentNode = newCurrentNode;
         } else {
             throw Error(`edgeId: ${edgeId} could not be found on current node!`)
