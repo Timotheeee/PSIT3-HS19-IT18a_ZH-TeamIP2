@@ -13,6 +13,7 @@ const express = require('express'),
 
 
 var dao = new DBController();
+var login = new LoginController();
 
 
 app.use(morgan('dev'));
@@ -46,7 +47,7 @@ app.post('/graph', function (req: any, res: { status: (arg0: number) => { json: 
 });
 
 app.post('/login/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { token: string; }) => void; }; }) {
-  new LoginController().auth(req, res);
+  login.auth(req, res);
 });
 
 app.post('/userPath/', function (req: any, res: { status: (arg0: number) => { json: (arg0: { message: string; }) => void; }; }) {
