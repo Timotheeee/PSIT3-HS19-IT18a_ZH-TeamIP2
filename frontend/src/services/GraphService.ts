@@ -24,15 +24,15 @@ export class GraphService {
     const result = await this.axiosService.get(this.url);
 
     if(result.success) {
-      const graph: Graph = GraphFactory.createGraphFromJSON(result.data);
+      const graph: Graph = GraphFactory.createGraphFromJSON(result);
       return graph;
     } else {
       throw Error(result.error_message);
     }
   }
 
-  public async getJSON(): Promise<Graph> {
+  public async getJSON(): Promise<string> {
     const result = await this.axiosService.get(this.url);
-    return result.data.graph;
+    return result.data;
   }
 }
