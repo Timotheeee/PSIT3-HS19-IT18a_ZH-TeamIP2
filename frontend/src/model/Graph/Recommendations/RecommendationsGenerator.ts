@@ -1,17 +1,16 @@
-import { GraphIterator } from "./Graph/GraphIterator";
+import { GraphIterator } from '../GraphIterator';
+import { Graph } from '../Graph';
+import { PathResult } from '../PathResult';
 
-export interface RecommendationsGeneratorInterfaceConstructor {
-  new (json: string, graphIterator: GraphIterator): RecommendationsGeneratorInterface;
+export interface RecommendationsGeneratorConstructor {
+  new (json: string, path: PathResult[], graph: Graph): RecommendationsGeneratorInterface;
 }
 
 export interface RecommendationsGeneratorInterface {
-  json: string;
-  graphIterator: GraphIterator;
-
   generate(): string[];
 }
 
-export function createRecommendationsGeneratorInterface(ctor: RecommendationsGeneratorInterfaceConstructor, json: string,
-  graphIterator: GraphIterator): RecommendationsGeneratorInterface {
-    return new ctor(json, graphIterator);
+export function createRecommendationsGeneratorInterface(ctor: RecommendationsGeneratorConstructor, json: string,
+  path: PathResult[], graph: Graph):RecommendationsGeneratorInterface {
+    return new ctor(json, path, graph);
 }
