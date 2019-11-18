@@ -10,7 +10,7 @@ export interface RecommendationsGeneratorInterface {
   generate(): string[];
 }
 
-export function createRecommendationsGeneratorInterface(ctor: RecommendationsGeneratorConstructor, json: string,
+export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string,
   path: PathResult[], graph: Graph):RecommendationsGeneratorInterface {
     return new ctor(json, path, graph);
 }
