@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> prepare unit tests for michael to continue on ...
 import { RecommendationsGeneratorInterface } from './RecommendationsGenerator';
 import { GraphIterator } from '../GraphIterator';
 import { Graph } from '../Graph';
 import { PathResult } from '../PathResult';
+<<<<<<< HEAD
 import { Edge } from '../Edge';
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
@@ -77,14 +81,18 @@ export interface AnswerBasedRecommendationJSON {
 =======
 import { RecommendationsGenerator } from "./RecommendationsGenerator";
 import { GraphIterator } from "./GraphIterator";
+=======
+>>>>>>> prepare unit tests for michael to continue on ...
 
-export class AnswerBasedRecommendationsGenerator implements RecommendationsGenerator {
-  json: string;
-  graphIterator: MyGraphIterator;
+export class AnswerBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
+  private _json: string;
+  private _path: PathResult[];
+  private _graph: Graph;
 
-  constructor(json: string, graphIterator: MyGraphIterator) {
-    this.json = json;
-    this.graphIterator = graphIterator;
+  constructor(json: string, path: PathResult[], graph: Graph) {
+    this._json = json;
+    this._path = path;
+    this._graph = graph;
   };
 
   public generate(): string[] {
