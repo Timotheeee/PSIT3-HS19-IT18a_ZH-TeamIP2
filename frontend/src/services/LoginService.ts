@@ -10,7 +10,7 @@ export class LoginService {
 
   private async post(userData: any): Promise<String> {
     const result = await this.axiosController.post(this.url, userData);
-    const token: string = result.data.token;
+    const token: string = result.token;
     return token;
   }
 
@@ -33,9 +33,11 @@ export class LoginService {
     const result = await this.axiosController.post(this.url, {name: name, password: password});
 
     let correctLogin: boolean = false;
-    if(result.data.token) {
+    if(result.token) {
       correctLogin = true;
-      this.axiosController.setHeader('token', result.data.token)
+      this.axiosController.setHeader('token', result.token)
+      console.log("was here");
+      console.log(correctLogin);
     }
     return correctLogin;
   }

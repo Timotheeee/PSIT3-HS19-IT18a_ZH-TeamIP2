@@ -41,5 +41,4 @@ app.post('/graph', (request: expressNS.Request, response: expressNS.Response) =>
 
 app.post('/login/', (request: expressNS.Request, response: expressNS.Response) => {
   login.auth(request, response);
-  response.status(200).json({ success: true, data: '' });
 });

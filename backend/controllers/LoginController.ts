@@ -15,14 +15,15 @@ export class LoginController {
   }
 
   public auth(req: any, res:any) {
-    let token = new LoginController().checkLoginData(req);
+    let token = this.checkLoginData(req);
 
    // login succesful if the method checkLoginData sends a token back, else the method
    // checkLoginData returns an empty string
     if(token) {
-      res.status(200).json({"token": token});
+
+      res.status(200).json({ success: true, "token": token });
     } else {
-      res.status(400).json({"token": ''});
+      res.status(400).json({success: false, "token": ''});
     }
   }
 
