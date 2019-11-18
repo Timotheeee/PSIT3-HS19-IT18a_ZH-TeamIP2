@@ -70,7 +70,7 @@ export class GraphFactory {
   }
 
   private static answerTypeStringToAnswerType(answerTypeStr: string): AnswerType {
-    if(answerTypeStr === 'resultType') {
+    if(answerTypeStr === 'input') {
       return AnswerType.InputAnswer;
     } else  {
       return AnswerType.RegularAnswer;

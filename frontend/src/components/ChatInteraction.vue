@@ -46,6 +46,7 @@ export default Vue.extend({
 
       // TODO: ryan duplicate code smell
       const currentNode:Node = graphIterator.currentNode;
+        console.log(currentNode);
         question1 = new Question(currentNode.id, currentNode.text, currentNode.answerType);
         let i = 1;
         for(let currentAnswer of graphIterator.answersForCurrentNode()){

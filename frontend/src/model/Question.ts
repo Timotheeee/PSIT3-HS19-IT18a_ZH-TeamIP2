@@ -39,4 +39,8 @@ export class Question {
   public setIsFinalQuestion(value: boolean) {
     this.isFinalQuestion = value;
   }
+
+  public getIsFinalQuestion(): boolean {
+    return this.isFinalQuestion;
+  }
 }
