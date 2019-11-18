@@ -12,7 +12,7 @@ export class PathService {
 
   public async post(path: Number[]) : Promise<string> {
     const result = await this.axiosController.post(this.url, {userPath: path})
-    return result.data.message;
+    return result.success;
   }
 
 

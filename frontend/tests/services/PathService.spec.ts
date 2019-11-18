@@ -1,7 +1,7 @@
 import {PathService} from './../../src/services/PathService';
 import moxios from 'moxios';
 
-describe("graphService", () => {
+describe("pathService", () => {
   let pathService: PathService;
 
   beforeEach(() => {
@@ -13,13 +13,13 @@ describe("graphService", () => {
     moxios.uninstall()
   })
 
-  test("post if token is still valid", async (done) => {
+  test("test posting pathService", async (done) => {
     moxios.wait(() => {
       let request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
         response: {
-          message: 'ok'
+          success: "true"
         }
       })
     })
@@ -27,7 +27,7 @@ describe("graphService", () => {
     // no user data needed
     pathService.post([1,2,3,4])
     .then((result) => {
-      expect(result).toBe('ok');
+      expect(result).toBe("true");
       done();
     })
   })

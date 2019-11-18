@@ -24,7 +24,7 @@ export class GraphService {
     const result = await this.axiosService.get(this.url);
 
     if(result.success) {
-      const graph: Graph = GraphFactory.createGraphFromJSON(result);
+      const graph: Graph = GraphFactory.createGraphFromJSON(result.data);
       return graph;
     } else {
       throw Error(result.error_message);
