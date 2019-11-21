@@ -23,12 +23,13 @@ export class LoginController {
 
       res.status(200).json({ success: true, "token": token });
     } else {
-      res.status(400).json({success: false, "token": ''});
+      res.status(200).json({success: false, "token": ''});
     }
   }
 
   private checkLoginData(req:any): string{
-    if(!req.header('token')) {
+    console.log("checklogindata: " + req.body.tok)
+    if(!req.body.tok) {
 
       // sign and send token back if correct login data
       let token = '';
@@ -39,9 +40,12 @@ export class LoginController {
       return token;
     } else {
       // token is already set so just verify if token is still valid
-      let correctToken = this.verify(req.header('token'));
+      let correctToken = this.verify(req.body.tok);
       if(correctToken) {
-        return req.header('token');
+        return req.body.tok;
+      }
+      if(req.body.password===this.password&&req.body.name===this.username) {
+        return this.sign(req.body.name);
       }
       return '';
     }
@@ -57,6 +61,7 @@ export class LoginController {
 
   private verify(signedToken: string): boolean {
     try {
+      console.log("verifying: " + signedToken);
       jwt.verify(signedToken, this.privateKey);
     } catch(err) {
       return false;

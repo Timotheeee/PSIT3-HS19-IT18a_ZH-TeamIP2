@@ -1,4 +1,4 @@
-import {AxiosController} from './AxiosController'
+import { AxiosController } from './AxiosController'
 
 export class LoginService {
   private readonly url: string = '/login';
@@ -8,38 +8,32 @@ export class LoginService {
     this.axiosController = new AxiosController();
   }
 
-  private async post(userData: any): Promise<String> {
-    const result = await this.axiosController.post(this.url, userData);
-    const token: string = result.token;
-    return token;
-  }
-
-  public async checkLoggedIn(): Promise<boolean> {
-    const token = await this.post({});
-
-    // if the token is still valid, then the token is set, else the token is the empty string
-    return token != '';
-  }
-
-  public isTokenSet(): boolean {
-    return this.axiosController.isHeaderSet('token');
-  }
 
   public logout() {
-    this.axiosController.setHeader('token', '');
+    console.log("logout");
+    localStorage.token = "";
   }
 
   public async verifyLoginData(name: string, password: string): Promise<boolean> {
-    const result = await this.axiosController.post(this.url, {name: name, password: password});
+    const result = await this.axiosController.post(this.url, { name: name, password: password });
 
     let correctLogin: boolean = false;
-    if(result.token) {
+    if (result.token && result.token != "") {
       correctLogin = true;
-      this.axiosController.setHeader('token', result.token)
-      console.log("was here");
-      console.log(correctLogin);
+      localStorage.token = result.token;
+
     }
     return correctLogin;
+  }
+
+  public async checkIfTokenStillValid(): Promise<boolean> {
+    console.log("checkIfTokenStillValid ");
+
+    let tok = localStorage.token;
+    const result = await this.axiosController.post(this.url, { tok: tok });
+    console.log(result);
+
+    return result.success;
   }
 
 }
