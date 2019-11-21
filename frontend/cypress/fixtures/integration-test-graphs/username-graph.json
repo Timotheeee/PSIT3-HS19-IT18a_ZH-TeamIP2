@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "metadata": {
+        "isHead": true,
+    	  "title" : "Tell me your name or I'll call you Leonardo DiCappuccino"
+      }
+    },
+    {
+      "id": "q2",
+      "metadata": {
+    	  "title" : "Nice to meet you %username%"
+      }
+    },
+    {
+      "id": "fn1",
+      "metadata": {
+    	  "title" : null,
+          "isFinalNode" : true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "q1",
+      "target": "q2",
+      "metadata": {
+        "answer": "Leonardo DiCappuccino",
+        "score": 0
+      }
+    },
+    {
+      "source": "q2",
+      "target": "fn1",
+      "metadata": {
+        "answer": "finish",
+        "score": 0
+      }
+    }
+  ]
+}
