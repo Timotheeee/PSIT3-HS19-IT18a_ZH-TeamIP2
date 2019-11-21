@@ -1,12 +1,13 @@
 import {AnswerStub} from './AnswerStub';
 import answerStub from './AnswerStub';
+import {AnswerType} from './../../src/model/Graph/Node';
 
 
 export class QuestionStub {
 
-  private answerType: string;
+  private answerType: number;
 
-  constructor(answerType: string) {
+  constructor(answerType: number) {
     this.answerType = answerType;
   }
 
@@ -18,7 +19,7 @@ export class QuestionStub {
     return "this is my question";
   }
 
-  public getAnswerType() : string {
+  public getAnswerType() : number {
     return this.answerType;
   }
 
@@ -31,6 +32,6 @@ export class QuestionStub {
   }
 }
 
-let questionStub = new QuestionStub("choice");
+let questionStub = new QuestionStub(AnswerType.RegularAnswer);
 export default questionStub;
 

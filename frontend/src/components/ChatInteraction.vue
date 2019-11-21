@@ -66,12 +66,7 @@ export default Vue.extend({
     methods: {
         processQuestion(edgeId: string) {
             this.graphIterator.choose(edgeId);
-
-            if(this.graphIterator.currentNode.isFinalNode){
-              this.questions.push(this.getLastQuestion());
-            } else {
-              this.questions.push(this.getNextQuestion());
-            }            
+            this.questions.push(this.getNextQuestion());
         },
         getNextQuestion(): Question {
           const currentNode:Node = this.graphIterator.currentNode;
@@ -85,12 +80,6 @@ export default Vue.extend({
           }
 
           return nextQuestion;
-        },
-        getLastQuestion() : Question {
-          const lastQuestion = new Question('fn999', 'Would you like to see how you did?', AnswerType.RegularAnswer);
-          lastQuestion.setIsFinalQuestion(true);
-          lastQuestion.addPossibleAnswer(new Answer(999, 'Yes', 'fn999+1'));
-          return lastQuestion;
         },
         insertUsernameInQuestion(question: string): string {
             let result = question.replace("%username%", this.$data.username);

@@ -2,7 +2,8 @@ import {Edge} from './Edge';
 
 export enum AnswerType {
   InputAnswer = 0,
-  RegularAnswer = 1
+  RegularAnswer = 1,
+  ResultAnswer
 }
 
 export class Node {
@@ -19,7 +20,7 @@ export class Node {
     this._text = text;
     this._answerType = answerType;
     this._isHead = isHead;
-    this._isFinalNode = isFinalNode;    
+    this._isFinalNode = isFinalNode;
 
     this._edges = [];
   }
