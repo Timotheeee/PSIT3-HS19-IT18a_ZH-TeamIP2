@@ -1,3 +1,4 @@
+import {AnswerType} from "../model/Graph/Node";
 <template>
   <div class="w-100 min-vh-100 background">
     <div class="container chat p-0 shadow-lg">
@@ -35,28 +36,29 @@ export default Vue.extend({
       let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, GraphFactory.createTestGraph());
       graphService.get()
       .then(result => {
-        createIterator(GraphIterator, result);
+        graphIterator = createIterator(GraphIterator, result);
+
+        var firstQuestion = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
+
+        // TODO: ryan duplicate code smell
+        const currentNode:Node = graphIterator.currentNode;
+        console.log(currentNode);
+        firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
+        let i = 1;
+        for(let currentAnswer of graphIterator.answersForCurrentNode()){
+            firstQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
+        }
+
+        this.$data.questions = [];
+        this.$data.questions.push(firstQuestion);
       })
       .catch(error => {
         alert('Please upload a file first in the adminpanel');
         this.$router.push('/welcome')
       })
 
-      var question1 = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
-
-      // TODO: ryan duplicate code smell
-      const currentNode:Node = graphIterator.currentNode;
-        console.log(currentNode);
-        question1 = new Question(currentNode.id, currentNode.text, currentNode.answerType);
-        let i = 1;
-        for(let currentAnswer of graphIterator.answersForCurrentNode()){
-          question1.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
-        }
-
       return {
-          questions: [
-            question1
-          ],
+          questions: [new Question("q0", "is typing...", AnswerType.RegularAnswer)],
           result: new Result(0, []),
           pathService: new PathService(),
           graphIterator: graphIterator,
