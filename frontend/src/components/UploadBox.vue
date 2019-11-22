@@ -6,7 +6,6 @@
       </label>
       <button id="submitFile" type="button" class="btn btn-secondary btn-lg" @click="submitFile">Submit</button><br>
       <button id="logout" type="button" class="btn btn-secondary btn-lg" @click="logout">Logout</button><br>
-      <a href="example.json"><button type="button" class="btn btn-secondary btn-lg">Example file format</button></a><br>
     </div>
   </div>
 </template>
@@ -40,11 +39,12 @@ export default Vue.extend({
       var reader = new FileReader();
       reader.readAsText(this.file, "UTF-8");
       reader.onload = evt => {
-        this.graphService.postGraph(evt.target!.result)
-        .then(res => {
+        const graphString: string = evt.target!.result!.toString();
+        this.graphService.post(graphString)
+        .then(result => {
           this.$emit("successfullUpload");
         })
-        .catch(rej => {
+        .catch(error => {
           this.$emit("errorWithFile");
         })
       }

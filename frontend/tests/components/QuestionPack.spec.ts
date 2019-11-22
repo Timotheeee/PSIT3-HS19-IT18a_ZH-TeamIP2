@@ -4,8 +4,10 @@ import QuestionPack from './../../src/components/QuestionPack.vue';
 import InputAnswer from './../../src/components/InputAnswer.vue';
 import ChoiceAnswer from './../../src/components/ChoiceAnswer.vue';
 import ResultAnswer from './../../src/components/ResultAnswer.vue';
+import {AnswerType} from './../../src/model/Graph/Node';
 import questionStub, {QuestionStub} from './QuestionStub';
 import answerStub from './AnswerStub';
+import {Answer} from "../../src/model/Answer";
 
 describe("questionpack", () => {
   let wrapper: Wrapper<Vue>;
@@ -25,17 +27,17 @@ describe("questionpack", () => {
     })
 
     it("should contain a choice-answer if answer-type is choice", () => {
-      wrapper.vm.$props.question = new QuestionStub("choice");
+      wrapper.vm.$props.question = new QuestionStub(AnswerType.RegularAnswer);
       expect(wrapper.html().includes('choice-answer')).toBeTruthy();
     })
 
     it("should contain a input-answer if answer-type is input", () => {
-      wrapper.vm.$props.question = new QuestionStub("input");
+      wrapper.vm.$props.question = new QuestionStub(AnswerType.InputAnswer);
       expect(wrapper.html().includes('input-answer')).toBeTruthy();
     })
 
     it("should contain a result-answer if answer-type is result", () => {
-      wrapper.vm.$props.question = new QuestionStub("result");
+      wrapper.vm.$props.question = new QuestionStub(AnswerType.ResultAnswer);
       expect(wrapper.html().includes('result-answer')).toBeTruthy();
     })
 

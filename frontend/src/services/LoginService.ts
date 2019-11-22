@@ -1,59 +1,39 @@
-import axios from 'axios';
-
+import { AxiosController } from './AxiosController'
 
 export class LoginService {
   private readonly url: string = '/login';
+  private readonly axiosController: AxiosController;
 
   constructor() {
-
+    this.axiosController = new AxiosController();
   }
 
-  public checkLoggedIn(): Promise<boolean> {
-    // check if token is still valid
-    return new Promise((resolve,reject) => {
-      this.post({})
-    .then(result => {
-      // token still verified
-      resolve(true);
-    })
-    .catch(error => {
-      reject(error)
-    })
-    });
-  }
-
-  public isTokenSet(): boolean {
-    return axios.defaults.headers.common['token'] ? true : false;
-  }
 
   public logout() {
-    axios.defaults.headers.common['token'] = '';
+    console.log("logout");
+    localStorage.token = "";
   }
 
-  public verifyLoginData(name: string, password: string): Promise<boolean> {
-    return new Promise((resolve,reject) => {
-      this.post({name: name, password: password})
-      .then(result => {
-        let correctLogin = false;
+  public async verifyLoginData(name: string, password: string): Promise<boolean> {
+    const result = await this.axiosController.post(this.url, { name: name, password: password });
 
-        // login was succesful, set token in header
-        if(result.data.token) {
-          correctLogin = true;
-          axios.defaults.headers.common['token'] = result.data.token;
-        }
-        resolve(correctLogin);
-      })
-      .catch(error => {
-        reject(error);
-      })
-    })
+    let correctLogin: boolean = false;
+    if (result.token && result.token != "") {
+      correctLogin = true;
+      localStorage.token = result.token;
+
+    }
+    return correctLogin;
   }
 
-  post(data: any): Promise<any> {
-    return axios({
-      method: "post", url: this.url,
-      data: data
-    })
+  public async checkIfTokenStillValid(): Promise<boolean> {
+    console.log("checkIfTokenStillValid ");
+
+    let tok = localStorage.token;
+    const result = await this.axiosController.post(this.url, { tok: tok });
+    console.log(result);
+
+    return result.success;
   }
 
 }

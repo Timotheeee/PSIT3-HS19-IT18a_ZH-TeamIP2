@@ -11,6 +11,9 @@
         @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
         @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)"
         @logout="logout" />
+
+        <graph-visualizer v-if="loggedin"></graph-visualizer>
+
         <button
           id="goToWelcomePage"
           @click="goTo('/welcome')"
@@ -26,6 +29,7 @@ import Vue from 'vue';
 import TheHeader from './TheHeader.vue';
 import LoginBox from './LoginBox.vue';
 import UploadBox from './UploadBox.vue';
+import GraphVisualizer from './GraphVisualizer.vue';
 import { LoginService } from '../services/LoginService';
 
 export default Vue.extend({
@@ -67,17 +71,14 @@ export default Vue.extend({
       this.loginService.logout();
     },
     checkIfTokenStillValid() {
-      this.loginService.checkLoggedIn()
+      console.log("check");
+      this.loginService.checkIfTokenStillValid()
       .then(result => {
       this.loggedin = result;
-    })
-    .catch(error => {
-      // if the token is still set, but the server sent an error back has to mean that
-      // that the token is not valid anymore
-      if(this.loginService.isTokenSet()) {
-        this.makeToast('danger', 'Session expired', "You're session has expired.");
-      }
-    })
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   },
   created() {
@@ -86,7 +87,8 @@ export default Vue.extend({
   components: {
     TheHeader,
     LoginBox,
-    UploadBox
+    UploadBox,
+    GraphVisualizer
   }
 });
 </script>

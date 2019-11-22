@@ -1,58 +1,38 @@
-import axios from 'axios';
-import {GraphIterator, MyGraphIterator} from './../model/MyGraphIterator';
+import {AxiosController} from './AxiosController'
+import { Graph } from '../model/Graph/Graph';
+import { GraphFactory } from '../model/Graph/GraphFactory';
 
 export class GraphService {
   readonly url: string = '/graph';
+  readonly axiosService: AxiosController;
+
   constructor() {
-
+    this.axiosService = new AxiosController();
   }
 
-  postGraph(graph: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "post",
-        url: this.url,
-        data: {
-          graph: graph
-        }
-      })
-      .then(result => {
-        resolve(result);
-      })
-      .catch(error => {
-        reject(error);
-      });
-    })
+  public async post(graphToPost: string): Promise<boolean> {
+    const result = await this.axiosService.post(this.url, {graph: graphToPost});
 
+    if(result.success) {
+      return true;
+    } else {
+      throw Error(result.error_message);
+    }
   }
 
-  getGraphIterator(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let promise = this.getGraph();
+  public async get(): Promise<Graph> {
+    const result = await this.axiosService.get(this.url);
 
-      promise.then(result => {
-        let graphIterator = new MyGraphIterator(result);
-        resolve(graphIterator);
-      })
-
-      promise.catch(error => {
-        reject(error);
-      })
-    })
+    if(result.success) {
+      const graph: Graph = GraphFactory.createGraphFromJSON(result.data);
+      return graph;
+    } else {
+      throw Error(result.error_message);
+    }
   }
 
-  private getGraph(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "get",
-        url: this.url,
-      })
-      .then(result => {
-        resolve(result);
-      })
-      .catch(error => {
-        reject(error);
-      });
-    })
+  public async getJSON(): Promise<string> {
+    const result = await this.axiosService.get(this.url);
+    return result.data;
   }
 }

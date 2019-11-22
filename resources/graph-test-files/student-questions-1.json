@@ -127,5 +127,40 @@
                 "score": -500
             }
         }
-    ]
+    ],
+    "recommendations": [
+    {
+      "type": "answerBased",
+      "data": [
+      {
+        "answerSet": ["e1","e2","e3"],
+        "recommendation": "<p>lorem ipsum a</p>"
+      },
+      {
+        "answerSet": ["e2","e4"],
+        "recommendation": "<p>lorem ipsum b</p>"
+      },
+      {
+        "answerSet": ["e5"],
+        "recommendation": "<p>lorem ipsum c</p>"
+      },
+      {
+        "answerSet": ["e2","e5","e7"],
+        "recommendation": "<p>lorem ipsum d</p>"
+      }
+      ]
+    },
+    {
+      "type": "scoreBased",
+      "data": {
+        "numberOfScorePartitions": 4,
+        "recommendations": [
+          "<p>lorem ipsum 1</p>",
+          "<p>lorem ipsum 2</p>",
+          "<p>lorem ipsum 3</p>",
+          "<p>lorem ipsum 4</p>"
+        ]
+      }
+    }
+  ]
 }
