@@ -4,20 +4,22 @@
       "id": "q1",
       "metadata": {
         "isHead": true,
+        "answerType": "input",
     	  "title" : "Tell me your name or I'll call you Leonardo DiCappuccino"
       }
     },
     {
       "id": "q2",
       "metadata": {
-    	  "title" : "Nice to meet you %username%"
+    	  "title" : "Nice to meet you %username%",
+        "answerType": "choice"
       }
     },
     {
       "id": "fn1",
       "metadata": {
-    	  "title" : null,
-          "isFinalNode" : true
+    	  "title" : "",
+        "isFinalNode" : true
       }
     }
   ],
