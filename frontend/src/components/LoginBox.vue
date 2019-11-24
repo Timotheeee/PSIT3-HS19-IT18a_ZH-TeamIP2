@@ -31,20 +31,19 @@ export default Vue.extend({
   },
   methods: {
     submitUserdata(): void {
-      let inputElement: HTMLInputElement = <HTMLInputElement>this.$refs.password;
-      let inputElementname: HTMLInputElement = <HTMLInputElement>this.$refs.name;
-        this.password=inputElement.value;
-        this.name=inputElementname.value;
-        this.loginService.verifyLoginData(this.name,this.password)
-        .then(result => {
-          var loggedin = result;
-
-          this.$emit('loginOK', loggedin);
-        })
-        .catch(reject => {
-          this.$emit('errorWithLogin');
-        })
-      }
+      let inputElementPassword: HTMLInputElement = <HTMLInputElement>this.$refs.password;
+      let inputElementName: HTMLInputElement = <HTMLInputElement>this.$refs.name;
+      this.password = inputElementPassword.value;
+      this.name = inputElementName.value;
+      this.loginService.verifyLoginData(this.name,this.password)
+      .then(result => {
+        var loggedin = result;
+        this.$emit('loginOK', loggedin);
+      })
+      .catch(reject => {
+        this.$emit('errorWithLogin');
+      })
+    }
   }
 })
 </script>

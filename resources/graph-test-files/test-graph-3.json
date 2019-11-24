@@ -5,7 +5,7 @@
       "metadata": {
         "isHead": true,
         "answerType": "input",
-        "title": "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I''ll just call you James"
+        "title": "Hey thanks for testing out StudentScore! Do you wanna tell me your name? If not I'll just call you Bob"
       }
     },
     {
@@ -58,7 +58,7 @@
       "target": "q2",
       "edgeId": "e1",
       "metadata": {
-        "answer": "James",
+        "answer": "Bob",
         "score": 0
       }
     },
