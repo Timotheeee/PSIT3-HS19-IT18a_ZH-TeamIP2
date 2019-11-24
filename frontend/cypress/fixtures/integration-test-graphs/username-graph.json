@@ -27,6 +27,7 @@
     {
       "source": "q1",
       "target": "q2",
+      "edgeId": "e1",
       "metadata": {
         "answer": "Leonardo DiCappuccino",
         "score": 0
@@ -35,6 +36,7 @@
     {
       "source": "q2",
       "target": "fn1",
+      "edgeId": "e2",
       "metadata": {
         "answer": "finish",
         "score": 0

@@ -4,13 +4,10 @@ import {AnswerType} from "../model/Graph/Node";
     <div class="container chat p-0 shadow-lg">
       <the-header />
       <div id="chat-box">
-        <form @submit="onSubmit"
-          method="post">
-          <question-pack class="questionPack"
-                    v-for="question in this.questions" v-bind:key="question.getId()"
-                    :question="question"
-                    @processNextQuestion="processQuestion" />
-        </form>
+        <question-pack class="questionPack"
+              v-for="question in this.questions" v-bind:key="question.getId()"
+              :question="question"
+              @processNextQuestion="processQuestion" />
       </div>
     </div>
   </div>
@@ -61,22 +58,21 @@ export default Vue.extend({
         insertUsernameInQuestion(question: string): string {
             let result = question.replace("%username%", this.$data.username);
             return result;
-        },
-
-        onSubmit(event: Event) {
-            // prevents form from reloading the page
-            event.preventDefault();
-
-            // TODO: ryan write this code -> use new classes for recommendations etc.
-            this.result.setScore(404);
-            // TODO: add recommendations
-            this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
         }
     },
     created() {
       EventBus.$on("setUsername", (username: String) => {
         this.$data.username = username;
       });
+
+      EventBus.$on("goToResultSite", () => {
+
+          // TODO: ryan write this code -> use new classes for recommendations etc.
+          this.result.setScore(404);
+          // TODO: add recommendations
+          this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
+      });
+
       let graphService = new GraphService();
       graphService.get()
         .then(result => {

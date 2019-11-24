@@ -6,12 +6,14 @@
             :key="answer.id"
             type="submit"
             :value="answer"
+            v-on:click="onButtonClick()"
     >{{answer.answer}}</button>
   </b-button-group>
 </template>
 
 <script lang="ts">
   import Vue from "vue";
+  import { EventBus } from "../event-bus";
   import { Answer } from "./../model/Answer";
 
   export default Vue.extend({
@@ -25,6 +27,12 @@
       possibleAnswers: {
         type: Array,
         required: true
+      }
+    },
+    methods: {
+      onButtonClick() {
+        // redirects user to the result site
+        EventBus.$emit("goToResultSite");
       }
     }
   });
