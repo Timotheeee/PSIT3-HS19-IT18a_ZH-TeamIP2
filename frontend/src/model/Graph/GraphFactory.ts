@@ -84,11 +84,11 @@ export class GraphFactory {
   private static importEdges(graph: Graph, edges: EdgeJSON[]) {
     let currentEdge: Object;
     for (let edge of edges) {
-        if (edge.metadata !== undefined) {
-          graph.addEdge(new Edge(edge.id, edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score)));
-        } else {
-          graph.addEdge(new Edge(edge.id, edge.source, edge.target));
-        }
+      if (edge.metadata !== undefined) {
+        graph.addEdge(new Edge(edge.edgeId, edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score)));
+      } else {
+        graph.addEdge(new Edge(edge.edgeId, edge.source, edge.target));
+      }
     }
   }
 }

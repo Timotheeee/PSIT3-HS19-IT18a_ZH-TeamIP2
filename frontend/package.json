@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest --silent",
+    "integration": "cypress open",
     "testviz": "jest -t 'visualizer'",
     "build": "webpack --watch --mode=development",
     "compile_css": "node-sass --include-path sass ./src/css/speech-bubble.scss",
@@ -38,6 +39,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "babel-core": "^6.26.3",
+    "cypress": "^3.6.1",
     "file-loader": "^4.2.0",
     "less": "^3.10.3",
     "moxios": "^0.4.0",

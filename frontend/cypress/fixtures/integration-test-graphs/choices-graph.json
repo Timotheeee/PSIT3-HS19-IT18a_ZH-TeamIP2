@@ -1,0 +1,96 @@
+{
+  "nodes": [
+    {
+      "id": "q1",
+      "metadata": {
+        "isHead": true,
+        "answerType": "choice",
+    	  "title" : "Do you go to reddit during class?"
+      }
+    },
+    {
+      "id": "q2",
+      "metadata": {
+    	  "title" : "Liar",
+        "answerType": "result"
+      }
+    },
+    {
+      "id": "q3",
+      "metadata": {
+        "title" : "Stop it, get some help",
+        "answerType": "result"
+      }
+    },
+    {
+      "id": "q4",
+      "metadata": {
+        "title" : "Everything",
+        "answerType": "result"
+      }
+    },
+    {
+      "id": "fn1",
+      "metadata": {
+    	  "title" : "",
+        "isFinalNode" : true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "q1",
+      "target": "q2",
+      "edgeId": "e1",
+      "metadata": {
+        "answer": "Pff... no",
+        "score": -100
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q3",
+      "edgeId": "e2",
+      "metadata": {
+        "answer": "Yes",
+        "score": 500
+      }
+    },
+    {
+      "source": "q1",
+      "target": "q4",
+      "edgeId": "e3",
+      "metadata": {
+        "answer": "What is reddit",
+        "score": 0
+      }
+    },
+    {
+      "source": "q2",
+      "target": "fn1",
+      "edgeId": "e4",
+      "metadata": {
+        "answer": "Cool",
+        "score": 0
+      }
+    },
+    {
+      "source": "q3",
+      "target": "fn1",
+      "edgeId": "e5",
+      "metadata": {
+        "answer": "Cool",
+        "score": 0
+      }
+    },
+    {
+      "source": "q4",
+      "target": "fn1",
+      "edgeId": "e6",
+      "metadata": {
+        "answer": "Cool",
+        "score": 0
+      }
+    }
+  ]
+}
