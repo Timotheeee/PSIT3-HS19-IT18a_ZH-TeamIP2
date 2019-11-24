@@ -32,36 +32,11 @@ import { GraphService } from '../services/GraphService'
 
 export default Vue.extend({
     data() {
-      let graphService = new GraphService();
-      let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, GraphFactory.createTestGraph());
-      graphService.get()
-      .then(result => {
-        graphIterator = createIterator(GraphIterator, result);
-
-        var firstQuestion = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
-
-        // TODO: ryan duplicate code smell
-        const currentNode:Node = graphIterator.currentNode;
-        console.log(currentNode);
-        firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
-        let i = 1;
-        for(let currentAnswer of graphIterator.answersForCurrentNode()){
-            firstQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
-        }
-
-        this.$data.questions = [];
-        this.$data.questions.push(firstQuestion);
-      })
-      .catch(error => {
-        alert('Please upload a file first in the adminpanel');
-        this.$router.push('/welcome')
-      })
-
       return {
           questions: [new Question("q0", "is typing...", AnswerType.RegularAnswer)],
           result: new Result(0, []),
           pathService: new PathService(),
-          graphIterator: graphIterator,
+          graphIterator: createIterator(GraphIterator, GraphFactory.createTestGraph()),
           username: ""
       }
     },
@@ -102,6 +77,29 @@ export default Vue.extend({
       EventBus.$on("setUsername", (username: String) => {
         this.$data.username = username;
       });
+      let graphService = new GraphService();
+      graphService.get()
+        .then(result => {
+            let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, result);
+            this.$data.graphIterator = graphIterator;
+
+            var firstQuestion = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
+
+            // TODO: ryan duplicate code smell
+            const currentNode:Node = graphIterator.currentNode;
+            firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
+            let i = 1;
+            for(let currentAnswer of graphIterator.answersForCurrentNode()){
+                firstQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
+            }
+
+            this.$data.questions = [];
+            this.$data.questions.push(firstQuestion);
+        })
+        .catch(error => {
+            alert('Please upload a file first in the adminpanel');
+            this.$router.push('/welcome')
+        });
     },
     updated() {
       var chatBox = this.$el.querySelector("#chat-box");
