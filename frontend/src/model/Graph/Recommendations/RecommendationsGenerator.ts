@@ -11,6 +11,6 @@ export interface RecommendationsGeneratorInterface {
 }
 
 export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string,
-  path: PathResult[], graph: Graph):RecommendationsGeneratorInterface {
+  path: PathResult[], graph: Graph): RecommendationsGeneratorInterface {
     return new ctor(json, path, graph);
 }
