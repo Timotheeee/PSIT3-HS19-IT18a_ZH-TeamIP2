@@ -14,6 +14,7 @@ export interface RecommendationsGeneratorInterface {
 
 export function createRecommendationsGenerator(ctor: RecommendationsGeneratorConstructor, json: string,
 <<<<<<< HEAD
+<<<<<<< HEAD
   path: PathResult[], graph: Graph): RecommendationsGeneratorInterface {
     return new ctor(json, path, graph);
 =======
@@ -42,6 +43,9 @@ export function createRecommendationsGeneratorInterface(ctor: RecommendationsGen
 =======
 >>>>>>> prepare unit tests for michael to continue on ...
   path: PathResult[], graph: Graph):RecommendationsGeneratorInterface {
+=======
+  path: PathResult[], graph: Graph): RecommendationsGeneratorInterface {
+>>>>>>> Implement RecommendationsGenerator classes
     return new ctor(json, path, graph);
 >>>>>>> -change recommendation interface to use PathResult over GraphIterator
 }
