@@ -35,8 +35,14 @@ app.get('/graph', (request: expressNS.Request, response: expressNS.Response) => 
 });
 
 app.post('/graph', (request: expressNS.Request, response: expressNS.Response) => {
-  dbController.save2File(request.body.graph);
-  response.status(200).json({ success: true, data: '' });
+
+  if(request.body.graph) {
+    dbController.save2File(request.body.graph);
+    response.status(200).json({ success: true, data: '' });
+  } else {
+    response.status(200).json({success: false, data: ''});
+  }
+
 });
 
 app.post('/login/', (request: expressNS.Request, response: expressNS.Response) => {

@@ -42,7 +42,12 @@ export default Vue.extend({
         const graphString: string = evt.target!.result!.toString();
         this.graphService.post(graphString)
         .then(result => {
-          this.$emit("successfullUpload");
+
+          if(result) {
+            this.$emit("successfullUpload");
+          } else {
+            this.$emit("errorWithFile");
+          }
         })
         .catch(error => {
           this.$emit("errorWithFile");
