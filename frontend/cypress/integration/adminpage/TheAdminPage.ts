@@ -18,7 +18,7 @@ describe('adminpage integration test', () => {
       cy.contains('Submit').click();
 
       // test if the error login toast was made
-      cy.contains('Error with login.');
+      cy.contains('Password or username was wrong.');
     })
 
     it('test the login with wrong input password', () => {
@@ -28,7 +28,7 @@ describe('adminpage integration test', () => {
       cy.contains('Submit').click();
 
       // test if the error login toast was made
-      cy.contains('Error with login.');
+      cy.contains('Password or username was wrong.');
     })
 
     it("tests if you're still logged in after going to another page", () => {
@@ -88,7 +88,6 @@ describe('adminpage integration test', () => {
   })
 
   describe('file upload process', () => {
-
     it ("test if there's an error without any input file ", () => {
 
       cy.visit(Cypress.config().baseUrl + 'adminpage');
