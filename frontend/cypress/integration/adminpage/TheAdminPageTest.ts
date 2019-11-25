@@ -92,20 +92,16 @@ describe('adminpage integration test', () => {
 
       cy.visit(Cypress.config().baseUrl + 'adminpage');
 
-
       // login
       cy.get('input#name').type('psit')
       cy.get('input#password').type('psit')
       cy.contains('Submit').click();
 
+      cy.get('button.close').click();
       cy.get('button#submitFile').click();
 
       // because there was no file added, should receive a toast with error
       cy.contains("File coulnd't be uploaded!");
-
     })
-
-
   })
-
 })
