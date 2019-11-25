@@ -31,7 +31,7 @@ export class Edge {
 }
 
 export interface EdgeJSON {
-  id: string;
+  edgeId: string;
   source: string;
   target: string;
   metadata: {
