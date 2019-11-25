@@ -85,9 +85,9 @@ export class GraphFactory {
     let currentEdge: Object;
     for (let edge of edges) {
       if (edge.metadata !== undefined) {
-        graph.addEdge(new Edge(edge.id, edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score)));
+        graph.addEdge(new Edge(edge.edgeId, edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score)));
       } else {
-        graph.addEdge(new Edge(edge.id, edge.source, edge.target));
+        graph.addEdge(new Edge(edge.edgeId, edge.source, edge.target));
       }
     }
   }

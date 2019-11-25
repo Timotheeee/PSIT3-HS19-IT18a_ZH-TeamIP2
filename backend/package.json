@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "build": "tsc -p .",
     "test": "tsc & jasmine dist/backend/test/DBControllerSpec.js",
-    "test2": "node_modules/nodemon/bin/nodemon.js -w dist ./node_modules/.bin/jasmine — config=jasmine.json",
+    "test2": "tsc & jasmine dist/backend/test/DBControllerSpec.js",
+    "test3": "node_modules/nodemon/bin/nodemon.js -w dist ./node_modules/.bin/jasmine — config=jasmine.json",
     "ex": "jasmine examples"
   },
   "author": "ayy",
