@@ -47,7 +47,7 @@ export class LoginController {
 
       return token;
     } else {
-      // token is already set so just verify if token is still valid
+      // token is already set so just verify if token is still valid and then send it back
       let correctToken = this.verify(request.body.tok);
       if(correctToken) {
         return request.body.tok;

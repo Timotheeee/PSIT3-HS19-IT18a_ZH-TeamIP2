@@ -24,7 +24,7 @@ describe('Graph', () => {
       let node2Add: Node = new Node('q1', 'How old are you');
       graph.addNode(node2Add);
 
-      expect(() => { 
+      expect(() => {
         graph.addNode(node2Add);
       }).toThrow();
     });
@@ -33,11 +33,11 @@ describe('Graph', () => {
   describe('addEdge()' , () => {
     it('should work if source and target do exist', () => {
       let node1: Node = new Node('q1', 'How old are you');
-      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');
       graph.addNode(node1);
       graph.addNode(node2);
 
-      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
+      let edge2Add: Edge = new Edge('e1', node1.id, node2.id, 'I\m 17 years old', 0);
 
       expect(() => {
         graph.addEdge(edge2Add);
@@ -46,10 +46,10 @@ describe('Graph', () => {
 
     it('should throw if source does not exist', () => {
       let node1: Node = new Node('q1', 'How old are you');
-      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');
       graph.addNode(node2);
-      
-      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
+
+      let edge2Add: Edge = new Edge('e1', node1.id, node2.id, 'I\m 17 years old', 0);
 
       expect(() => {
         graph.addEdge(edge2Add);
@@ -58,10 +58,10 @@ describe('Graph', () => {
 
     it('should throw if target does not exist', () => {
       let node1: Node = new Node('q1', 'How old are you');
-      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');      
+      let node2: Node = new Node('q2', 'Do you prefer dogs to cats?');
       graph.addNode(node1);
-      
-      let edge2Add: Edge = new Edge('e1', node1, node2, 'I\m 17 years old', 0);
+
+      let edge2Add: Edge = new Edge('e1', node1.id, node2.id, 'I\m 17 years old', 0);
 
       expect(() => {
         graph.addEdge(edge2Add);
@@ -85,14 +85,14 @@ describe('Graph', () => {
       let node2Add2: Node = new Node('q2', 'Do you prefer dogs to cats?');
       let node2Add3: Node = new Node('q3', 'Would you like to own a motorcycle?');
 
-      graph.addNode(node2Add1); 
-      graph.addNode(node2Add2); 
-      graph.addNode(node2Add3); 
+      graph.addNode(node2Add1);
+      graph.addNode(node2Add2);
+      graph.addNode(node2Add3);
 
       let actual:Node|null = graph.findNode('q3');
       expect(actual).not.toBeNull();
     });
 
   });
-    
+
 });

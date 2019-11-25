@@ -13,40 +13,40 @@ describe("loginService", () => {
     moxios.uninstall()
   })
 
-  test("verifyLoginData", async (done) => {
+  test("verifyLoginData with wrong data", async (done) => {
+    //simulate bad login attempt
     moxios.wait(() => {
       let request = moxios.requests.mostRecent()
       request.respondWith({
-        status: 400,
+        status: 200,
         response: {
-          token: ''
+          success: false, "token": ""
         }
       })
     })
 
-    // no user data needed
+
     loginService.verifyLoginData('name', 'password')
     .then((result) => {
-    })
-    .catch(error => {
-      expect(error).toBeTruthy();
+      expect(result).toBe(false);
       done();
     })
   })
 
-  test("verifyLoginData if token is still valid", async (done) => {
+  test("verifyLoginData with valid login data", async (done) => {
+    //pretend the data is correct
     moxios.wait(() => {
       let request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
         response: {
-          token: '1234'
+           success: true, "token": "2"
         }
       })
     })
 
-    // no user data needed
-    loginService.verifyLoginData('name', 'passowrd')
+
+    loginService.verifyLoginData('name', 'password')
     .then((result) => {
       expect(result).toBe(true);
       done();
@@ -59,32 +59,13 @@ describe("loginService", () => {
       request.respondWith({
         status: 200,
         response: {
-          token: '1234'
+          success: true, "token": "2"
         }
       })
     })
 
     // no user data needed
-    loginService.checkLoggedIn()
-    .then((result) => {
-      expect(result).toBe(true);
-      done();
-    })
-  })
-
-  test("checkLoggedIn if token is still valid", async (done) => {
-    moxios.wait(() => {
-      let request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: {
-          token: '1234'
-        }
-      })
-    })
-
-    // no user data needed
-    loginService.checkLoggedIn()
+    loginService.checkIfTokenStillValid()
     .then((result) => {
       expect(result).toBe(true);
       done();
