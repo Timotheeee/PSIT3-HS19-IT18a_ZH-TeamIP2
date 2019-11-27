@@ -12,7 +12,7 @@ export class LoginController {
   constructor() {
     var content: string[] = fs.readFileSync('.env',"utf8").split("\n");
 
-    console.log(content);
+    //console.log(content);
 
     this.privateKey = content[0];
     this.username = content[1];
@@ -21,7 +21,7 @@ export class LoginController {
   }
 
   public auth(request: Request, response: Response) {
-    let token = this.checkLoginData(request);
+    let token = this.checkLoginData(request.body);
 
    // login succesful if the method checkLoginData sends a token back, else the method
    // checkLoginData returns an empty string
@@ -33,27 +33,28 @@ export class LoginController {
     }
   }
 
-  private checkLoginData(request: Request): string{
-    console.log("checklogindata: " + request.body.tok)
-    if(!request.body.tok) {
+  private checkLoginData(body: any): string{
+    console.log("checklogindata line 37: " + JSON.stringify(body))
+    if(!body.tok) {
 
       // sign and send token back if correct login data
       let token = '';
 
 
-      if(request.body.password===this.password && request.body.name===this.username) {
-        token = this.sign(request.body.name);
+      if(body.password===this.password && body.name===this.username) {
+        token = this.sign(body.name);
       }
 
       return token;
     } else {
       // token is already set so just verify if token is still valid and then send it back
-      let correctToken = this.verify(request.body.tok);
+      let correctToken = this.verify(body.tok);
+      console.log("VERIFY RESULT: " + correctToken);
       if(correctToken) {
-        return request.body.tok;
+        return body.tok;
       }
-      if(request.body.password===this.password&&request.body.name===this.username) {
-        return this.sign(request.body.name);
+      if(body.password===this.password&&body.name===this.username) {
+        return this.sign(body.name);
       }
       return '';
     }

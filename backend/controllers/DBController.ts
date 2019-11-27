@@ -6,12 +6,12 @@ export class DBController {
   private graph: string = '';
   private con: any;
 
-  constructor() {    
+  constructor() {
     fs.readFile(filelocation, 'utf8', (err: any, data: string) =>  {
       if (err) {
         throw Error(`error while reading file: ${err}`);
       }
-      this.graph = data;      
+      this.graph = data;
     });
   }
 
@@ -28,7 +28,7 @@ export class DBController {
   }
 
   //used for tests
-  /*public getGraphAsync() {
+  public getLoadedFileAsync() {
     var this2 = this;
     var prom = new Promise(function (resolve, reject) {
       var si = setInterval(function () {
@@ -39,5 +39,5 @@ export class DBController {
       }, 50);
     });
     return prom;
-  }*/
+  }
 }

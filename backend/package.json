@@ -8,9 +8,8 @@
     "dev": "nodemon server.ts",
     "start": "node dist/server.js",
     "build": "tsc -p .",
-    "test": "tsc & jasmine dist/backend/test/DBControllerSpec.js",
-    "test2": "tsc & jasmine dist/backend/test/DBControllerSpec.js",
-    "test3": "node_modules/nodemon/bin/nodemon.js -w dist ./node_modules/.bin/jasmine — config=jasmine.json",
+    "testlogin": "tsc & jasmine dist/test/LoginControllerSpec.js",
+    "testdb": "tsc & jasmine dist/test/DBControllerSpec.js",
     "ex": "jasmine examples"
   },
   "author": "ayy",
