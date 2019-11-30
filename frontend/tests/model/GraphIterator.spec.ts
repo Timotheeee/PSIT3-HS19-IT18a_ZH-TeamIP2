@@ -61,7 +61,7 @@ describe('GraphIterator', () => {
 
         it('should return true if currentNode points to a final node', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
-            
+
             traverseToFinalNode(iterator);
 
             expect(iterator.isFinalNode()).toBe(true);
@@ -83,7 +83,7 @@ describe('GraphIterator', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
             iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
             iterator.choose(iterator.answersForCurrentNode()[0].edgeId);
-            
+
             const actual = iterator.getPath();
 
             expect(actual.length).toBe(2);
@@ -106,7 +106,7 @@ describe('GraphIterator', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
 
             const illegalEdgeId = 'e¿3999';
-            expect(() => { 
+            expect(() => {
                 iterator.choose(illegalEdgeId);
             }).toThrow();
         });
@@ -125,9 +125,9 @@ describe('GraphIterator', () => {
     });
 
     describe('composite test gaming graph: left path', () =>{
-        it('should folllow the path and eventually arrive at the final node.', () => {
+        it('should follow the path and eventually arrive at the final node.', () => {
             const iterator: GraphIteratorInterface = createTestGraph();
-            
+
             expect(iterator.currentNode.text).toBe(q1Text);
             iterator.choose('e1');
 
@@ -155,7 +155,7 @@ describe('GraphIterator', () => {
             iterator.choose('e3');
 
             expect(iterator.currentNode.text).toBe(q4Text);
-            iterator.choose('e6'); 
+            iterator.choose('e6');
 
             expect(iterator.currentNode.text).toBe(q5Text);
             iterator.choose('e8');

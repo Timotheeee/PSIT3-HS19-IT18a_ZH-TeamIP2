@@ -63,7 +63,7 @@ describe('questionnaire integration test', function() {
       }));
     })
 
-    it('should be able to ', function () {
+    it('should be able to choose all available answers', function () {
 
       // start questionnaire
       cy.visit(Cypress.config().baseUrl + 'welcome');

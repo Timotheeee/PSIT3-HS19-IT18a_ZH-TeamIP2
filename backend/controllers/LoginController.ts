@@ -23,7 +23,7 @@ export class LoginController {
   public auth(request: Request, response: Response) {
     let token = this.checkLoginData(request.body);
 
-   // login succesful if the method checkLoginData sends a token back, else the method
+   // login successful if the method checkLoginData sends a token back, else the method
    // checkLoginData returns an empty string
     if(token) {
 

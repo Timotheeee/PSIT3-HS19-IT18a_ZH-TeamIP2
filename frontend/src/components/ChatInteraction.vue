@@ -93,7 +93,7 @@ export default Vue.extend({
             this.$data.questions.push(firstQuestion);
         })
         .catch(error => {
-            alert('Please upload a file first in the adminpanel');
+            alert('Please upload a file first in the admin panel');
             this.$router.push('/welcome')
         });
     },

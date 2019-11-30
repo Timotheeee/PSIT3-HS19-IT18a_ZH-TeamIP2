@@ -93,18 +93,18 @@ describe("adminsite", () => {
           expect(makeToastStub).toHaveBeenCalled();
       })
 
-      test ("is a toast made when there was a succesful file upload", () => {
+      test ("is a toast made when there was a successful file upload", () => {
 
         // log in
         wrapper.setData({
           loggedin: true
         })
 
-        wrapper.find(UploadBox).vm.$emit('successfullUpload');
+        wrapper.find(UploadBox).vm.$emit('successfulUpload');
         expect(makeToastStub).toHaveBeenCalled();
       })
 
-      test ("is a toast made when there was an unsuccesful file upload", () => {
+      test ("is a toast made when there was an unsuccessful file upload", () => {
 
         // login
         wrapper.setData({

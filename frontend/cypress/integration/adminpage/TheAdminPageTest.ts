@@ -1,7 +1,7 @@
 describe('adminpage integration test', () => {
 
   describe('login process', () =>  {
-    it('test the login in succesfull scenario', () => {
+    it('test the login in succesful scenario', () => {
       cy.visit(Cypress.config().baseUrl + 'adminpage');
       cy.get('input#name').type('psit').should('have.value', 'psit');
       cy.get('input#password').type('psit').should('have.value', 'psit');
@@ -45,7 +45,7 @@ describe('adminpage integration test', () => {
        // go back to admin panel
        cy .get('button#goToAdminPage').click();
 
-      // test if you're still loggin in --> logout button and submit file button should be there
+      // test if you're still logged in --> logout button and submit file button should be there
       cy.get('button#logout');
       cy.get('button#submitFile');
     })
@@ -67,7 +67,7 @@ describe('adminpage integration test', () => {
       cy.get('input#password')
     })
 
-    it("tests if still loggin in after reload", () => {
+    it("tests if still logged in after reload", () => {
       cy.visit(Cypress.config().baseUrl + 'adminpage');
 
       // login
@@ -101,7 +101,7 @@ describe('adminpage integration test', () => {
       cy.get('button#submitFile').click();
 
       // because there was no file added, should receive a toast with error
-      cy.contains("File coulnd't be uploaded!");
+      cy.contains("File couldn't be uploaded!");
     })
   })
 })

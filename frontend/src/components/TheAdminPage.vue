@@ -8,7 +8,7 @@
         @loginOK="updateViewToUpload"
         @errorWithLogin="makeToast('warning', loginErrorTitle, loginErrorBody)" />
         <upload-box v-else
-        @successfullUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
+        @successfulUpload="makeToast('success', fileUploadSuccessTitle, fileUploadSuccessBody)"
         @errorWithFile="makeToast('warning', fileUploadErrorTitle, fileUploadErrorBody)"
         @logout="logout" />
 
@@ -46,7 +46,7 @@ export default Vue.extend({
       loginErrorBody: "There was an error with the login. Please try again",
       fileUploadSuccessTitle: "File upload successfully!",
       fileUploadSuccessBody: "File was uploaded to the server and saved.",
-      fileUploadErrorTitle: "File coulnd't be uploaded!",
+      fileUploadErrorTitle: "File couldn't be uploaded!",
       fileUploadErrorBody: "There was an error with the file upload. Please try again."
     };
   },

@@ -9,7 +9,7 @@ export class GraphFactory {
   /**
    * This method is purely to be used for test purposes.
    * It creates a graph (question catalogue) using a fix string that represents the json format
-   * of the simplest possible situation: the gaming questionaire with the sleep/fitness question.
+   * of the simplest possible situation: the gaming questionnaire with the sleep/fitness question.
    */
   public static createTestGraph(): Graph {
     return this.createGraphFromJSON(GraphFactory.STATIC_JSON_STR_1);

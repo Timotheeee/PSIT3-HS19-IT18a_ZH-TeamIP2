@@ -20,7 +20,7 @@ describe('Graph', () => {
       graph.addNode(new Node('q1', 'How old are you'));
     });
 
-    it('should throw if a node witht the same nodeId already exists', () => {
+    it('should throw if a node with the same nodeId already exists', () => {
       let node2Add: Node = new Node('q1', 'How old are you');
       graph.addNode(node2Add);
 

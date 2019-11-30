@@ -44,7 +44,7 @@ export default Vue.extend({
         .then(result => {
 
           if(result) {
-            this.$emit("successfullUpload");
+            this.$emit("successfulUpload");
           } else {
             this.$emit("errorWithFile");
           }

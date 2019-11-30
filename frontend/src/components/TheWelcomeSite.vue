@@ -7,7 +7,7 @@
           <p class="lead">{{this.textStudentScore}}</p>
 
           <button id="goToQuestionnaire" @click="goTo('/questionnaire')" type="button" class="btn btn-secondary btn-lg">Start StudentScore!</button>
-          <button id="goToAdminPage" @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Adminpanel</button>
+          <button id="goToAdminPage" @click="goTo('/adminpage')" type="button" class="btn btn-secondary btn-lg">Go to Admin Panel</button>
 
           <h5>StudentScore Members</h5>
               <ul id="teammembers" class="list-inline">
