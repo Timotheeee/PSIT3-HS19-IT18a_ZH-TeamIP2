@@ -22,6 +22,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
   };
 
 
+<<<<<<< HEAD
   public generate(): string[] {
     let userAnswers: string[] = this.getAnswerIds(this._path);
     let recommendationsCatalogue: AnswerBasedRecommendationJSON[] = this.parseFromJSON(this._json);
@@ -99,10 +100,11 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
     this._graph = graph;
   };
 
+=======
+>>>>>>> -made some minor adjustments.
   public generate(): string[] {
-    // implement generate function
     let userAnswers: string[] = this.getAnswerIds(this._path);
-    let recommendationsCatalogue: AnswerBasedRecommendationJSON[] = this.createAnswerBasedRecommendationsFromJSON(this._json);
+    let recommendationsCatalogue: AnswerBasedRecommendationJSON[] = this.parseFromJSON(this._json);
     let recommendationsMap = this.createRecommendationsMap(recommendationsCatalogue);
     let recommendations = this.calculateRecommendations(userAnswers, recommendationsCatalogue, recommendationsMap);
 
@@ -124,9 +126,8 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
     return userAnswers;
   }
 
-  createAnswerBasedRecommendationsFromJSON(json: string): AnswerBasedRecommendationJSON[] {
-    let answerBasedRecommendations = JSON.parse(json);
-    return answerBasedRecommendations;
+  parseFromJSON(json: string): AnswerBasedRecommendationJSON[] {
+    return JSON.parse(json);
   }
 
   createRecommendationsMap(recommendationsCatalogue: AnswerBasedRecommendationJSON[]): Map<string[], string> {
