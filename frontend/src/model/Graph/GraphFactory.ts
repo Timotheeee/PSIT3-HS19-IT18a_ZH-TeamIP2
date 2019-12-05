@@ -59,8 +59,6 @@ export class GraphFactory {
 
   private static importNodes(graph: Graph, nodes: NodeJSON[]) {
     for (let node of nodes) {
-      // TODO: ryan don't forget about about isFinalNode
-      // TODO: ryan clean this mess up
       if(node.metadata !== undefined && (node.metadata.isHead !== undefined || node.metadata.isFinalNode !== undefined)) {
         graph.addNode(new Node(node.id, node.metadata.title, this.answerTypeStringToAnswerType(node.metadata.answerType),
                       node.metadata.isHead, node.metadata.isFinalNode!));
