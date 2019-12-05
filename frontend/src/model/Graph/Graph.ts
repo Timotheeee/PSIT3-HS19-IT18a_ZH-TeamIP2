@@ -1,6 +1,7 @@
 import {Node, NodeJSON, AnswerType} from './Node';
 import {Edge, EdgeJSON } from './Edge';
 
+// TODO: ryan: rename this to QuestionCatalogue
 export class Graph {
   private _nodes: Node[];
   private _headNode: Node|null = null;
@@ -17,7 +18,7 @@ export class Graph {
   /**
    * Adds a node if a node with the same nodeId does not yet exist.
    * The passed object will be cloned before it is added to the collection.
-   * @param node2Add 
+   * @param node2Add
    */
   addNode(node2Add: Node): void {
     if (this.findNode(node2Add.id) === null) {
@@ -30,7 +31,7 @@ export class Graph {
   /**
    * Adds an edge to the graph if it's source node and target node do exist.
    * The passed edge object will be cloned before it is added to the collection.
-   * @param edge2Add 
+   * @param edge2Add
    */
   addEdge(edge2Add: Edge): void {
     /* check if the source node exists */
@@ -43,7 +44,7 @@ export class Graph {
     if (targetNode == null) {
       throw new Error(`error while adding edge: ${edge2Add.id} target: ${edge2Add.targetId} does not exist!`);
     }
-    
+
     sourceNode.addEdge(edge2Add);
   }
 
@@ -51,14 +52,14 @@ export class Graph {
    * Finds an existing node by Id. Returns null if node doesn't exist.
    */
   findNode(nodeId: string) : Node|null {
-    for (let node of this._nodes) {      
+    for (let node of this._nodes) {
       // check if node id already exists
       if (node.id === nodeId) {
         return node;
       }
     }
     return null;
-  }  
+  }
 }
 
 export interface GraphJSON {

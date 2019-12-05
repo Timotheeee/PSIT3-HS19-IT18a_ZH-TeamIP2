@@ -9,29 +9,33 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
   private _json: string;
   private _path : PathResult[];
   private _graph : Graph;
+  private _score : number = 0;
 
   constructor(json: string, path: PathResult[], graph: Graph) {
     this._json = json;
     this._path = path;
     this._graph = graph;
-  };
+  }
+
+  get score(): number { return this._score; }
 
   public generate(): string[] {
-    // implement generate function
-    let scoreBasedRecommendations: ScoreBasedRecommendationsJSON = this.createScoreBasedRecommendationsFromJSON(this._json);
+    this._score = this.calculateScore();
+
+    let scoreBasedRecommendations: ScoreBasedRecommendationsJSON = this.parseFromJSON(this._json);
     let numberOfPartitions: number = scoreBasedRecommendations.numberOfPartitions;
     let recommendationsCatalogue: string[] = scoreBasedRecommendations.recommendations;
-    let userScore: number = this.calculateScore(this._path);
-    let recommendations: string[] = this.calculateRecommendations(numberOfPartitions, recommendationsCatalogue, userScore);
+    let recommendations: string[] = this.calculateRecommendations(numberOfPartitions, recommendationsCatalogue, this._score);
+
     return recommendations;
   }
 
-  calculateScore(path: PathResult[]): number {
+  private calculateScore(): number {
     let score: number = 0;
-    if (path.length < 1) {
+    if (this._path.length < 1) {
       throw new Error("path is empty.");
     }
-    for (let pathResult of path) {
+    for (let pathResult of this._path) {
       let decision: Edge | null = pathResult.decision;
       if (decision !== null) {
         score += decision.weight;
@@ -40,9 +44,8 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
     return score;
   }
 
-  createScoreBasedRecommendationsFromJSON(json: string): ScoreBasedRecommendationsJSON {
-    let scoreBasedRecommendations = JSON.parse(json);
-    return scoreBasedRecommendations;
+  parseFromJSON(json: string): ScoreBasedRecommendationsJSON {
+    return JSON.parse(json);
   }
 
   /*
@@ -70,10 +73,6 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
       partitionCounter += 1;
     }
     return recommendations;
-  }
-
-  public getScore(): number {
-    return this.calculateScore(this._path);
   }
 }
 
