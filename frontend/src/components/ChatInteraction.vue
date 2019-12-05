@@ -79,11 +79,8 @@ export default Vue.extend({
             let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, result);
             this.$data.graphIterator = graphIterator;
 
-            var firstQuestion = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
-
-            // TODO: ryan duplicate code smell
             const currentNode:Node = graphIterator.currentNode;
-            firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
+            let firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
             let i = 1;
             for(let currentAnswer of graphIterator.answersForCurrentNode()){
                 firstQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
