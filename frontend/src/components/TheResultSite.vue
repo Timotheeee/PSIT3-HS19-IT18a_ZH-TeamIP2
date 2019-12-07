@@ -22,67 +22,67 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import TheHeader from './TheHeader.vue';
-import {Result} from './../model/Result';
+  import Vue from 'vue';
+  import TheHeader from './TheHeader.vue';
+  import {Result} from './../model/Result';
 
-export default Vue.extend({
-  data() {
-    return {
-      result: new Result(1, []),
-      score: 0,
-      showAdvice: false,
-      recommendations: [""],
-    }
-  },
-  created() {
-    if(this.$route && this.$route.params.result) {
-        let resultJSON = JSON.parse(this.$route.params.result);
-        this.result = new Result(resultJSON.score, resultJSON.recommendations);
-    }
-    if(this.recommendations.length == 1
-        && this.recommendations[0] == "") {
-      this.recommendations.push("No recommendations available");
-    }
-  },
-  components: {
-    TheHeader
-  },
-  methods: {
-    countDown() {
-      var this2 = this;
-      setInterval(function() {
-        if (this2.score * 4 < this2.result.getScore()) {
-          this2.score++;
-        }
-        if (this2.score * 2 < this2.result.getScore()) {
-          this2.score++;
-        }
-        if (this2.score < this2.result.getScore()) {
-          this2.score++;
-        }
-        else {
-          if (!this2.showAdvice) {
-            this2.showAdvice = true;
-            var i = -1;
-
-            setInterval(function() {
-              if (this2.recommendations != null
-                  && i < this2.recommendations.length
-                  && i >= 0) {
-                this2.recommendations.push(this2.result.getRecommendations()[i]);
-              }
-              i++;
-            }, 600);
+  export default Vue.extend({
+    data() {
+      return {
+        result: new Result(1, []),
+        score: 0,
+        showAdvice: false,
+        recommendations: [""],
+      }
+    },
+    created() {
+      if(this.$route && this.$route.params.result) {
+          let resultJSON = JSON.parse(this.$route.params.result);
+          this.result = new Result(resultJSON.score, resultJSON.recommendations);
+      }
+      if(this.result.getRecommendations().length == 0
+        || (this.result.getRecommendations().length == 1 && this.result.getRecommendations()[0] == "")) {
+        this.result.getRecommendations().push("No recommendations available");
+      }
+    },
+    components: {
+      TheHeader
+    },
+    methods: {
+      countDown() {
+        var this2 = this;
+        setInterval(function() {
+          if (this2.score * 4 < this2.result.getScore()) {
+            this2.score++;
           }
-        }
-      }, 50);
+          if (this2.score * 2 < this2.result.getScore()) {
+            this2.score++;
+          }
+          if (this2.score < this2.result.getScore()) {
+            this2.score++;
+          }
+          else {
+            if (!this2.showAdvice) {
+              this2.showAdvice = true;
+              var i = -1;
+
+              setInterval(function() {
+                if (this2.recommendations != null
+                    && i < this2.recommendations.length
+                    && i >= 0) {
+                  this2.recommendations.push(this2.result.getRecommendations()[i]);
+                }
+                i++;
+              }, 600);
+            }
+          }
+        }, 10);
+      }
+    },
+    beforeMount() {
+      this.countDown();
     }
-  },
-  beforeMount() {
-    this.countDown();
-  }
-});
+  });
 </script>
 
 <style lang="scss" scoped>
