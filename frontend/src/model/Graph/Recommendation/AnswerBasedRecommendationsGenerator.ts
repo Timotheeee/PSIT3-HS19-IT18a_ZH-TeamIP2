@@ -55,9 +55,8 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
   calculateRecommendations(userAnswers: string[], recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[],
                            recommendationsMap: Map<string[], string>): string[] {
     let recommendations: string[] = [];
-
     for (const [key, value] of recommendationsMap.entries()) {
-      if (this.checkAnswers(userAnswers, key)) {
+      if (this.checkAnswers(key, userAnswers)) {
         recommendations.push(value);
       }
     }
