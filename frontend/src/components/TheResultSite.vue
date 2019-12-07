@@ -38,10 +38,6 @@
     created() {
       if(this.$route && this.$route.params.result) {
         let resultJSON = JSON.parse(this.$route.params.result);
-
-        console.log('inside of created');
-        console.log(resultJSON);
-
         this.result = new Result(resultJSON.score, resultJSON.recommendations);
       }
       if(this.recommendations.length == 1
