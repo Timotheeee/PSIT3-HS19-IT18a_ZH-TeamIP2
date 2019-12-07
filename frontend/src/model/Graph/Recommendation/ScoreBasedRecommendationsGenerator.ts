@@ -6,12 +6,12 @@ import { GraphTools } from '../GraphTools';
 import { Edge } from '../Edge';
 
 export class ScoreBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
-  private _json: string;
+  private _config :
   private _path : PathResult[];
   private _graph : Graph;
   private _score : number = 0;
 
-  constructor(json: string, path: PathResult[], graph: Graph) {
+  constructor(config: ScoreBasedRecommendationsJSON, path: PathResult[], graph: Graph) {
     this._json = json;
     this._path = path;
     this._graph = graph;
@@ -22,7 +22,7 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
   public generate(): string[] {
     this._score = this.calculateScore();
 
-    let scoreBasedRecommendations: ScoreBasedRecommendationsJSON = this.parseFromJSON(this._json);
+    let scoreBasedRecommendations: ScoreBasedRecommendationJSON = this.parseFromJSON(this._json);
     let numberOfPartitions: number = scoreBasedRecommendations.numberOfPartitions;
     let recommendationsCatalogue: string[] = scoreBasedRecommendations.recommendations;
     let recommendations: string[] = this.calculateRecommendations(numberOfPartitions, recommendationsCatalogue, this._score);
@@ -42,10 +42,6 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
       }
     }
     return score;
-  }
-
-  parseFromJSON(json: string): ScoreBasedRecommendationsJSON {
-    return JSON.parse(json);
   }
 
   /*
@@ -76,7 +72,9 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
   }
 }
 
-export interface ScoreBasedRecommendationsJSON {
+export interface ScoreBasedRecommendationConfigJSON {
   numberOfPartitions: number;
   recommendations: string[];
 }
+
+

@@ -3,13 +3,14 @@ import { GraphIterator } from '../GraphIterator';
 import { Graph } from '../Graph';
 import { PathResult } from '../PathResult';
 import { Edge } from '../Edge';
+import {AnswerBasedRecommendationConfigJSON} from "./JSONTypes";
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
-  private _json: string;
+  private _json: AnswerBasedRecommendationConfigJSON;
   private _path: PathResult[];
   private _graph: Graph;
 
-  constructor(json: string, path: PathResult[], graph: Graph) {
+  constructor(json: AnswerBasedRecommendationConfigJSON, path: PathResult[], graph: Graph) {
     this._json = json;
     this._path = path;
     this._graph = graph;
@@ -18,11 +19,13 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
 
   public generate(): string[] {
     let userAnswers: string[] = this.getAnswerIds(this._path);
-    let recommendationsCatalogue: AnswerBasedRecommendationJSON[] = this.parseFromJSON(this._json);
-    let recommendationsMap = this.createRecommendationsMap(recommendationsCatalogue);
-    let recommendations = this.calculateRecommendations(userAnswers, recommendationsCatalogue, recommendationsMap);
+    //let recommendationsCatalogue: AnswerBasedRecommendationJSON[] = this.parseFromJSON(this._json);
+    //let recommendationsMap = this.createRecommendationsMap(recommendationsCatalogue);
+    //let recommendations = this.calculateRecommendations(userAnswers, recommendationsCatalogue, recommendationsMap);
 
-    return recommendations;
+    //return recommendations;
+
+    return [''];
   }
 
 
@@ -37,11 +40,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
     return userAnswers;
   }
 
-  parseFromJSON(json: string): AnswerBasedRecommendationJSON[] {
-    return JSON.parse(json);
-  }
-
-  createRecommendationsMap(recommendationsCatalogue: AnswerBasedRecommendationJSON[]): Map<string[], string> {
+  createRecommendationsMap(recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[]): Map<string[], string> {
     let map: Map<string[], string> = new Map<string[], string>();
     for (let catalogueEntry of recommendationsCatalogue) {
       map.set(catalogueEntry.answerSet,  catalogueEntry.recommendation);
@@ -58,7 +57,8 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
     return true;
   }
 
-  calculateRecommendations(userAnswers: string[], recommendationsCatalogue: AnswerBasedRecommendationJSON[], recommendationsMap: Map<string[], string>): string[] {
+  calculateRecommendations(userAnswers: string[], recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[],
+                           recommendationsMap: Map<string[], string>): string[] {
     let recommendations: string[] = [];
 
     for (const [key, value] of recommendationsMap.entries()) {
@@ -70,7 +70,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationsGener
   }
 }
 
-export interface AnswerBasedRecommendationJSON {
+export interface AnswerBasedRecommendationConfigJSON {
   answerSet: string[];
   recommendation: string;
 }
