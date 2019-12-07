@@ -2,7 +2,6 @@ import { Graph } from "./Graph";
 import { Node } from "./Node";
 import { Edge, EdgeResult } from './Edge';
 import { PathResult } from "./PathResult";
-import { OutgoingMessage } from "http";
 
 export interface GraphIteratorConstructor {
     new (catalogue: Graph): GraphIteratorInterface;
@@ -29,6 +28,7 @@ export function createIterator(ctor: GraphIteratorConstructor, catalogue: Graph)
 export class GraphIterator implements GraphIteratorInterface {
     private _currentNode: Node;
     private readonly _catalogue: Graph;
+    private _path: PathResult[] = [];
 
     constructor(catalogue: Graph) {
         this._catalogue = catalogue;
@@ -64,11 +64,18 @@ export class GraphIterator implements GraphIteratorInterface {
          *  */
         if(i < outgoingEdges.length) {
             let newCurrentNode = this._catalogue.findNode(outgoingEdges[i].targetId)!;
+<<<<<<< HEAD
 =======
          *  */ 
         if(i < outoingEdges.length) {            
             let newCurrentNode = this._catalogue.findNode(outoingEdges[i].targetId)!;
 >>>>>>> prepare unit tests for michael to continue on ...
+=======
+
+          / * save current move to path */
+          this._path.push(new PathResult(this.currentNode, outgoingEdges[i]));
+
+>>>>>>> -scoreBasedConfig and answerBasedConfig json parsing does now work
             this._currentNode = newCurrentNode;
         } else {
             throw Error(`edgeId: ${edgeId} could not be found on current node!`)
@@ -80,6 +87,6 @@ export class GraphIterator implements GraphIteratorInterface {
     }
 
     getPath(): PathResult[] {
-        throw new Error("Method not implemented.");
+        return this._path;
     }
 }

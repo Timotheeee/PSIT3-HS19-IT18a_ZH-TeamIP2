@@ -26,6 +26,9 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
   public generate(): string[] {
     this._score = this.calculateScore();
 
+    console.log('this._scoreBasedCOnfig');
+    console.log(this._scoreBasedConfig);
+
     //let scoreBasedRecommendations: ScoreBasedRecommendationJSON = this.parseFromJSON(this._json);
     let numberOfPartitions: number = this._scoreBasedConfig.numberOfPartitions;
     let recommendationsCatalogue: string[] = this._scoreBasedConfig.recommendations;
