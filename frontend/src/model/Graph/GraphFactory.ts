@@ -13,7 +13,7 @@ export class GraphFactory {
 
   /**
    * This method is purely to be used for test purposes.
-   * It creates a graph (question catalogue) using a fix string that represents the json format
+   * It creates a graph (question catalogue) using a string that represents the json format
    * of the simplest possible situation: the gaming questionnaire with the sleep/fitness question.
    */
   public static createTestGraph(): Graph {
@@ -21,13 +21,24 @@ export class GraphFactory {
   }
 
   static createGraphFromJSON(data: string): Graph {
-    let graph: GraphJSON = JSON.parse(data);
-    return (this.createGraph(graph));
+    let parsedObject: Object = JSON.parse(data);
+    let graphJSON: GraphJSON = new GraphJSON();
+
+    for (let [key, value] of Object.entries(parsedObject)) {
+      if(key === 'nodes') {
+        let nodes: NodeJSON[] = value as NodeJSON[];
+        graphJSON.nodes.push(...nodes);
+      }
+
+      if(key === 'edges') {
+        let edges: EdgeJSON[] = value as EdgeJSON[];
+        graphJSON.edges.push(...edges);
+      }
+    }
+
+    return (this.createGraph(graphJSON));
   }
 
-  /*
-   * Creates and returns a Graph object from the given JSONGraph.
-   */
   private static createGraph(JSONGraph: GraphJSON) : Graph {
     let graph: Graph = new Graph();
     this.importNodes(graph, JSONGraph.nodes);
@@ -85,7 +96,6 @@ export class GraphFactory {
   }
 
   private static importEdges(graph: Graph, edges: EdgeJSON[]) {
-    let currentEdge: Object;
     for (let edge of edges) {
       if (edge.metadata !== undefined) {
         graph.addEdge(new Edge(edge.edgeId, edge.source, edge.target, edge.metadata.answer, parseInt(edge.metadata.score)));

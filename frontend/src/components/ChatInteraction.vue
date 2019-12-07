@@ -26,15 +26,17 @@ import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/
 import { Node, AnswerType} from '../model/Graph/Node';
 import { PathService } from '../services/PathService'
 import { GraphService } from '../services/GraphService'
+import {RecommendationHelper} from "../model/Graph/Recommendation/RecommendationHelper";
+import {blobToBinaryString} from "cypress/types/blob-util";
 
 export default Vue.extend({
     data() {
       return {
           questions: [new Question("q0", "is typing...", AnswerType.RegularAnswer)],
           result: new Result(0, []),
-          pathService: new PathService(),
-          graphIterator: createIterator(GraphIterator, GraphFactory.createTestGraph()),
-          username: ""
+          graph: null
+          username: "",
+          graphIterator: null
       }
     },
     methods: {
@@ -66,11 +68,9 @@ export default Vue.extend({
       });
 
       EventBus.$on("goToResultSite", () => {
-
-          // TODO: ryan write this code -> use new classes for recommendations etc.
-          this.result.setScore(404);
-          // TODO: add recommendations
-          this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
+        //let recommendationResult: Result = RecommendationHelper.generate(this.$data.graphObj, this.$data.graphIterator.getPath());
+        let recommendationResult = new Result(404, []);
+        this.$router.push({name: 'Results', params: {result: JSON.stringify(recommendationResult)}});
       });
 
       let graphService = new GraphService();
@@ -78,6 +78,8 @@ export default Vue.extend({
         .then(result => {
             let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, result);
             this.$data.graphIterator = graphIterator;
+
+            this.$data.graphObj = result;
 
             const currentNode:Node = graphIterator.currentNode;
             let firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);

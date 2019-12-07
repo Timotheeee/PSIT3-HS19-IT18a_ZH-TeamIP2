@@ -1,10 +1,20 @@
 import {Node, NodeJSON, AnswerType} from './Node';
 import {Edge, EdgeJSON } from './Edge';
+import {ScoreBasedRecommendationConfigJSON} from "./Recommendation/ScoreBasedRecommendationsGenerator";
+import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedRecommendationsGenerator";
 
-// TODO: ryan: rename this to QuestionCatalogue
 export class Graph {
   private _nodes: Node[];
   private _headNode: Node|null = null;
+
+  private _scoreBasedRecommendationConfig: ScoreBasedRecommendationConfigJSON|null = null;
+  private _answerBasedRecommendationConfig: AnswerBasedRecommendationConfigJSON|null = null;
+
+  get scoreBasedRecommendationConfig(){ return this._scoreBasedRecommendationConfig; }
+  set scoreBasedRecommendationConfig(value) { this._scoreBasedRecommendationConfig = value; }
+
+  get answerBasedRecommendationConfig() { return this._answerBasedRecommendationConfig; }
+  set answerBasedRecommendationConfig(value) { this._answerBasedRecommendationConfig = value; }
 
   constructor() {
     this._nodes = [];
@@ -62,7 +72,7 @@ export class Graph {
   }
 }
 
-export interface GraphJSON {
-  nodes: NodeJSON[];
-  edges: EdgeJSON[];
+export class GraphJSON {
+  nodes: NodeJSON[] = [];
+  edges: EdgeJSON[] = [];
 }

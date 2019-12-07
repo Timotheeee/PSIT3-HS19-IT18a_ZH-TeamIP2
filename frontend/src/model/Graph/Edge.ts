@@ -34,6 +34,7 @@ export interface EdgeJSON {
   edgeId: string;
   source: string;
   target: string;
+
   metadata: {
     answer: string;
     score: string;

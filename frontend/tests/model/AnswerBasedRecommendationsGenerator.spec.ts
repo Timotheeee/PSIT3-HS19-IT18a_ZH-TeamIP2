@@ -1,5 +1,5 @@
-import { RecommendationsGeneratorInterface , createRecommendationsGenerator} from '../../src/model/Graph/Recommendations/RecommendationsGenerator';
-import { AnswerBasedRecommendationsGenerator } from '../../src/model/Graph/Recommendations/AnswerBasedRecommendationsGenerator';
+import { RecommendationsGeneratorInterface , createRecommendationsGenerator} from '../../src/model/Graph/Recommendation/RecommendationsGenerator';
+import { AnswerBasedRecommendationsGenerator } from '../../src/model/Graph/Recommendation/AnswerBasedRecommendationsGenerator';
 import { GraphIterator } from '../../src/model/Graph/GraphIterator';
 import { GraphFactory } from '../../src/model/Graph/GraphFactory';
 import { Graph } from '../../src/model/Graph/Graph';
