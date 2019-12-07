@@ -5,9 +5,11 @@ import {ScoreBasedRecommendationConfigJSON} from "./Recommendation/ScoreBasedRec
 import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedRecommendationsGenerator";
 
 export class GraphFactory {
+
   static createGraphFromJSON(data: string): Graph {
     let parsedObject: Object = JSON.parse(data);
     let graphJSON: GraphJSON = new GraphJSON();
+
 
     let scoreBasedConfig: ScoreBasedRecommendationConfigJSON|null = null;
     let answerBasedConfig: AnswerBasedRecommendationConfigJSON[]|null = null;

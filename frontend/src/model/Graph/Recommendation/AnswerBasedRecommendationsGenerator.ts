@@ -9,16 +9,16 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
   private _graph: Graph;
 
   constructor(config: AnswerBasedRecommendationConfigJSON, path: PathResult[], graph: Graph) {
-    this._config = config;
     this._path = path;
     this._graph = graph;
+    this._config = config;
   };
 
 
   public generate(): string[] {
     let userAnswers: string[] = this.getAnswerIds(this._path);
     let recommendationsMap = this.createRecommendationsMap(this._config);
-    let recommendations = this.calculateRecommendations(userAnswers, recommendationsCatalogue, recommendationsMap);
+    let recommendations = this.calculateRecommendations(userAnswers, this._config, recommendationsMap);
 
     return recommendations;
   }
