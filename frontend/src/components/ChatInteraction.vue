@@ -34,14 +34,15 @@ export default Vue.extend({
       return {
           questions: [new Question("q0", "is typing...", AnswerType.RegularAnswer)],
           result: new Result(0, []),
-          graph: null
+          graph: null,
           username: "",
-          graphIterator: null
+          // @ts-ignore
+          graphIterator: null as GraphIterator
       }
     },
     methods: {
         processQuestion(edgeId: string) {
-            this.graphIterator.choose(edgeId);
+            this.graphIterator!.choose(edgeId);
             this.questions.push(this.getNextQuestion());
         },
         getNextQuestion(): Question {
@@ -51,7 +52,7 @@ export default Vue.extend({
               this.insertUsernameInQuestion(currentNode.text),
               currentNode.answerType);
           let i = 1;
-          for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
+          for(let currentAnswer of this.graphIterator!.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
           }
 
@@ -68,8 +69,7 @@ export default Vue.extend({
       });
 
       EventBus.$on("goToResultSite", () => {
-        //let recommendationResult: Result = RecommendationHelper.generate(this.$data.graphObj, this.$data.graphIterator.getPath());
-        let recommendationResult = new Result(404, []);
+        let recommendationResult: Result = RecommendationHelper.generate(this.$data.graphObj, this.$data.graphIterator.getPath());
         this.$router.push({name: 'Results', params: {result: JSON.stringify(recommendationResult)}});
       });
 

@@ -9,14 +9,14 @@ import { GraphTools } from '../GraphTools';
 import { Edge } from '../Edge';
 
 export class ScoreBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
-  private _config :
+  private _scoreBasedConfig: ScoreBasedRecommendationConfigJSON;
   private _path : PathResult[];
   private _graph : Graph;
   private _score : number = 0;
 <<<<<<< HEAD
 
-  constructor(config: ScoreBasedRecommendationsJSON, path: PathResult[], graph: Graph) {
-    this._json = json;
+  constructor(scoredBasedConfig: ScoreBasedRecommendationConfigJSON, path: PathResult[], graph: Graph) {
+    this._scoreBasedConfig = scoredBasedConfig;
     this._path = path;
     this._graph = graph;
   }
@@ -26,9 +26,9 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationsGenera
   public generate(): string[] {
     this._score = this.calculateScore();
 
-    let scoreBasedRecommendations: ScoreBasedRecommendationJSON = this.parseFromJSON(this._json);
-    let numberOfPartitions: number = scoreBasedRecommendations.numberOfPartitions;
-    let recommendationsCatalogue: string[] = scoreBasedRecommendations.recommendations;
+    //let scoreBasedRecommendations: ScoreBasedRecommendationJSON = this.parseFromJSON(this._json);
+    let numberOfPartitions: number = this._scoreBasedConfig.numberOfPartitions;
+    let recommendationsCatalogue: string[] = this._scoreBasedConfig.recommendations;
     let recommendations: string[] = this.calculateRecommendations(numberOfPartitions, recommendationsCatalogue, this._score);
 
     return recommendations;

@@ -9,7 +9,6 @@ import { PathResult } from '../PathResult';
 <<<<<<< HEAD
 <<<<<<< HEAD
 import { Edge } from '../Edge';
-import {AnswerBasedRecommendationConfigJSON} from "./JSONTypes";
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationsGeneratorInterface {
   private _json: AnswerBasedRecommendationConfigJSON;
