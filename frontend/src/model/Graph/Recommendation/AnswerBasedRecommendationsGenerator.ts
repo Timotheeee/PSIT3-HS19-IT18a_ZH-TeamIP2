@@ -8,7 +8,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
   private _path: PathResult[];
   private _graph: Graph;
 
-  constructor(config: AnswerBasedRecommendationConfigJSON, path: PathResult[], graph: Graph) {
+  constructor(config: AnswerBasedRecommendationConfigJSON[], path: PathResult[], graph: Graph) {
     this._path = path;
     this._graph = graph;
     this._config = config;

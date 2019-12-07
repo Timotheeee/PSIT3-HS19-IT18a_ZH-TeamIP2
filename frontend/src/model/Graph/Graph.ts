@@ -5,10 +5,10 @@ import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedR
 
 export class Graph {
   private _nodes: Node[];
-  private _headNode: Node|null = null;
+  private _headNode: Node| null = null;
 
   private _scoreBasedRecommendationConfig: ScoreBasedRecommendationConfigJSON|null = null;
-  private _answerBasedRecommendationConfig: AnswerBasedRecommendationConfigJSON|null = null;
+  private _answerBasedRecommendationConfig: AnswerBasedRecommendationConfigJSON[]|null = null;
 
   get scoreBasedRecommendationConfig(){ return this._scoreBasedRecommendationConfig; }
   set scoreBasedRecommendationConfig(value) { this._scoreBasedRecommendationConfig = value; }
