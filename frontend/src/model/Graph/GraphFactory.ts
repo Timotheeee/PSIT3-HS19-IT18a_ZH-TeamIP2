@@ -10,7 +10,7 @@ export class GraphFactory {
     let graphJSON: GraphJSON = new GraphJSON();
 
     let scoreBasedConfig: ScoreBasedRecommendationConfigJSON|null = null;
-    let answerBasedConfig: AnswerBasedRecommendationConfigJSON|null = null;
+    let answerBasedConfig: AnswerBasedRecommendationConfigJSON[]|null = null;
 
     for (let [key, value] of Object.entries(parsedObject)) {
       if(key === 'nodes') {
@@ -29,12 +29,12 @@ export class GraphFactory {
 
           if(currentValue.type === 'scoreBased') {
             // @ts-ignore
-            scoreBasedConfig = currentValue.data as ScoreBasedRecommendationConfigJSON[];
+            scoreBasedConfig = currentValue.data as ScoreBasedRecommendationConfigJSON;
           }
 
           if(currentValue.type === 'answerBased') {
             // @ts-ignore
-            answerBasedConfig = currentValue.data as AnswerBasedRecommendationConfigJSON;
+            answerBasedConfig = currentValue.data as AnswerBasedRecommendationConfigJSON[];
           }
         }
       }
@@ -44,7 +44,7 @@ export class GraphFactory {
   }
 
 
-  private static createGraph(jsonGraph: GraphJSON, answerBasedConfig: AnswerBasedRecommendationConfigJSON,
+  private static createGraph(jsonGraph: GraphJSON, answerBasedConfig: AnswerBasedRecommendationConfigJSON[],
                              scoreBasedConfig: ScoreBasedRecommendationConfigJSON) : Graph {
     let graph: Graph = new Graph();
     this.importNodes(graph, jsonGraph.nodes);
@@ -118,5 +118,4 @@ export class GraphFactory {
 export interface RecommendationConfigTypeJSON {
   type: string;
   data: Object;
-
 }
