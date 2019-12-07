@@ -4,7 +4,7 @@ import { PathResult } from '../PathResult';
 import { Edge } from '../Edge';
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationGeneratorInterface {
-  private _config: AnswerBasedRecommendationConfigJSON;
+  private _config: AnswerBasedRecommendationConfigJSON[];
   private _path: PathResult[];
   private _graph: Graph;
 

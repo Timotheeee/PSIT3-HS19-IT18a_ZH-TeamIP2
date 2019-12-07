@@ -26,14 +26,14 @@
       "id": "q4",
       "metadata": {
         "answerType": "choice",
-        "title": "%username% are you more of a athletic person?"
+        "title": "%username% are you more of an athletic person?"
       }
     },
     {
       "id": "q5",
       "metadata": {
         "answerType": "choice",
-        "title": "How much do you exercise in a week? "
+        "title": "How frequent do you go to the gym?"
       }
     },
     {
@@ -47,7 +47,7 @@
       "id": "q7",
       "metadata": {
         "answerType": "choice",
-        "title": "Pretty impressive %username%!... Do you even have time for school?"
+        "title": "Rather impressive %username%!... Do you even have time to study?"
       }
     },
     {
@@ -61,14 +61,14 @@
       "id": "q9",
       "metadata": {
         "answerType": "choice",
-        "title": "Tell me %username%...are you happy with your grades?"
+        "title": "Tell me %username%...are you content with your grades?"
       }
     },
     {
       "id": "q10",
       "metadata": {
         "answerType": "result",
-        "title": "Great! You are finished! Would you like to see the results?"
+        "title": "Thank your for telling me about your habits! Would you like to see the results?"
       }
     },
     {

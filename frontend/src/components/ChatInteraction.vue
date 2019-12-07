@@ -70,6 +70,10 @@ export default Vue.extend({
 
       EventBus.$on("goToResultSite", () => {
         let recommendationResult: Result = RecommendationHelper.generate(this.$data.graphObj, this.$data.graphIterator.getPath());
+
+        console.log('inside of goToResultSite:');
+        console.log(recommendationResult);
+
         this.$router.push({name: 'Results', params: {result: JSON.stringify(recommendationResult)}});
       });
 
