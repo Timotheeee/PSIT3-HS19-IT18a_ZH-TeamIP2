@@ -60,22 +60,13 @@ export class GraphIterator implements GraphIteratorInterface {
         /**
          * if edgeId is one of the connected edges set it as currentNode -> move
          * Otherwise throw which means edgeId was invalid
-<<<<<<< HEAD
          *  */
         if(i < outgoingEdges.length) {
             let newCurrentNode = this._catalogue.findNode(outgoingEdges[i].targetId)!;
-<<<<<<< HEAD
-=======
-         *  */ 
-        if(i < outoingEdges.length) {            
-            let newCurrentNode = this._catalogue.findNode(outoingEdges[i].targetId)!;
->>>>>>> prepare unit tests for michael to continue on ...
-=======
 
-          / * save current move to path */
-          this._path.push(new PathResult(this.currentNode, outgoingEdges[i]));
+            / * save current move to path */
+            this._path.push(new PathResult(this.currentNode, outgoingEdges[i]));
 
->>>>>>> -scoreBasedConfig and answerBasedConfig json parsing does now work
             this._currentNode = newCurrentNode;
         } else {
             throw Error(`edgeId: ${edgeId} could not be found on current node!`)

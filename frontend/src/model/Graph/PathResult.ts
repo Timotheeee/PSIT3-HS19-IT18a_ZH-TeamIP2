@@ -10,18 +10,7 @@ export class PathResult {
         this._decision = decision;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Cherry-pick Ryan's changes to PathResult
+
     get node(): Node { return this._node;  }
     get decision(): Edge|null { return this._decision; }
-
 }
-<<<<<<< HEAD
-=======
-    get decision(): Edge { return this._decision; }
-}
->>>>>>> -change recommendation interface to use PathResult over GraphIterator
-=======
->>>>>>> Cherry-pick Ryan's changes to PathResult
