@@ -5,8 +5,7 @@
             class="possible-answer"
             :class='{"active-item": currentItem == answer.id}'
             v-on:click="onButtonClick(answer)"
-            :value="answer.getAnswer()"
-    >{{answer.answer}}</button>
+            :value="answer.getAnswer()" >{{answer.answer}}</button>
   </b-button-group>
 </template>
 
@@ -47,13 +46,13 @@
         }
       }
     },
-      mounted () {
-        document.addEventListener("keyup", this.selectAnswer);
-      },
-      destroyed () {
-        // to avoid memory leaks
-        document.removeEventListener("keyup", this.selectAnswer)
-      }
+    mounted () {
+      document.addEventListener("keyup", this.selectAnswer);
+    },
+    destroyed () {
+      // to avoid memory leaks
+      document.removeEventListener("keyup", this.selectAnswer)
+    }
   });
 </script>
 

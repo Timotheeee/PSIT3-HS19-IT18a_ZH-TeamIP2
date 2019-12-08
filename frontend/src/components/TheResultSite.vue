@@ -37,12 +37,12 @@
     },
     created() {
       if(this.$route && this.$route.params.result) {
-        let resultJSON = JSON.parse(this.$route.params.result);
-        this.result = new Result(resultJSON.score, resultJSON.recommendations);
+          let resultJSON = JSON.parse(this.$route.params.result);
+          this.result = new Result(resultJSON.score, resultJSON.recommendations);
       }
-      if(this.recommendations.length == 1
-        && this.recommendations[0] == "") {
-        this.recommendations.push("No recommendations available");
+      if(this.result.getRecommendations().length == 0
+        || (this.result.getRecommendations().length == 1 && this.result.getRecommendations()[0] == "")) {
+        this.result.getRecommendations().push("No recommendations available");
       }
     },
     components: {
@@ -68,15 +68,15 @@
 
               setInterval(function() {
                 if (this2.recommendations != null
-                  && i < this2.recommendations.length
-                  && i >= 0) {
+                    && i < this2.recommendations.length
+                    && i >= 0) {
                   this2.recommendations.push(this2.result.getRecommendations()[i]);
                 }
                 i++;
               }, 600);
             }
           }
-        }, 50);
+        }, 10);
       }
     },
     beforeMount() {

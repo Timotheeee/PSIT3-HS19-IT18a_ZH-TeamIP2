@@ -4,8 +4,7 @@
       <input type="text" v-model="userInput" :placeholder="[[answer.getAnswer()]]" class="text">
       <button :key="answer.id"
               class="possible-answer"
-              v-on:click="onButtonClick(answer)"
-      >Enter</button>
+              v-on:click="onButtonClick(answer)" >Enter</button>
     </div>
   </div>
 </template>
@@ -34,7 +33,7 @@
 
         let username = this.$data.userInput;
         if(username != "") {
-            event.setAnswer(username);
+          event.setAnswer(username);
         }
 
         // set the username for the questions
@@ -51,10 +50,10 @@
   @import "../css/colors";
   @import "../css/speech-bubble";
 
-.text {
-  margin-left: 15px;
-  border-color: transparent;
-}
+  .text {
+    margin-left: 15px;
+    border-color: transparent;
+  }
 
   ::placeholder {
     color: lightgrey;
