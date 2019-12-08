@@ -1,4 +1,4 @@
-import { AnswerBasedRecommendationsGenerator, AnswerBasedRecommendationConfigJSON } from '../../src/model/Graph/Recommendation/AnswerBasedRecommendationsGenerator';
+import { AnswerBasedRecommendationsGenerator } from '../../src/model/Graph/Recommendation/AnswerBasedRecommendationsGenerator';
 import { GraphIterator } from '../../src/model/Graph/GraphIterator';
 import { GraphFactory } from '../../src/model/Graph/GraphFactory';
 import { Graph } from '../../src/model/Graph/Graph';
