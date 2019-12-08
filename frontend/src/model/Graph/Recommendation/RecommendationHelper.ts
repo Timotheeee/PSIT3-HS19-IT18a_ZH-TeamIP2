@@ -5,8 +5,17 @@ import {AnswerBasedRecommendationsGenerator} from "./AnswerBasedRecommendationsG
 import {Result} from "../../Result";
 import {GraphTools} from "../GraphTools";
 
+/**
+ * Helper class to generate Recommendations using the available implementations of type RecommendationGeneratorInterface.
+ */
 export class RecommendationHelper {
 
+  /**
+   * Creates a Result object that can be used for presentation in Vue, containing recommendations based on the
+   * chosen path.
+   * @param graph question catalogue that was used
+   * @param path path returned from GraphIteratorInterface
+   */
   public static generate(graph: Graph, path: PathResult[]) : Result {
     let score: number = 0;
     let htmlTexts: string[] = [];

@@ -4,9 +4,17 @@ import {Edge, EdgeJSON} from './Edge';
 import {ScoreBasedRecommendationConfigJSON} from "./Recommendation/ScoreBasedRecommendationsGenerator";
 import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedRecommendationsGenerator";
 
+/**
+ * Creates instances of the Graph object for a json string.
+ * Handles the JSON parsing.
+ */
 export class GraphFactory {
 
-  static createGraphFromJSON(data: string): Graph {
+  /**
+   * Parses the JSON and attempts tro create a viable Graph object.
+   * @param data JSON formatted string
+   */
+  public static createGraphFromJSON(data: string): Graph {
     let parsedObject: Object = JSON.parse(data);
     let graphJSON: GraphJSON = new GraphJSON();
 
@@ -117,6 +125,9 @@ export class GraphFactory {
   }
 }
 
+/**
+ * Necessary for JSON parsing.
+ */
 export interface RecommendationConfigTypeJSON {
   type: string;
   data: Object;

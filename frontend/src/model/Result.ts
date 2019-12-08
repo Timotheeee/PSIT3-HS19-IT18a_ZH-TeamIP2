@@ -1,3 +1,6 @@
+/**
+ * Vue viewmodel.
+ */
 export class Result {
   private score: number;
   private recommendations: string[];

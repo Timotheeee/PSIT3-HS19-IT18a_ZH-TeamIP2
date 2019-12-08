@@ -3,6 +3,11 @@ import {Edge, EdgeJSON } from './Edge';
 import {ScoreBasedRecommendationConfigJSON} from "./Recommendation/ScoreBasedRecommendationsGenerator";
 import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedRecommendationsGenerator";
 
+/**
+ * Represents a graph data structure optimized for this application.
+ * Currently, it contains the config for the recommendation generators. This should be moved in the next iteration.
+ * Can be parsed from JSON.
+ */
 export class Graph {
   private _nodes: Node[];
   private _headNode: Node| null = null;
@@ -30,7 +35,7 @@ export class Graph {
    * The passed object will be cloned before it is added to the collection.
    * @param node2Add
    */
-  addNode(node2Add: Node): void {
+  public addNode(node2Add: Node): void {
     if (this.findNode(node2Add.id) === null) {
       this.nodes.push(node2Add);
     } else {
@@ -43,7 +48,7 @@ export class Graph {
    * The passed edge object will be cloned before it is added to the collection.
    * @param edge2Add
    */
-  addEdge(edge2Add: Edge): void {
+  public addEdge(edge2Add: Edge): void {
     /* check if the source node exists */
     let sourceNode: Node|null = this.findNode(edge2Add.sourceId);
     if (sourceNode == null) {
@@ -58,10 +63,11 @@ export class Graph {
     sourceNode.addEdge(edge2Add);
   }
 
-  /*
+  /**
    * Finds an existing node by Id. Returns null if node doesn't exist.
+   * @param nodeId
    */
-  findNode(nodeId: string) : Node|null {
+  public findNode(nodeId: string) : Node|null {
     for (let node of this._nodes) {
       // check if node id already exists
       if (node.id === nodeId) {
@@ -72,6 +78,9 @@ export class Graph {
   }
 }
 
+/**
+ * Necessary for JSON parsing.
+ */
 export class GraphJSON {
   nodes: NodeJSON[] = [];
   edges: EdgeJSON[] = [];
