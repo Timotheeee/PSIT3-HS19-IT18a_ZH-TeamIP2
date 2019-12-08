@@ -12,28 +12,28 @@
       "id": "q2",
       "metadata": {
         "answerType": "choice",
-        "title": "%username% are you a gamer?"
+        "title": "%username% do you play video games?"
       }
     },
     {
       "id": "q3",
       "metadata": {
         "answerType": "choice",
-        "title": "Ah I see you are a person of culture as well %username%. How much time do you spend gaming in a week?"
+        "title": "I'm a gamer myself. How often do you get to pown newbies?"
       }
     },
       {
       "id": "q4",
       "metadata": {
         "answerType": "choice",
-        "title": "%username% are you more of an athletic person?"
+        "title": "Do you exercise %username%?"
       }
     },
     {
       "id": "q5",
       "metadata": {
         "answerType": "choice",
-        "title": "How frequent do you go to the gym?"
+        "title": "How often?"
       }
     },
     {
@@ -54,7 +54,7 @@
       "id": "q8",
       "metadata": {
         "answerType": "choice",
-        "title": "So no gaming, no exercising... hmmm what is left... are you more the 'party hard' type?"
+        "title": "Let's see. You don't like video games nor sports. Do you like to go out then?"
       }
     },
     {
@@ -149,7 +149,7 @@
       "target": "q6",
       "edgeId": "e8",
       "metadata": {
-        "answer": "No, I prefer minimum amount of movement...",
+        "answer": "No, I hate sports!",
         "score": -10
       }
     },
@@ -230,7 +230,7 @@
       "target": "q10",
       "edgeId": "e17",
       "metadata": {
-        "answer": "Yeah, I couldn't be better! I am the next Einstein!",
+        "answer": "Yeah, I'm pretty awesome! I am going to win a nobel prize someday!",
         "score": 10
       }
     },
@@ -248,7 +248,7 @@
       "target": "q10",
       "edgeId": "e19",
       "metadata": {
-        "answer": "No, let's just say I live by the words: You don't have to worry about life, if you don't have one...",
+        "answer": "You can't go out if you don't have any friends",
         "score": -10
       }
     },
@@ -268,23 +268,23 @@
       "data": [
         {
           "answerSet": ["e2","e13"],
-          "recommendation": "<p><h5>The Hardcore Gamer</h5>Listen here! I think you have a real problem, so for your sake, just check out this page <a href=\"https://gamequitters.com/video-game-addiction-test-for-gamers/\">gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
+          "recommendation": "<p><h5>The Competitive Gamer</h5>Listen here! I think you have a real problem, so for your sake, just check out this page <a href=\"https://gamequitters.com/video-game-addiction-test-for-gamers/\">gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
         },
         {
-          "answerSet": ["e2","e13"],
+          "answerSet": ["e9"],
           "recommendation": "<p><h5>The Sports Freak</h5> How about slowing down a bit? Too much is never good, check out this page <a href=\"https://huffingtonpost.com.au/2017/08/06/how-much-exercise-is-too-much_a_23064102/\">huffingtonpost.com.au/2017/08/06/how-much-exercise-is-too-much_a_23064102/</a></p>"
         },
         {
           "answerSet": ["e2, e7, e12, e16"],
-          "recommendation": "<p><h5>The Allrounder</h5> Wow, your really impressed me!...Finding time for everything, being good at school. How about you give me some advise? Tell me your secrets! <a href=\"https://jerryjenkins.com/how-to-write-a-book/\">jerryjenkins.com/how-to-write-a-book/</a></p>"
+          "recommendation": "<p><h5>Well balanced</h5> Wow, your really impressed me!...Finding time for everything, being good at school. How about you give me some advise? Tell me your secrets! <a href=\"https://jerryjenkins.com/how-to-write-a-book/\">jerryjenkins.com/how-to-write-a-book/</a></p>"
         },
         {
           "answerSet": ["e14, e16"],
-          "recommendation": "<p><h5>The Next Einstein</h5> I think you are ready for this... <a href=\"www.admission.princeton.edu/how-apply\">admission.princeton.edu/how-apply</a></p>"
+          "recommendation": "<p><h5>The rare Prodigy</h5> I think you are ready for this... <a href=\"www.admission.princeton.edu/how-apply\">admission.princeton.edu/how-apply</a></p>"
         },
         {
           "answerSet": ["e2","e5","e7"],
-          "recommendation": "<p><h5>The No Lifer </h5> Don't give up on yourself! Have a look at this page: <a href=\"https://www.betterhelp.com/advice/general/why-do-i-have-no-life\">betterhelp.com/advice/general/why-do-i-have-no-life/</a></p></a>"
+          "recommendation": "<p><h5>The Workaholic </h5> Don't give up on yourself! Have a look at this page: <a href=\"https://www.betterhelp.com/advice/general/why-do-i-have-no-life\">betterhelp.com/advice/general/why-do-i-have-no-life/</a></p></a>"
         }
       ]
     },
@@ -293,11 +293,9 @@
       "data": {
         "numberOfScorePartitions": 5,
         "recommendations": [
-          "<p>The Hardcore Gamer</p>",
-          "<p>The Sports Freak</p>",
-          "<p>The Allrounder</p>",
-          "<p>The Next Einstein</p>",
-	        "<p>The No Lifer</p>"
+          "<h4>Underachiever</h4><p>You are on a slippery slope and might want to look at some of your negative habits.</p>",
+          "<h4>Average Student</h4><p>You reached an average result which means that there is some room to improve but also that you are doing the basics right.</p>",
+          "<h4>Excellent Student</h4><p>Congratulations, you reached an excellent score. Keep doing what you are doing!</p>"
         ]
       }
     }
