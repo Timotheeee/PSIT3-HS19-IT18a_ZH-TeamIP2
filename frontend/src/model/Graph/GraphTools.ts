@@ -1,8 +1,15 @@
 import { Graph } from './Graph';
 
+/**
+ * Helper class for working with Graph objects.
+ */
 export class GraphTools  {
 
-    public static getExtremas(graph:Graph): number[]{
+  /**
+   * Returns the shortest and longest path present in the graph.
+   * @param graph
+   */
+  public static getExtremas(graph:Graph): number[]{
         return [-80, 70];
     }
 

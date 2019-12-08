@@ -1,6 +1,9 @@
 import {Answer} from './Answer';
 import {AnswerType} from './Graph/Node';
 
+/**
+ * Vue viewmodel.
+ */
 export class Question {
   private id: string;
   private question: string;

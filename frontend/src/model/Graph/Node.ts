@@ -1,11 +1,18 @@
 import {Edge} from './Edge';
 
+/**
+ * Represents the attribute answerType of Node.
+ */
 export enum AnswerType {
   InputAnswer = 0,
   RegularAnswer = 1,
   ResultAnswer
 }
 
+/**
+ * Represents a vertice (node) in the graph data structure.
+ * Can be parsed from JSON.
+ */
 export class Node {
   private _id: string = "";
   private _text: string = "";
@@ -43,12 +50,18 @@ export class Node {
   set edges(edges: Edge[]) { this._edges = edges }
   get edges(): Edge[] { return this._edges }
 
+  /**
+   * Add (reachable) edge.
+   * @param edge
+   */
   addEdge(edge: Edge) {
     this._edges.push(edge);
   }
-
 }
 
+/**
+ * Necessary for JSON parsing.
+ */
 export interface NodeJSON {
   id: string;
   metadata: {
