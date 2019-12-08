@@ -57,18 +57,7 @@ describe("adminsite", () => {
       wrapper.find(LoginBox).vm.$emit('loginOK');
       expect(updateViewToUploadStub).toHaveBeenCalled()
     })
-
-    test("is logout method called ", () => {
-
-      // log in
-      wrapper.setData({
-        loggedin: true
-      })
-
-      wrapper.find(UploadBox).vm.$emit('logout');
-      expect(wrapper.vm.$data.loggedin).toBe(false);
-    })
-
+    
     test("is goTo method called ", () => {
       let goToStub = jest.fn();
       wrapper.setMethods({goTo: goToStub()})

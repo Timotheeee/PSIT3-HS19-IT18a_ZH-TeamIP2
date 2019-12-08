@@ -20,8 +20,11 @@ describe("resultsite", () => {
     })
 
     it("should render at least one advice", () => {
-      wrapper.setData({showAdvice: true});
-      expect(wrapper.contains('p.advice')).toBeTruthy();
+      wrapper.setData({
+        showAdvice: true,
+        recommendations: ["testrecommendation"]
+      });
+      expect(wrapper.contains('.advice')).toBeTruthy();
     })
   })
 })
