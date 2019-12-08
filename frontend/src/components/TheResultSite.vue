@@ -29,7 +29,9 @@
   export default Vue.extend({
     data() {
       return {
-        result: new Result(1, []),
+        //result: new Result(1, []),
+        // @ts-ignore
+        result : null as Result,
         score: 0,
         showAdvice: false,
         recommendations: [""],
@@ -95,7 +97,7 @@
   }
 
   #score {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .fade-enter-active,
