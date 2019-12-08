@@ -4,6 +4,11 @@ import { Graph } from '../Graph';
 import { GraphTools } from '../GraphTools';
 import { Edge } from '../Edge';
 
+/**
+ * Class responsible for generating HTML recommendation strings that are dependent on a Student's questionnaire score.
+ * The range of possible scores is divided in n partitions. Depending on in which partition a student's score falls,
+ * the student receives a recommendation, which is displayed on the result site.
+ */
 export class ScoreBasedRecommendationsGenerator implements RecommendationGeneratorInterface {
   private _scoreBasedConfig: ScoreBasedRecommendationConfigJSON;
   private _path : PathResult[];
@@ -18,6 +23,11 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
 
   get score(): number { return this._score; }
 
+  /**
+   * Generates the appropriate recommendation string by dividing the possible score range by the number of score
+   * partitions and then choosing the recommendation corresponding to the partition, which contains the student's score.
+   * @returns recommendations A string array containing a single recommendation string formatted in HTML.
+   */
   public generate(): string[] {
     this._score = this.calculateScore();
     let numberOfPartitions: number = this._scoreBasedConfig.numberOfScorePartitions;
@@ -42,7 +52,7 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
   }
 
   /*
-   * Choose the appropriate score parition according to the student's score and
+   * Choose the appropriate score partition according to the student's score and
    * return the respective recommendation string.
    */
   private calculateRecommendations(numberOfScorePartitions: number, recommendationsCatalogue: string[], userScore: number): string[] {
