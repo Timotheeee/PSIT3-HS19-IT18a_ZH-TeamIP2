@@ -4,21 +4,21 @@ import { PathResult } from '../PathResult';
 import { Edge } from '../Edge';
 
 export class AnswerBasedRecommendationsGenerator implements RecommendationGeneratorInterface {
-  private _config: AnswerBasedRecommendationConfigJSON[];
+  private _answerBasedConfig: AnswerBasedRecommendationConfigJSON[];
   private _path: PathResult[];
   private _graph: Graph;
 
-  constructor(config: AnswerBasedRecommendationConfigJSON[], path: PathResult[], graph: Graph) {
+  constructor(answerBasedConfig: AnswerBasedRecommendationConfigJSON[], path: PathResult[], graph: Graph) {
+    this._answerBasedConfig = answerBasedConfig;
     this._path = path;
     this._graph = graph;
-    this._config = config;
   };
 
 
   public generate(): string[] {
     let userAnswers: string[] = this.getAnswerIds(this._path);
-    let recommendationsMap = this.createRecommendationsMap(this._config);
-    let recommendations = this.calculateRecommendations(userAnswers, this._config, recommendationsMap);
+    let recommendationsMap = this.createRecommendationsMap(this._answerBasedConfig);
+    let recommendations = this.calculateRecommendations(userAnswers, this._answerBasedConfig, recommendationsMap);
 
     return recommendations;
   }

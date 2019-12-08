@@ -39,26 +39,34 @@ describe('ScoreBasedRecommendationsGenerator', () => {
         let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, graph);
 
         graphIterator.choose("e1");
-        graphIterator.choose("e3");
-        graphIterator.choose("e5");
+        graphIterator.choose("e2");
+        graphIterator.choose("e6");
+        graphIterator.choose("e13");
+        graphIterator.choose("e16");
         let path: PathResult[] = graphIterator.getPath();
 
         const generator: ScoreBasedRecommendationsGenerator = createScoreRecGen(graph, path);
-        expect(generator.generate()).toBe("<p>lorem ipsum 1</p>");
+        expect(generator.generate()[0].includes("The Hardcore Gamer")).toBeTruthy();
+        expect(generator.score).toEqual(-80);
       });
 
       it('should return the recommendation 4 if a certain path is taken', () => {
         let graph = GraphFactory.createGraphFromJSON(JSON_RECOMMENDATION_TEST);
         let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, graph);
 
-        graphIterator.choose("e2");
-        graphIterator.choose("e4");
-        graphIterator.choose("e6");
+        graphIterator.choose("e1");
+        graphIterator.choose("e3");
+        graphIterator.choose("e7");
+        graphIterator.choose("e11");
+        graphIterator.choose("e14");
+        graphIterator.choose("e17");
         let path: PathResult[] = graphIterator.getPath();
 
         const generator: ScoreBasedRecommendationsGenerator = createScoreRecGen(graph, path);
-        expect(generator.generate()).toBe("<p>lorem ipsum 1</p>");
-      });
+        expect(generator.generate()[0].includes("The No Lifer")).toBeTruthy();
+        expect(generator.score).toEqual(70);
+   });
+
     });
   });
 });
