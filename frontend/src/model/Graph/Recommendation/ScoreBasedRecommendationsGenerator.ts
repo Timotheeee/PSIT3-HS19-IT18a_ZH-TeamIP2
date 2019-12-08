@@ -45,18 +45,18 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
    * Choose the appropriate score parition according to the student's score and
    * return the respective recommendation string.
    */
-  calculateRecommendations(numberOfPartitions: number, recommendationsCatalogue: string[], userScore: number): string[] {
+  calculateRecommendations(numberOfScorePartitions: number, recommendationsCatalogue: string[], userScore: number): string[] {
     let extrema: number[] = GraphTools.getExtremas(this._graph);
     let minScore = extrema[0];
     let maxScore = extrema[1];
     let scoreRange = maxScore - minScore;
-    let partitionSize = scoreRange / numberOfPartitions;
+    let partitionSize = scoreRange / numberOfScorePartitions;
     let currentLowerPartitionBoundary: number = minScore;
     let currentUpperPartitionBoundary: number = currentLowerPartitionBoundary + partitionSize;
     let partitionCounter: number = 0;
     let recommendations: string[] = [];
 
-    while (partitionCounter < numberOfPartitions) {
+    while (partitionCounter < numberOfScorePartitions) {
       if (userScore <= currentUpperPartitionBoundary) {
         recommendations.push(recommendationsCatalogue[partitionCounter]);
         break;
