@@ -41,8 +41,6 @@ export class LoginService {
    * @returns Boolean Promise if the token is still valid.
    */
   public async checkIfTokenStillValid(): Promise<boolean> {
-    console.log("checkIfTokenStillValid ");
-
     let tok = localStorage.token;
     const result = await this.axiosController.post(this.url, { tok: tok });
 
