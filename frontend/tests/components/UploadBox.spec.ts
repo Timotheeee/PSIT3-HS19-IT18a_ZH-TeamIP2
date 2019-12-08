@@ -53,23 +53,6 @@ describe("uploadbox", () => {
       button.trigger("click");
       expect(submitFileStub.mock.calls.length).toBe(1);
     })
-
-    test("is log out method called", async () => {
-      // declare stub method
-      let logoutStub = jest.fn();
-      wrapper.setMethods({ logout: logoutStub  });
-
-      let button = wrapper.find("button#logout");
-      button.trigger("click");
-      await wrapper.vm.$nextTick()
-      expect(logoutStub).toHaveBeenCalled()
-    })
-
-    test("is logout event emitted", () => {
-      let button = wrapper.find("button#logout");
-      button.trigger("click");
-      expect(wrapper.emitted('logout')).toBeTruthy();
-    })
   })
 
 

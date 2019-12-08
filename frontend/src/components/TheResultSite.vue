@@ -12,7 +12,7 @@
           <h3 key="1" v-if="showAdvice">We recommend</h3>
           <div key="2" v-if="showAdvice">
             <div v-for="advice in recommendations" :key="advice">
-              <div v-html="advice"></div>
+              <div class="advice" v-html="advice"></div>
             </div>
           </div>
         </transition-group>
@@ -29,9 +29,7 @@
   export default Vue.extend({
     data() {
       return {
-        //result: new Result(1, []),
-        // @ts-ignore
-        result : null as Result,
+        result : new Result(1, []),
         score: 0,
         showAdvice: false,
         recommendations: [""],
