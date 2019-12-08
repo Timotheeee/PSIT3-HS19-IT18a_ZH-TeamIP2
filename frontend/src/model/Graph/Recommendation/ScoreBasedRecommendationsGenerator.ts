@@ -1,5 +1,4 @@
 import { RecommendationGeneratorInterface } from './RecommendationGeneratorInterface';
-import { GraphIterator } from '../GraphIterator';
 import { PathResult } from '../PathResult';
 import { Graph } from '../Graph';
 import { GraphTools } from '../GraphTools';
@@ -21,11 +20,7 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
 
   public generate(): string[] {
     this._score = this.calculateScore();
-
-    console.log(this._scoreBasedConfig);
-
-    //let scoreBasedRecommendations: ScoreBasedRecommendationJSON = this.parseFromJSON(this._json);
-    let numberOfPartitions: number = this._scoreBasedConfig.numberOfPartitions;
+    let numberOfPartitions: number = this._scoreBasedConfig.numberOfScorePartitions;
     let recommendationsCatalogue: string[] = this._scoreBasedConfig.recommendations;
     let recommendations: string[] = this.calculateRecommendations(numberOfPartitions, recommendationsCatalogue, this._score);
 
@@ -75,6 +70,6 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
 }
 
 export interface ScoreBasedRecommendationConfigJSON {
-  numberOfPartitions: number;
+  numberOfScorePartitions: number;
   recommendations: string[];
 }
