@@ -291,7 +291,7 @@
     {
       "type": "scoreBased",
       "data": {
-        "numberOfScorePartitions": 5,
+        "numberOfScorePartitions": 3,
         "recommendations": [
           "<h4>Underachiever</h4><p>You are on a slippery slope and might want to look at some of your negative habits.</p>",
           "<h4>Average Student</h4><p>You reached an average result which means that there is some room to improve but also that you are doing the basics right.</p>",
