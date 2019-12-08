@@ -268,23 +268,23 @@
       "data": [
         {
           "answerSet": ["e2","e13"],
-          "recommendation": "<p><h5>The Hardcore Gamer</h5>Listen here! I think you have a real problem, so for your sake, just check out this page<a>www.gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
+          "recommendation": "<p><h5>The Hardcore Gamer</h5>Listen here! I think you have a real problem, so for your sake, just check out this page <a href=\"https://gamequitters.com/video-game-addiction-test-for-gamers/\">gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
         },
         {
           "answerSet": ["e2","e13"],
-          "recommendation": "<p><h5>The Sports Freak</h5> How about slowing down a bit? Too much is never good, check out this page <a>www.huffingtonpost.com.au/2017/08/06/how-much-exercise-is-too-much_a_23064102/</a> </p>"
+          "recommendation": "<p><h5>The Sports Freak</h5> How about slowing down a bit? Too much is never good, check out this page <a href=\"https://huffingtonpost.com.au/2017/08/06/how-much-exercise-is-too-much_a_23064102/\">huffingtonpost.com.au/2017/08/06/how-much-exercise-is-too-much_a_23064102/</a></p>"
         },
         {
           "answerSet": ["e2, e7, e12, e16"],
-          "recommendation": "<p><h5>The Allrounder</h5> Wow, your really impressed me!...Finding time for everything, being good at school. How about you give me some advise? Tell me your secrets!<a>www.jerryjenkins.com/how-to-write-a-book/</a></p>"
+          "recommendation": "<p><h5>The Allrounder</h5> Wow, your really impressed me!...Finding time for everything, being good at school. How about you give me some advise? Tell me your secrets! <a href=\"https://jerryjenkins.com/how-to-write-a-book/\">jerryjenkins.com/how-to-write-a-book/</a></p>"
         },
         {
           "answerSet": ["e14, e16"],
-          "recommendation": "<p><h5>The Next Einstein</h5> I think you are ready for this...<a>www.admission.princeton.edu/how-apply</a></p>"
+          "recommendation": "<p><h5>The Next Einstein</h5> I think you are ready for this... <a href=\"www.admission.princeton.edu/how-apply\">admission.princeton.edu/how-apply</a></p>"
         },
         {
           "answerSet": ["e2","e5","e7"],
-          "recommendation": "<p><h5>The No Lifer </h5> Don't give up on yourself! Have a look at this page: <a>https://www.betterhelp.com/advice/general/why-do-i-have-no-life/</a></p>"
+          "recommendation": "<p><h5>The No Lifer </h5> Don't give up on yourself! Have a look at this page: <a href=\"https://www.betterhelp.com/advice/general/why-do-i-have-no-life\">betterhelp.com/advice/general/why-do-i-have-no-life/</a></p></a>"
         }
       ]
     },

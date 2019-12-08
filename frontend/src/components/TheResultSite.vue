@@ -9,10 +9,10 @@
         </h1>
 
         <transition-group name="fade" mode="out-in">
-          <h3 key="1" v-if="showAdvice">StudentScore's advices for you are:</h3>
+          <h3 key="1" v-if="showAdvice">We recommend</h3>
           <div key="2" v-if="showAdvice">
             <div v-for="advice in recommendations" :key="advice">
-              <p class="lead advice">{{advice}}</p>
+              <div v-html="advice"></div>
             </div>
           </div>
         </transition-group>
@@ -40,8 +40,7 @@
         let resultJSON = JSON.parse(this.$route.params.result);
         this.result = new Result(resultJSON.score, resultJSON.recommendations);
       }
-      if(this.recommendations.length == 1
-        && this.recommendations[0] == "") {
+      if(this.recommendations.length == 1 && this.recommendations[0] == "") {
         this.recommendations.push("No recommendations available");
       }
     },
