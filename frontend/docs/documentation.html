@@ -23,6 +23,15 @@ Handles the JSON parsing.</p></dd>
 <dt><a href="#PathResult">PathResult</a></dt>
 <dd><p>Represents a single step in a graph.
 An array of PathResult accurately and completely describes the path that was taken.</p></dd>
+<dt><a href="#AnswerBasedRecommendationsGenerator">AnswerBasedRecommendationsGenerator</a></dt>
+<dd><p>Class responsible for generating HTML recommendation strings that are dependent on a Student&#39;s questionnaire answers.
+Depending on the student&#39;s answers, he receives specific recommendations how to improve his habits.</p></dd>
+<dt><a href="#RecommendationHelper">RecommendationHelper</a></dt>
+<dd><p>Helper class to generate Recommendations using the available implementations of type RecommendationGeneratorInterface.</p></dd>
+<dt><a href="#ScoreBasedRecommendationsGenerator">ScoreBasedRecommendationsGenerator</a></dt>
+<dd><p>Class responsible for generating HTML recommendation strings that are dependent on a Student&#39;s questionnaire score.
+The range of possible scores is divided in n partitions. Depending on in which partition a student&#39;s score falls,
+the student receives a recommendation, which is displayed on the result site.</p></dd>
 <dt><a href="#AxiosController">AxiosController</a></dt>
 <dd><p>Class for transfering data between front- &amp; backend with the axios-framework.</p></dd>
 <dt><a href="#GraphService">GraphService</a></dt>
@@ -261,7 +270,57 @@ This accurately describes the path that was taken.</p>
 <p>Represents a single step in a graph.
 An array of PathResult accurately and completely describes the path that was taken.</p>
 
-<p><strong>Kind</strong>: global class<br><a name="AxiosController"></a></p>
+<p><strong>Kind</strong>: global class<br><a name="AnswerBasedRecommendationsGenerator"></a></p>
+<h2 id="answerbasedrecommendationsgenerator">AnswerBasedRecommendationsGenerator</h2>
+<p>Class responsible for generating HTML recommendation strings that are dependent on a Student&#39;s questionnaire answers.
+Depending on the student&#39;s answers, he receives specific recommendations how to improve his habits.</p>
+
+<p><strong>Kind</strong>: global class<br><a name="AnswerBasedRecommendationsGenerator+generate"></a></p>
+<h3 id="answerbasedrecommendationsgenerator-generate-">answerBasedRecommendationsGenerator.generate() ⇒</h3>
+<p>Generates the appropriate recommendation strings comparing multiple answer sets (groups of answers) with the
+student&#39;s answers to check if the student&#39;s answers contain a specific answer set. If a match is found, the
+student receives the recommendations on the result site.</p>
+
+<p><strong>Kind</strong>: instance method of <a href="#AnswerBasedRecommendationsGenerator"><code>AnswerBasedRecommendationsGenerator</code></a><br><strong>Returns</strong>: <p>recommendations A string array containing the answer-based recommendation strings formatted in HTML.</p><br><a name="RecommendationHelper"></a></p>
+<h2 id="recommendationhelper">RecommendationHelper</h2>
+<p>Helper class to generate Recommendations using the available implementations of type RecommendationGeneratorInterface.</p>
+
+<p><strong>Kind</strong>: global class<br><a name="RecommendationHelper.generate"></a></p>
+<h3 id="recommendationhelper-generate-graph-path-">RecommendationHelper.generate(graph, path)</h3>
+<p>Creates a Result object that can be used for presentation in Vue, containing recommendations based on the
+chosen path.</p>
+
+<p><strong>Kind</strong>: static method of <a href="#RecommendationHelper"><code>RecommendationHelper</code></a>  </p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>graph</td>
+<td><p>question catalogue that was used</p></td>
+</tr>
+<tr>
+<td>path</td>
+<td><p>path returned from GraphIteratorInterface</p></td>
+</tr>
+</tbody>
+</table>
+<p><a name="ScoreBasedRecommendationsGenerator"></a></p>
+<h2 id="scorebasedrecommendationsgenerator">ScoreBasedRecommendationsGenerator</h2>
+<p>Class responsible for generating HTML recommendation strings that are dependent on a Student&#39;s questionnaire score.
+The range of possible scores is divided in n partitions. Depending on in which partition a student&#39;s score falls,
+the student receives a recommendation, which is displayed on the result site.</p>
+
+<p><strong>Kind</strong>: global class<br><a name="ScoreBasedRecommendationsGenerator+generate"></a></p>
+<h3 id="scorebasedrecommendationsgenerator-generate-">scoreBasedRecommendationsGenerator.generate() ⇒</h3>
+<p>Generates the appropriate recommendation string by dividing the possible score range by the number of score
+partitions and then choosing the recommendation corresponding to the partition, which contains the student&#39;s score.</p>
+
+<p><strong>Kind</strong>: instance method of <a href="#ScoreBasedRecommendationsGenerator"><code>ScoreBasedRecommendationsGenerator</code></a><br><strong>Returns</strong>: <p>recommendations A string array containing a single recommendation string formatted in HTML.</p><br><a name="AxiosController"></a></p>
 <h2 id="axioscontroller">AxiosController</h2>
 <p>Class for transfering data between front- &amp; backend with the axios-framework.</p>
 

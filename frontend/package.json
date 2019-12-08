@@ -13,7 +13,7 @@
     "build": "webpack --watch --mode=development",
     "compile_css": "node-sass --include-path sass ./src/css/speech-bubble.scss",
     "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css",
-    "doc": "jsdoc2md --files ./src/model/*.ts ./src/model/Graph/*.ts ./src/services/*.ts --configure ./jsdoc2md.json > ./docs/index.md"
+    "doc": "jsdoc2md --files ./src/model/*.ts ./src/model/Graph/*.ts ./src/model/Graph/Recommendation/*.ts ./src/services/*.ts --configure ./jsdoc2md.json > ./docs/index.md"
   },
   "author": "",
   "license": "ISC",
