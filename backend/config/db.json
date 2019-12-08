@@ -268,7 +268,7 @@
       "data": [
         {
           "answerSet": ["e2","e13"],
-          "recommendation": "<p><h5>The Competitive Gamer</h5>Listen here! I think you have a real problem, so for your sake, just check out this page <a href=\"https://gamequitters.com/video-game-addiction-test-for-gamers/\">gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
+          "recommendation": "<p><h5>Habit: competitive gaming!</h5>Listen here! I think you have a real problem, so for your sake, just check out this page <a href=\"https://gamequitters.com/video-game-addiction-test-for-gamers/\">gamequitters.com/video-game-addiction-test-for-gamers/</a></p>"
         },
         {
           "answerSet": ["e9"],
@@ -291,7 +291,7 @@
     {
       "type": "scoreBased",
       "data": {
-        "numberOfScorePartitions": 5,
+        "numberOfScorePartitions": 3,
         "recommendations": [
           "<h4>Underachiever</h4><p>You are on a slippery slope and might want to look at some of your negative habits.</p>",
           "<h4>Average Student</h4><p>You reached an average result which means that there is some room to improve but also that you are doing the basics right.</p>",
