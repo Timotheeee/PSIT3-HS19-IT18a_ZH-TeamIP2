@@ -12,11 +12,16 @@
     "test_one": "jest -t 'loginService'",
     "build": "webpack --watch --mode=development",
     "compile_css": "node-sass --include-path sass ./src/css/speech-bubble.scss",
-    "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css"
+    "watch": "nodemon --watch src/css/style.scss --exec npm run compile_css",
+    "doc": "jsdoc2md --files ./src/model/*.ts ./src/model/Graph/*.ts ./src/services/*.ts --configure ./jsdoc2md.json > ./docs/index.md"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
     "@types/jest": "^24.0.20",
     "@types/moxios": "^0.4.9",
     "@types/node": "^12.7.11",
@@ -25,11 +30,13 @@
     "css-loader": "^3.2.0",
     "jest": "^24.9.0",
     "jsdoc": "^3.6.3",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^5.0.3",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.6.3",
+    "typescript": "^3.7.3",
     "vue": "^2.6.10",
     "vue-jest": "^3.0.5",
     "vue-loader": "^15.7.1",
@@ -38,6 +45,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "axios": "^0.19.0",
     "babel-core": "^6.26.3",
     "cypress": "^3.6.1",
