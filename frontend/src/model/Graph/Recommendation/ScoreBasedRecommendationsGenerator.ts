@@ -45,7 +45,7 @@ export class ScoreBasedRecommendationsGenerator implements RecommendationGenerat
    * Choose the appropriate score parition according to the student's score and
    * return the respective recommendation string.
    */
-  calculateRecommendations(numberOfScorePartitions: number, recommendationsCatalogue: string[], userScore: number): string[] {
+  private calculateRecommendations(numberOfScorePartitions: number, recommendationsCatalogue: string[], userScore: number): string[] {
     let extrema: number[] = GraphTools.getExtremas(this._graph);
     let minScore = extrema[0];
     let maxScore = extrema[1];
