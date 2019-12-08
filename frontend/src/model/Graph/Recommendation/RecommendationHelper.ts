@@ -3,6 +3,7 @@ import {ScoreBasedRecommendationsGenerator} from "./ScoreBasedRecommendationsGen
 import {PathResult} from "../PathResult";
 import {AnswerBasedRecommendationsGenerator} from "./AnswerBasedRecommendationsGenerator";
 import {Result} from "../../Result";
+import {GraphTools} from "../GraphTools";
 
 export class RecommendationHelper {
 
@@ -14,13 +15,18 @@ export class RecommendationHelper {
       new ScoreBasedRecommendationsGenerator(graph.scoreBasedRecommendationConfig!, path, graph);
 
     htmlTexts.push(...scoreBasedRecommendationsGenerator.generate());
-    score = scoreBasedRecommendationsGenerator.score;
+
+    // take Student's score from scoreBasedRecommendationsGenerator and convert it into a percentage (integer).
+    let extrema = GraphTools.getExtremas(graph);
+    let minScore = extrema[0];
+    let maxScore = extrema[1];
+    let scorePercentage = GraphTools.convertScoreToPercentage(scoreBasedRecommendationsGenerator.score, minScore, maxScore);
 
     let answerBasedRecommendationsGenerator: AnswerBasedRecommendationsGenerator =
       new AnswerBasedRecommendationsGenerator(graph.answerBasedRecommendationConfig!, path, graph);
 
     htmlTexts.push(...answerBasedRecommendationsGenerator.generate());
 
-    return new Result(score, htmlTexts);
+    return new Result(scorePercentage, htmlTexts);
   }
 }
