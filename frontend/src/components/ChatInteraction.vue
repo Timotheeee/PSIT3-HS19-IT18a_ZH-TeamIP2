@@ -26,20 +26,23 @@ import { GraphIteratorInterface, GraphIterator, createIterator } from '../model/
 import { Node, AnswerType} from '../model/Graph/Node';
 import { PathService } from '../services/PathService'
 import { GraphService } from '../services/GraphService'
+import {RecommendationHelper} from "../model/Graph/Recommendation/RecommendationHelper";
+import {blobToBinaryString} from "cypress/types/blob-util";
 
 export default Vue.extend({
     data() {
       return {
           questions: [new Question("q0", "is typing...", AnswerType.RegularAnswer)],
           result: new Result(0, []),
-          pathService: new PathService(),
-          graphIterator: createIterator(GraphIterator, GraphFactory.createTestGraph()),
-          username: ""
+          graph: null,
+          username: "",
+          // @ts-ignore
+          graphIterator: null as GraphIterator
       }
     },
     methods: {
         processQuestion(edgeId: string) {
-            this.graphIterator.choose(edgeId);
+            this.graphIterator!.choose(edgeId);
             this.questions.push(this.getNextQuestion());
         },
         getNextQuestion(): Question {
@@ -49,7 +52,7 @@ export default Vue.extend({
               this.insertUsernameInQuestion(currentNode.text),
               currentNode.answerType);
           let i = 1;
-          for(let currentAnswer of this.graphIterator.answersForCurrentNode()){
+          for(let currentAnswer of this.graphIterator!.answersForCurrentNode()){
             nextQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));
           }
 
@@ -66,11 +69,8 @@ export default Vue.extend({
       });
 
       EventBus.$on("goToResultSite", () => {
-
-          // TODO: ryan write this code -> use new classes for recommendations etc.
-          this.result.setScore(404);
-          // TODO: add recommendations
-          this.$router.push({name: 'Results', params: {result: JSON.stringify(this.result)}});
+        let recommendationResult: Result = RecommendationHelper.generate(this.$data.graphObj, this.$data.graphIterator.getPath());
+        this.$router.push({name: 'Results', params: {result: JSON.stringify(recommendationResult)}});
       });
 
       let graphService = new GraphService();
@@ -79,11 +79,10 @@ export default Vue.extend({
             let graphIterator: GraphIteratorInterface = createIterator(GraphIterator, result);
             this.$data.graphIterator = graphIterator;
 
-            var firstQuestion = new Question('1', graphIterator.currentNode.text, graphIterator.currentNode.answerType);
+            this.$data.graphObj = result;
 
-            // TODO: ryan duplicate code smell
             const currentNode:Node = graphIterator.currentNode;
-            firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
+            let firstQuestion = new Question(currentNode.id, currentNode.text, currentNode.answerType);
             let i = 1;
             for(let currentAnswer of graphIterator.answersForCurrentNode()){
                 firstQuestion.addPossibleAnswer(new Answer(i++, currentAnswer.answer, currentAnswer.edgeId));

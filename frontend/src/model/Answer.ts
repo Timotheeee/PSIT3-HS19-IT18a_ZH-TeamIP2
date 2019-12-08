@@ -1,3 +1,6 @@
+/**
+ * Vue viewmodel.
+ */
 export class Answer {
   private id: number;
   private answer: string;

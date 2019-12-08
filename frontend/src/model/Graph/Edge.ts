@@ -1,5 +1,7 @@
-import {Node} from './Node';
-
+/**
+ * Represents a connection between two vertices (nodes) in a graph.
+ * Can be parsed from JSON.
+ */
 export class Edge {
   private readonly _id: string;
   private readonly _sourceId: string;
@@ -17,23 +19,23 @@ export class Edge {
 
   get id(): string { return this._id }
 
-  //set source(node: Node) { this._source = node }
   get sourceId() : string { return this._sourceId }
 
-  //set target(node: Node) { this._target = node }
   get targetId(): string { return this._targetId }
 
-  //set weight(n: number) { this._weight = n }
   get weight(): number { return this._weight }
 
-  //set answer(answer: string) { this._answer = answer }
   get answer() : string { return this._answer }
 }
 
+/**
+ * Necessary for JSON parsing.
+ */
 export interface EdgeJSON {
   edgeId: string;
   source: string;
   target: string;
+
   metadata: {
     answer: string;
     score: string;

@@ -1,9 +1,25 @@
 import {Node, NodeJSON, AnswerType} from './Node';
 import {Edge, EdgeJSON } from './Edge';
+import {ScoreBasedRecommendationConfigJSON} from "./Recommendation/ScoreBasedRecommendationsGenerator";
+import {AnswerBasedRecommendationConfigJSON} from "./Recommendation/AnswerBasedRecommendationsGenerator";
 
+/**
+ * Represents a graph data structure optimized for this application.
+ * Currently, it contains the config for the recommendation generators. This should be moved in the next iteration.
+ * Can be parsed from JSON.
+ */
 export class Graph {
   private _nodes: Node[];
-  private _headNode: Node|null = null;
+  private _headNode: Node| null = null;
+
+  private _scoreBasedRecommendationConfig: ScoreBasedRecommendationConfigJSON|null = null;
+  private _answerBasedRecommendationConfig: AnswerBasedRecommendationConfigJSON[]|null = null;
+
+  get scoreBasedRecommendationConfig(){ return this._scoreBasedRecommendationConfig; }
+  set scoreBasedRecommendationConfig(value) { this._scoreBasedRecommendationConfig = value; }
+
+  get answerBasedRecommendationConfig() { return this._answerBasedRecommendationConfig; }
+  set answerBasedRecommendationConfig(value) { this._answerBasedRecommendationConfig = value; }
 
   constructor() {
     this._nodes = [];
@@ -17,9 +33,9 @@ export class Graph {
   /**
    * Adds a node if a node with the same nodeId does not yet exist.
    * The passed object will be cloned before it is added to the collection.
-   * @param node2Add 
+   * @param node2Add
    */
-  addNode(node2Add: Node): void {
+  public addNode(node2Add: Node): void {
     if (this.findNode(node2Add.id) === null) {
       this.nodes.push(node2Add);
     } else {
@@ -30,9 +46,9 @@ export class Graph {
   /**
    * Adds an edge to the graph if it's source node and target node do exist.
    * The passed edge object will be cloned before it is added to the collection.
-   * @param edge2Add 
+   * @param edge2Add
    */
-  addEdge(edge2Add: Edge): void {
+  public addEdge(edge2Add: Edge): void {
     /* check if the source node exists */
     let sourceNode: Node|null = this.findNode(edge2Add.sourceId);
     if (sourceNode == null) {
@@ -43,25 +59,29 @@ export class Graph {
     if (targetNode == null) {
       throw new Error(`error while adding edge: ${edge2Add.id} target: ${edge2Add.targetId} does not exist!`);
     }
-    
+
     sourceNode.addEdge(edge2Add);
   }
 
-  /*
+  /**
    * Finds an existing node by Id. Returns null if node doesn't exist.
+   * @param nodeId
    */
-  findNode(nodeId: string) : Node|null {
-    for (let node of this._nodes) {      
+  public findNode(nodeId: string) : Node|null {
+    for (let node of this._nodes) {
       // check if node id already exists
       if (node.id === nodeId) {
         return node;
       }
     }
     return null;
-  }  
+  }
 }
 
-export interface GraphJSON {
-  nodes: NodeJSON[];
-  edges: EdgeJSON[];
+/**
+ * Necessary for JSON parsing.
+ */
+export class GraphJSON {
+  nodes: NodeJSON[] = [];
+  edges: EdgeJSON[] = [];
 }

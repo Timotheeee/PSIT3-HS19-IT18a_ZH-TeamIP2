@@ -5,14 +5,14 @@
       <div class="jumbotron text-center jumbotron-fluid">
         <h1 class="display-4">This is your score:</h1>
         <h1 id="score" class="display-4">
-          <b>{{ this.result.getScore() }}</b>
+          <b>{{ this.result.getScore() }}%</b>
         </h1>
 
         <transition-group name="fade" mode="out-in">
-          <h3 key="1" v-if="showAdvice">StudentScore's advices for you are:</h3>
+          <h3 key="1" v-if="showAdvice">We recommend</h3>
           <div key="2" v-if="showAdvice">
             <div v-for="advice in recommendations" :key="advice">
-              <p class="lead advice">{{advice}}</p>
+              <div v-html="advice"></div>
             </div>
           </div>
         </transition-group>
@@ -29,7 +29,9 @@
   export default Vue.extend({
     data() {
       return {
-        result: new Result(1, []),
+        //result: new Result(1, []),
+        // @ts-ignore
+        result : null as Result,
         score: 0,
         showAdvice: false,
         recommendations: [""],
@@ -40,7 +42,7 @@
           let resultJSON = JSON.parse(this.$route.params.result);
           this.result = new Result(resultJSON.score, resultJSON.recommendations);
       }
-      if(this.result.getRecommendations().length == 0
+      if(this.result.getRecommendations().length == 1
         || (this.result.getRecommendations().length == 1 && this.result.getRecommendations()[0] == "")) {
         this.result.getRecommendations().push("No recommendations available");
       }
@@ -96,7 +98,7 @@
   }
 
   #score {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .fade-enter-active,
