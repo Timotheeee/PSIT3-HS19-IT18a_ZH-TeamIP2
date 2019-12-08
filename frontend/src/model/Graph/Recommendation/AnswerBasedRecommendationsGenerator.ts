@@ -24,7 +24,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
   }
 
 
-  getAnswerIds(path: PathResult[]): string[] {
+  private getAnswerIds(path: PathResult[]): string[] {
     let userAnswers: string[] = [];
     for (let pathResult of path) {
       let decision: Edge | null = pathResult.decision;
@@ -35,7 +35,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
     return userAnswers;
   }
 
-  createRecommendationsMap(recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[]): Map<string[], string> {
+  private createRecommendationsMap(recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[]): Map<string[], string> {
     let map: Map<string[], string> = new Map<string[], string>();
     for (let catalogueEntry of recommendationsCatalogue) {
       map.set(catalogueEntry.answerSet,  catalogueEntry.recommendation);
@@ -43,7 +43,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
     return map;
   }
 
-  checkAnswers(answerSet: string[], userAnswers: string[]): boolean {
+  private checkAnswers(answerSet: string[], userAnswers: string[]): boolean {
     for (let answerId of answerSet) {
       if (!userAnswers.includes(answerId)) {
         return false;
@@ -52,7 +52,7 @@ export class AnswerBasedRecommendationsGenerator implements RecommendationGenera
     return true;
   }
 
-  calculateRecommendations(userAnswers: string[], recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[],
+  private calculateRecommendations(userAnswers: string[], recommendationsCatalogue: AnswerBasedRecommendationConfigJSON[],
                            recommendationsMap: Map<string[], string>): string[] {
     let recommendations: string[] = [];
     for (const [key, value] of recommendationsMap.entries()) {
