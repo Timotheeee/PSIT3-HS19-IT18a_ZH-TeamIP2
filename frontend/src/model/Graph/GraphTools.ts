@@ -3,6 +3,6 @@ import { Graph } from './Graph';
 export class GraphTools  {
 
     public static getExtremas(graph:Graph): number[]{
-        return [-100, 70];
+        return [-80, 70];
     }
 }
