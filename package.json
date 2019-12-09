@@ -1,53 +1,18 @@
 {
-  "name": "studentscore-frontend",
+  "name": "todo_server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-      "build": "node server.js"
-   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-typescript": "^7.7.4",
-    "@types/jest": "^24.0.20",
-    "@types/moxios": "^0.4.9",
-    "@types/node": "^12.7.11",
-    "@vue/test-utils": "^1.0.0-beta.29",
-    "bootstrap-vue": "^2.0.2",
-    "css-loader": "^3.2.0",
-    "jest": "^24.9.0",
-    "jsdoc": "^3.6.3",
-    "jsdoc-babel": "^0.5.0",
-    "jsdoc-to-markdown": "^5.0.3",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.0",
-    "ts-jest": "^24.1.0",
-    "ts-loader": "^6.2.0",
-    "typescript": "^3.7.3",
-    "vue": "^2.6.10",
-    "vue-jest": "^3.0.5",
-    "vue-loader": "^15.7.1",
-    "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9"
-  },
+  "description": "A simple todo server",
+  "main": "todo_server.js",
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "axios": "^0.19.0",
-    "babel-core": "^6.26.3",
-    "cypress": "^3.6.1",
-    "file-loader": "^4.2.0",
-    "less": "^3.10.3",
-    "moxios": "^0.4.0",
-    "nodemon": "^1.19.3",
-    "npm-run-all": "^4.1.5",
-    "npm-watch": "^0.6.0",
-    "sass": "^1.23.0",
-    "vue-router": "^3.1.3",
-    "watch": "^1.0.2"
-  }
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
 }
