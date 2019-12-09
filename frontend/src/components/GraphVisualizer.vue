@@ -79,10 +79,10 @@
   }
 
   .answer-block {
-    margin: auto;
     margin-bottom: 10px;
-    width: 80%;
+    margin-left:10px;
     border: 1px solid red;
+    display: inline-block;
   }
 
   .highlighted {
