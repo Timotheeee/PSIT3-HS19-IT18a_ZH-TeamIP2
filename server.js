@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const DBController_1 = require("./controllers/DBController");
 const LoginController_1 = require("./controllers/LoginController");
-const express = require('express'), bodyParser = require('body-parser'), morgan = require('morgan'), app = express(), mysql = require('mysql'), fs = require('fs');
+const express = require('express'), bodyParser = require('body-parser'), morgan = require('morgan'), app = express(), fs = require('fs');
 const dbController = new DBController_1.DBController();
 const login = new LoginController_1.LoginController();
 app.use(morgan('dev'));
