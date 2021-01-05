@@ -34,7 +34,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "file-loader": "^4.2.0",
     "less": "^3.10.3",
